@@ -5,10 +5,10 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-05 17:06:57
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-05 18:34:28
+ * @LastEditTime: 2020-07-05 17:38:32
  * @Description:
  * @TODO::
- * @Reference:http://preview.d2l.ai/d2l-en/PR-1117/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html
+ * @Reference:
 -->
 
 # 几何和线性代数运算
