@@ -5,10 +5,10 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-07 14:29:58
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-07 15:16:45
+ * @LastEditTime: 2020-07-07 15:08:26
  * @Description:
  * @TODO::
- * @Reference:http://preview.d2l.ai/d2l-en/PR-1111/chapter_appendix-mathematics-for-deep-learning/single-variable-calculus.html
+ * @Reference:
 -->
 
 # 单变量微积分
@@ -42,14 +42,6 @@ TODO:CODE
 TODO:MATH
 
 这已经足够在代码中使用了。例如，已知L(x)=x2+1701(x4)3L(x)=x2+1701(x4)3，那么我们可以看到在x=4x=4这一点上这个值有多大。
-
-TODO:CODE
-
-现在，如果我们细心观察，我们会注意到这个数字的输出非常接近88。事实上,如果我们减少ϵϵ,我们将看到值逐渐接近88。因此，我们可以正确地得出结论，我们寻求的值(输入变化的程度改变了输出)在x=4x=4点应该是88。数学家对这个事实进行编码的方式是
-
-TODO:CODE
-
-
 
 因此，对于函数输入的微小变化，我们可以考虑函数输出的变化比率。 我们可以这样写
 

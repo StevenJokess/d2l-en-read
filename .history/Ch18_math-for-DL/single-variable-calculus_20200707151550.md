@@ -5,10 +5,10 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-07 14:29:58
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-07 15:16:45
+ * @LastEditTime: 2020-07-07 15:15:50
  * @Description:
  * @TODO::
- * @Reference:http://preview.d2l.ai/d2l-en/PR-1111/chapter_appendix-mathematics-for-deep-learning/single-variable-calculus.html
+ * @Reference:
 -->
 
 # 单变量微积分

@@ -5,10 +5,10 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-07 14:29:58
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-07 15:16:45
+ * @LastEditTime: 2020-07-07 15:07:05
  * @Description:
  * @TODO::
- * @Reference:http://preview.d2l.ai/d2l-en/PR-1111/chapter_appendix-mathematics-for-deep-learning/single-variable-calculus.html
+ * @Reference:
 -->
 
 # 单变量微积分
@@ -31,27 +31,8 @@ TODO:CODE
 
 在这么大的范围内，函数的行为并不简单。然而，如果我们将范围缩小到更小的值，比如[1.75,2.25][1.75,2.25]，我们可以看到图变得简单多了。
 
-TODO:CODE
-
-从极端的角度来说，如果我们放大到一个很小的部分，行为会变得简单得多:它只是一条直线。
-
-TODO:CODE
-
-这是对单个变量演算的关键观察：熟悉的函数的行为可以在足够小的范围内用一条线建模。 这意味着对于大多数函数，可以合理地预期，随着我们将函数的x值稍微移动一点，输出f（x）也将稍微移动一点。 我们需要回答的唯一问题是：“与输入的变化相比，输出的变化有多大？ 它大一半吗？ 两倍大？”
-
-TODO:MATH
-
-这已经足够在代码中使用了。例如，已知L(x)=x2+1701(x4)3L(x)=x2+1701(x4)3，那么我们可以看到在x=4x=4这一点上这个值有多大。
-
-TODO:CODE
-
-现在，如果我们细心观察，我们会注意到这个数字的输出非常接近88。事实上,如果我们减少ϵϵ,我们将看到值逐渐接近88。因此，我们可以正确地得出结论，我们寻求的值(输入变化的程度改变了输出)在x=4x=4点应该是88。数学家对这个事实进行编码的方式是
-
-TODO:CODE
 
 
-
-因此，对于函数输入的微小变化，我们可以考虑函数输出的变化比率。 我们可以这样写
 
 每行使用以下规则：链规则和对数导数。
     求和规则。
