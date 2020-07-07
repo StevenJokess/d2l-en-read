@@ -62,7 +62,6 @@ d2lbook activate all chapter_multilayer-perceptrons/mlp-scratch.md
 第三步，点击图11.21右方的“Clone or download”绿色按钮，并点击红框中的按钮复制位于你的用户名下的代码库地址。按“获取和运行本书的代码”一节中介绍的方法进入命令行模式。假设我们希望将代码库保存在本地的~/repo路径之下。进入该路径，键入git clone并粘贴位于你的用户名下的代码库地址。执行以下命令：
 
 # 将your_GitHub_ID替换成你的GitHub用户名
-
 git clone https://github.com/your_GitHub_ID/d2l-zh.git
 这时，本地的~/repo/d2l-zh路径下将包含本书的代码库中的所有文件。
 
