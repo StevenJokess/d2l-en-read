@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-08 19:12:24
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-08 21:03:53
+ * @LastEditTime: 2020-07-08 20:51:32
  * @Description:translate
  * @TODO::
  * @Reference:https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html
@@ -98,8 +98,6 @@ L（w + ϵ）≈L（w）+ ϵ⋅∇wL（w）。
 极小值的唯一可能位置是x = −1,0,2x = −1,0,2，其中函数分别取值−5,0，−32−5,0，−32，因此我们可以 结论是，当x = 2x = 2时，我们将函数最小化。 快速绘图确认了这一点。
 
 TODO:CODE
-
-这突出了一个重要的事实，无论是从理论上还是从数值上进行工作，都应了解：我们可以最小化（或最大化）函数的唯一可能点的梯度将等于零，但是，并非每个梯度为零的点都是真实的全局最小值（或 最大值）。
 
 
 
