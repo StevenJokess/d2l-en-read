@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-25 17:45:41
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-25 18:49:14
+ * @LastEditTime: 2020-07-25 18:55:03
  * @Description:translate by machine half
  * @TODO::
  * @Reference:http://preview.d2l.ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/maximum-likelihood.html
