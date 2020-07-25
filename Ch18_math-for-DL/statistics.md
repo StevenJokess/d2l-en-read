@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-25 13:34:05
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-07-25 13:40:53
+ * @LastEditTime: 2020-07-25 13:41:41
  * @Description:translate by machine half
  * @TODO::
  * @Reference:http://preview.d2l.ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/statistics.html
