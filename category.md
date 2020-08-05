@@ -10,7 +10,7 @@
 -->
 (Replace this first paragraph with a brief description of your new category. This guidance will appear in the category selection area, so try to keep it below 200 characters.)
 
-(将第一段替换为对新类别的简要描述。 此指南将出现在类别选择区域中，所以尽量将其控制在200个字符以下
+(将第一段替换为对新类别的简要描述。此指南将出现在类别选择区域中，所以尽量将其控制在200个字符以下
 
 Use the following paragraphs for a longer description, or to establish category guidelines or rules:
 
