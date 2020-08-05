@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-06-29 22:51:53
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-08-05 22:06:50
+ * @LastEditTime: 2020-08-05 22:07:20
  * @Description:MT, improve
  * @TODO::
  * @Reference:http://preview.d2l.ai/d2l-en/PR-1081/chapter_generative-adversarial-networks/gan.html
@@ -88,8 +88,6 @@ TODO:CODE
 现在我们指定超参数来拟合高斯分布。
 
 TODO:CODE
-
-
 
 ## 小结
 
