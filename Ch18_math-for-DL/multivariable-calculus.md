@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-07-08 19:12:24
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-08-08 11:21:08
+ * @LastEditTime: 2020-08-08 11:21:41
  * @Description:MT
  * @TODO::
  * @Reference:https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html
@@ -23,7 +23,7 @@ TODO:MATH
 
 我们将一个变量中的导数称为*偏导数*，而另一个变量中的导数将被修正。在(18.4.1)中，我们将使用标记方法∂∂w1:
 
-现在，让我们把 w 2 w2改成 w 2 + 2 w2 + 2:
+现在，让我们把 w 2改成 w 2 + 2:
 
 我们再次使用了12这个概念，它是一个高阶项，我们可以像上一节中抛弃22一样抛弃它，还有我们在(18.4.1)中看到的。以这种方式继续下去，我们可以这样写
 
@@ -31,7 +31,7 @@ TODO:MATH
 
 然后
 
-我们将向量 w l something wL 称为 l l 的梯度。
+我们将向量 w l something wL 称为 l的梯度。
 
 方程式(18.4.5)值得思考一会儿。它的格式和我们在一维空间中遇到的格式完全一样，只是我们把所有的东西都转换成了矢量和点积。它允许我们近似地告诉我们，在任何对输入的扰动情况下，函数 l 将如何变化。正如我们将在下一节中看到的，这将为我们提供一个重要的工具，帮助我们以几何学的方式理解如何使用梯度中包含的信息来学习。
 
