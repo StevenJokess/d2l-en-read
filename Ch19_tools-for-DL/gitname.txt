@@ -1,0 +1,8 @@
+![image](https://user-images.githubusercontent.com/25657787/90141963-5ea2d880-ddae-11ea-9abb-193478ececa8.png)
+![image](https://user-images.githubusercontent.com/25657787/90142382-df61d480-ddae-11ea-9a4e-87ec45ff07c7.png)
+Every time I use `git push` , it looks like another user.
+My git name is `stevenjokes`
+![image](https://user-images.githubusercontent.com/25657787/90142937-91999c00-ddaf-11ea-9597-59bfaaee7f76.png)
+
+https://docs.github.com/en/github/committing-changes-to-your-project/why-are-my-commits-linked-to-the-wrong-user
+https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/adding-an-email-address-to-your-github-account
