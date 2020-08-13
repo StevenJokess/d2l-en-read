@@ -1,0 +1,67 @@
+# [colab]read img: No such file: solved
+https://colab.research.google.com/github/d2l-ai/d2l-en-colab/blob/master/chapter_computer-vision/fcn.ipynb?hl=en
+
+### For using whole repo(include `/img`):
+1. Go to https://colab.research.google.com/
+2. Create a new notebook
+![image|690x467, 50%](upload://gLdVAWiSpE2xHPxxYCv7m0MeBCE.png)
+![image|587x220](upload://Ac6a3XwWvHCdV1h2W1aX1On0C3z.png)
+3. Mount it to your google Drive
+![image|403x195](upload://sbLD0JL40E1ZkvXmYafZQqob2JQ.png)
+![image|690x163, 50%](upload://nlN4WBruRL35a7HMBH0Jo3vRgKn.png)
+4. Create a new folder:
+![image|432x416](upload://tutviOfJpl6V1FMUUhaQ50Zk8BP.png)
+name it `d2l-en`:
+![image|404x417](upload://92YuO35WiApGbA2BjS0RXn1faQJ.png)
+
+5. git clone : [reference](https://medium.com/@ashwindesilva/how-to-use-google-colaboratory-to-clone-a-github-repository-e07cf8d3d22b)
+```
+%cd drive/My Drive/d2l-en
+!git clone https://github.com/d2l-ai/d2l-en-colab.git
+!git clone https://github.com/d2l-ai/d2l-pytorch-colab.git
+!git clone https://github.com/d2l-ai/d2l-tensorflow-colab.git
+```
+
+The result is
+![image|660x500](upload://2yUHqfJcEjSOqwuUXC4uLJ7RUqn.png)
+
+
+
+
+
+mxnet repo: https://github.com/d2l-ai/d2l-en-colab
+pytorch repo:https://github.com/d2l-ai/d2l-pytorch-colab
+tensorflow repo:https://github.com/d2l-ai/d2l-tensorflow-colab
+
+Delete a folder:
+```
+import shutil
+shutil.rmtree('/content/drive/My Drive/d2l-en', ignore_errors=True)
+```
+[More Tutorial](https://github.com/savankoradiya/Google-Colab-Tutorial)
+
+Can't open: https://github.com/googlecolab/colabtools/issues/1502
+
+https://drive.google.com/drive/folders/1V84YTT-yhRPAZIF7tRoQN9a6pYm8Ju24?usp=sharing
+
+
+
+```
+from google.colab import drive
+drive.mount('/content/drive')
+
+!ls
+!pwd
+%cd drive/My Drive/d2l-en
+%cd d2l-en-colab
+```
+
+![image|690x303, 75%](upload://IBcydVqERgK3PTfKpm1l6D6XIV.png)
+
+![image|579x282](upload://iie500TfNnRhmpBb5BFvpjio4e0.png)
+![image|675x342, 50%](upload://2wptC0qnmcZwcwqtNKCr2QmJIFg.png)
+
+---
+
+You don't need to install next time if you installed before.
+![image|690x72](upload://9fSlHk0CEsCJI5qAI8bIVCDgQcq.png)
