@@ -126,7 +126,8 @@ jupyter nbextension enable execute_time/ExecuteTime
 We can use the `Hinterland` plugin to give a hint without using tab while coding. Use the following commands to install the plugin:
 
 ```sh
-pip install jupyter_contrib_nbextensions_configurator
+# https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator
+pip install jupyter_nbextensions_configurator
 jupyter nbextensions_configurator enable --user
 ```
 
