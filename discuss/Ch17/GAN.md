@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-09-13 19:51:23
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-09-13 19:51:31
+ * @LastEditTime: 2020-09-13 21:52:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -104,3 +104,126 @@ Does time.stop() mean that only first epoch time?
 Yes, it times for one epoch.
 
 Continue Discussion
+
+---
+
+https://discuss.d2l.ai/t/generative-adversarial-networks/776
+
+D2L Discussion
+Sign Up
+Log In
+Generative Adversarial Networks
+d2l-en
+pytorch
+
+StevenJokes
+20d
+http://d2l.ai/chapter_generative-adversarial-networks/gan.html 4
+
+
+
+
+created
+20d
+last reply
+4d
+3
+replies
+61
+views
+2
+users
+1
+link
+3
+11 DAYS LATER
+
+StevenJokes
+1
+9d
+http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/gan.html
+
+The loss of discriminator is better to be bigger.
+The loss of generator is better to be smaller.
+
+I can’t figure out a question: https://stackoverflow.com/questions/63763835/why-is-my-loss-of-generator-0-why-is-loss-of-discriminator-bigger-than-generato
+Anyone helps me?
+
+
+
+
+goldpiggy
+5d
+Hi @StevenJokes, we want to minimize both loss. Can you specify where do you see the following augment? Thanks
+
+The loss of discriminator is better to be bigger.
+The loss of generator is better to be smaller.
+
+
+
+
+StevenJokes
+4
+4d
+GAN:
+image
+image
+1009×422 28.7 KB
+
+DCGAN:
+image
+image
+891×429 30.5 KB
+
+I forgot the book name… Too many books I have read…
+I found 《深入浅出PyTorch：从模型到源码》writen by 张校捷
+ GitHub
+
+zxjzxj9/PyTorchIntroduction
+《深入浅出 PyTorch——从模型到源码》源代码和勘误（见Issues）. Contribute to zxjzxj9/PyTorchIntroduction development by creating an account on GitHub.
+
+
+GAN: https://github.com/zxjzxj9/PyTorchIntroduction/blob/master/Chapter4/gan.py
+4.7 生成模型：VAE和GAN
+可以看到，生成器的损失函数的目的是让生成器的输出在判别器上输出的概率尽可能大，判别器的损失函数目的是让真实数据在判别器上输出的概率尽可能大（见式（4.11）第一项），而让生成器生成的输出在判别器上的概率尽可能小（见式（4.11）第二项）
+
+LossD = -(logD(x) +log(1-D(G(z))) (4.11)
+
+Do you understand Chinese? Just keep same to the passage.
+I have tried google translation to English, which is understandable for me.
+BTW, recommend a chrome extension https://chrome.google.com/webstore/detail/沙拉查词-聚合词典划词翻译/cdonnmffkdaoajfknoeeecmchibpmkmg/reviews?hl=en
+It is convient to translate Chinese to Engish and English to Chinese.
+image
+image
+1594×395 106 KB
+Will your team give me an AI job now?
+I really need to learn AI from working with you…
+Would you like to train me…
+
+
+
+Hello! Looks like you’re enjoying the discussion, but you haven’t signed up for an account yet.
+
+When you create an account, we remember exactly what you’ve read, so you always come right back where you left off. You also get notifications, here and via email, whenever someone replies to you. And you can like posts to share the love. heartpulse
+
+Sign Up Remind me tomorrowno thanks
+Suggested Topics
+Topic	Replies	Activity
+Installation
+pytorch
+13	4d
+Attention Mechanisms
+pytorch
+2	9h
+Data Preprocessing
+pytorch
+9	6d
+Softmax Regression from Scratch
+pytorch
+14	19d
+Concise Linear Regression
+pytorch
+20	11h
+Want to read more? Browse other topics in
+pytorch
+ or view latest topics.

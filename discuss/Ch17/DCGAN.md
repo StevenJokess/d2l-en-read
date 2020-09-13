@@ -240,3 +240,117 @@ We can talk more about the code there.
 Deep Convolutional Generative Adversarial Networks
 
 Continue Discussion
+
+---
+
+https://discuss.d2l.ai/t/deep-convolutional-generative-adversarial-networks/836
+
+D2L Discussion
+Sign Up
+Log In
+Deep Convolutional Generative Adversarial Networks
+d2l-en
+pytorch
+
+StevenJokes
+15d
+https://d2l.ai/chapter_generative-adversarial-networks/dcgan.html 4
+
+
+
+
+created
+15d
+last reply
+10d
+3
+replies
+47
+views
+2
+users
+2
+links
+3
+
+StevenJokes
+1
+15d
+now it is not released.
+http://preview.d2l.ai/d2l-en/PR-1309/chapter_generative-adversarial-networks/dcgan.html 4
+
+merge now!
+http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
+
+
+
+
+yoderj
+10d
+@StevenJokes Looks like it just got merged. Congratulations! I think it will show on the main book in a few days, right?
+
+
+
+
+StevenJokes
+1
+10d
+I know it has been merged.
+I don’t know when it will show
+I think it needs to be optim.
+Usually pytorch is quicker than mxnet.
+Help me if you can.
+And find some ways to delete image
+@yoderj
+BTW, I’m translating it to tensorflow
+stuck one night…
+github.com
+StevenJokes/d2l-en-read/blob/master/chapter-generative-adversarial-networks/gan-tf1.ipynb
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.8-final"
+  },
+  "orig_nbformat": 2,
+  "kernelspec": {
+   "name": "python37864bittf2conda1de394c9651a4d19aa25641a40b8d2d8",
+   "display_name": "Python 3.7.8 64-bit ('tf2': conda)"
+  }
+ },
+This file has been truncated. show original
+
+
+Hello! Looks like you’re enjoying the discussion, but you haven’t signed up for an account yet.
+
+When you create an account, we remember exactly what you’ve read, so you always come right back where you left off. You also get notifications, here and via email, whenever someone replies to you. And you can like posts to share the love. heartpulse
+
+Sign Up Remind me tomorrowno thanks
+Suggested Topics
+Topic	Replies	Activity
+Networks Using Blocks (VGG)
+pytorch
+6	19d
+Image Classification Dataset
+pytorch
+4	Jun 26
+Probability
+pytorch
+9	Jun 26
+Generative Adversarial Networks
+pytorch
+3	4d
+Concise Softmax Regression
+pytorch
+7	25d
+Want to read more? Browse other topics in
+pytorch
+ or view latest topics.
