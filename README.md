@@ -5,7 +5,7 @@
  * @Author:  StevenJokes https://github.com/StevenJokes
  * @Date: 2020-06-10 21:41:43
  * @LastEditors:  StevenJokes https://github.com/StevenJokes
- * @LastEditTime: 2020-08-25 00:04:46
+ * @LastEditTime: 2020-09-16 19:35:27
  * @Description:
  * @TODO::
  * @Reference:
@@ -21,6 +21,8 @@ D2L的精读实现。
 不妄想一步学会（因为真菜），只求渐渐在多次和集体中步步收敛。
 
 https://github.com/d2l-ai/d2l-en
+
+---
 
 ```bibtex
 @book{zhang2020dive,
