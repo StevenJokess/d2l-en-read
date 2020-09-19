@@ -2,9 +2,9 @@
 
 <!--
  * @version:
- * @Author:  StevenJokes https://github.com/StevenJokes
+ * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-13 21:12:16
- * @LastEditors:  StevenJokes https://github.com/StevenJokes
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
  * @LastEditTime: 2020-09-13 21:12:48
  * @Description:http://preview.d2l.ai/d2l-en/master/chapter_linear-networks/image-classification-dataset.html
  * @TODO::

@@ -2,9 +2,9 @@
 
 <!--
  * @version:
- * @Author:  StevenJokes https://github.com/StevenJokes
+ * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-07-25 18:56:15
- * @LastEditors:  StevenJokes https://github.com/StevenJokes
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
  * @LastEditTime: 2020-07-25 19:10:23
  * @Description:translate by machine half
  * @TODO::

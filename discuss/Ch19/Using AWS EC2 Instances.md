@@ -2,9 +2,9 @@
 
 <!--
  * @version:
- * @Author:  StevenJokes https://github.com/StevenJokes
+ * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-13 19:44:08
- * @LastEditors:  StevenJokes https://github.com/StevenJokes
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
  * @LastEditTime: 2020-09-13 19:45:12
  * @Description:http://preview.d2l.ai/d2l-en/master/chapter_appendix-tools-for-deep-learning/aws.html
  * @TODO::

@@ -2,9 +2,9 @@
 
 <!--
  * @version:
- * @Author:  StevenJokes https://github.com/StevenJokes
+ * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-13 21:20:24
- * @LastEditors:  StevenJokes https://github.com/StevenJokes
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
  * @LastEditTime: 2020-09-13 21:21:20
  * @Description:http://preview.d2l.ai/d2l-en/master/chapter_preliminaries/autograd.html
  * @TODO::

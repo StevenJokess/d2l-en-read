@@ -2,9 +2,9 @@
 
 <!--
  * @version:
- * @Author:  StevenJokes https://github.com/StevenJokes
+ * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-07-25 13:34:05
- * @LastEditors:  StevenJokes https://github.com/StevenJokes
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
  * @LastEditTime: 2020-08-08 10:46:57
  * @Description:MT
  * @Reference:http://preview.d2l.ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/statistics.html

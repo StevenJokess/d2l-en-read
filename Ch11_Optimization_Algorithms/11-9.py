@@ -1,9 +1,9 @@
 # coding=utf-8
 '''
 version:
-Author:  StevenJokes https://github.com/StevenJokes
+Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-08-06 00:11:37
-LastEditors:  StevenJokes https://github.com/StevenJokes
+LastEditors:  StevenJokess https://github.com/StevenJokess
 LastEditTime: 2020-08-06 00:14:22
 Description:
 TODO::
