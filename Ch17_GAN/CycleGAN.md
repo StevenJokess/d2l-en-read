@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 23:41:44
+ * @LastEditTime: 2020-09-23 23:49:43
  * @Description:
  * @TODO::
  * @Reference:
@@ -31,7 +31,7 @@ CycleGAN tries to solve these issues with the so-called cycle consistency.
 The translation will be cycle-consistent if we translate the sentence back from German into English and we arrive at the original sentence we started with.
 In a mathematical context, if we have a translator, , and another translator, the two should be inverses of each other.[22]
 
-Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26]
+Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30]
 
 
 
@@ -106,9 +106,37 @@ The network with 9 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256
 
 For discriminator networks, we use 70 × 70 PatchGAN [7]. Let Ck denote a 4×4 Convolution-InstanceNorm-LeakyReLU layer with k ﬁlters and stride 2. After the last layer, we apply a convolution to produce a 1-dimensional output. We do not use InstanceNorm for the ﬁrst C64 layer. We use leaky ReLUs with a slope of 0.2. The discriminator architecture is: C64-C128-C256-C512
 
+We take the input image (128 × 128 × 3) and assign that to d1 (64 × 64 × 64).
+We take d1 (64 × 64 × 64) and assign that to d2 (32 × 32 × 128).
+We take d2 (32 × 32 × 128) and assign that to d3 (16 × 16 × 256).
+We take d3 (16 × 16 × 256) and assign that to d4 (8 × 8 × 512).
+We take d4 (8 × 8 × 512) and flatten by conv2d to 8 × 8 × 1.[30]
 
 
+```python
+# [30]
+def build_discriminator(self):
 
+        def d_layer(layer_input, filters, f_size=4, normalization=True):
+            """Discriminator layer"""
+            d = Conv2D(filters, kernel_size=f_size,
+                       strides=2, padding='same')(layer_input)
+            d = LeakyReLU(alpha=0.2)(d)
+            if normalization:
+                d = InstanceNormalization()(d)
+            return d
+
+        img = Input(shape=self.img_shape)
+
+        d1 = d_layer(img, self.df, normalization=False)
+        d2 = d_layer(d1, self.df * 2)
+        d3 = d_layer(d2, self.df * 4)
+        d4 = d_layer(d3, self.df * 8)
+
+        validity = Conv2D(1, kernel_size=4, strides=1, padding='same')(d4)
+
+        return Model(img, validity)
+```
 
 Image-to-image translation
 
@@ -150,12 +178,33 @@ Compared to the basic GAN in Section 17.1, we use the same learning rate for bot
 We train the model with a small number of epochs just for demonstration. For better performance, the variable `num_epochs` can be set to a larger number.
 
 
+For each training iteration do[30]
 
+1. Train the Discriminator:
+    Take a mini-batch of random images from each domain (imgsA and imgsB).
+    Use the Generator GAB to translate imgsA to domain B and vice versa with GBA.
+    Compute DA(imgsA, 1) and DA(GBA(imgsB), 0) to get the losses for real images in A and translated images from B, respectively. Then add these two losses together. The 1 and 0 in DA serve as labels.
+    Compute DB(imgsB, 1) and DB(GAB(imgsA), 0) to get the losses for real images in B and translated images from A, respectively. Then add these two losses together. The 1 and 0 in DB serve as labels.
+2. Add the losses from steps c and d together to get a total Discriminator loss. Train the Generator:
+    We use the combined model to
+    Input the images from domain A (imgsA) and B (imgsB)
+        The outputs are
+        Validity of A: DA(GBA(imgsB))
+        Validity of B: DB(GAB(imgsA))
+        Reconstructed A: GBA(GAB(imgsA))
+        Reconstructed B: GAB(GBA(imgsB))
+        Identity mapping of A: GBA(imgsA))
+        Identity mapping of B: GAB(imgsB))
+    We then update the parameters of both Generators inline with the cycle-consistency loss, identity loss, and adversarial loss with
+        Mean squared error (MSE) for the scalars (discriminator probabilities)
+        Mean absolute error (MAE) for images (either reconstructed or identity-mapped)
 
 
 
 
 train.py is a general-purpose training script. It works for various models (with option --model: e.g., pix2pix, cyclegan, colorization) and different datasets (with option --dataset_mode: e.g., aligned, unaligned, single, colorization). See the main README and training/test tips for more details.[8]
+
+
 
 
 
