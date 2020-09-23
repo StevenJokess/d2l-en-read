@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 22:36:39
+ * @LastEditTime: 2020-09-23 23:18:19
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,7 +15,7 @@
 
 Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon.
 
-In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses.
+In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28].
 
 ![horse2zebra](img/horse2zebra.gif)
 
@@ -31,10 +31,11 @@ CycleGAN tries to solve these issues with the so-called cycle consistency.
 The translation will be cycle-consistent if we translate the sentence back from German into English and we arrive at the original sentence we started with.
 In a mathematical context, if we have a translator, , and another translator, the two should be inverses of each other.[22]
 
+Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26]
 
 
 
-## baseline
+## baseline(pix2pix)
 
 how to use pixel-wise label information to perform image-to-image translation with pix2pix and translate high-resolution images with pix2pixHD.
 
@@ -49,8 +50,7 @@ Then, install the prerequisites to be able to visualize the results during train
 
 $ pip install dominate visdom
 
-
-
+Another code[27]
 
 
 Mathematically, if we have a translator G : X → Y and another translator F : Y → X, then G and F should be inverses of each other, and both mappings should be bijections. We apply this structural assumptionbytrainingboththemapping G and F simultaneously, and adding a cycle consistency loss [12] that encourages F(G(x)) ≈ x and G(F(y)) ≈ y. Combining this loss with adversarial losses on domains X and Y yields our full objective for unpaired image-to-image translation.
@@ -66,6 +66,8 @@ apple2orange: 996 apple images and 1020 orange images downloaded from ImageNet u
 script.
 
 `bash ./datasets/download_cyclegan_dataset.sh apple2orange`
+
+MXNet code[29]
 
 
 To train a model on your own datasets, you need to create a data folder with two subdirectories trainA and trainB that contain images from domain A and B. You can test your model on your training set by setting --phase train in test.py. You can also create subdirectories testA and testB if you have test data.You can also create subdirectories testA and testB if you have test data.
@@ -191,7 +193,11 @@ train.py is a general-purpose training script. It works for various models (with
 [22]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781789956177/ba03770c-17b6-42f6-b102-8c8554e523d9.xhtml
 [23]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/209b2357-05d7-48d4-9c91-e061eccf8344.xhtml
 [24]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/e4242ef6-dd25-4f42-91b8-4b701fc0d503.xhtml
-
+[25]: https://github.com/taesungp/cyclegan
+[26]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/a3d5b679-d40e-43cf-a71f-0998b7c18505.xhtml
+[27]: https://github.com/eriklindernoren/PyTorch-GAN/tree/master/implementations/pix2pix
+[28]: https://colab.research.google.com/github/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/CycleGAN.ipynb#scrollTo=z1EySlOXwwoa
+[29]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/CycleGAN
 
 ---
 https://learning.oreilly.com/library/view/advanced-deep-learning/9781789956177/262cfe39-8f03-49b7-ba8b-f8db88ff65d6.xhtml

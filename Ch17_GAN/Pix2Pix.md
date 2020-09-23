@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 22:53:46
+ * @LastEditTime: 2020-09-23 23:19:43
  * @Description:
  * @TODO::
  * @Reference:
@@ -41,10 +41,11 @@ $$V_{\text {pix} 2 \text {pix}}=\min _{G} \max _{D} V(D, G)+\lambda \mathcal{L}_
 
 Here, $\mathcal{L}_{L 1}(G)$ represents the L1-loss between the generated samples and the real ones from the paired collection. The purpose of the L1-loss is to reserve the low-frequency information in the images for better image quality.[2]
 
-
+MXNet code[3]
 
 ## Reference
 
 
 [1]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/8d5574ec-aa41-42d3-a92d-d549488d32a9.xhtml
 [2]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/05e25d65-5beb-412b-9b38-d99516eccbf0.xhtml
+[3]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/Pix2Pix
