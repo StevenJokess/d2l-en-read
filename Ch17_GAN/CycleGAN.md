@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 21:17:14
+ * @LastEditTime: 2020-09-23 21:23:32
  * @Description:
  * @TODO::
  * @Reference:
@@ -19,7 +19,16 @@ In this section, we will demonstrate how you can use GANs to generate image-to-i
 
 Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transﬁguration, season transfer, photo enhancement, etc.
 
-##
+
+## baseline
+
+pix2pix [13] We also compare against pix2pix [13], which is trained on paired data, to see how close we can get to this “upper bound” without using any paired data.
+
+
+Mathematically, if we have a translator G : X → Y and another translator F : Y → X, then G and F should be inverses of each other, and both mappings should be bijections. We apply this structural assumptionbytrainingboththemapping G and F simultaneously, and adding a cycle consistency loss [12] that encourages F(G(x)) ≈ x and G(F(y)) ≈ y. Combining this loss with adversarial losses on domains X and Y yields our full objective for unpaired image-to-image translation.
+
+
+
 ## The apple2orange Dataset[4]
 
 apple2orange: 996 apple images and 1020 orange images downloaded from ImageNet using keywords apple and navel orange.[5]
@@ -99,6 +108,7 @@ $G^{*}, F^{*}=\arg \min _{G, F} \max _{D_{x}, D_{Y}} \mathcal{L}\left(G, F, D_{X
 train.py is a general-purpose training script. It works for various models (with option --model: e.g., pix2pix, cyclegan, colorization) and different datasets (with option --dataset_mode: e.g., aligned, unaligned, single, colorization). See the main README and training/test tips for more details.[8]
 
 
+
 ## Summary
 
 
@@ -118,3 +128,5 @@ train.py is a general-purpose training script. It works for various models (with
 [9]:Abstract: https://arxiv.org/pdf/1703.10593.pdf
 [10]:3.2.CycleConsistencyLoss: https://arxiv.org/pdf/1703.10593.pdf
 [11]:3.3.FullObjective: https://arxiv.org/pdf/1703.10593.pdf
+[12]:T. Zhou, P. Krahenbuhl, M. Aubry, Q. Huang, and A. A. Efros. Learning dense correspondence via 3dguided cycle consistency. In CVPR, 2016. 2, 3
+[13]:L. A. Gatys, A. S. Ecker, and M. Bethge. Image style transfer using convolutional neural networks. CVPR, 2016. 3, 8, 9, 14, 15
