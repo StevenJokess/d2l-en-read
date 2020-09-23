@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 21:55:26
+ * @LastEditTime: 2020-09-23 22:00:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -136,6 +136,10 @@ train.py is a general-purpose training script. It works for various models (with
 ## Summary
 
 
+
+*  Finally, we demonstrate the generality of our algorithm on a wide range of applications where paired data does not exist.
+*  Nonetheless, in many cases completely unpaired data is plentifully available and should be made use of. This paper pushes the boundaries of what is possible in this “unsupervised” setting.
+*
 
 
 ## Reference
