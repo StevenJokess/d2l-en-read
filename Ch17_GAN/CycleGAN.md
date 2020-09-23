@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 20:59:41
+ * @LastEditTime: 2020-09-23 21:05:42
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,7 +15,9 @@
 
 Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon.
 
-In this section, we will demonstrate how you can use GANs to generate image-to-image translation. We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content.For example, landscape painting<->landscape photographs, zebras<->horses.
+In this section, we will demonstrate how you can use GANs to generate image-to-image translation which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses.
+
+Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transﬁguration, season transfer, photo enhancement, etc.
 
 ## The apple2orange Dataset[4]
 
@@ -93,4 +95,4 @@ train.py is a general-purpose training script. It works for various models (with
 [6]:7.2.Networkarchitectures: https://arxiv.org/pdf/1703.10593.pdf
 [7]:P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros. Imageto-image translation with conditional adversarial networks. In CVPR, 2017. 2, 3, 5, 6, 7, 8, 18
 [8]:https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/CycleGAN.ipynb
-
+[9]:Abstract: https://arxiv.org/pdf/1703.10593.pdf
