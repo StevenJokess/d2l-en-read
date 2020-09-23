@@ -5,22 +5,31 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 20:37:28
+ * @LastEditTime: 2020-09-23 20:59:41
  * @Description:
  * @TODO::
  * @Reference:
-[1]:https://junyanz.github.io/CycleGAN/
-[2]:https://arxiv.org/pdf/1703.10593.pdf
-[3]:http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
 -->
 
-# Cycle-Consistent Generative Adversarial Networks
+# Cycle-Consistent Adversarial Networks
 
-Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found than DCGAN can generate photorealistic images, like Pokemon.
+Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon.
 
-In this section, we will demonstrate how you can use GANs to generate photorealistic videos. We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN) introduced in [2]. We will TODO:? , they can be leveraged to photorealistic videos.
+In this section, we will demonstrate how you can use GANs to generate image-to-image translation. We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content.For example, landscape painting<->landscape photographs, zebras<->horses.
 
-## The ? Dataset
+## The apple2orange Dataset[4]
+
+apple2orange: 996 apple images and 1020 orange images downloaded from ImageNet using keywords apple and navel orange.[5]
+
+`bash ./datasets/download_cyclegan_dataset.sh dataset_name`
+
+script.
+
+`bash ./datasets/download_cyclegan_dataset.sh apple2orange`
+
+
+To train a model on your own datasets, you need to create a data folder with two subdirectories trainA and trainB that contain images from domain A and B. You can test your model on your training set by setting --phase train in test.py. You can also create subdirectories testA and testB if you have test data.You can also create subdirectories testA and testB if you have test data.
+
 
 The dataset we will use is a collection of Pokemon sprites obtained from TODO: ?
 First download, extract and load this dataset.
@@ -35,7 +44,16 @@ TODO:
 
 
 
-## The Generator
+## The Generator[6]
+
+The network with 6 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,u128,u64,c7s1-3
+The network with 9 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,R256,R256,R256,u128 u64,c7s1-3
+
+
+
+## The Discriminator
+
+For discriminator networks, we use 70 × 70 PatchGAN [7]. Let Ck denote a 4×4 Convolution-InstanceNorm-LeakyReLU layer with k ﬁlters and stride 2. After the last layer, we apply a convolution to produce a 1-dimensional output. We do not use InstanceNorm for the ﬁrst C64 layer. We use leaky ReLUs with a slope of 0.2. The discriminator architecture is: C64-C128-C256-C512
 
 
 
@@ -56,6 +74,8 @@ Compared to the basic GAN in Section 17.1, we use the same learning rate for bot
 We train the model with a small number of epochs just for demonstration. For better performance, the variable `num_epochs` can be set to a larger number.
 
 
+train.py is a general-purpose training script. It works for various models (with option --model: e.g., pix2pix, cyclegan, colorization) and different datasets (with option --dataset_mode: e.g., aligned, unaligned, single, colorization). See the main README and training/test tips for more details.[8]
+
 
 ## Summary
 
@@ -67,4 +87,10 @@ We train the model with a small number of epochs just for demonstration. For bet
 
 [1]:http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
 [2]:https://junyanz.github.io/CycleGAN/
+[3]:http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
+[4]:https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/datasets.md
+[5]:J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. Imagenet: A large-scale hierarchical image database. In CVPR, 2009. 8, 13, 18
+[6]:7.2.Networkarchitectures: https://arxiv.org/pdf/1703.10593.pdf
+[7]:P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros. Imageto-image translation with conditional adversarial networks. In CVPR, 2017. 2, 3, 5, 6, 7, 8, 18
+[8]:https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/CycleGAN.ipynb
 
