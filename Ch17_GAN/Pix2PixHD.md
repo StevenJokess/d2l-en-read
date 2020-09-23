@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:53:07
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 22:56:23
+ * @LastEditTime: 2020-09-23 23:05:53
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,8 +22,12 @@ NVIDIA has already open-sourced the full source code of pix2pixHD for PyTorch. A
 
 $ git clone https://github.com/NVIDIA/pix2pixHD
 
+$V_{\text {pix} 2 \text {pixHD}}=\min _{G} \max _{D_{1}, D_{2}} \sum_{k=1,2} V\left(D_{k}, G\right)+\lambda \mathcal{L}_{F M}\left(D_{k}, G\right)$
 
+## Generator
 
+![Generator](img\Pix2PixHD.jpg)
+Here, $\lambda \mathcal{L}_{F M}\left(D_{k}, G\right)$ measures the L1-loss between the feature maps of the generated and real images at multiple layers in the discriminator networks. It forces the generator to approximate the real data at different scales, thereby generating more realistic images.
 
 ## Reference
 
