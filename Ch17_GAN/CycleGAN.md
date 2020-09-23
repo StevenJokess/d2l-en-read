@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 21:13:20
+ * @LastEditTime: 2020-09-23 21:17:14
  * @Description:
  * @TODO::
  * @Reference:
@@ -78,15 +78,21 @@ We train the model with a small number of epochs just for demonstration. For bet
 
 
 
-## Cycle Consistency Loss
+## Cycle Consistency Loss[10]
 
 $\begin{aligned} \mathcal{L}_{\mathrm{cyc}}(G, F) &=\mathbb{E}_{x \sim p_{\text {data }}(x)}\left[\|F(G(x))-x\|_{1}\right] \\ &+\mathbb{E}_{y \sim p_{\text {data }}(y)}\left[\|G(F(y))-y\|_{1}\right] \end{aligned}$
 
+The behavior induced by the cycle consistency loss can beobservedinFigure4: thereconstructedimages F(G(x)) end up matching closely to the input images x.
 
-## Full Objective
+
+
+## Full Objective[11]
 
 $\begin{aligned} \mathcal{L}\left(G, F, D_{X}, D_{Y}\right) &=\mathcal{L}_{\text {GAN }}\left(G, D_{Y}, X, Y\right) \\ &+\mathcal{L}_{\text {GAN }}\left(F, D_{X}, Y, X\right) \\ &+\lambda \mathcal{L}_{\text {cyc }}(G, F) \end{aligned}$
 
+We aim to solve:
+
+$G^{*}, F^{*}=\arg \min _{G, F} \max _{D_{x}, D_{Y}} \mathcal{L}\left(G, F, D_{X}, D_{Y}\right)$
 
 
 
@@ -110,3 +116,5 @@ train.py is a general-purpose training script. It works for various models (with
 [7]:P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros. Imageto-image translation with conditional adversarial networks. In CVPR, 2017. 2, 3, 5, 6, 7, 8, 18
 [8]:https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/CycleGAN.ipynb
 [9]:Abstract: https://arxiv.org/pdf/1703.10593.pdf
+[10]:3.2.CycleConsistencyLoss: https://arxiv.org/pdf/1703.10593.pdf
+[11]:3.3.FullObjective: https://arxiv.org/pdf/1703.10593.pdf
