@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 00:28:18
+ * @LastEditTime: 2020-09-24 00:37:09
  * @Description:
  * @TODO::
  * @Reference:
@@ -117,16 +117,77 @@ Not making the parameters of the Discriminators trainable for now
 Compiling the two Generators
 
 
+### Residual block[32]
+
+![generator0](img\CycleGAN_generator.png)
+create the code for the definition of the residual block, as follows:
+
+```python
+#[32]
+class ResidualBlock(nn.Module):
+    def __init__(self, channels):
+        super(ResidualBlock, self).__init__()
+
+        block = [nn.ReflectionPad2d(1),
+                 nn.Conv2d(channels, channels, 3),
+                 nn.InstanceNorm2d(channels),
+                 nn.ReLU(inplace=True),
+                 nn.ReflectionPad2d(1),
+                 nn.Conv2d(channels, channels, 3),
+                 nn.InstanceNorm2d(channels)]
+         self.block = nn.Sequential(*block)
+
+     def forward(self, x):
+         return x + self.block(x)
+```
+
 ### The Generator[6]
 
-![generator](img\CycleGAN_generator.jpg)
+![generator1](img\CycleGAN_generator.jpg)
+
 
 We adopt our architectures from Johnson et al. [23]. We use 6 residual blocks for 128×128 training images, and 9 residual blocks for 256× 256 or higher-resolution training images. Below, we follow the naming convention used in the Johnson et al.’s Github repository. Let c7s1-k denotea 7×7 Convolution-InstanceNormReLU layer with k ﬁlters and stride 1. dk denotes a 3×3 Convolution-InstanceNorm-ReLU layer with k ﬁlters and stride 2. Reﬂection padding was used to reduce artifacts. Rk denotes a residual block that contains two 3 × 3 convolutional layers with the same number of ﬁlters on both layer. uk denotes a 3 × 3 fractional-strided-ConvolutionInstanceNorm-ReLU layer with k ﬁlters and stride 1
 
 The network with 6 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,u128,u64,c7s1-3
 The network with 9 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,R256,R256,R256,u128 u64,c7s1-3
 
+```python
+#
+class Generator(nn.Module):
+    def __init__(self, channels, num_blocks=9):
+        super(Generator, self).__init__()
+        self.channels = channels
 
+        model = [nn.ReflectionPad2d(3)]
+        model += self._create_layer(self.channels, 64, 7, stride=1, padding=0, transposed=False)
+        # downsampling
+        model += self._create_layer(64, 128, 3, stride=2, padding=1, transposed=False)
+        model += self._create_layer(128, 256, 3, stride=2, padding=1, transposed=False)
+        # residual blocks
+        model += [ResidualBlock(256) for _ in range(num_blocks)]
+        # upsampling
+        model += self._create_layer(256, 128, 3, stride=2, padding=1, transposed=True)
+        model += self._create_layer(128, 64, 3, stride=2, padding=1, transposed=True)
+        # output
+        model += [nn.ReflectionPad2d(3),
+                  nn.Conv2d(64, self.channels, 7),
+                  nn.Tanh()]
+
+        self.model = nn.Sequential(*model)
+
+    def _create_layer(self, size_in, size_out, kernel_size, stride=2, padding=1, transposed=False):
+        layers = []
+        if transposed:
+            layers.append(nn.ConvTranspose2d(size_in, size_out, kernel_size, stride=stride, padding=padding, output_padding=1))
+        else:
+            layers.append(nn.Conv2d(size_in, size_out, kernel_size, stride=stride, padding=padding))
+        layers.append(nn.InstanceNorm2d(size_out))
+        layers.append(nn.ReLU(inplace=True))
+        return layers
+
+    def forward(self, x):
+        return self.model(x)
+```
 
 ### The Discriminator[6]
 
@@ -164,6 +225,31 @@ def build_discriminator(self):
         return Model(img, validity)
 ```
 
+```python
+#[32]
+class Discriminator(nn.Module):
+    def __init__(self, channels):
+        super(Discriminator, self).__init__()
+        self.channels = channels
+
+        self.model = nn.Sequential(
+            *self._create_layer(self.channels, 64, 2, normalize=False),
+            *self._create_layer(64, 128, 2),
+            *self._create_layer(128, 256, 2),
+            *self._create_layer(256, 512, 1),
+            nn.Conv2d(512, 1, 4, stride=1, padding=1)
+        )
+
+    def _create_layer(self, size_in, size_out, stride, normalize=True):
+        layers = [nn.Conv2d(size_in, size_out, 4, stride=stride, padding=1)]
+        if normalize:
+            layers.append(nn.InstanceNorm2d(size_out))
+        layers.append(nn.LeakyReLU(0.2, inplace=True))
+        return layers
+
+    def forward(self, x):
+        return self.model(x)
+```
 Image-to-image translation
 
 
@@ -241,7 +327,7 @@ We aim to solve:
 
 $G^{*}, F^{*}=\arg \min _{G, F} \max _{D_{x}, D_{Y}} \mathcal{L}\left(G, F, D_{X}, D_{Y}\right)$
 
-```py
+```python
 #[31]
 cyc_loss = tf.reduce_mean(tf.abs(input_A-cyc_A)) + tf.reduce_mean(tf.abs(input_B-cyc_B))
 g_loss_A = g_loss_A_1 + 10*cyc_loss
@@ -386,6 +472,7 @@ D_A_loss_2 = tf.reduce_mean(tf.square(gen_pool_rec_A))
 [29]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/CycleGAN
 [30]: https://learning.oreilly.com/library/view/gans-in-action/9781617295560/OEBPS/Text/kindle_split_019_split_000.html
 [31]: https://hardikbansal.github.io/CycleGANBlog/
+[32]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/e32d5a1f-ed74-4535-8b83-d06560ce17a9.xhtml
 ```
 
 ---
