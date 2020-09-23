@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 23:18:19
+ * @LastEditTime: 2020-09-23 23:41:44
  * @Description:
  * @TODO::
  * @Reference:
@@ -93,6 +93,8 @@ Network Architecture We adopt the architecture for our generative networks from 
 
 ### The Generator[6]
 
+![generator](img\CycleGAN_generator.jpg)
+
 We adopt our architectures from Johnson et al. [23]. We use 6 residual blocks for 128×128 training images, and 9 residual blocks for 256× 256 or higher-resolution training images. Below, we follow the naming convention used in the Johnson et al.’s Github repository. Let c7s1-k denotea 7×7 Convolution-InstanceNormReLU layer with k ﬁlters and stride 1. dk denotes a 3×3 Convolution-InstanceNorm-ReLU layer with k ﬁlters and stride 2. Reﬂection padding was used to reduce artifacts. Rk denotes a residual block that contains two 3 × 3 convolutional layers with the same number of ﬁlters on both layer. uk denotes a 3 × 3 fractional-strided-ConvolutionInstanceNorm-ReLU layer with k ﬁlters and stride 1
 
 The network with 6 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,u128,u64,c7s1-3
@@ -159,15 +161,21 @@ train.py is a general-purpose training script. It works for various models (with
 
 ## Summary
 
-
-
 *  Finally, we demonstrate the generality of our algorithm on a wide range of applications where paired data does not exist.
 *  Nonetheless, in many cases completely unpaired data is plentifully available and should be made use of. This paper pushes the boundaries of what is possible in this “unsupervised” setting.
-*
 
+## Summary[30]
+
+* Image-to-image translation frameworks are frequently difficult to train because of the need for perfect pairs; the CycleGAN solves this by making this an unpaired domain translation.
+* The CycleGAN has three losses:
+* Cycle-consistent, which measures the difference between the original image and an image translated into a different domain and back again
+* Adversarial, which ensures realistic images
+* Identity, which preserves the color space of the image
+* The two Generators use the U-Net architecture, and the two Discriminators use the PatchGAN-based architecture.
+* We implemented an object-oriented design of the CycleGAN and used it to convert apples to oranges.
+* Practical applications of the CycleGAN include self-driving car training and extensions that allow us to create different styles of images during the translation process.
 
 ## Reference
-
 
 [1]: http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
 [2]: https://junyanz.github.io/CycleGAN/
@@ -189,7 +197,7 @@ train.py is a general-purpose training script. It works for various models (with
 [18]: D. Ulyanov, A. Vedaldi, and V. Lempitsky. Instance normalization: Themissingingredientforfaststylization. arXiv preprint arXiv:1607.08022, 2016. 5
 [19]: P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros. Imageto-image translation with conditional adversarial networks. In CVPR, 2017. 2, 3, 5, 6, 7, 8, 18
 [20]: C. Li and M. Wand. Precomputed real-time texture synthesis with markovian generative adversarial networks. ECCV, 2016. 5
-[21]: C. Ledig, L. Theis, F. Husz´ar, J. Caballero, A. Cunningham, A. Acosta, A. Aitken, A. Tejani, J. Totz, Z. Wang, et al. Photo-realistic single image superresolution using a generative adversarial network. In CVPR, 2017. 5
+[21]: C. Ledg, L. Theis, F. Husz´ar, J. Caballero, A. Cunningham, A. Acosta, A. Aitken, A. Tejani, J. Totz, Z. Wang, et al. Photo-realistic single image superresolution using a generative adversarial network. In CVPR, 2017. 5
 [22]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781789956177/ba03770c-17b6-42f6-b102-8c8554e523d9.xhtml
 [23]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/209b2357-05d7-48d4-9c91-e061eccf8344.xhtml
 [24]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/e4242ef6-dd25-4f42-91b8-4b701fc0d503.xhtml
@@ -198,8 +206,11 @@ train.py is a general-purpose training script. It works for various models (with
 [27]: https://github.com/eriklindernoren/PyTorch-GAN/tree/master/implementations/pix2pix
 [28]: https://colab.research.google.com/github/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/CycleGAN.ipynb#scrollTo=z1EySlOXwwoa
 [29]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/CycleGAN
+[30]: https://learning.oreilly.com/library/view/gans-in-action/9781617295560/OEBPS/Text/kindle_split_019_split_000.html
+
 
 ---
+
 https://learning.oreilly.com/library/view/advanced-deep-learning/9781789956177/262cfe39-8f03-49b7-ba8b-f8db88ff65d6.xhtml
 
 Building the generator and discriminator
