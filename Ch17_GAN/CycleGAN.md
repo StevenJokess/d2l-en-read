@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 23:58:38
+ * @LastEditTime: 2020-09-25 00:20:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,7 +15,7 @@
 
 Now, we introduced the basic ideas behind how GAN[58]/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon, styleGAN[35][34].
 
-In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28], black-and-white to color[57]. convert it into the style of Van Gogh or Picasso![31]
+In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28], black-and-white to color[57] (For example, in colorization problems, the form, structure, and edges of the grayscale image are the same as in the color image. To circumvent this problem, the CycleGAN generators use a U-Net[75] structure as shown in Figure 7.1.6.[74]). convert it into the style of Van Gogh or Picasso![31]
 increase the quality and dimension of generated data.[33] the training examples from the two domains are unpaired, meaning that there is no one-to-one correspondence between inputs and outputs.[59]
 
 introduced a new concept of teaching a GAN to not only learn the latent space but also how to transform from one latent space to another.[48]
@@ -196,6 +196,14 @@ Creating the identity loss constraint for both directions
 Not making the parameters of the Discriminators trainable for now
 Compiling the two Generators
 
+### U-Net[74][75]
+
+![U-Net](img\Unet.jpg)
+
+https://github.com/PacktPublishing/Advanced-Deep-Learning-with-Keras [74]...
+
+
+
 
 
 ### Residual block[32]
@@ -226,6 +234,7 @@ class ResidualBlock(nn.Module):
 
 ![generator1](img\CycleGAN_generator.jpg)
 
+![The forward cycle generator G, implementation in Keras. The generator is a U-Network made of encoder and decoder.](img\Unet.jpg)[74]
 
 We adopt our architectures from Johnson et al. [23]. We use 6 residual blocks for 128×128 training images, and 9 residual blocks for 256× 256 or higher-resolution training images. Below, we follow the naming convention used in the Johnson et al.’s Github repository. Let c7s1-k denotea 7×7 Convolution-InstanceNormReLU layer with k ﬁlters and stride 1. dk denotes a 3×3 Convolution-InstanceNorm-ReLU layer with k ﬁlters and stride 2. Reﬂection padding was used to reduce artifacts. Rk denotes a residual block that contains two 3 × 3 convolutional layers with the same number of ﬁlters on both layer. uk denotes a 3 × 3 fractional-strided-ConvolutionInstanceNorm-ReLU layer with k ﬁlters and stride 1
 
@@ -304,6 +313,8 @@ class Generator(nn.Module):
 ```
 
 ### The Discriminator[6]
+
+![The target discriminator, Dy, implementation in Keras. The PatchGAN discriminator is shown on the right.](img\PatchGAN.jpg)[74]
 
 loss函数使用的是LSGAN中所提到均方差，这种loss可以提高假图像的精度。[46]
 
@@ -772,3 +783,6 @@ Real photo to an artist's painting[71]
 [71]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07.html#ch07lvl2sec23
 [72]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07s02.html
 [73]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch05.html
+[74]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07s03.html
+[75]: https://arxiv.org/pdf/1505.04597
+TODO: https://learning.oreilly.com/library/view/multimodal-scene-understanding/9780128173596/B9780128173589000081.xhtml#st0075
