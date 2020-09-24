@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 22:06:40
+ * @LastEditTime: 2020-09-24 22:36:14
  * @Description:
  * @TODO::
  * @Reference:
@@ -37,7 +37,7 @@ CycleGAN tries to solve these issues with the so-called cycle consistency.
 The translation will be cycle-consistent if we translate the sentence back from German into English and we arrive at the original sentence we started with.
 In a mathematical context, if we have a translator, , and another translator, the two should be inverses of each other.[22]
 
-Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30]
+Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30] So it is more memory-intensive than pix2pix[63], more easy to out of memory.[63]
 
 ## DiscoGAN[39]
 
@@ -124,7 +124,22 @@ script.
 
 `bash ./datasets/download_cyclegan_dataset.sh apple2orange`
 
+
 URL: https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/apple2orange.zip
+
+```bash
+# [62]
+FILE=$1
+# ...
+echo "Specified [$FILE]"
+URL=https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/$FILE.zip
+ZIP_FILE=./datasets/$FILE.zip
+TARGET_DIR=./datasets/$FILE/
+wget -N $URL -O $ZIP_FILE
+mkdir $TARGET_DIR
+unzip $ZIP_FILE -d ./datasets/
+rm $ZIP_FILE
+```
 
 More Datasets[45]
 
@@ -623,6 +638,7 @@ Image-to-Image Demo[52]
 pikachu Demo[56]
 More GAN[60]
 
+
 ## Reference
 
 ```md
@@ -686,6 +702,10 @@ More GAN[60]
 [58]: https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf
 [59]: https://learning.oreilly.com/library/view/python-machine-learning/9781789955750/Text/Chapter_17.xhtml#_idParaDest-342
 [60]: https://github.com/hindupuravinash/the-gan-zoo
+[61]: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007
+[62]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/pix2pix.ipynb
+[63]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/qa.md
+
 
 
 

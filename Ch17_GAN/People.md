@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 20:25:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 20:50:54
+ * @LastEditTime: 2020-09-24 22:38:38
  * @Description:
  * @TODO::
  * @Reference:
@@ -42,3 +42,16 @@ Variational Autoencoders for Deforming 3D Mesh Models
 https://qytan.com/publication/vae/
 
 
+---
+
+Uber AI Labs
+
+alife.org
+
+Open-ended evolution at Reddit
+
+The NEAT Software Catalog
+
+arXiv.org
+
+The NEAT algorithm paper
