@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 11:35:25
+ * @LastEditTime: 2020-09-24 17:34:39
  * @Description:
  * @TODO::
  * @Reference:
@@ -36,6 +36,49 @@ The translation will be cycle-consistent if we translate the sentence back from 
 In a mathematical context, if we have a translator, , and another translator, the two should be inverses of each other.[22]
 
 Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30]
+
+## DiscoGAN[39]
+
+![DiscoGAN](img\DiscoGAN.jpg)[39]
+
+On a high level, it tries to learn two generator functions in the form of neural networks $G_A$B and $G_BA$ so that an image xA, when fed through the generator $G_AB
+$, produces an image xAB, that looks realistic in domain $B$. Also, when this image xAB is fed through the other generator network $G_B$A, it should produce an image $x_ABA$ which should ideally be the same as the original image $x_A$. With respect to the generator function, the following relation should hold true:
+
+$G_{B A} G_{A B}\left(x_{A}\right)=x_{A}$
+
+Taking all of this into consideration, we can formulate the loss the generator we would like to minimize as the reconstruction loss and the loss with respect to the discriminator identifying xAB as fake. The second loss will attempt to make the generator produce realistic images in domain B. The generator loss of mapping an image xA in domain A to an image in domain B can be expressed as follows:
+
+$C=\left\|x_{A}-x_{A B A}\right\|_{2}^{2}=\left\|x_{A}-G_{B A} G_{A B}\left(x_{A}\right)\right\|_{2}^{2}$
+
+The reconstruction loss under the L2 norm can be expressed as follows:
+
+$C_{reconst(ABA)}=\left\|x_{A}-G_{BA} G_{AB}\left(x_{A}\right)\right\|_{2}^{2}$
+
+Frobenius norm
+
+is given by $D_{B}(.),$ then the generator should make $x_{A B}$ highly probable under the
+discriminator network, so that $D_{B}\left(x_{B}\right)=D_{B}\left(G_{A B}\left(x_{A}\right)\right)$ is as close to 1 as possible. In terms of
+log loss, the generator should minimize the negative log of the preceding probability, which
+basically gives us $C_{D(A B)}$, as shown here:
+$C_{D(A B)}=-\log \left(D_{B}\left(G_{A B}\left(x_{A}\right)\right)\right)$
+Combining (3) and (4), we can get the total generator cost $C_{-} G_{A B}$ of mapping an image from
+domain A to domain B, as shown here:
+$C_{-} G_{A B}=C_{r e c o n s t(A B A)}+C_{D(A B)}=\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\left\|x_{A}-G_{B A} G_{A B}\left(x_{A}\right)\right\|_{2}^{2}-\log \left(D_{B}\left(G_{A B}\left(x_{A}\right)\right)\right)\right]+\underset{y_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\left\|x_{B}-G_{A B} G_{B A}\left(x_{B}\right)\right\|_{2}^{2}-\log \left(D_{A}\left(G_{B A}\left(y_{B}\right)\right)\right)\right]$
+Now, let's build the cost functions the discriminators would try to minimize to set up the
+zero-sum min/max games. The discriminators in each domain would try to distinguish the real images from the fake images, and hence the discriminator $G_{B}$ would try to minimize the
+cost $C_{-} D_{B},$ as shown here:
+$C_{-} D_{B}=-\underset{x_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{B}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(1-G_{A B}\left(x_{A}\right)\right)\right]$
+Similarly, the discriminator $D_{A}$ would try to minimize the cost $C_{-} D_{A}$ as shown here:
+$C_{-} D_{A}=-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{A}\right)\right)\right]-\underset{x_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\log \left(1-G_{B A}\left(x_{B}\right)\right)\right]$
+Combining ( 8 ) and ( 9 ) the overall discriminator cost is given by $C_{D}$, as follows:
+$C_{D}=-\underset{y_{B} \sim P\left(y_{B}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(y_{B}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(1-G_{A B}\left(x_{A}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{A}\right)\right)\right]-\underset{x_{B} \sim P\left(y_{B}\right)}{\mathbb{E}}\left[\log \left(1-G_{B A}\left(x_{B}\right)\right)\right](10)$
+If we denote the parameters of the $G_{A B}, G_{B A}, D_{A},$ and $D_{B}$ as $\theta_{G A B}, \theta_{G B A}, \theta_{D A},$ and $\theta_{D B},$ then
+the optimized parameters of the networks can be represented as follows:
+
+
+$$\hat{\theta}_{G A B}, \hat{\theta}_{G B A}=\operatorname{argmin}_{\theta_{C A B}, \theta_{G B A}} \underset{z_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\left\|x_{A}-G_{B A} G_{A B}\left(x_{A}\right)\right\|_{2}^{2}-\log \left(D_{B}\left(G_{A B}\left(x_{A}\right)\right)\right)\right]+\underset{z_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\left\|x_{B}-G_{A B} G_{B A}\left(x_{B}\right)\right\|_{2}^{2}-\log \left(D_{A}\left(G_{B A}\left(x_{B}\right)\right)\right)\right]$$
+$$\hat{\theta}_{D A}, \hat{\theta}_{D B}=\operatorname{argmin}_{\theta_{D A}, \theta_{D B}}-\underset{x_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{B}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(1-G_{A B}\left(x_{A}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{A}\right)\right)\right]-\underset{x_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\log \left(1-G_{B A}\left(x_{B}\right)\right)\right]$$
+
 
 
 
@@ -544,6 +587,7 @@ For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks a
 [36]: https://learning.oreilly.com/library/view/the-deep-learning/9781839219856/B15385_07_Final_VK_ePub.xhtml#_idParaDest-232
 [37]: https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/ch17.html#idm46182870531912
 [38]: https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/app01.html#solutions_appendix
+[39]: https://learning.oreilly.com/library/view/intelligent-projects-using/9781788996921/f3bb58fe-be48-477a-bfbe-46732978d741.xhtml
 ```
 
 ---
