@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 18:03:42
+ * @LastEditTime: 2020-09-24 21:05:33
  * @Description:
  * @TODO::
  * @Reference:
@@ -17,6 +17,8 @@ Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that 
 
 In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28].convert it into the style of Van Gogh or Picasso![31]
 increase the quality and dimension of generated data.[33]
+
+introduced a new concept of teaching a GAN to not only learn the latent space but also how to transform from one latent space to another.[48]
 
 TODO:?  [2]
 However, with large enough capacity, a network can map the same set of input images to any random permutation of images in the target domain, where any of the learned mappings can induce an output distribution that matches the target distribution. Thus, an adversarial loss alone cannot guarantee that the learned function can map an individual input  xi  to a desired output  yi .
@@ -89,6 +91,7 @@ one small modification. In a CycleGAN, we have the flexibility to determine how 
 
 pix2pix uses a conditional generative adversarial network (cGAN) to learn a mapping from an input image to an output image.
 
+website[50], video[51]
 
 how to use pixel-wise label information to perform image-to-image translation with pix2pix and translate high-resolution images with pix2pixHD.
 
@@ -121,6 +124,10 @@ script.
 
 `bash ./datasets/download_cyclegan_dataset.sh apple2orange`
 
+URL: https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/apple2orange.zip
+
+More Datasets[45]
+
 MXNet code[29]
 
 
@@ -143,7 +150,13 @@ TODO:
 
 Network Architecture We adopt the architecture for our generative networks from Johnson et al. [15] who have shownimpressiveresultsforneuralstyletransferandsuperresolution. This network contains three convolutions, several residual blocks [17], two fractionally-strided convolutions with stride 1 2, and one convolution that maps features to RGB. We use 6 blocks for 128×128 images and 9 blocksfor 256×256 andhigher-resolutiontrainingimages. Similar to Johnson et al. [15], we use instance normalization [18]. For the discriminator networks we use 70 × 70 PatchGANs [19],[20],[21], which aim to classify whether 70×70 overlapping image patches are real or fake. Such a patch-level discriminator architecture has fewer parameters thanafull-imagediscriminatorandcanworkonarbitrarilysized images in a fully convolutional fashion [16].
 
-![network](CycleGAN_network.jpg)[30]
+![network](img\CycleGAN_network.jpg)[30]
+
+
+要用到InstanceNormalization[46]
+
+https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/cyclegan/cyclegan.py
+
 
 Input
 
@@ -240,7 +253,42 @@ class Generator(nn.Module):
         return self.model(x)
 ```
 
+```python
+#[52]
+    def downsampling2d(layer_input, filters: int):
+        """Layers used in the encoder"""
+        d = Conv2D(filters=filters,
+                   kernel_size=4,
+                   strides=2,
+                   padding='same')(layer_input)
+        d = LeakyReLU(alpha=0.2)(d)
+        d = InstanceNormalization()(d)
+        return d
+```
+
+```python
+#[52]
+    def upsampling2d(layer_input, skip_input, filters: int):
+        """
+        Layers used in the decoder
+        :param layer_input: input layer
+        :param skip_input: another input from the corresponding encoder block
+        :param filters: number of filters
+        """
+        u = UpSampling2D(size=2)(layer_input)
+        u = Conv2D(filters=filters,
+                   kernel_size=4,
+                   strides=1,
+                   padding='same',
+                   activation='relu')(u)
+        u = InstanceNormalization()(u)
+        u = Concatenate()([u, skip_input])
+        return u
+```
+
 ### The Discriminator[6]
+
+loss函数使用的是LSGAN中所提到均方差，这种loss可以提高假图像的精度。[46]
 
 For discriminator networks, we use 70 × 70 PatchGAN [7]. Let Ck denote a 4×4 Convolution-InstanceNorm-LeakyReLU layer with k ﬁlters and stride 2. After the last layer, we apply a convolution to produce a 1-dimensional output. We do not use InstanceNorm for the ﬁrst C64 layer. We use leaky ReLUs with a slope of 0.2. The discriminator architecture is: C64-C128-C256-C512
 
@@ -561,9 +609,18 @@ Training GANs is notoriously difficult, because of the complex dynamics between 
 
 For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks available at https://github.com/ageron/handson-ml2.
 
+
+Visualizing generator and discriminator.[49]
+
 ## Mobile[42]
 
 The runPix2PixBlurryModel method is similar to the code in the previous chapters where we used an image input to feed into our models.
+
+## Application
+
+DeOldify[44]
+Image-to-Image Demo[52]
+
 
 ## Reference
 
@@ -611,69 +668,20 @@ The runPix2PixBlurryModel method is similar to the code in the previous chapters
 [41]: https://affinelayer.com/pix2pix/
 [42]: https://learning.oreilly.com/library/view/intelligent-mobile-projects/9781788834544/0992a92e-6f99-4057-8783-f165265b06a4.xhtml
 [43]: https://pytorch.org/docs/stable/hub.html
+[44]: https://learning.oreilly.com/library/view/practical-ai-on/9781492075806/ch07.html#idm46127042099592
+[45]: https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/
+[46]: https://blog.csdn.net/weixin_44791964/article/details/103780922
+[47]: https://github.com/eriklindernoren/PyTorch-GAN
+[48]: https://learning.oreilly.com/library/view/practical-ai-on/9781492075806/ch07.html#idm46127042099592
+[49]: https://poloclub.github.io/ganlab/
+[50]: https://phillipi.github.io/pix2pix/
+[51]: https://youtu.be/u7kQ5lNfUfg
+[52]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781789956177/262cfe39-8f03-49b7-ba8b-f8db88ff65d6.xhtml
+[53]: https://affinelayer.com/pixsrv/
+[54]: https://geometrylearning.com
+[55]: https://github.com/s9xie/hed
+[56]:
+
+
 
 ```
-
----
-
-https://learning.oreilly.com/library/view/advanced-deep-learning/9781789956177/262cfe39-8f03-49b7-ba8b-f8db88ff65d6.xhtml
-
-Building the generator and discriminator
-First, we'll implement the build_generator function. The GAN models we've looked at so far started with some sort of latent vector. But here, the generator input is an image from one of the domains and the output is an image from the opposite domain. Following the paper's guidelines, the generator is a U-Net style network. It has a downsampling encoder, an upsampling decoder, and shortcut connections between the corresponding encoder/decoder blocks. We'll start with the build_generator definition:
-
-def build_generator(img: Input) -> Model:
-The U-Net downsampling encoder consists of a number of convolutional layers with LeakyReLU activations, followed by InstanceNormalization. The difference between batch and instance normalization is that batch normalization computes its parameters across the whole mini-batch, while instance normalization computes them separately for each image of the mini-batch. For clarity, we'll implement a separate subroutine called downsampling2d, which defines one such layer. We'll use this function to build the necessary number of layers when we build the network encoder (please note the indentation here; downsampling2d is a subroutine defined within build_generator):
-
-    def downsampling2d(layer_input, filters: int):
-        """Layers used in the encoder"""
-        d = Conv2D(filters=filters,
-                   kernel_size=4,
-                   strides=2,
-                   padding='same')(layer_input)
-        d = LeakyReLU(alpha=0.2)(d)
-        d = InstanceNormalization()(d)
-        return d
-Next, let's focus on the decoder, which isn't implemented with transpose convolutions. Instead, the input data is upsampled with the UpSampling2D operation, which simply duplicates each input pixel as a 2×2 patch. This is followed by a regular convolution to smooth out the patches. This smoothed output is concatenated with the shortcut (or skip_input) connection from the corresponding encoder block. The decoder consists of a number of such upsampling blocks. For clarity, we'll implement a separate subroutine called upsampling2d, which defines one such block. We'll use it to build the necessary number of blocks for the network decoder (please note the indentation here; upsampling2d is a subroutine defined within build_generator):
-
-    def upsampling2d(layer_input, skip_input, filters: int):
-        """
-        Layers used in the decoder
-        :param layer_input: input layer
-        :param skip_input: another input from the corresponding encoder block
-        :param filters: number of filters
-        """
-        u = UpSampling2D(size=2)(layer_input)
-        u = Conv2D(filters=filters,
-                   kernel_size=4,
-                   strides=1,
-                   padding='same',
-                   activation='relu')(u)
-        u = InstanceNormalization()(u)
-        u = Concatenate()([u, skip_input])
-        return u
-Next, we'll implement the full definition of the U-Net using the subroutines we just defined (please note the indentation here; the code is part of build_generator):
-
-    # Encoder
-    gf = 32
-    d1 = downsampling2d(img, gf)
-    d2 = downsampling2d(d1, gf * 2)
-    d3 = downsampling2d(d2, gf * 4)
-    d4 = downsampling2d(d3, gf * 8)
-
-    # Decoder
-    # Note that we concatenate each upsampling2d block with
-    # its corresponding downsampling2d block, as per U-Net
-    u1 = upsampling2d(d4, d3, gf * 4)
-    u2 = upsampling2d(u1, d2, gf * 2)
-    u3 = upsampling2d(u2, d1, gf)
-
-    u4 = UpSampling2D(size=2)(u3)
-    output_img = Conv2D(3, kernel_size=4, strides=1, padding='same',
-    activation='tanh')(u4)
-
-    model = Model(img, output_img)
-
-    model.summary()
-
-    return model
-Then, we should implement the build_discriminator function. We'll omit the implementation here because it is a fairly straightforward CNN, similar to those shown in the previous examples (you can find this in the book's GitHub repository). The only difference is that, instead of using batch normalization, it uses instance normalization.
