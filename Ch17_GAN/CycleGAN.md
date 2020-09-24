@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 10:21:25
+ * @LastEditTime: 2020-09-24 11:35:25
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,9 +13,10 @@
 
 # Cycle-Consistent Adversarial Networks
 
-Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon.
+Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon, styleGAN[35][34].
 
 In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28].convert it into the style of Van Gogh or Picasso![31]
+increase the quality and dimension of generated data.[33]
 
 TODO:?  [2]
 However, with large enough capacity, a network can map the same set of input images to any random permutation of images in the target domain, where any of the learned mappings can induce an output distribution that matches the target distribution. Thus, an adversarial loss alone cannot guarantee that the learned function can map an individual input  xi  to a desired output  yi .
@@ -438,6 +439,70 @@ D_A_loss_2 = tf.reduce_mean(tf.square(gen_pool_rec_A))
 * We implemented an object-oriented design of the CycleGAN and used it to convert apples to oranges.
 * Practical applications of the CycleGAN include self-driving car training and extensions that allow us to create different styles of images during the translation process.
 
+## Explore[36]
+
+it will be time to explore other networks such as the Least Squares GAN (LSGAN) and Wasserstein GAN (WGAN). Then, there is this large playing field of conditional GANs such as the Conditional GAN (cGan), InfoGAN, Auxiliary Classifier GAN (AC-GAN), and Semi-Supervised GAN (SGAN). Once you've done this, you'll have set the stage for advanced topics such as CycleGAN, BigGAN, and StyleGAN.
+
+## Exercises[37]
+
+What are the main tasks that autoencoders are used for?
+
+Suppose you want to train a classifier, and you have plenty of unlabeled training data but only a few thousand labeled instances. How can autoencoders help? How would you proceed?
+
+If an autoencoder perfectly reconstructs the inputs, is it necessarily a good autoencoder? How can you evaluate the performance of an autoencoder?
+
+What are undercomplete and overcomplete autoencoders? What is the main risk of an excessively undercomplete autoencoder? What about the main risk of an overcomplete autoencoder?
+
+How do you tie weights in a stacked autoencoder? What is the point of doing so?
+
+What is a generative model? Can you name a type of generative autoencoder?
+
+What is a GAN? Can you name a few tasks where GANs can shine?
+
+What are the main difficulties when training GANs?
+
+Try using a denoising autoencoder to pretrain an image classifier. You can use MNIST (the simplest option), or a more complex image dataset such as CIFAR10 if you want a bigger challenge. Regardless of the dataset you’re using, follow these steps:
+
+Split the dataset into a training set and a test set. Train a deep denoising autoencoder on the full training set.
+
+Check that the images are fairly well reconstructed. Visualize the images that most activate each neuron in the coding layer.
+
+Build a classification DNN, reusing the lower layers of the autoencoder. Train it using only 500 images from the training set. Does it perform better with or without pretraining?
+
+Train a variational autoencoder on the image dataset of your choice, and use it to generate images. Alternatively, you can try to find an unlabeled dataset that you are interested in and see if you can generate new samples.
+
+Train a DCGAN to tackle the image dataset of your choice, and use it to generate images. Add experience replay and see if this helps. Turn it into a conditional GAN where you can control the generated class.
+
+## Answers[38]
+
+Here are some of the main tasks that autoencoders are used for:
+
+Feature extraction
+
+Unsupervised pretraining
+
+Dimensionality reduction
+
+Generative models
+
+Anomaly detection (an autoencoder is generally bad at reconstructing outliers)
+
+If you want to train a classifier and you have plenty of unlabeled training data but only a few thousand labeled instances, then you could first train a deep autoencoder on the full dataset (labeled + unlabeled), then reuse its lower half for the classifier (i.e., reuse the layers up to the codings layer, included) and train the classifier using the labeled data. If you have little labeled data, you probably want to freeze the reused layers when training the classifier.
+
+The fact that an autoencoder perfectly reconstructs its inputs does not necessarily mean that it is a good autoencoder; perhaps it is simply an overcomplete autoencoder that learned to copy its inputs to the codings layer and then to the outputs. In fact, even if the codings layer contained a single neuron, it would be possible for a very deep autoencoder to learn to map each training instance to a different coding (e.g., the first instance could be mapped to 0.001, the second to 0.002, the third to 0.003, and so on), and it could learn “by heart” to reconstruct the right training instance for each coding. It would perfectly reconstruct its inputs without really learning any useful pattern in the data. In practice such a mapping is unlikely to happen, but it illustrates the fact that perfect reconstructions are not a guarantee that the autoencoder learned anything useful. However, if it produces very bad reconstructions, then it is almost guaranteed to be a bad autoencoder. To evaluate the performance of an autoencoder, one option is to measure the reconstruction loss (e.g., compute the MSE, or the mean square of the outputs minus the inputs). Again, a high reconstruction loss is a good sign that the autoencoder is bad, but a low reconstruction loss is not a guarantee that it is good. You should also evaluate the autoencoder according to what it will be used for. For example, if you are using it for unsupervised pretraining of a classifier, then you should also evaluate the classifier’s performance.
+
+An undercomplete autoencoder is one whose codings layer is smaller than the input and output layers. If it is larger, then it is an overcomplete autoencoder. The main risk of an excessively undercomplete autoencoder is that it may fail to reconstruct the inputs. The main risk of an overcomplete autoencoder is that it may just copy the inputs to the outputs, without learning any useful features.
+
+To tie the weights of an encoder layer and its corresponding decoder layer, you simply make the decoder weights equal to the transpose of the encoder weights. This reduces the number of parameters in the model by half, often making training converge faster with less training data and reducing the risk of overfitting the training set.
+
+A generative model is a model capable of randomly generating outputs that resemble the training instances. For example, once trained successfully on the MNIST dataset, a generative model can be used to randomly generate realistic images of digits. The output distribution is typically similar to the training data. For example, since MNIST contains many images of each digit, the generative model would output roughly the same number of images of each digit. Some generative models can be parametrized—for example, to generate only some kinds of outputs. An example of a generative autoencoder is the variational autoencoder.
+
+A generative adversarial network is a neural network architecture composed of two parts, the generator and the discriminator, which have opposing objectives. The generator’s goal is to generate instances similar to those in the training set, to fool the discriminator. The discriminator must distinguish the real instances from the generated ones. At each training iteration, the discriminator is trained like a normal binary classifier, then the generator is trained to maximize the discriminator’s error. GANs are used for advanced image processing tasks such as super resolution, colorization, image editing (replacing objects with realistic background), turning a simple sketch into a photorealistic image, or predicting the next frames in a video. They are also used to augment a dataset (to train other models), to generate other types of data (such as text, audio, and time series), and to identify the weaknesses in other models and strengthen them.
+
+Training GANs is notoriously difficult, because of the complex dynamics between the generator and the discriminator. The biggest difficulty is mode collapse, where the generator produces outputs with very little diversity. Moreover, training can be terribly unstable: it may start out fine and then suddenly start oscillating or diverging, without any apparent reason. GANs are also very sensitive to the choice of hyperparameters.
+
+For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks available at https://github.com/ageron/handson-ml2.
+
 ## Reference
 
 ```md
@@ -473,6 +538,12 @@ D_A_loss_2 = tf.reduce_mean(tf.square(gen_pool_rec_A))
 [30]: https://learning.oreilly.com/library/view/gans-in-action/9781617295560/OEBPS/Text/kindle_split_019_split_000.html
 [31]: https://hardikbansal.github.io/CycleGANBlog/
 [32]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/e32d5a1f-ed74-4535-8b83-d06560ce17a9.xhtml
+[33]: https://learning.oreilly.com/library/view/pytorch-computer-vision/9781838644833/8be6fe30-e2d7-4901-ba08-a02c10606a0a.xhtml
+[34]: https://thispersondoesnotexist.com/
+[35]: https://arxiv.org/abs/1912.04958
+[36]: https://learning.oreilly.com/library/view/the-deep-learning/9781839219856/B15385_07_Final_VK_ePub.xhtml#_idParaDest-232
+[37]: https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/ch17.html#idm46182870531912
+[38]: https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/app01.html#solutions_appendix
 ```
 
 ---
