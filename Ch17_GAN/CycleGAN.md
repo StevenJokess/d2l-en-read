@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 22:36:14
+ * @LastEditTime: 2020-09-24 23:24:15
  * @Description:
  * @TODO::
  * @Reference:
@@ -111,6 +111,7 @@ Another code[27]
 
 Mathematically, if we have a translator G : X → Y and another translator F : Y → X, then G and F should be inverses of each other, and both mappings should be bijections. We apply this structural assumptionbytrainingboththemapping G and F simultaneously, and adding a cycle consistency loss [12] that encourages F(G(x)) ≈ x and G(F(y)) ≈ y. Combining this loss with adversarial losses on domains X and Y yields our full objective for unpaired image-to-image translation.
 
+Unlike pix2pix, CycleGAN learns image translation as long as there are a sufficient amount and variation of source and target data. No alignment is needed. CycleGAN learns the source and target distributions and how to translate from source to target distribution from given sample data. No supervision is needed.[71]
 
 
 
@@ -144,7 +145,7 @@ rm $ZIP_FILE
 More Datasets[45]
 
 MXNet code[29]
-
+TF (zibra<->horses) code[65] [69] [70]
 
 To train a model on your own datasets, you need to create a data folder with two subdirectories trainA and trainB that contain images from domain A and B. You can test your model on your training set by setting --phase train in test.py. You can also create subdirectories testA and testB if you have test data.You can also create subdirectories testA and testB if you have test data.
 
@@ -338,6 +339,8 @@ def build_discriminator(self):
 
         return Model(img, validity)
 ```
+
+
 
 ```python
 #[32]
@@ -633,10 +636,28 @@ The runPix2PixBlurryModel method is similar to the code in the previous chapters
 
 ## Application
 
+Image transformation: Such as changing horses to zebra and vice versa
+Enhancing the resolution: The CycleGAN, when trained by a dataset consisting of low-resolution and super-resolution images, could perform super-resolution when given with low-resolution images
+Style transfer: Given an image, it can be transformed into different painting styles
+[67]
+
 DeOldify[44]
 Image-to-Image Demo[52]
 pikachu Demo[56]
 More GAN[60]
+GAN Timeline[64]
+
+Music generation: MIDINet, a convolutional GAN, has been demonstrated to generate melodies. You can refer to the paper here: https://arxiv.org/pdf/1703.10847.pdf.
+Medical anomaly detection: AnoGAN is a DCGAN shown by Thomas Schlegl et al. to learn a manifold of normal anatomical variability. They were able to train the network to label anomalies on optical coherence tomography images of the retina. If the work interests you, you can see the related paper on arXiv at https://arxiv.org/pdf/1703.05921.pdf.
+Vector arithmetic on faces using GANs: In the joint research paper by Indico Research and Facebook, they demonstrated that it's possible to use GANs and perform image arithmetic. For example, Man with glasses—Man without glasses + Woman without glasses = Woman with glasses. It's an interesting paper and you can read more about it on Arxiv (https://arxiv.org/pdf/1511.06434.pdf).
+Text to image synthesis: GANs have been demonstrated to generate images of birds and flowers from human-written textual descriptions. The model uses DCGAN along with a hybrid character level convolutional recurrent network. The details of the work are given in the paper, Generative Adversarial Text to Image Synthesis. The link to the paper is https://arxiv.org/pdf/1605.05396.pdf.[68]
+
+Satellite image to map
+Face image to emoji, caricature or anime
+Body image to the avatar
+Colorization of grayscale photos
+Medical scan to a real photo
+Real photo to an artist's painting
 
 
 ## Reference
@@ -705,8 +726,12 @@ More GAN[60]
 [61]: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007
 [62]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/pix2pix.ipynb
 [63]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/qa.md
-
-
-
-
-```
+[64]: https://github.com/dongb5/GAN-Timeline
+[65]: https://learning.oreilly.com/library/view/deep-learning-with/9781484236796/html/463582_1_En_8_Chapter.xhtml
+[66]: https://github.com/xhujoy/CycleGAN-tensorflow
+[67]: https://learning.oreilly.com/library/view/hands-on-artificial-intelligence/9781788836067/c2e7d914-4e45-4528-8627-c590d19107ef.xhtml
+[68]: https://learning.oreilly.com/library/view/hands-on-artificial-intelligence/9781788836067/9a020d1d-ad7a-4d6a-8be6-b9fd2af9b491.xhtml
+[69]: https://github.com/WeeHyongTok/CycleGAN-tensorflow/blob/master/CycleGAN-Example.ipynb
+[70]: https://github.com/xhujoy/CycleGAN-tensorflow
+[71]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07.html#ch07lvl2sec23
+[72]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07s02.html
