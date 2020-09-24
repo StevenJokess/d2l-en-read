@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 21:05:33
+ * @LastEditTime: 2020-09-24 22:06:40
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,10 +13,10 @@
 
 # Cycle-Consistent Adversarial Networks
 
-Now, we introduced the basic ideas behind how GAN/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon, styleGAN[35][34].
+Now, we introduced the basic ideas behind how GAN[58]/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon, styleGAN[35][34].
 
-In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28].convert it into the style of Van Gogh or Picasso![31]
-increase the quality and dimension of generated data.[33]
+In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28], black-and-white to color[57]. convert it into the style of Van Gogh or Picasso![31]
+increase the quality and dimension of generated data.[33] the training examples from the two domains are unpaired, meaning that there is no one-to-one correspondence between inputs and outputs.[59]
 
 introduced a new concept of teaching a GAN to not only learn the latent space but also how to transform from one latent space to another.[48]
 
@@ -620,7 +620,8 @@ The runPix2PixBlurryModel method is similar to the code in the previous chapters
 
 DeOldify[44]
 Image-to-Image Demo[52]
-
+pikachu Demo[56]
+More GAN[60]
 
 ## Reference
 
@@ -680,7 +681,11 @@ Image-to-Image Demo[52]
 [53]: https://affinelayer.com/pixsrv/
 [54]: https://geometrylearning.com
 [55]: https://github.com/s9xie/hed
-[56]:
+[56]: http://1023.io/pix2pix-edges-to-pikachu-2
+[57]: https://learning.oreilly.com/library/view/practical-deep-learning/9781492034858/ch10.html#pix2pix
+[58]: https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf
+[59]: https://learning.oreilly.com/library/view/python-machine-learning/9781789955750/Text/Chapter_17.xhtml#_idParaDest-342
+[60]: https://github.com/hindupuravinash/the-gan-zoo
 
 
 
