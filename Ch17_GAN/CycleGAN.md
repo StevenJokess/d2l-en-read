@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 17:48:51
+ * @LastEditTime: 2020-09-24 18:03:42
  * @Description:
  * @TODO::
  * @Reference:
@@ -472,11 +472,19 @@ D_A_loss_2 = tf.reduce_mean(tf.square(gen_pool_rec_A))
 D_A_loss_2 = tf.reduce_mean(tf.square(gen_pool_rec_A))
 ```
 
+## Model[43]
+
+```python
+model = torch.hub.load('facebookresearch/pytorch_GAN_zoo:hub', 'PGAN',
+                       model_name='celebAHQ-512',
+                       pretrained=True,
+                       useGPU=use_gpu)
+```
 
 ## Summary
 
-*  Finally, we demonstrate the generality of our algorithm on a wide range of applications where paired data does not exist.
-*  Nonetheless, in many cases completely unpaired data is plentifully available and should be made use of. This paper pushes the boundaries of what is possible in this “unsupervised” setting.
+* Finally, we demonstrate the generality of our algorithm on a wide range of applications where paired data does not exist.
+* Nonetheless, in many cases completely unpaired data is plentifully available and should be made use of. This paper pushes the boundaries of what is possible in this “unsupervised” setting.
 
 ## Summary[30]
 
@@ -553,6 +561,10 @@ Training GANs is notoriously difficult, because of the complex dynamics between 
 
 For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks available at https://github.com/ageron/handson-ml2.
 
+## Mobile[42]
+
+The runPix2PixBlurryModel method is similar to the code in the previous chapters where we used an image input to feed into our models.
+
 ## Reference
 
 ```md
@@ -597,6 +609,9 @@ For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks a
 [39]: https://learning.oreilly.com/library/view/intelligent-projects-using/9781788996921/f3bb58fe-be48-477a-bfbe-46732978d741.xhtml
 [40]: https://learning.oreilly.com/library/view/intelligent-projects-using/9781788996921/89968ae6-5da7-4f1b-ae5f-74a6a6b5c63c.xhtml
 [41]: https://affinelayer.com/pix2pix/
+[42]: https://learning.oreilly.com/library/view/intelligent-mobile-projects/9781788834544/0992a92e-6f99-4057-8783-f165265b06a4.xhtml
+[43]: https://pytorch.org/docs/stable/hub.html
+
 ```
 
 ---
