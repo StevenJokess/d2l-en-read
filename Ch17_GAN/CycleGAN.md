@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 23:24:15
+ * @LastEditTime: 2020-09-24 23:58:38
  * @Description:
  * @TODO::
  * @Reference:
@@ -37,7 +37,7 @@ CycleGAN tries to solve these issues with the so-called cycle consistency.
 The translation will be cycle-consistent if we translate the sentence back from German into English and we arrive at the original sentence we started with.
 In a mathematical context, if we have a translator, , and another translator, the two should be inverses of each other.[22]
 
-Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30] So it is more memory-intensive than pix2pix[63], more easy to out of memory.[63]
+Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30] So it is more memory-intensive than pix2pix[63], more easy to out of memory.[63] Since the network is symmetric, CycleGAN also wants the generator F to learn how to synthesize fake source data, x ', that can fool the discriminator, Dx, in the backward cycle. Inspired by the better perceptual quality of Least Squares GAN (LSGAN) [73]
 
 ## DiscoGAN[39]
 
@@ -195,6 +195,7 @@ Creating placeholders for the reconstructed images back in the original domain
 Creating the identity loss constraint for both directions
 Not making the parameters of the Discriminators trainable for now
 Compiling the two Generators
+
 
 
 ### Residual block[32]
@@ -385,6 +386,14 @@ $\begin{aligned} \mathcal{L}_{\mathrm{GAN}}\left(G, D_{Y}, X, Y\right) &=\mathbb
 
 ### Discriminator Loss
 
+$\mathcal{L}_{\text {forward}-G A N}^{(D)}=\mathbb{E}_{y \sim p_{\text {daa}}(y)}\left(D_{y}(y)-1\right)^{2}+\mathbb{E}_{x \sim p_{\text {dan}}(x)} D_{y}(G(x))^{2}$
+
+$\mathcal{L}_{\text {backward}-G A N}^{(D)}=\mathbb{E}_{x \sim p_{\text {dat}}(x)}\left(D_{x}(x)-1\right)^{2}+\mathbb{E}_{y \sim p_{\text {data}}(y)} D_{x}(F(y))^{2}$
+
+$\mathcal{L}_{GAN}^{(D)}=\mathcal{L}_{\text {forward}-GAN}^{(D)}+\mathcal{L}_{\text {backward}-GAN}^{(D)}$
+
+[72]
+
 minimize ( Discriminator $\left._{A}(a)-1\right)^{2}$
 
 ```python
@@ -405,6 +414,14 @@ D_B_loss = (D_B_loss_1 + D_B_loss_2)/2
 
 ### Generator Loss
 
+$\mathcal{L}_{\text {forward}-G A N}^{(G)}=\mathbb{E}_{x \sim p_{\text {dala}}(x)}\left(D_{y}(G(x))-1\right)^{2}$
+
+$\mathcal{L}_{\text {backward}-G A N}^{(G)}=\mathbb{E}_{y \sim p_{\text {data}}(y)}\left(D_{x}(F(y))-1\right)^{2}$
+
+
+$\mathcal{L}_{GAN}^{(G)}=\mathcal{L}_{\text {forward}-GAN}^{(G)}+\mathcal{L}_{\text {backward}-GAN}^{(G)}$
+[72]
+
 minimize
 $\left(\text {Discriminator}_{B}\left(\text {Generator}_{A \rightarrow B}(a)\right)-1\right)^{2}$
 
@@ -420,7 +437,17 @@ $\begin{aligned} \mathcal{L}_{\mathrm{cyc}}(G, F) &=\mathbb{E}_{x \sim p_{\text 
 
 The behavior induced by the cycle consistency loss can beobservedinFigure4: thereconstructedimages F(G(x)) end up matching closely to the input images x.
 
+$\mathcal{L}_{c y c}=\mathcal{L}_{\text {forward}-c y c}+\mathcal{L}_{\text {backward}-c y c}$
+
+x' = F(G(x)) This is done by minimizing the forward cycle-consistency L1 loss:[72]
+$\mathcal{L}_{\text {forward}-c y c}=\mathbb{E}_{x \sim p_{\text {tan}}(x)}\left[\|F(G(x))-x\|_{1}\right]$
+
+y ' = G(F(y)). This is done by minimizing the backward cycle-consistency L1 loss:[72]
+$\mathcal{L}_{\text {backward}-c y c}=\mathbb{E}_{y \sim p_{\text {data}}(y)}\left[\|G(F(y))-y\|_{1}\right]$
+
 In particular, for a GAN loss $\mathcal{L}_{\mathrm{GAN}}(G, D, X, Y)$and train the $G$ to minimize $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[(D(G(x))-1)^{2}\right]$and train the $D$ to minimize $\mathbb{E}_{y \sim p_{\text {data}}(y)}\left[(D(y)-1)^{2}\right]+$ $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[D(G(x))^{2}\right]$ [14]
+
+The cycle-consistency loss uses L1 or Mean Absolute Error (MAE) since it generally results in less blurry image reconstruction compared to L2 or Mean Square Error (MSE).[72The cycle-consistency loss uses L1 or Mean Absolute Error (MAE) since it generally results in less blurry image reconstruction compared to L2 or Mean Square Error (MSE).]
 
 ```python
 cyc_loss = tf.reduce_mean(tf.abs(input_A-cyc_A)) + tf.reduce_mean(tf.abs(input_B-cyc_B))
@@ -433,6 +460,15 @@ This measures the absolute difference between the original images, that is, x an
 
 
 ### Full Objective[11]
+
+![forward and backward](img\CycleGAN_forback.jpg)[72]
+
+The total loss of CycleGAN becomes:
+
+$\mathcal{L}=\lambda_{1} \mathcal{L}_{G A N}+\lambda_{2} \mathcal{L}_{c y c}+\lambda_{3} \mathcal{L}_{\text {identity}}$
+
+$\lambda_{3}=0.5$
+
 
 Minimize[31]
 $\begin{aligned} \mathcal{L}\left(G, F, D_{X}, D_{Y}\right) &=\mathcal{L}_{\text {GAN }}\left(G, D_{Y}, X, Y\right) \\ &+\mathcal{L}_{\text {GAN }}\left(F, D_{X}, Y, X\right) \\ &+\lambda \mathcal{L}_{\text {cyc }}(G, F) \end{aligned}$
@@ -657,7 +693,7 @@ Face image to emoji, caricature or anime
 Body image to the avatar
 Colorization of grayscale photos
 Medical scan to a real photo
-Real photo to an artist's painting
+Real photo to an artist's painting[71]
 
 
 ## Reference
@@ -735,3 +771,4 @@ Real photo to an artist's painting
 [70]: https://github.com/xhujoy/CycleGAN-tensorflow
 [71]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07.html#ch07lvl2sec23
 [72]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch07s02.html
+[73]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch05.html
