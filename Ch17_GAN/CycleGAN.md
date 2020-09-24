@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 00:37:09
+ * @LastEditTime: 2020-09-24 10:21:25
  * @Description:
  * @TODO::
  * @Reference:
@@ -152,7 +152,7 @@ The network with 6 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256
 The network with 9 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,R256,R256,R256,u128 u64,c7s1-3
 
 ```python
-#
+#[32]
 class Generator(nn.Module):
     def __init__(self, channels, num_blocks=9):
         super(Generator, self).__init__()
