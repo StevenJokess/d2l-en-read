@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 17:34:39
+ * @LastEditTime: 2020-09-24 17:48:51
  * @Description:
  * @TODO::
  * @Reference:
@@ -79,10 +79,16 @@ the optimized parameters of the networks can be represented as follows:
 $$\hat{\theta}_{G A B}, \hat{\theta}_{G B A}=\operatorname{argmin}_{\theta_{C A B}, \theta_{G B A}} \underset{z_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\left\|x_{A}-G_{B A} G_{A B}\left(x_{A}\right)\right\|_{2}^{2}-\log \left(D_{B}\left(G_{A B}\left(x_{A}\right)\right)\right)\right]+\underset{z_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\left\|x_{B}-G_{A B} G_{B A}\left(x_{B}\right)\right\|_{2}^{2}-\log \left(D_{A}\left(G_{B A}\left(x_{B}\right)\right)\right)\right]$$
 $$\hat{\theta}_{D A}, \hat{\theta}_{D B}=\operatorname{argmin}_{\theta_{D A}, \theta_{D B}}-\underset{x_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{B}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(1-G_{A B}\left(x_{A}\right)\right)\right]-\underset{x_{A} \sim P\left(x_{A}\right)}{\mathbb{E}}\left[\log \left(D_{B}\left(x_{A}\right)\right)\right]-\underset{x_{B} \sim P\left(x_{B}\right)}{\mathbb{E}}\left[\log \left(1-G_{B A}\left(x_{B}\right)\right)\right]$$
 
+https://github.com/PacktPublishing/Intelligent-Projects-using-Python/tree/master/Chapter04
 
+one small modification. In a CycleGAN, we have the flexibility to determine how much weight to assign to the reconstruction loss with respect to the GAN loss or the loss attributed to the discriminator. This parameter helps in balancing the losses in correct proportions based on the problem at hand to help the network converge faster while training.[40]
 
 
 ## baseline(pix2pix)
+
+
+pix2pix uses a conditional generative adversarial network (cGAN) to learn a mapping from an input image to an output image.
+
 
 how to use pixel-wise label information to perform image-to-image translation with pix2pix and translate high-resolution images with pix2pixHD.
 
@@ -101,6 +107,7 @@ Another code[27]
 
 
 Mathematically, if we have a translator G : X → Y and another translator F : Y → X, then G and F should be inverses of each other, and both mappings should be bijections. We apply this structural assumptionbytrainingboththemapping G and F simultaneously, and adding a cycle consistency loss [12] that encourages F(G(x)) ≈ x and G(F(y)) ≈ y. Combining this loss with adversarial losses on domains X and Y yields our full objective for unpaired image-to-image translation.
+
 
 
 
@@ -588,6 +595,8 @@ For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks a
 [37]: https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/ch17.html#idm46182870531912
 [38]: https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/app01.html#solutions_appendix
 [39]: https://learning.oreilly.com/library/view/intelligent-projects-using/9781788996921/f3bb58fe-be48-477a-bfbe-46732978d741.xhtml
+[40]: https://learning.oreilly.com/library/view/intelligent-projects-using/9781788996921/89968ae6-5da7-4f1b-ae5f-74a6a6b5c63c.xhtml
+[41]: https://affinelayer.com/pix2pix/
 ```
 
 ---
