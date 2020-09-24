@@ -5,14 +5,17 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-23 23:19:43
+ * @LastEditTime: 2020-09-24 17:52:43
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
+## code
 
 $ git clone https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix.git
+
+
 Then, install the prerequisites to be able to visualize the results during training:
 
 $ pip install dominate visdom
@@ -20,12 +23,22 @@ $ pip install dominate visdom
 
 The Image-to-Image Translation with Conditional Adversarial Networks (known as Pix2Pix, https://arxiv.org/abs/1611.07004) paper from the same team also does image-to-image translation for paired training data.
 
+tf code:
+https://github.com/affinelayer/pix2pix-tensorflow
+
+![encode-decode](img\encode-decode.png)[4]
+
 ### The Generator
+
+The Generator has the job of taking an input image and performing the transform we want in order to produce the target image. An example input would be a black and white image, and we want the output to be a colorized version of that image. The structure of the generator is called an "encoder-decoder" and in pix2pix the encoder-decoder looks more or less like this:
+
 
 ![Generator architecture](img\Pix2Pix_generator.jpg)[1]
 
 
 ### The Discriminator
+
+The Discriminator has the job of taking two images, an input image and an unknown image (which will be either a target or output image from the generator), and deciding if the second image was produced by the generator or not.
 
 ![Discriminator architecture](img\Pix2Pix_discri.jpg)[1]
 
@@ -49,3 +62,4 @@ MXNet code[3]
 [1]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/8d5574ec-aa41-42d3-a92d-d549488d32a9.xhtml
 [2]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/05e25d65-5beb-412b-9b38-d99516eccbf0.xhtml
 [3]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/Pix2Pix
+[4]: https://affinelayer.com/pix2pix/
