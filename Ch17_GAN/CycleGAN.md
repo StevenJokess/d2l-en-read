@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-25 23:32:55
+ * @LastEditTime: 2020-09-27 18:36:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -38,6 +38,9 @@ The translation will be cycle-consistent if we translate the sentence back from 
 In a mathematical context, if we have a translator, , and another translator, the two should be inverses of each other.[22]
 
 Using CycleGAN, we only need to train one model to freely translate from image set A to image set B and vice versa.[26] We will need at least two sets of Discriminators and two Generators to achieve this.[30] So it is more memory-intensive than pix2pix[63], more easy to out of memory.[63] Since the network is symmetric, CycleGAN also wants the generator F to learn how to synthesize fake source data, x ', that can fool the discriminator, Dx, in the backward cycle. Inspired by the better perceptual quality of Least Squares GAN (LSGAN) [73]
+
+While Pix2Pix works best in supervised contexts, when the target images were made available to add an MSE loss to the GAN objective, more recent solutions removed this constraint. This is, for instance, the case of CycleGAN.[91]
+
 
 ## DiscoGAN[39]
 
@@ -130,6 +133,8 @@ script.
 
 
 URL: https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/apple2orange.zip
+
+CMP Facade Database[93]
 
 ```bash
 # [62]
@@ -390,6 +395,8 @@ Image-to-image translation
 The discriminator is a mirror of the generator.
 
 ## Loss Function
+
+this is why it's a GAN based method and what the discriminator does is it discriminates basically learns between whether it's a horse or not. So when you map from X your zebra to Y your horse, you will also have another loss produced by the discriminator D that tells you whether it's mapped to a horse or not. Okay, it's really kind of two losses that are going on, you've got this so called cycle consistency loss and then you've also got the discriminator input loss.[92]
 
  For the mapping function G : X → Y and its discriminator $D_Y$ , we express the objective as:
 
@@ -818,3 +825,6 @@ Real photo to an artist's painting[71]
 [88]: https://www.bilibili.com/video/BV1AJ411w77m?from=search&seid=17955911669782317392
 [89]: https://www.bilibili.com/read/cv3593140?from=search
 [90]: https://github.com/tensorflow/examples/blob/master/tensorflow_examples/models/pix2pix/pix2pix.py#L161-L185
+[91]: https://learning.oreilly.com/library/view/hands-on-computer-vision/9781788830645/8a083e46-e1dd-4520-bfde-fe98ee7c1815.xhtml
+[92]: https://learning.oreilly.com/videos/hands-on-computer-vision/9781789614077/9781789614077-video7_4
+[93]: http://cmp.felk.cvut.cz/~tylecr1/facade/
