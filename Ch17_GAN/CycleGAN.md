@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-27 18:36:05
+ * @LastEditTime: 2020-09-28 11:16:30
  * @Description:
  * @TODO::
  * @Reference:
@@ -28,6 +28,8 @@ However, with large enough capacity, a network can map the same set of input ima
 Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transﬁguration, season transfer, photo enhancement, etc.
 
 ![mapping](img\mapping.jpg)
+
+图中(b)和(c)就是Dual Learning[98][99]
 
 Left: Overall CycleGAN schema; Middle: Forward cycle-consistency loss; Right: Backward cycle-consistency loss.[22]
 
@@ -101,7 +103,8 @@ website[50], video[51]
 
 how to use pixel-wise label information to perform image-to-image translation with pix2pix and translate high-resolution images with pix2pixHD.
 
-pix2pix [13] We also compare against pix2pix [13], which is trained on paired data, to see how close we can get to this “upper bound” without using any paired data.
+pix2pix [13] We also compare against pix2pix [13], which is trained on paired data, to see how close we can get to this “upper bound” without using any paired data(horses and zebras standing in identical positions.[94])
+
 
 Pix2pix was designed to learn of the connections between paired collections of images, for example, transforming an aerial photo taken by a satellite into a regular map, or a sketch image into a color image, and vice versa.[24]
 
@@ -119,6 +122,7 @@ Mathematically, if we have a translator G : X → Y and another translator F : Y
 
 Unlike pix2pix, CycleGAN learns image translation as long as there are a sufficient amount and variation of source and target data. No alignment is needed. CycleGAN learns the source and target distributions and how to translate from source to target distribution from given sample data. No supervision is needed.[71]
 
+![pix2pix dataset and domain mapping example](img\Pix2Pix_StyleGAN.png)[94]
 
 
 ## The apple2orange Dataset[4]
@@ -173,6 +177,11 @@ TODO:
 
 ## Network Architecture[14]
 
+Dual Learning
+
+![Dual Learning](img\Dual_Learning.jpg)[100]
+
+
 Network Architecture We adopt the architecture for our generative networks from Johnson et al. [15] who have shownimpressiveresultsforneuralstyletransferandsuperresolution. This network contains three convolutions, several residual blocks [17], two fractionally-strided convolutions with stride 1 2, and one convolution that maps features to RGB. We use 6 blocks for 128×128 images and 9 blocksfor 256×256 andhigher-resolutiontrainingimages. Similar to Johnson et al. [15], we use instance normalization [18]. For the discriminator networks we use 70 × 70 PatchGANs [19],[20],[21], which aim to classify whether 70×70 overlapping image patches are real or fake. Such a patch-level discriminator architecture has fewer parameters thanafull-imagediscriminatorandcanworkonarbitrarilysized images in a fully convolutional fashion [16].
 
 ![network](img\CycleGAN_network.jpg)[30]
@@ -202,6 +211,7 @@ Creating placeholders for the image input for both directions
 Linking them both to an image in the other domain
 Creating placeholders for the reconstructed images back in the original domain
 Creating the identity loss constraint for both directions
+    In the original CycleGAN paper, the identity loss was included as an optional addition to the necessary reconstruction loss and validity loss.[94]
 Not making the parameters of the Discriminators trainable for now
 Compiling the two Generators
 
@@ -215,6 +225,57 @@ https://github.com/PacktPublishing/Advanced-Deep-Learning-with-Keras [74]...
 “This tutorial is using a modified unet generator for simplicity.”[89]
 
 InstanceNormalization[90]
+
+In a similar manner to a variational autoencoder, a U-Net consists of two halves: the downsampling half, where input images are compressed spatially but expanded channel-wise, and an upsampling half, where representations are expanded spatially while the number of channels is reduced.[94]
+
+However, unlike in a VAE, there are also skip connections between equivalently shaped layers in the upsampling and downsampling parts of the network. A VAE is linear; data flows through the network from input to the output, one layer after another. A U-Net is different, because it contains skip connections that allow information to shortcut parts of the network and flow through to later layers.[94]
+
+U-Net是德国Freiburg大学模式识别和图像处理组提出的一种全卷积结构。和常见的先降采样到低维度，再升采样到原始分辨率的编解码(Encoder-Decoder)结构的网络相比，U-Net的区别是加入skip-connection，对应的feature maps和decode之后的同样大小的feature maps按通道拼(concatenate)一起，用来保留不同分辨率下像素级的细节信息。U-Net对提升细节的效果非常明显。[98]
+
+```python
+#[94]
+def build_generator_unet(self):
+
+    def downsample(layer_input, filters, f_size=4):
+        d = Conv2D(filters, kernel_size=f_size
+            , strides=2, padding='same')(layer_input)
+        d = InstanceNormalization(axis = -1, center = False, scale = False)(d)
+        d = Activation('relu')(d)
+
+        return d
+
+    def upsample(layer_input, skip_input, filters, f_size=4, dropout_rate=0):
+        u = UpSampling2D(size=2)(layer_input)
+        u = Conv2D(filters, kernel_size=f_size, strides=1, padding='same')(u)
+        u = InstanceNormalization(axis = -1, center = False, scale = False)(u)
+        u = Activation('relu')(u)
+        if dropout_rate:
+            u = Dropout(dropout_rate)(u)
+
+        u = Concatenate()([u, skip_input])
+        return u
+
+    # Image input
+    img = Input(shape=self.img_shape)
+
+    # Downsampling 1(The generator consists of two halves. First, we downsample the image, using Conv2D layers with stride 2.)
+    d1 = downsample(img, self.gen_n_filters)
+    d2 = downsample(d1, self.gen_n_filters*2)
+    d3 = downsample(d2, self.gen_n_filters*4)
+    d4 = downsample(d3, self.gen_n_filters*8)
+
+    # Upsampling 2(Then we upsample, to return the tensor to the same size as the original image. The upsampling blocks contain Concatenate layers, which give the network the U-Net architecture.)
+    u1 = upsample(d4, d3, self.gen_n_filters*4)
+    u2 = upsample(u1, d2, self.gen_n_filters*2)
+    u3 = upsample(u2, d1, self.gen_n_filters)
+
+    u4 = UpSampling2D(size=2)(u3)
+
+    output = Conv2D(self.channels, kernel_size=4, strides=1
+           , padding='same', activation='tanh')(u4)
+
+    return Model(img, output)
+```
 
 ### Residual block[32]
 
@@ -329,6 +390,10 @@ class Generator(nn.Module):
 loss函数使用的是LSGAN中所提到均方差，这种loss可以提高假图像的精度。[46]
 
 For discriminator networks, we use 70 × 70 PatchGAN [7]. Let Ck denote a 4×4 Convolution-InstanceNorm-LeakyReLU layer with k ﬁlters and stride 2. After the last layer, we apply a convolution to produce a 1-dimensional output. We do not use InstanceNorm for the ﬁrst C64 layer. We use leaky ReLUs with a slope of 0.2. The discriminator architecture is: C64-C128-C256-C512
+
+The benefit of using a PatchGAN discriminator is that the loss function can then measure how good the discriminator is at distinguishing images based on their style rather than their content. Since each individual element of the discriminator prediction is based only on a small square of the image, it must use the style of the patch, rather than its content, to make its decision. This is exactly what we require; we would rather our discriminator is good at identifying when two images differ in style than content.[94]
+
+PatchGAN的思想是，既然GAN只负责处理低频成分，那么判别器就没必要以一整张图作为输入，只需要对NxN的一个图像patch去进行判别就可以了。这也是为什么叫Markovian discriminator，因为在patch以外的部分认为和本patch互相独立。[98]
 
 We take the input image (128 × 128 × 3) and assign that to d1 (64 × 64 × 64).
 We take d1 (64 × 64 × 64) and assign that to d2 (32 × 32 × 128).
@@ -472,6 +537,12 @@ $\mathcal{L}_{\text {backward}-c y c}=\mathbb{E}_{y \sim p_{\text {data}}(y)}\le
 In particular, for a GAN loss $\mathcal{L}_{\mathrm{GAN}}(G, D, X, Y)$and train the $G$ to minimize $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[(D(G(x))-1)^{2}\right]$and train the $D$ to minimize $\mathbb{E}_{y \sim p_{\text {data}}(y)}\left[(D(y)-1)^{2}\right]+$ $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[D(G(x))^{2}\right]$ [14]
 
 The cycle-consistency loss uses L1 or Mean Absolute Error (MAE) since it generally results in less blurry image reconstruction compared to L2 or Mean Square Error (MSE).[72The cycle-consistency loss uses L1 or Mean Absolute Error (MAE) since it generally results in less blurry image reconstruction compared to L2 or Mean Square Error (MSE).]
+
+不加cycle-consistency，会产生GAN训练中容易发生的mode collapse问题。虽然名字叫CycleGAN，并且套路也和C-GAN很像，但是其实只有adversarial，并没有generative。因为严格来说只是学习了和的mapping，所谓的generative network里并没有随机性。[98]
+
+![mode collapse](img\mode_collapse.jpg)
+
+上边的是真实分布，下边的是学习到的分布，可以看到学习到的分布只是完整分布的一部分，这个叫做partial mode collapse，是训练不收敛情况中常见的一种。如果是完全的mode collapse，就是说生成模型得到的都是几乎一样的输出。而加入Cycle-consistency会让一个domain里不同的样本都尽量映射到另一个domain里不同的地方，理想情况就是双射（bijection）。[98]
 
 ```python
 cyc_loss = tf.reduce_mean(tf.abs(input_A-cyc_A)) + tf.reduce_mean(tf.abs(input_B-cyc_B))
@@ -630,6 +701,8 @@ model = torch.hub.load('facebookresearch/pytorch_GAN_zoo:hub', 'PGAN',
 * We implemented an object-oriented design of the CycleGAN and used it to convert apples to oranges.
 * Practical applications of the CycleGAN include self-driving car training and extensions that allow us to create different styles of images during the translation process.
 
+The CycleGAN methodology allows us to train a model to learn the general style of an artist and transfer this over to a photograph, to generate output that looks as if the artist had painted the scene in the photo. The model also gives us the reverse process for free, converting paintings into realistic photographs. Crucially, paired images from each domain aren’t required for a CycleGAN to work, making it an extremely powerful and flexible technique.[94]
+
 ## Explore[36]
 
 it will be time to explore other networks such as the Least Squares GAN (LSGAN) and Wasserstein GAN (WGAN). Then, there is this large playing field of conditional GANs such as the Conditional GAN (cGan), InfoGAN, Auxiliary Classifier GAN (AC-GAN), and Semi-Supervised GAN (SGAN). Once you've done this, you'll have set the stage for advanced topics such as CycleGAN, BigGAN, and StyleGAN.
@@ -729,6 +802,7 @@ Colorization of grayscale photos
 Medical scan to a real photo
 Real photo to an artist's painting[71]
 
+age-gender-estimation[96][97]
 
 
 
@@ -828,3 +902,11 @@ Real photo to an artist's painting[71]
 [91]: https://learning.oreilly.com/library/view/hands-on-computer-vision/9781788830645/8a083e46-e1dd-4520-bfde-fe98ee7c1815.xhtml
 [92]: https://learning.oreilly.com/videos/hands-on-computer-vision/9781789614077/9781789614077-video7_4
 [93]: http://cmp.felk.cvut.cz/~tylecr1/facade/
+[94]: https://learning.oreilly.com/library/view/generative-deep-learning/9781492041931/ch05.html#idm45165178466584
+[95]: https://www.bilibili.com/video/BV1ut4y1S7gP?p=21
+[96]: https://github.com/yu4u/age-gender-estimation
+[97]: https://github.com/yu4u/age-estimation-pytorch
+[98]: https://zhuanlan.zhihu.com/p/27199954
+[99]: He, D., Xia, Y., Qin, T., Wang, L., Yu, N., Liu, T.-Y., and Ma, W.-Y. (2016a). Dual learning for machine translation. In the Annual Conference on Neural Information Processing Systems (NIPS), 2016.
+[100]: [Tie-Yan Liu, Dual Learning: Pushing the New Frontier of Artificial Intelligence, MIFS 2016](http://www.dsrg.stuorg.iastate.edu/wp-content/uploads/2017/02/dual-learning_-pushing-the-new-frontier-of-artificial-intelligence-tieyan-liu.pdf)
+[101]:
