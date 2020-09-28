@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 16:31:25
+ * @LastEditTime: 2020-09-28 18:25:25
  * @Description:
  * @TODO::
  * @Reference:
@@ -18,6 +18,8 @@ Now, we introduced the basic ideas behind how GAN[58]/DCGAN [1] work. We found t
 In this section, we will demonstrate how you can use GANs to translate Unpaired image-to-image [22] which goal is to learn the mapping ( G : X → Y ) , cycle consistency loss to enforce F(G(X)) ≈ X between an input image G(X) and an output image Y using a training set of aligned image pairs. [9] We will be basing our models on the Cycle-Consistent Generative Adversarial Networks (CycleGAN website[25]) introduced in [2]. We will TODO:? , they can be leveraged to translate image-to-image. It works better if two datasets share similar visual content. For example, landscape painting<->landscape photographs, zebras<->horses[28], black-and-white to color[57] (For example, in colorization problems, the form, structure, and edges of the grayscale image are the same as in the color image. To circumvent this problem, the CycleGAN generators use a U-Net[75] structure as shown in Figure 7.1.6.[74]). convert it into the style of Van Gogh or Picasso![31]
 increase the quality and dimension of generated data.[33] the training examples from the two domains are unpaired, meaning that there is no one-to-one correspondence between inputs and outputs.[59]
 
+2017/03[110]
+
 introduced a new concept of teaching a GAN to not only learn the latent space but also how to transform from one latent space to another.[48]
 
 TODO:?  [2]
@@ -25,8 +27,9 @@ However, with large enough capacity, a network can map the same set of input ima
 
 注意，这两个Domain内部的照片必须有一些共性的东西，比如都是斑马的照片，你不能把所有动物的照片都放进去然后期望它能学到斑马的特征。[105]
 
+cycleGAN output only fools humans ~25% of the time based on paper by authors below — but that is 23% greater than most other ‘fakes’. Since it is a cycleGAN, the vis-2-SAR was free.[111]
 
-![paired](img/paired.gif)
+![paired](img/paired.png)
 
 ![horse2zebra](img/horse2zebra.gif)
 
@@ -792,9 +795,17 @@ For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks a
 
 Visualizing generator and discriminator.[49]
 
+Contrastive Unpaired Translation (CUT)[114]
+
 ## Mobile[42]
 
 The runPix2PixBlurryModel method is similar to the code in the previous chapters where we used an image input to feed into our models.
+
+## Expansion
+
+injects latent space information during both translations.[107]
+Augmented CycleGAN gives us extra variables that drive the generative process.[108]
+
 
 ## Application
 
@@ -829,7 +840,11 @@ age-gender-estimation[96][97]
 Voice[103]
 ![CycleGAN](img\CycleGAN_voice.jpg)
 
+Music-Style-Transfer[113]
+
 One example of this kind of framework is Cycle Consistent Adversarial Domain Adaptation (CyCADA).[11] Unfortunately, a full explanation of the way it works is beyond the scope of this chapter. This is because there are many more such frameworks: some even experiment with CycleGAN in language, music, or other forms of domain adaptation. To give you a sense of the complexity, figure 9.9 shows the architecture and design of CyCADA.[106]
+
+High-Resolution Structural-to-DTI Synthesis[112]
 
 ## Reference
 
@@ -941,3 +956,12 @@ https://arxiv.org/pdf/1711.11586
 [104]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/models/cycle_gan_model.py
 [105]: http://fancyerii.github.io/books/cycle-gan/
 [106]: https://livebook.manning.com/book/gans-in-action/chapter-9/145
+[107]: “Augmented CycleGAN: Learning Many-to-Many Mappings from Unpaired Data,” by Amjad Almahairi et al., 2018, http://arxiv.org/abs/1802.10151.
+[108]: “Augmented Cyclic Adversarial Learning for Low Resource Domain Adaptation,” by Ehsan Hosseini-Asl, 2019, https://arxiv.org/pdf/1807.00374.pdf.
+[109]: https://twitter.com/search?q=cyclegan&src=typd
+[110]: https://twitter.com/dl_from_scratch/status/1308266572503367680
+[111]: https://twitter.com/shaybstrong/status/1308098136590577665
+[112]: Manifold-Aware CycleGAN for High-Resolution Structural-to-DTI Synthesis http://arxiv.org/abs/2004.00173
+[113]: https://github.com/sumuzhao/CycleGAN-Music-Style-Transfer
+[114]: https://github.com/taesungp/contrastive-unpaired-translation
+[115]: https://github.com/taesungp/contrastive-unpaired-translation
