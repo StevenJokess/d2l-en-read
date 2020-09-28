@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 11:16:30
+ * @LastEditTime: 2020-09-28 16:31:25
  * @Description:
  * @TODO::
  * @Reference:
@@ -23,11 +23,16 @@ introduced a new concept of teaching a GAN to not only learn the latent space bu
 TODO:?  [2]
 However, with large enough capacity, a network can map the same set of input images to any random permutation of images in the target domain, where any of the learned mappings can induce an output distribution that matches the target distribution. Thus, an adversarial loss alone cannot guarantee that the learned function can map an individual input  xi  to a desired output  yi .
 
+注意，这两个Domain内部的照片必须有一些共性的东西，比如都是斑马的照片，你不能把所有动物的照片都放进去然后期望它能学到斑马的特征。[105]
+
+
+![paired](img/paired.gif)
+
 ![horse2zebra](img/horse2zebra.gif)
 
 Qualitative results are presented on several tasks where paired training data does not exist, including collection style transfer, object transﬁguration, season transfer, photo enhancement, etc.
 
-![mapping](img\mapping.jpg)
+![mapping](img/mapping.jpg)
 
 图中(b)和(c)就是Dual Learning[98][99]
 
@@ -473,6 +478,8 @@ $\begin{aligned} \mathcal{L}_{\mathrm{GAN}}\left(G, D_{Y}, X, Y\right) &=\mathbb
 1. Generators must make the discriminators approve all the generated images, so as to fool them.
 1. The generated image must retain the property of original image, so if we generate a fake image using a generator say  GeneratorA→B  then we must be able to get back to original image using the another generator  GeneratorB→A  - it must satisfy cyclic-consistency.
 
+G的目标是生成能以假乱真的很像属于Y的照片，而DY的目标是能够判断图片是真实的Y中的还是有G伪造出来的。G的目标是让Loss变小，它可以做的就是使得生成的G(x)很像，从而logDY(G(x)很大，[1−logDY(G(x))]很小，从而使得最终Loss变小。而DY要和它唱对台戏，它的目的是让Loss变大，因此它要做的就是对于真实的y，DY(y)尽量大；而伪造的G(x)，logDY(G(x))尽量小，从而1−logDY(G(x))尽量大。[105]
+
 ### Discriminator Loss
 
 $\mathcal{L}_{\text {forward}-G A N}^{(D)}=\mathbb{E}_{y \sim p_{\text {daa}}(y)}\left(D_{y}(y)-1\right)^{2}+\mathbb{E}_{x \sim p_{\text {dan}}(x)} D_{y}(G(x))^{2}$
@@ -522,7 +529,11 @@ g_loss_A_1 = tf.reduce_mean(tf.squared_difference(dec_gen_A,1))
 
 ### Cycle Consistency Loss[10]
 
+我们期望 $x \approx F(G(x)),$ 类似的有 $y \approx G(F(y))_{\circ}$[105]
+
 $\begin{aligned} \mathcal{L}_{\mathrm{cyc}}(G, F) &=\mathbb{E}_{x \sim p_{\text {data }}(x)}\left[\|F(G(x))-x\|_{1}\right] \\ &+\mathbb{E}_{y \sim p_{\text {data }}(y)}\left[\|G(F(y))-y\|_{1}\right] \end{aligned}$
+
+
 
 The behavior induced by the cycle consistency loss can beobservedinFigure4: thereconstructedimages F(G(x)) end up matching closely to the input images x.
 
@@ -534,7 +545,10 @@ $\mathcal{L}_{\text {forward}-c y c}=\mathbb{E}_{x \sim p_{\text {tan}}(x)}\left
 y ' = G(F(y)). This is done by minimizing the backward cycle-consistency L1 loss:[72]
 $\mathcal{L}_{\text {backward}-c y c}=\mathbb{E}_{y \sim p_{\text {data}}(y)}\left[\|G(F(y))-y\|_{1}\right]$
 
-In particular, for a GAN loss $\mathcal{L}_{\mathrm{GAN}}(G, D, X, Y)$and train the $G$ to minimize $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[(D(G(x))-1)^{2}\right]$and train the $D$ to minimize $\mathbb{E}_{y \sim p_{\text {data}}(y)}\left[(D(y)-1)^{2}\right]+$ $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[D(G(x))^{2}\right]$ [14]
+In particular, for a GAN loss $\mathcal{L}_{\mathrm{GAN}}(G, D, X, Y)$and train the $G$ to minimize $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[(D(G(x))-1)^{2}\right]$and train the $D$ to minimize $\mathbb{E}_{y \sim p_{\text {data}}(y)}\left[(D(y)-1)^{2}\right]+$ $\mathbb{E}_{x \sim p_{\text {data}}(x)}\left[D(G(x))^{2}\right]$ [14]Cycle Consistency Loss
+
+另外在实际的对抗训练中，负log似然非常不稳定，因此在实际代码中通常用MSE替代它。因此在 训练G的时候，实际的损失函数是 $\mathbb{E}_{x \sim p_{\text {data }}(x)}\left[\left(1-D_{Y}(G(x))\right)^{2}\right] ;$ 而训练 $D_{Y}$ 时实际的损失函数 是 $\mathbb{E}_{y \sim p_{\text {data }}(y)}\left[\left(1-D_{Y}(y)\right)^{2}\right]+\mathbb{E}_{x \sim p_{\text {data }}(x)}\left[D(G(x))^{2}\right]$
+训练$F$和 $D_{X}$ 也是类似的。[105]
 
 The cycle-consistency loss uses L1 or Mean Absolute Error (MAE) since it generally results in less blurry image reconstruction compared to L2 or Mean Square Error (MSE).[72The cycle-consistency loss uses L1 or Mean Absolute Error (MAE) since it generally results in less blurry image reconstruction compared to L2 or Mean Square Error (MSE).]
 
@@ -591,6 +605,12 @@ DiscoGAN [77] and DualGAN [78] were proposed in the same period that CycleGAN wa
 
 
 
+### identity Loss
+
+ $\mathcal{L}_{\text {identity }}(G, F)=\mathbb{E}_{y \sim p_{\text {data }}(y)}\left[\|G(y)-y\|_{1}\right]+\mathbb{E}_{x \sim p_{\text {data }}(x)}\left[\|F(x)-x\|_{1}\right]$
+
+比如G是从X到Y的映射，我们给定普通马，它生成斑马。但是如果我给你斑马呢？你还是应该生成完全一样的斑马。[105]
+
 ### Putting it together[31]
 
 With the loss function defined, all the is needed to train the model is to minimize the loss function w.r.t. model parameters.
@@ -639,6 +659,8 @@ For each training iteration do[30]
 5 Trains the Generators
 6 If at save interval => save generated image samples
 7 This function is similar to what you have encountered and is made explicit in the GitHub repository.
+
+Future work[101][102]
 
 
 
@@ -694,9 +716,9 @@ model = torch.hub.load('facebookresearch/pytorch_GAN_zoo:hub', 'PGAN',
 
 * Image-to-image translation frameworks are frequently difficult to train because of the need for perfect pairs; the CycleGAN solves this by making this an unpaired domain translation.
 * The CycleGAN has three losses:
-* Cycle-consistent, which measures the difference between the original image and an image translated into a different domain and back again
-* Adversarial, which ensures realistic images
-* Identity, which preserves the color space of the image
+  * Cycle-consistent, which measures the difference between the original image and an image translated into a different domain and back again
+  * Adversarial, which ensures realistic images
+  * Identity, which preserves the color space of the image
 * The two Generators use the U-Net architecture, and the two Discriminators use the PatchGAN-based architecture.
 * We implemented an object-oriented design of the CycleGAN and used it to convert apples to oranges.
 * Practical applications of the CycleGAN include self-driving car training and extensions that allow us to create different styles of images during the translation process.
@@ -804,14 +826,17 @@ Real photo to an artist's painting[71]
 
 age-gender-estimation[96][97]
 
+Voice[103]
+![CycleGAN](img\CycleGAN_voice.jpg)
 
+One example of this kind of framework is Cycle Consistent Adversarial Domain Adaptation (CyCADA).[11] Unfortunately, a full explanation of the way it works is beyond the scope of this chapter. This is because there are many more such frameworks: some even experiment with CycleGAN in language, music, or other forms of domain adaptation. To give you a sense of the complexity, figure 9.9 shows the architecture and design of CyCADA.[106]
 
 ## Reference
 
 ```md
 [1]: http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
 [2]: https://junyanz.github.io/CycleGAN/
-[3]: http://preview.d2l.ai/d2l-en/master/chapter_generative-adversarial-networks/dcgan.html
+[3]: https://arxiv.org/pdf/1703.10593.pdf
 [4]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/datasets.md
 [5]: J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. Imagenet: A large-scale hierarchical image database. In CVPR, 2009. 8, 13, 18
 [6]: 7.2.Networkarchitectures: https://arxiv.org/pdf/1703.10593.pdf
@@ -909,4 +934,10 @@ age-gender-estimation[96][97]
 [98]: https://zhuanlan.zhihu.com/p/27199954
 [99]: He, D., Xia, Y., Qin, T., Wang, L., Yu, N., Liu, T.-Y., and Ma, W.-Y. (2016a). Dual learning for machine translation. In the Annual Conference on Neural Information Processing Systems (NIPS), 2016.
 [100]: [Tie-Yan Liu, Dual Learning: Pushing the New Frontier of Artificial Intelligence, MIFS 2016](http://www.dsrg.stuorg.iastate.edu/wp-content/uploads/2017/02/dual-learning_-pushing-the-new-frontier-of-artificial-intelligence-tieyan-liu.pdf)
-[101]:
+[101]: Jun-Yan Zhu, Richard Zhang, Deepak Pathak, Trevor Darrell, Alexei A. Efros, Oliver Wang, and Eli Shechtman "Toward Multimodal Image-to-Image Translation", in NeurIPS 2017.
+https://arxiv.org/pdf/1711.11586
+[102]: Judy Hoffman, Eric Tzeng, Taesung Park, Jun-Yan Zhu, Phillip Isola, Alexei A. Efros, and Trevor Darrell "CyCADA: Cycle-Consistent Adversarial Domain Adaptation", in ICML 2018.https://arxiv.org/pdf/1711.03213
+[103]: https://www.youtube.com/watch?v=JUWVuF2ucTk
+[104]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/models/cycle_gan_model.py
+[105]: http://fancyerii.github.io/books/cycle-gan/
+[106]: https://livebook.manning.com/book/gans-in-action/chapter-9/145
