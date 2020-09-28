@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 16:57:01
+ * @LastEditTime: 2020-09-28 19:08:45
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,3 +20,4 @@ https://medium.com/swlh/hairstyle-transfer-semantic-editing-gan-latent-code-b3a6
 https://github.com/Azmarie/Hairstyle-Transfer
 https://arxiv.org/abs/1812.04948
 https://twitter.com/dl_from_scratch/status/1308266572503367680
+https://paperswithcode.com/paper/analyzing-and-improving-the-image-quality-of

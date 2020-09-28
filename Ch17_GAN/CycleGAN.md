@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 18:25:25
+ * @LastEditTime: 2020-09-28 19:31:12
  * @Description:
  * @TODO::
  * @Reference:
@@ -113,6 +113,13 @@ how to use pixel-wise label information to perform image-to-image translation wi
 
 pix2pix [13] We also compare against pix2pix [13], which is trained on paired data, to see how close we can get to this “upper bound” without using any paired data(horses and zebras standing in identical positions.[94])
 
+pix2pix力图用重建来解决低频成分的生成，用GAN 解决高频成分的生成，所以损失函数为一个标准的 cgan损失加上L1重建损失，分别定义如下:[119]
+$$
+\begin{array}{l}
+G^{*}=\arg \min _{G} \max _{D} \mathcal{L}_{c G A N}(G, D)+\lambda \mathcal{L}_{L 1}(G) \\
+\mathcal{L}_{L 1}(G)=\mathbb{E}_{x, y, z}\left[\|y-G(x, z)\|_{1}\right]
+\end{array}
+$$
 
 Pix2pix was designed to learn of the connections between paired collections of images, for example, transforming an aerial photo taken by a satellite into a regular map, or a sketch image into a color image, and vice versa.[24]
 
@@ -291,6 +298,56 @@ def build_generator_unet(self):
 create the code for the definition of the residual block, as follows:
 
 ```python
+#[117]
+class ResidualBlock(nn.Module):
+    def __init__(self, in_features):
+        super(ResidualBlock, self).__init__()
+
+        conv_block = [  nn.ReflectionPad2d(1),
+                        nn.Conv2d(in_features, in_features, 3),
+                        nn.InstanceNorm2d(in_features),
+                        nn.ReLU(inplace=True),
+                        nn.ReflectionPad2d(1),
+                        nn.Conv2d(in_features, in_features, 3),
+                        nn.InstanceNorm2d(in_features)  ]
+
+        self.conv_block = nn.Sequential(*conv_block)
+
+    def forward(self, x):
+        return x + self.conv_block(x)
+```
+
+```python
+#[118]
+class Residual(nn.Module):  #@save
+    """The Residual block of ResNet."""
+    def __init__(self, input_channels, num_channels,
+                 use_1x1conv=False, strides=1):
+        super().__init__()
+        self.conv1 = nn.Conv2d(input_channels, num_channels,
+                               kernel_size=3, padding=1, stride=strides)
+        self.conv2 = nn.Conv2d(num_channels, num_channels,
+                               kernel_size=3, padding=1)
+        if use_1x1conv:
+            self.conv3 = nn.Conv2d(input_channels, num_channels,
+                                   kernel_size=1, stride=strides)
+        else:
+            self.conv3 = None
+        self.bn1 = nn.BatchNorm2d(num_channels)
+        self.bn2 = nn.BatchNorm2d(num_channels)
+        self.relu = nn.ReLU(inplace=True)
+
+    def forward(self, X):
+        Y = F.relu(self.bn1(self.conv1(X)))
+        Y = self.bn2(self.conv2(Y))
+        if self.conv3:
+            X = self.conv3(X)
+        Y += X
+        return F.relu(Y)
+```
+
+
+```python
 #[32]
 class ResidualBlock(nn.Module):
     def __init__(self, channels):
@@ -402,6 +459,8 @@ For discriminator networks, we use 70 × 70 PatchGAN [7]. Let Ck denote a 4×4 C
 The benefit of using a PatchGAN discriminator is that the loss function can then measure how good the discriminator is at distinguishing images based on their style rather than their content. Since each individual element of the discriminator prediction is based only on a small square of the image, it must use the style of the patch, rather than its content, to make its decision. This is exactly what we require; we would rather our discriminator is good at identifying when two images differ in style than content.[94]
 
 PatchGAN的思想是，既然GAN只负责处理低频成分，那么判别器就没必要以一整张图作为输入，只需要对NxN的一个图像patch去进行判别就可以了。这也是为什么叫Markovian discriminator，因为在patch以外的部分认为和本patch互相独立。[98]
+
+
 
 We take the input image (128 × 128 × 3) and assign that to d1 (64 × 64 × 64).
 We take d1 (64 × 64 × 64) and assign that to d2 (32 × 32 × 128).
@@ -795,7 +854,7 @@ For the solutions to exercises 9, 10, and 11, please see the Jupyter notebooks a
 
 Visualizing generator and discriminator.[49]
 
-Contrastive Unpaired Translation (CUT)[114]
+Contrastive Unpaired Translation (CUT) [114][115]
 
 ## Mobile[42]
 
@@ -845,6 +904,8 @@ Music-Style-Transfer[113]
 One example of this kind of framework is Cycle Consistent Adversarial Domain Adaptation (CyCADA).[11] Unfortunately, a full explanation of the way it works is beyond the scope of this chapter. This is because there are many more such frameworks: some even experiment with CycleGAN in language, music, or other forms of domain adaptation. To give you a sense of the complexity, figure 9.9 shows the architecture and design of CyCADA.[106]
 
 High-Resolution Structural-to-DTI Synthesis[112]
+
+Learning to Imitate Human Demonstrations[116]
 
 ## Reference
 
@@ -964,4 +1025,8 @@ https://arxiv.org/pdf/1711.11586
 [112]: Manifold-Aware CycleGAN for High-Resolution Structural-to-DTI Synthesis http://arxiv.org/abs/2004.00173
 [113]: https://github.com/sumuzhao/CycleGAN-Music-Style-Transfer
 [114]: https://github.com/taesungp/contrastive-unpaired-translation
-[115]: https://github.com/taesungp/contrastive-unpaired-translation
+[115]: https://www.youtube.com/watch?v=jSGOzjmN8q0&feature=youtu.be
+[116]: https://bair.berkeley.edu/blog/2019/12/13/humans-cyclegan/
+[117]: https://github.com/Dipeshtamboli/GAN_for_clothes/blob/master/CycleGAN/models.py
+[118]: http://preview.d2l.ai/d2l-en/master/chapter_convolutional-modern/resnet.html?highlight=residual
+[119]: img\Pix2Pix_yousanai.jpeg
