@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-09-28 17:11:32
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-09-28 18:12:49
+LastEditTime: 2020-09-28 21:17:42
 Description:
 TODO::
 Reference:
@@ -38,3 +38,11 @@ Reference:
 
 
 
+#----------------------
+# https://github.com/WillSuen/GANs/blob/master/train_cycleGAN.py
+#mxnet
+        ## save model
+        modG_A.save_params(os.path.join(mode_path, 'generatorA'))
+        modG_B.save_params(os.path.join(mode_path, 'generatorB'))
+        modD_A.save_params(os.path.join(mode_path, 'discriminatorA'))
+        modD_B.save_params(os.path.join(mode_path, 'discriminatorB'))

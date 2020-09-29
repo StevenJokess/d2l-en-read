@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 20:40:44
+ * @LastEditTime: 2020-09-28 23:28:49
  * @Description:
  * @TODO::
  * @Reference:
@@ -246,6 +246,8 @@ In a similar manner to a variational autoencoder, a U-Net consists of two halves
 However, unlike in a VAE, there are also skip connections between equivalently shaped layers in the upsampling and downsampling parts of the network. A VAE is linear; data flows through the network from input to the output, one layer after another. A U-Net is different, because it contains skip connections that allow information to shortcut parts of the network and flow through to later layers.[94]
 
 U-Net是德国Freiburg大学模式识别和图像处理组提出的一种全卷积结构。和常见的先降采样到低维度，再升采样到原始分辨率的编解码(Encoder-Decoder)结构的网络相比，U-Net的区别是加入skip-connection，对应的feature maps和decode之后的同样大小的feature maps按通道拼(concatenate)一起，用来保留不同分辨率下像素级的细节信息。U-Net对提升细节的效果非常明显。[98]
+
+code[120]
 
 ```python
 #[94]
@@ -988,6 +990,9 @@ High-Resolution Structural-to-DTI Synthesis[112]
 
 Learning to Imitate Human Demonstrations[116]
 
+Voice converter[121][122][123]
+
+
 ## Reference
 
 ```md
@@ -1111,4 +1116,11 @@ https://arxiv.org/pdf/1711.11586
 [117]: https://github.com/Dipeshtamboli/GAN_for_clothes/blob/master/CycleGAN/models.py
 [118]: http://preview.d2l.ai/d2l-en/master/chapter_convolutional-modern/resnet.html?highlight=residual
 [119]: img\Pix2Pix_yousanai.jpeg
-[120]:
+[120]: https://github.com/nh9k/pytorch-implementation/tree/master/4_U-Net
+[121]: https://github.com/leimao/Voice_Converter_CycleGAN
+[122]: https://github.com/pritishyuvraj/Voice-Conversion-GAN
+[123]: https://github.com/TaiChunYen/Pytorch-CycleGAN-VC2
+[124]: https://github.com/znxlwm/pytorch-CycleGAN
+[125]: https://github.com/WillSuen/GANs/blob/master/symbol/cycleGAN.py mxnet
+[126]: https://github.com/znxlwm/pytorch-CycleGAN/blob/master/network.py
+TODO: https://github.com/togheppi/CycleGAN

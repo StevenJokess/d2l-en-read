@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 17:52:43
+ * @LastEditTime: 2020-09-28 20:45:56
  * @Description:
  * @TODO::
  * @Reference:
@@ -63,3 +63,4 @@ MXNet code[3]
 [2]: https://learning.oreilly.com/library/view/hands-on-generative-adversarial/9781789530513/05e25d65-5beb-412b-9b38-d99516eccbf0.xhtml
 [3]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/Pix2Pix
 [4]: https://affinelayer.com/pix2pix/
+[5]: https://github.com/yenchenlin/pix2pix-tensorflow
