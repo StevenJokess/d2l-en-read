@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-01 09:31:33
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-01 14:48:28
+ * @LastEditTime: 2020-10-03 12:14:41
  * @Description:
  * @TODO::
  * @Reference:
@@ -191,3 +191,8 @@ https://create.baidu.com/
 - 我招进来稳定，我要是高流通的名校硕士，我随便流通了。。
 - 升学又要几年，完全错过实践。
 - 而且山西我了解到出了百度出了相关的标注中心。。山西大学百度也是培养大数据学院的（老总老家重视些，哈哈）。
+
+---
+
+被拒了，说没有用户增长的经验？？
+我一直说看你的教程一直都学不会paddlelite开发app？你还一直想用户增长？？我去。。
