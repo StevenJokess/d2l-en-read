@@ -1,26 +1,31 @@
-# Installation
 
-The `d2lbook` package is tested under macOS and Linux. (You are welcome to
-contribute a Windows release).
 
-First make sure you have [pip](https://pip.pypa.io/en/stable/) available. In
-option, we recommend [conda](https://docs.conda.io/en/latest/miniconda.html) for
-libraries that `pip` doesn't support.
+<!--
+ * @version:
+ * @Author:  StevenJokess https://github.com/StevenJokess
+ * @Date: 2020-09-27 19:00:42
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
+ * @LastEditTime: 2020-09-27 19:03:35
+ * @Description:
+ * @TODO::
+ * @Reference:https://book.d2l.ai/install.html
+-->
 
-Now install the command-line interface.
+# 安装
 
-```sh
-pip install git+https://github.com/d2l-ai/d2l-book
+d2lbook包在macOS和Linux下进行测试。(欢迎您贡献一个Windows版本)。
+
+首先确保你有可用的[pip](https://pip.pypa.io/en/stable/)。在选项中，我们建议对pip不支持的库使用[conda](https://docs.conda.io/en/latest/miniconda.html)。
+
+现在安装命令行界面。
+
+```bash
+pip install https://github.com/d2l-ai/d2l-book
 ```
 
-This is a [d2lbook pip package](https://pypi.org/project/d2lbook/), but we
-recommend you to install latest version at Github directly since it's under fast
-developing.
 
-To build HTML results, we need [pandoc](https://pandoc.org/). You can install it
-through `conda install pandoc`.
+这是一个[d2lbook pip包](https://pypi.org/project/d2lbook/)，但是我们建议您直接在Github上安装最新版本，因为它正在快速开发中。
 
-Building the PDF version requires
-[LibRsvg](https://wiki.gnome.org/Projects/LibRsvg) to convert your SVG images
-(our recommend format), e.g. `conda install librsvg`, and of course, you need to
-have a LaTeX distribution, e.g. [Tex Live](https://www.tug.org/texlive/), available,
+要构建HTML结果，我们需要[pandoc](https://pandoc.org/)。你可以通过`conda install pandoc`来安装它。
+
+构建PDF版本需要[LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)转换你的SVG图像(我们推荐的格式)，例如`conda install LibRsvg`，当然，你需要有一个LaTeX发行版，例如[Tex Live](https://www.tug.org/texlive/)
