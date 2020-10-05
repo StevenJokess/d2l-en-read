@@ -1,3 +1,15 @@
+
+
+<!--
+ * @version:
+ * @Author:  StevenJokess https://github.com/StevenJokess
+ * @Date: 2020-09-29 21:19:32
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
+ * @LastEditTime: 2020-10-05 16:49:33
+ * @Description:fix typo
+ * @TODO::
+ * @Reference:
+-->
 # Building this Website
 
 You may find building this website is a good starting point for your
@@ -20,7 +32,7 @@ Once finished, you can check the results in the `_build` folder. For example, th
 You can build a particular format:
 
 ```sh
-d2lbook build eval  # evaluate noteboks and save in .ipynb formats
+d2lbook build eval  # evaluate notebooks and save in .ipynb formats
 d2lbook build html  # build the HTML version
 d2lbook build pdf   # build the PDF version
 ```
