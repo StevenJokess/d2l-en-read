@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-01 09:31:33
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-03 12:14:41
+ * @LastEditTime: 2020-10-04 20:59:52
  * @Description:
  * @TODO::
  * @Reference:
@@ -140,6 +140,10 @@ https://github.com/StevenJokess/pytorch-andriod-greatdemo
 
 ---
 
+https://aistudio.baidu.com/aistudio/education/lessonvideo/639048
+
+---
+
 ## 用户价值=新体验-旧体验-替换成本
 
 - 新体验最大化：提供免费算力;其notebook体验(在代码块和文字块转化是可视化操作，数据都加载好了)
@@ -175,11 +179,16 @@ https://github.com/StevenJokess/pytorch-andriod-greatdemo
 
 ## 域名太多，不太系统的感觉：
 
+https://ai.baidu.com/
 https://aistudio.baidu.com/
 https://www.paddlepaddle.org.cn/hub
 https://ai.baidu.com/easydl
 https://zhongbao.baidu.com/mark/home/mark
 https://create.baidu.com/
+https://aim.baidu.com/
+百度世界2020:
+https://www.bilibili.com/video/BV1oT4y1w775?from=search&seid=2027579501532386030
+
 **还是没找到2019年开发者大会里提到的线上处理AI数据标注的URL。。麻烦在哪里告诉我一下？**
 
 
