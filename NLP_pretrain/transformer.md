@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-07 19:27:43
+ * @LastEditTime: 2020-10-07 22:29:14
  * @Description:
  * @TODO::
  * @Reference:
@@ -49,7 +49,7 @@ def positional_encoding(position, d_model):
   return tf.cast(pos_encoding, dtype=tf.float32)
 ```
 
-```
+```py
 #Scaled-Dot Attention
 def scaled_dot_product_attention(q, k, v, mask):
   """Calculate the attention weights.
