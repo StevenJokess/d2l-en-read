@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 23:28:49
+ * @LastEditTime: 2020-10-07 22:46:48
  * @Description:
  * @TODO::
  * @Reference:
@@ -367,6 +367,12 @@ class ResidualBlock(nn.Module):
      def forward(self, x):
          return x + self.block(x)
 ```
+
+
+
+### Generator & Disminator
+
+![Cycle_Gen_Dis](img\Cycle_Gen_Dis.jpg)[127]
 
 ### The Generator[6]
 
@@ -1123,4 +1129,5 @@ https://arxiv.org/pdf/1711.11586
 [124]: https://github.com/znxlwm/pytorch-CycleGAN
 [125]: https://github.com/WillSuen/GANs/blob/master/symbol/cycleGAN.py mxnet
 [126]: https://github.com/znxlwm/pytorch-CycleGAN/blob/master/network.py
+[127]: file:///E:/DL-v/20%20CycleGAN性别转换/20%20CycleGAN性别转换/imgs/CycleGAN模型细节.pdf
 TODO: https://github.com/togheppi/CycleGAN

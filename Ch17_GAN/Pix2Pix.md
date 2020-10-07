@@ -5,11 +5,36 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-28 20:45:56
+ * @LastEditTime: 2020-10-07 23:00:12
  * @Description:
  * @TODO::
  * @Reference:
 -->
+
+# Pix2Pix
+
+## Abstract
+
+CGAN在图像翻译任务(DIP)、图像合成、图像上色。表明在不手工设计损失函数的情况下，也能获得理想的结果。[6]
+
+IQA
+
+像素损失（MSE->PSNR）;
+
+## 数据集
+
+CMP Facade Database
+    由捷克理工大学的机器感知中心(CMP)发布,包含606张建筑正面的校正图像,来自世界各地的不同城市,包含12类语义分割标注
+    http://cmp.felk.cvut.cz/-tylecr1/facade/
+
+Paris streetview Dataset
+    由牛津大学发布,包含6412张从 Flickr上下载的包含巴黎标志性建筑的街景图像
+    http://www.robots.ox.ac.uk/-vgg/data/parisbuildings/
+
+Cityscapes Dataset
+    由德国三个研究机构联合发布的城市景观数据集,拥有5000张带语义理解标注的城市街景图像
+    https://www.cityscapes-dataset.com
+
 
 ## code
 
@@ -64,3 +89,4 @@ MXNet code[3]
 [3]: https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/Pix2Pix
 [4]: https://affinelayer.com/pix2pix/
 [5]: https://github.com/yenchenlin/pix2pix-tensorflow
+[6]: https://ai.deepshare.net/detail/v_5f44d9dce4b0118787333e00/3?from=p_5f4c7402e4b0dd4d974c43e4&type=6
