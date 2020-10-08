@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-01 09:31:33
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-05 14:18:15
+ * @LastEditTime: 2020-10-08 19:30:42
  * @Description:
  * @TODO::
  * @Reference:
@@ -182,7 +182,7 @@ https://aistudio.baidu.com/aistudio/education/lessonvideo/639048
 https://ai.baidu.com/
 https://aistudio.baidu.com/
 https://www.paddlepaddle.org.cn/hub
-https://ai.baidu.com/easydl
+https://ai.baidu.com/easydl EasyDL是一个专门针对深度学习模型训练与发布的平台 为了解决AI赋能行业的这个痛点，以一种便捷高效的方式满足这些定制化深度学习模型需求以及伴随而来的其他需求。用户上传自己的数据，在平台上进行数据标注、加工、训练、部署和服务，最终得到云端独立的REST API或一个离线SDK，从而方便地将模型部署到自己的业务场景中。
 https://zhongbao.baidu.com/mark/home/mark
 https://create.baidu.com/
 https://aim.baidu.com/
