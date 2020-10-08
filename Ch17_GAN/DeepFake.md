@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-28 18:57:58
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-07 18:56:02
+ * @LastEditTime: 2020-10-08 18:59:31
  * @Description:MT
  * @TODO::
  * @Reference:
@@ -26,6 +26,8 @@
 除了调查信息之外，我们还讨论了该领域需要考虑的开放问题和未来趋势。
 
 索引术语-假新闻，深度伪造，媒体取证，面部操作，人脸识别，生物识别，数据库，基准(—Fake News, DeepFakes, Media Forensics, Face Manipulation, Face Recognition, Biometrics, Databases, Benchmark)
+
+
 
 ## 简介
 
@@ -77,6 +79,14 @@ DeepFaceLab is an open-source deepfake system created by iperovfor face swapping
 
 
 
+---
+[7]
+
+  deepfake  creation  model  using  two  encoder-decoder  pairs.  Twonetworks  use  the  same  encoder  but  different  decoders  for  training  process(top). An image of face A is encoded with the common encoder and decodedwith decoder B to create a deepfake (bottom)
+
+
+
+
 ```md
 [1]: https://paperswithcode.com/paper/deepfakes-and-beyond-a-survey-of-face
 [2]: https://paperswithcode.com/paper/deepfacelab-a-simple-flexible-and-extensible
@@ -84,11 +94,12 @@ DeepFaceLab is an open-source deepfake system created by iperovfor face swapping
 [4]: https://arxiv.org/abs/2005.05535 DeepFaceLab
 [5]: Deepfakes. Deepfakes. https://github.com/deepfakes/faceswap, 2017.
 [6]: https://arxiv.org/pdf/2001.00179v3.pdf DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection
-
-
-```
+[7]: https://arxiv.org/pdf/1909.11573
 
 ```
+
+```md
+TODO:
 1 https://www.nist.gov/itl/iad/mig/media-forensics-challenge-2018
 2 https://deepfakedetectionchallenge.ai/
 3 https://apps.apple.com/cn/app/id1465199127
@@ -105,4 +116,25 @@ DeepFaceLab is an open-source deepfake system created by iperovfor face swapping
 22 https://github.com/LynnHo/AttGAN-Tensorflow
 23 https://github.com/csmliu/STGAN
 34 https://deepfakedetectionchallenge.ai/
+
+garwal, S., and Varshney, L. R. (2019). Limits of deepfake detection:A robust estimation viewpoint.arXiv preprintarXiv:1905.03493.
+```
+
+```
+
+https://app.dimensions.ai
+
+Tools Links Key  Features
+
+Faceswaphttps://github.com/deepfakes/faceswap- Using two encoder-decoder pairs.- Parameters of the encoder are shared.
+
+Faceswap-GANhttps://github.com/shaoanlu/faceswap-GANAdversarial loss and perceptual loss (VGGface) are added to an auto-encoder architec-ture.
+
+Few-ShotFaceTranslation GANhttps://github.com/shaoanlu/fewshot-face-translation-GAN-  Use  a  pre-trained  face  recognition  model  to  extract  latent  embeddings  for  GANprocessing.- Incorporate semantic priors obtained by modules from FUNIT [39] and SPADE [40].
+
+DeepFaceLabhttps://github.com/iperov/DeepFaceLab-  Expand  from  the  Faceswap  method  with  new  models,  e.g.  H64,  H128,  LIAEF128,SAE [41].- Support multiple face extraction modes, e.g. S3FD, MTCNN, dlib, or manual [41].
+
+DFakerhttps://github.com/dfaker/df- DSSIM loss function [42] is used to reconstruct face.- Implemented based on Keras library.DeepFaketfhttps://github.com/StromWine/DeepFaketfSimilar to DFaker but implemented based on tensorflow.
+
+Deepfakes webβhttps://deepfakesweb.com/Commercial website for face swapping using deep learning algorithms.
 ```
