@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 12:58:54
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-09 14:44:44
+ * @LastEditTime: 2020-10-09 15:04:15
  * @Description:
  * @TODO::math
  * @Reference:https://blog.csdn.net/weixin_43172660/article/details/82958534
@@ -223,7 +223,9 @@ microF1=2×microP×microRmicroP+microR
 
 AUC养了一个小弟，叫GINI系数[8]
 
-2*AUC -1
+GINI = 2*AUC -1
+
+gini就是roc曲线和y=x的合并行成区域的面积再乘2，所以就很容易得到上面的公式了，三角形面积为0.5
 
 ·GINI系数:也是用于模型风险区分能力进行评估。
 GINI统计值衡量坏账户数在好账户数上的的累积分布与随机分布曲线之间的面积，好账户与坏账户分布之间的差异越大，GINI指标越高，表明模型的风险区分能力越强。
@@ -277,8 +279,3 @@ PS：除了按概率值大小等距十等分外，还可以对概率排序后按
 散度与好坏样本的比例无关，抽样不会有明显影响；
 好坏样本分数比较接近正态分布时，最能真实反映真实的区分度
 没有参照的阈值，可以用来比较不同模型在同一数据集上的表现，或者同一模型在不同时期样本上的表现。
-
-作者：GQRstar
-链接：https://www.jianshu.com/p/d3739a5499b5
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
