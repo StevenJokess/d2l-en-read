@@ -5,11 +5,16 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:08:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-08 19:50:28
+ * @LastEditTime: 2020-10-14 21:10:19
  * @Description:
  * @TODO::
  * @Reference:https://spinningup.readthedocs.io/zh_CN/latest/spinningup/rl_intro.html#bellman-equations
+ * https://nndl.github.io/ ch14
 -->
+
+即使是专家也很难给出“正确”的动 作，二是获取大量数据的成本往往比较高．对于下棋这类任务，虽然我们很难知 道每一步的“正确”动作，但是其最后的结果（即赢输）却很容易判断．因此，如果 可以通过大量的模拟数据，通过最后的结果（奖励）来倒推每一步棋的好坏，从 而学习出“最佳”的下棋策略，这就是强化学习．
+
+强化学习（ReinforcementLearning，RL），也叫增强学习，是指一类从（与 环境）交互中不断学习的问题以及解决这类问题的方法．强化学习问题可以描 述为一个智能体从与环境的交互中不断学习以完成特定目标（比如取得最大奖 励值）．和深度学习类似，强化学习中的关键问题也是贡献度分配问题[Minsky, 1961]，每一个动作并不能直接得到监督信息，需要通过整个模型的最终监督信 息（奖励）得到，并且有一定的延时性
 
 术语：
 
@@ -24,6 +29,7 @@
 机性策略
 深度强化学习中最常见的两种随机策略是 绝对策略 (Categorical Policies) 和 对角高斯策略 (Diagonal Gaussian Policies)。
 
+策略 智能体的策略（Policy）就是智能体如何根据环境状态𝑠来决定下一步的 动作𝑎，通常可以分为确定性策略（Deterministic Policy）和随机性策略（StochasticPolicy）两种[2]
 
 贝尔曼方程
 
