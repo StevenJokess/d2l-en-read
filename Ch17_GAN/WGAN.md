@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-24 23:51:37
+ * @LastEditTime: 2020-10-14 20:27:38
  * @Description:
  * @TODO::
  * @Reference:
@@ -23,5 +23,15 @@ As we've mentioned before, GANs are notoriously hard to train. The opposing obje
 ...
 
 
+
+对抗生成网络的训练不稳定问题的一种有效解决方法是W-GAN[Arjovsky et al.,2017]，通过用Wasserstein距离替代JS散度来进行训练．[3]
+
+Wasserstein距离也称为推土机距离，参见第E.3.4节
+
+和原始GAN相比，W-GAN的评价网络最后一层不使用Sigmoid函数，损失函数不取对数
+
 [1]: https://learning.oreilly.com/library/view/python-machine-learning/9781789955750/Text/Chapter_17.xhtml#_idParaDest-342
 [2]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch05.html
+[3]: https://nndl.github.io
+
+TODO:https://github.com/uclaacmai/Generative-Adversarial-Network-Tutorial
