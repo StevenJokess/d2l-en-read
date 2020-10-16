@@ -5,7 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
+<<<<<<< Updated upstream
  * @LastEditTime: 2020-10-07 22:46:48
+=======
+ * @LastEditTime: 2020-10-16 20:23:13
+>>>>>>> Stashed changes
  * @Description:
  * @TODO::
  * @Reference:
@@ -998,6 +1002,9 @@ Learning to Imitate Human Demonstrations[116]
 
 Voice converter[121][122][123]
 
+实现CycleGAN时使用了最小二乘损失（Least Square GAN）[128]
+
+
 
 ## Reference
 
@@ -1131,3 +1138,4 @@ https://arxiv.org/pdf/1711.11586
 [126]: https://github.com/znxlwm/pytorch-CycleGAN/blob/master/network.py
 [127]: file:///E:/DL-v/20%20CycleGAN性别转换/20%20CycleGAN性别转换/imgs/CycleGAN模型细节.pdf
 TODO: https://github.com/togheppi/CycleGAN
+[128]: https://weread.qq.com/web/reader/4653238071e86dd54654969kd8232f00235d82c8d161fb2
