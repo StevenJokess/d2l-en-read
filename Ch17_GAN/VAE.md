@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-14 22:09:32
+ * @LastEditTime: 2020-10-17 14:47:54
  * @Description:
  * @TODO::
  * @Reference:
@@ -80,3 +80,5 @@ variational autoencoders (VAEs) are autoencoders that tackle the problem of the 
 [5]: https://keras.io/examples/generative/vae/
 [6]: https://nndl.github.io/
 [7]: Doersch C, 2016. Tutorial on variational autoencoders[J/OL]. CoRR, abs/1606.05908.http://arxiv.org/abs/1606.05908.
+TODO:
+[8]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/ch12-%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/vae.py
