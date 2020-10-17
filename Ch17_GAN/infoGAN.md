@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-14 23:16:31
+ * @LastEditTime: 2020-10-17 16:59:58
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
@@ -20,6 +20,8 @@ InfoGAN的思想也很简单，GAN的原始噪声z可以看成是数据的一种
 
 
 
+
+
 这是总的模型架构，其中值得注意的是，文章直接用判别器作为变分网络 [公式]，最后一层同时输出c的预测和真假的预测。
 
 思考
@@ -28,3 +30,11 @@ InfoGAN的互信息项使latent code c尽可能包含更多的关于生成图像
 1.由于c每个维度间是独立的，并且一般假设Q(c|x)维度间独立，因此这样能够促进c的不同维度间的解耦，但根据ICML2019的最佳论文可知，这样并不够。
 
 2.我猜测，为使互信息最大，c的每个维度都应最大限度地捕捉x变化最大且独立的各个方面，而真实的变化因子一般是按照变化方差从大到小排列的，类似PCA，所以这种匹配使解耦成为了可能。
+
+InfoGAN [3]尝试使用无监督的方式去学习输入𝒙的可解释隐向量𝒛的表示方法 (Interpretable Representation)，即希望隐向量𝒛能够对应到数据的语义特征。比如对于 MNIST 手写数字图片，我们可以认为数字的类别、字体大小和书写风格等是图片的隐藏变 量，希望模型能够学习到这些分离的(Disentangled)可解释特征表示方法，从而可以通过人 为控制隐变量来生成指定内容的样本。对于 CelebA 名人照片数据集，希望模型可以把发 型、眼镜佩戴情况、面部表情等特征分隔开，从而生成指定形态的人脸图片。
+分离的可解释特征有什么好处呢？它可以让神经网络的可解释性更强，比如𝒛包含了一 些分离的可解释特征，那么我们可以通过仅仅改变这一个位置上面的特征来获得不同语义 的生成数据，如图 13.10 所示，通过将“戴眼镜男士”与“不戴眼镜男士”的隐向量相 减，并与“不戴眼镜女士”的隐向量相加，可以生成“戴眼镜女士”的生成图片。
+
+
+[1]: https://www.zhihu.com/column/c_1186629504699731968
+[2]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf 13.4.2
+[3]

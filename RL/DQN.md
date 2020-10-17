@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-05 21:36:25
+ * @LastEditTime: 2020-10-17 15:32:40
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -38,6 +38,10 @@ Q学习的思想是：Q(S, A) = 在状态S下，采取动作A后，未来将得�
 
 ## DQN
 
+2015 年，DeepMind 提出了利用深度神经网络实现的 Q Learning [4]算法，发表在 Nature 期刊上 [1]，并在 Atari 游戏环境中的 49 个小游戏上训练学习，取得了人类水平相 当甚至超人类水平的表现，激发起业界和大众对强化学习研究的强烈兴趣。
+
+$Q^{*}\left(s_{t}, a_{t}\right) \leftarrow Q^{*}\left(s_{t}, a_{t}\right)+\alpha\left(r\left(s_{t}, a_{t}\right)+\gamma \max _{a_{t+1}} Q^{*}\left(s_{t+1}, a_{t+1}\right)-Q^{*}\left(s_{t}, a_{t}\right)\right)$
+
 DQN属于DRL（深度强化学习）的一种，它是深度学习与Q学习的结合体。前面讲了采用S-A表格的局限性，当状态和行为的组合不可穷尽时，就无法通过查表的方式选取最优的Action了。这时候就该想到深度学习了，想通过深度学习找到最优解在很多情况下确实不太靠谱，但是找到一个无限逼近最优解的次优解，倒是没有问题的。
 
 因此DQN实际上，总体思路还是用的Q学习的思路，不过对于给定状态选取哪个动作所能得到的Q值，却是由一个深度神经网络来计算的了，其流程图如下：
@@ -45,6 +49,7 @@ DQN属于DRL（深度强化学习）的一种，它是深度学习与Q学习的�
 ![DQN](img\DQN.png)
 
 ![DQN_alg](img\DQN_alg.png)
+
 
 ## Target Network
 

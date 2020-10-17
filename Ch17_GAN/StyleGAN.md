@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-08 02:24:13
+ * @LastEditTime: 2020-10-17 17:12:14
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 # StyleGAN
+
+A new paper by NVIDIA, A Style-Based Generator Architecture for GANs (StyleGAN), presents a novel model which addresses this challenge. StyleGAN generates the artificial image gradually, starting from a very low resolution and continuing to a high resolution (1024×1024). By modifying the input of each level separately, it controls the visual features that are expressed in that level, from coarse features (pose, face shape) to fine details (hair color), without affecting other levels. [11]
 
 StyleGAN is a type of generative adversarial network. It uses an alternative generator architecture for generative adversarial networks, borrowing from style transfer literature; in particular, the use of adaptive instance normalization. Otherwise it follows Progressive GAN in using a progressively growing training regime. Other quirks include the fact it generates from a fixed value tensor not stochastically generated latent variables as in regular GANs. The stochastically generated latent variables are used as style vectors in the adaptive instance normalization at each resolution after being transformed by an 8-layer feedforward network. Lastly, it employs a form of regularization called mixing regularization, which mixes two style latent variables during training.[8]
 
@@ -23,6 +25,11 @@ Fr ́echet inception distance (FID) for various generator de-signs (lower is bet
 
 
 The new architecture leads to an automatically learned, unsupervised separation of high-level attributes (e.g., pose and identity when trained on human faces) and stochastic variation in the generated images (e.g., freckles, hair), and it enables intuitive, scale-specific control of the synthesis. The new generator improves the state-of-the-art in terms of traditional distribution quality metrics, leads to demonstrably better interpolation properties, and also better disentangles the latent factors of variation.[4]
+
+The paper divides the features into three types:
+Coarse – resolution of up to 82 – affects pose, general hair style, face shape, etc
+Middle – resolution of 162 to 322  – affects finer facial features, hair style, eyes open/closed, etc.
+Fine – resolution of 642 to 10242 – affects color scheme (eye, hair and skin) and micro features.[11]
 
 ## Style-based generator
 
@@ -56,13 +63,32 @@ Furthermore, increasing the depth of the mapping networkimproves both image qual
 
 ## FFHQ dataset
 
+
+Flickr-Faces-HQ (FFHQ), which consists of images of “regular” people and is more diversified. The chart below shows the Frèchet inception distance (FID) score of different configurations of the model.
+
 https://github.com/NVlabs/ffhq-dataset
 
 
+## source code
+
+https://github.com/NVlabs/stylegan
 
 
 
 traditional GAN gen-erator architecture is in every way inferior to a style-baseddesign.
+
+## Mapping Network[11]
+
+The Mapping Network’s goal is to encode the input vector into an intermediate vector whose different elements control different visual features. This is a non-trivial process since the ability to control visual features with the input vector is limited, as it must follow the probability density of the training data. For example, if images of people with black hair are more common in the dataset, then more input values will be mapped to that feature. As a result, the model isn’t capable of mapping parts of the input (elements in the vector) to features, a phenomenon called features entanglement. However, by using another neural network the model can generate a vector that doesn’t have to follow the training data distribution and can reduce the correlation between features.
+The Mapping Network consists of 8 fully connected layers and its output w is of the same size as the input layer (512×1).
+
+
+## Adaptive Instance Normalization (AdaIN)[11]
+
+The AdaIN (Adaptive Instance Normalization) module transfers the encoded information w, created by the Mapping Network, into the generated image. The module is added to each resolution level of the Synthesis Network and defines the visual expression of the features in that level:
+Each channel of the convolution layer output is first normalized to make sure the scaling and shifting of step 3 have the expected effect.
+The intermediate vector w is transformed using another fully-connected layer (marked as A) into a scale and bias for each channel.
+The scale and bias vectors shift each channel of the convolution output, thereby defining the importance of each filter in the convolution. This tuning translates the information from w to a visual representation.
 
 
 
@@ -81,7 +107,7 @@ traditional GAN gen-erator architecture is in every way inferior to a style-base
 [8]: https://paperswithcode.com/method/stylegan
 [9]: https://arxiv.org/abs/1812.04948
 [10]: X.  Huang  and  S.  J.  Belongie.Arbitrary  style  transferin  real-time  with  adaptive  instance  normalization.CoRR,abs/1703.06868, 2017. 1, 2
-[11]:
+[11]: https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/
 
 
 TODO:
