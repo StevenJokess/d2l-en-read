@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:08:40
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 18:33:06
+ * @LastEditTime: 2020-10-17 22:37:20
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,12 +22,12 @@ However, DCGAN used transpose convolutions to change the representation size. In
 
 ## Generator
 
-
+![Generator](img/ProGAN_Gen.png)
 
 
 ## Discriminator
 
-
+![Discriminator](img/ProGAN_Dis.png)
 
 
 
@@ -36,7 +36,11 @@ A detailed view of the discriminator architecture, when it has “grown” to re
 
 ## Loss Function
 
+improved Wasserstein loss function(WGAN-GP).
 
+$\operatorname{Loss}_{G}=-D\left(x^{\prime}\right)$
+$\left.G P=\left(\| \nabla D\left(a x^{\prime}+(1-a) x\right)\right) \|_{2}-1\right)^{2}$
+$\operatorname{Loss}_{D}=-D(x)+D\left(x^{\prime}\right)+\lambda * G P$
 
 
 [1]: https://arxiv.org/abs/1710.10196 Progressive Growing of GANs For Improved Quality, Stability, and and Variation.

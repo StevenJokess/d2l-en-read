@@ -1,0 +1,1 @@
+![Hype](img\HypeCycle.jpg)
