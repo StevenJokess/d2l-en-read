@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:24:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 17:30:07
+ * @LastEditTime: 2020-10-17 18:04:17
  * @Description:
  * @TODO::
  * @Reference:
@@ -14,6 +14,8 @@
 InstaGAN’s purpose is to transfigure instances of an object into another object.
 
 The challenge is different than in CycleGAN as the objects are of different shape and size (e.g. sheep and giraffe). InstaGAN is based on CycleGAN but includes a few additional parts to support this transfiguration.
+
+
 
 
 
