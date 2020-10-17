@@ -3,12 +3,11 @@
 <!--
  * @version:
  * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-10-17 23:05:17
+ * @Date: 2020-10-17 23:19:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 23:14:24
+ * @LastEditTime: 2020-10-17 23:19:11
  * @Description:
  * @TODO::
  * @Reference:
 -->
-https://github.com/AlanTur1ng/Machine-Learning-in-Action-Python3
-https://blog.csdn.net/qq_39521554
+https://github.com/EssayKillerBrain/EssayKiller_V2
