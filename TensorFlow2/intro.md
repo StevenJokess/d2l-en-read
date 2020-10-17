@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 15:10:25
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 15:18:25
+ * @LastEditTime: 2020-10-17 22:38:55
  * @Description:
  * @TODO::
  * @Reference:
@@ -79,3 +79,4 @@ optimizer.apply_gradients(zip(grads, model.trainable_variables))
 ```
 
 [1]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf
+[2]: https://medium.com/coinmonks/8-things-to-do-differently-in-tensorflows-eager-execution-mode-47cf429aa3ad
