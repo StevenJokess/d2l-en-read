@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 18:30:46
+ * @LastEditTime: 2020-10-19 19:51:47
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,3 +25,4 @@ Goodfellow最知名的成就就是发明了GAN,被誉为GAN之父。同时他还
 2017年，Goodfellow被《MIT技术评论》的35位35岁以下的创新者所引用。在2019年，他被列入《外交政策》的100位全球思想家名单。
 
 [1]: https://www.aminer.cn/ai-history
+[2]: https://mrt.aminer.cn/5df49f20e8cc00e7af330f6b
