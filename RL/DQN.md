@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 23:22:36
+ * @LastEditTime: 2020-10-17 23:51:46
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -38,7 +38,9 @@ Q学习的思想是：Q(S, A) = 在状态S下，采取动作A后，未来将得�
 
 ## DQN
 
-2015 年，DeepMind 提出了利用深度神经网络实现的 Q Learning [4]算法，发表在 Nature 期刊上 [1]，并在 Atari 游戏环境中的 49 个小游戏上训练学习，取得了人类水平相 当甚至超人类水平的表现，激发起业界和大众对强化学习研究的强烈兴趣。
+深度Q学习的核心就是用一个人工神经网络q(s,a;w),s∈[插图],a∈[插图]来代替动作价值函数。由于神经网络具有强大的表达能力，能够自动寻找特征，所以采用神经网络有潜力比传统人工特征强大得多。[4]
+
+2015 年，DeepMind 提出了利用深度神经网络实现的 Q Learning [4-]算法，发表在 Nature 期刊上 [1]，并在 Atari 游戏环境中的 49 个小游戏上训练学习，取得了人类水平相 当甚至超人类水平的表现，激发起业界和大众对强化学习研究的强烈兴趣。
 
 $Q^{*}\left(s_{t}, a_{t}\right) \leftarrow Q^{*}\left(s_{t}, a_{t}\right)+\alpha\left(r\left(s_{t}, a_{t}\right)+\gamma \max _{a_{t+1}} Q^{*}\left(s_{t+1}, a_{t+1}\right)-Q^{*}\left(s_{t}, a_{t}\right)\right)$
 
@@ -50,8 +52,21 @@ DQN属于DRL（深度强化学习）的一种，它是深度学习与Q学习的�
 
 ![DQN_alg](img\DQN_alg.png)
 
+## 经验回放（Experience Replay）：
 
-## Target Network
+将经验（即历史的状态、动作、奖励等）存储起来，再在存储的经验中按一定的规则采样。
+
+V.Mnih等在2013年发表文章《Playing Atari with deepreinforcement learning》，提出了基于经验回放的深度Q网络，标志着深度Q网络的诞生，也标志着深度强化学习的诞生。
+
+经验回放主要有“存储”和“采样回放”两大关键步骤。
+·存储：将轨迹以(St,At,Rt+1,St+1)等形式存储起来；
+·采样回放：使用某种规则从存储的(St,At,Rt+1,St+1)中随机取出一条或多条经验
+
+D.Horgan等在2018发表文章《Distributed prioritizedexperience replay》，将分布式经验回放和优先经验回放相结合，得到分布式优先经验回放（distributed prioritizedexperience replay）。经验回放也不是完全没有缺点。例如，它也会导致回合更新和多步学习算法无法使用。一般情况下，如果我们将经验回放用于Q学习，就规避了这个缺点。
+
+## 目标网络(Target Network)
+
+修改网络的更新方式，例如不把刚学习到的网络权重马上用于后续的自益过程。[4]
 
 上面的代码似乎已经能够正常运行了，为什么又冒出一个target network呢？回想下前面那个公式，这里重新搬到下面来，是不是之前说target和θi-都先忽略，现在就该解释一下了。
 
@@ -68,7 +83,7 @@ DQN属于DRL（深度强化学习）的一种，它是深度学习与Q学习的�
 [1]: https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
 [2]: https://www.cnblogs.com/wdzeng/p/10860166.html
 [3]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter17_deep-reinforcement-learning/DQN.ipynb
-
+[4]: https://weread.qq.com/web/reader/da832f507192b327da81965kd6432e00228d645920e3401
 
 
 ---

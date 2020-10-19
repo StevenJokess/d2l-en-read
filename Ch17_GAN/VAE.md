@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 14:47:54
+ * @LastEditTime: 2020-10-19 18:28:10
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,8 +13,17 @@
 
 # Variational Autoencoders (VAEs)
 
+VAE，也可以叫做变分自编码器，属于自动编码器的变体。
+
 假设一个生成模型（如图13.3所示）中包含隐变量，即有部分变量是不可观测的，其中观测变量𝑿是一个高维空间𝒳中的随机向量，隐变量𝒁是一个相对低维的空间𝒵中的随机向量．
 
+自动编码器是一种人工神经网络，用于学习高效的数据值编码以无监督方式。自动编码器的目的是通过训练网络忽略信号“噪声” 来学习一组数据的表示（编码），通常用于降维。基本模型存在几种变体，其目的是强制学习的输入表示形式具有有用的属性。
+
+与经典（稀疏，去噪等）自动编码器不同，变分自动编码器（VAE）是生成模型，例如生成对抗网络。文章重点解决，在存在具有难解的后验分布的连续潜在变量和大型数据集的情况下，如何在定向概率模型中进行有效的推理和学习。他们引入了一种随机变分推理和学习算法，该算法可以扩展到大型数据集，并且在某些微分可微性条件下甚至可以在难处理的情况下工作。
+
+作者证明了变化下界的重新参数化产生了一个下界估计量，该估计量可以使用标准随机梯度方法直接进行优化。 其次表明，对于每个数据点具有连续潜在变量的iid数据集，通过使用拟议的下界估计器将近似推理模型（也称为识别模型）拟合到难处理的后验，可以使后验推理特别有效。
+
+主要提出者Durk Kingma（Diederik P. Kingma），目前就职于Google。 在加入Google之前，于2017年获得阿姆斯特丹大学博士学位，并于2015年成为OpenAI创始团队的一员。 他主要研究的方向为：推理，随机优化，可识别性。其中的研究成就包括变分自编码器（VAE）（一种用于生成建模的有原则的框架）以及广泛使用的随机优化方法Adam。[9]
 
 
 In a nutshell, a VAE is an autoencoder whose encodings distribution is regularised during the training in order to ensure that its latent space has good properties allowing us to generate some new data. Moreover, the term “variational” comes from the close relation there is between the regularisation and the variational inference method in statistics.
@@ -82,3 +91,4 @@ variational autoencoders (VAEs) are autoencoders that tackle the problem of the 
 [7]: Doersch C, 2016. Tutorial on variational autoencoders[J/OL]. CoRR, abs/1606.05908.http://arxiv.org/abs/1606.05908.
 TODO:
 [8]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/ch12-%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/vae.py
+[9]: https://www.aminer.cn/ai-history
