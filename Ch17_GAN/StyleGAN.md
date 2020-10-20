@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 17:12:14
+ * @LastEditTime: 2020-10-19 21:29:29
  * @Description:
  * @TODO::
  * @Reference:
@@ -90,6 +90,8 @@ Each channel of the convolution layer output is first normalized to make sure th
 The intermediate vector w is transformed using another fully-connected layer (marked as A) into a scale and bias for each channel.
 The scale and bias vectors shift each channel of the convolution output, thereby defining the importance of each filter in the convolution. This tuning translates the information from w to a visual representation.
 
+The use of different style vectors at diﬀerent points of the synthesis network gives control over the styles of the resulting image at diﬀerent levels of detail. For example, blocks of layers in the synthesis network at lower resolutions (e.g. 4 × 4 and 8 × 8) control high-level styles such as pose and hairstyle. Blocks of layers in the middle of the network (e.g. as 16 × 16 and 32 × 32) control hairstyles and facial expression. Finally, blocks of layers closer to the output end of the network (e.g. 64 × 64 to 1024 × 1024) control color schemes and very ﬁne details.
+
 
 
 
@@ -108,7 +110,7 @@ The scale and bias vectors shift each channel of the convolution output, thereby
 [9]: https://arxiv.org/abs/1812.04948
 [10]: X.  Huang  and  S.  J.  Belongie.Arbitrary  style  transferin  real-time  with  adaptive  instance  normalization.CoRR,abs/1703.06868, 2017. 1, 2
 [11]: https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/
-
+[12]: http://questioneurope.blogspot.com/search/label/AI
 
 TODO:
 

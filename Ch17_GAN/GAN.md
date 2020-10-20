@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 19:51:47
+ * @LastEditTime: 2020-10-19 21:45:30
  * @Description:
  * @TODO::
  * @Reference:
@@ -23,6 +23,7 @@ GAN的提出者伊恩·古德费洛，曾就读于斯坦福大学，在那里获
 Goodfellow最知名的成就就是发明了GAN,被誉为GAN之父。同时他还是 Deep Learning 教材的主要作者。在Google，他开发了一个系统，该系统使Google Maps能够自动转录街景汽车拍摄的照片中的地址，并展示了机器学习系统的安全漏洞。
 
 2017年，Goodfellow被《MIT技术评论》的35位35岁以下的创新者所引用。在2019年，他被列入《外交政策》的100位全球思想家名单。
+
 
 [1]: https://www.aminer.cn/ai-history
 [2]: https://mrt.aminer.cn/5df49f20e8cc00e7af330f6b

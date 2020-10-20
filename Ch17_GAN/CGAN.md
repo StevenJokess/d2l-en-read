@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:04:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-16 20:13:27
+ * @LastEditTime: 2020-10-20 10:08:45
  * @Description:
  * @TODO::
  * @Reference:
@@ -30,6 +30,8 @@ $$
 
 遇到一个更大的问题——普通的GAN无法控制生成器的输入内容。即生成器生成内容是随机的，判别器只会判断生成器生成数据的真实性，而不会判断生成器有没有生成规定的数据。[3]
 
+传统的GAN模型对于数据的属性不加限定, 无法有效地控制生成的结果, 在生成的图像中往往会存在较多的噪点; 此外, 传统 GAN 模型一次只能学习一类数据, 对于包含多个类的数据样本集, 需逐类学习及生成相应类的样本集, 导致效率低下。[5]
+Mirza等[6]提出了CGAN 模型, CGAN的结构如图1所示, 通过对生成网络G和判别网络D添加额外的信息y(如数据标签、模态数据), 可以起到连接或者区分z和x的作用, 引导学习过程, 使得网络的性能得到提升, 同时使GAN 模型具有生成多类数据的能力。
 
 
 生成器要根据约束条件去生成相应的图像，所以生成器要接受约束条件，其次判别器除了判别生成器生成的图像是否真实外，还要判别生成器生成的图像与真实图像之间是否匹配，否则，就算生成了真实图像也无用
@@ -41,3 +43,5 @@ $$
 [2]: img\CGAN_yousanai.jpeg
 [3]: https://weread.qq.com/web/reader/4653238071e86dd54654969k34132fc02293416a75f431d
 [4]: https://weread.qq.com/web/reader/4653238071e86dd54654969ka1d32a6022aa1d0c6e83eb4
+[5]: http://www.opticsjournal.net/richHtml/gxxb/2019/39/3/0311002.html
+[6]: Mirza M , Osindero S. Conditional generative adversarial nets[EB/OL]. ( 2014 -11-06)[2018-07-28]. org/abs/1411. 1784.

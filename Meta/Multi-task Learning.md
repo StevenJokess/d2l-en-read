@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 22:51:45
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-14 22:57:46
+ * @LastEditTime: 2020-10-19 21:27:09
  * @Description:
  * @TODO::
  * @Reference:
@@ -32,4 +32,39 @@
 （3）既然一个好的表示通常需要适用于多个不同任务，参见第1.3节．多任务学习的机制使得它会比单任务学习获得更好的表示．
 （4）在多任务学习中，每个任务都可以“选择性”利用其他任务中学习到的隐藏特征，从而提高自身的能力
 
+```python
+# https://gist.github.com/dominique003/679e641210b9aade06b513b7b6750746/raw/976c370a9c789bfa8927560157b57b813411c86e/MTCNNExtractFaces.py
+# extract and plot each detected face in a photograph
+from matplotlib import pyplot
+from mtcnn.mtcnn import MTCNN
+
+# draw each face separately
+def draw_faces(filename, result_list):
+	# load the image
+	data = pyplot.imread(filename)
+	# plot each face as a subplot
+	for i in range(len(result_list)):
+		# get coordinates
+		x1, y1, width, height = result_list[i]['box']
+		x2, y2 = x1 + width, y1 + height
+		# define subplot
+		pyplot.subplot(1, len(result_list), i+1)
+		pyplot.axis('off')
+		# plot face
+		pyplot.imshow(data[y1:y2, x1:x2])
+	# show the plot
+	pyplot.show()
+
+filename = 'poupees.jpg'
+# load image from file
+pixels = pyplot.imread(filename)
+# create the detector, using default weights
+detector = MTCNN()
+# detect faces in the image
+faces = detector.detect_faces(pixels)
+# display faces on the original image
+draw_faces(filename, faces)
+```
+
 [1]: Caruana R, 1997. Multi-task learning[J]. Machine Learning, 28(1):41-75.
+TODO:http://questioneurope.blogspot.com/2020/07/running-mtcnn-on-my-own-photos.html
