@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-07 23:00:12
+ * @LastEditTime: 2020-10-21 22:35:19
  * @Description:
  * @TODO::
  * @Reference:
@@ -53,6 +53,12 @@ https://github.com/affinelayer/pix2pix-tensorflow
 
 ![encode-decode](img\encode-decode.png)[4]
 
+```
+[7]
+# Calculate output of image discriminator (PatchGAN)
+patch = (1, opt.img_height // 2 ** 4, opt.img_width // 2 ** 4)
+```
+
 ### The Generator
 
 The Generator has the job of taking an input image and performing the transform we want in order to produce the target image. An example input would be a black and white image, and we want the output to be a colorized version of that image. The structure of the generator is called an "encoder-decoder" and in pix2pix the encoder-decoder looks more or less like this:
@@ -68,6 +74,13 @@ The Discriminator has the job of taking two images, an input image and an unknow
 ![Discriminator architecture](img\Pix2Pix_discri.jpg)[1]
 
 The discriminator network creates a 30x30 feature map to represent the loss. This kind of architecture is called PatchGAN, which means that every small image patch in the original image is mapped to a pixel in the final loss map. A big advantage of PatchGAN is that it can handle the arbitrary sizes of input images as long as the labels have been transformed so that they're the same size as the loss map. It also evaluates the quality of the input image according to the quality of the local patches, rather than their global property. Here, we will show you how the size of the image patch (that is, 70) is calculated.[1]
+
+```
+[7]
+# Loss functions
+criterion_GAN = torch.nn.MSELoss()
+criterion_pixelwise = torch.nn.L1Loss()
+```
 
 ### Training
 
@@ -90,3 +103,4 @@ MXNet code[3]
 [4]: https://affinelayer.com/pix2pix/
 [5]: https://github.com/yenchenlin/pix2pix-tensorflow
 [6]: https://ai.deepshare.net/detail/v_5f44d9dce4b0118787333e00/3?from=p_5f4c7402e4b0dd4d974c43e4&type=6
+[7]: https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/pix2pix/pix2pix.py

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 16:59:58
+ * @LastEditTime: 2020-10-21 22:44:39
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
@@ -37,4 +37,7 @@ InfoGAN [3]尝试使用无监督的方式去学习输入𝒙的可解释隐向�
 
 [1]: https://www.zhihu.com/column/c_1186629504699731968
 [2]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf 13.4.2
-[3]
+[3]: https://arxiv.org/abs/1606.03657
+[4]: https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/infogan/infogan.py
+
+

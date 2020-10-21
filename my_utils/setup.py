@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-10-19 19:05:23
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-10-19 19:05:45
+LastEditTime: 2020-10-21 22:36:46
 Description:
 TODO::
 Reference:https://github.com/thu-ml/tianshou/blob/master/setup.py
@@ -80,4 +80,13 @@ setup(
         "mujoco": ["mujoco_py"],
         "pybullet": ["pybullet"],
     },
+)
+
+---
+# https://github.com/qqiang00/Reinforce/blob/master/setup.py
+from setuptools import setup, find_packages
+
+setup(
+    name = 'reinforce',
+    packages = find_packages(),
 )
