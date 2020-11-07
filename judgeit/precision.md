@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 12:58:54
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-09 15:04:15
+ * @LastEditTime: 2020-11-07 23:30:04
  * @Description:
  * @TODO::math
  * @Reference:https://blog.csdn.net/weixin_43172660/article/details/82958534
@@ -16,6 +16,7 @@
  * [6]: https://www.jianshu.com/p/cb8f77bd6067#4.%20Lift%20%E5%92%8CGain%E5%9B%BE
  * [7]: https://www.jianshu.com/p/d3739a5499b5
  * [8]: [Lift , Gain](https://blog.csdn.net/zwqjoy/article/details/84859405#%E5%9B%9B%20Lift%20%2C%20Gain)
+ * [9]: https://goodgoodstudy.blog.csdn.net/article/details/108697963
 -->
 
 # 评价指标[1]
@@ -181,6 +182,14 @@ ks值[0.2,0.3],模型具有一定区分能力，勉强可以接受
 ks值[0.3,0.5],模型具有较强的区分能力。
 
 ks值大于0.75，往往表示模型有异常。
+
+计算KS的常见方法是这样的：[9]
+
+step 1. 对变量进行分箱（binning），可以选择等频、等距，或者自定义距离。
+step 2. 计算每个分箱区间的好账户数(goods)和坏账户数(bads)。
+step 3. 计算每个分箱区间的累计好账户数占总好账户数比率(cum_good_rate)和累计坏账户数占总坏账户数比率(cum_bad_rate)。
+step 4. 计算每个分箱区间累计坏账户占比与累计好账户占比差的绝对值，得到KS曲线。也就是： [公式]
+step 5. 在这些绝对值中取最大值，得到此变量最终的KS值。
 
 ### 优劣
 

@@ -5,11 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
-<<<<<<< Updated upstream
- * @LastEditTime: 2020-11-07 19:56:30
-=======
- * @LastEditTime: 2020-10-16 20:23:13
->>>>>>> Stashed changes
+ * @LastEditTime: 2020-11-07 23:52:19
  * @Description:
  * @TODO::
  * @Reference:
@@ -389,6 +385,38 @@ We adopt our architectures from Johnson et al. [23]. We use 6 residual blocks fo
 The network with 6 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,u128,u64,c7s1-3
 The network with 9 residual blocks consists of: c7s1-64,d128,d256,R256,R256,R256, R256,R256,R256,R256,R256,R256,u128 u64,c7s1-3
 
+```py
+# [129]
+def _get_generator(self, name):
+    model = mnist_uni_img2img(self.img_shape, name=name)
+    model.summary()
+    return model
+
+def mnist_uni_img2img(img_shape, name="generator"):
+    model = keras.Sequential([
+        # [n, 28, 28, n] -> [n, 14, 14, 64]
+        Conv2D(64, (4, 4), strides=(2, 2), padding='same', input_shape=img_shape),
+        BatchNormalization(),
+        LeakyReLU(),
+        # -> [n, 7, 7, 128]
+        Conv2D(128, (4, 4), strides=(2, 2), padding='same'),
+        BatchNormalization(),
+        LeakyReLU(),
+
+        # -> [n, 14, 14, 64]
+        Conv2DTranspose(64, (4, 4), strides=(2, 2), padding='same'),
+        BatchNormalization(),
+        ReLU(),
+        # -> [n, 28, 28, 32]
+        Conv2DTranspose(32, (4, 4), strides=(2, 2), padding='same'),
+        BatchNormalization(),
+        ReLU(),
+        # -> [n, 28, 28, 1]
+        Conv2D(img_shape[-1], (4, 4), padding='same', activation=keras.activations.tanh)
+    ], name=name)
+    return model
+```
+
 ```python
 #[32]
 class Generator(nn.Module):
@@ -511,6 +539,32 @@ class Generator(nn.Module):
 ![The target discriminator, Dy, implementation in Keras. The PatchGAN discriminator is shown on the right.](img\PatchGAN.jpg)[74]
 
 loss函数使用的是LSGAN中所提到均方差，这种loss可以提高假图像的精度。[46]
+
+```py
+# [129]
+model = keras.Sequential([
+            keras.layers.GaussianNoise(0.01, input_shape=self.img_shape),   # add some noise
+            mnist_uni_disc_cnn(),
+            keras.layers.Dense(1)
+        ], name=name)
+
+def mnist_uni_disc_cnn(input_shape=(28, 28, 1), use_bn=True):
+    model = keras.Sequential()
+    # [n, 28, 28, n] -> [n, 14, 14, 64]
+    model.add(Conv2D(64, (4, 4), strides=(2, 2), padding='same', input_shape=input_shape))
+    if use_bn:
+        model.add(BatchNormalization())
+    model.add(LeakyReLU())
+    model.add(Dropout(0.3))
+    # -> [n, 7, 7, 128]
+    model.add(Conv2D(128, (4, 4), strides=(2, 2), padding='same'))
+    if use_bn:
+        model.add(BatchNormalization())
+    model.add(LeakyReLU())
+    model.add(Dropout(0.3))
+    model.add(Flatten())
+    return model
+```
 
 For discriminator networks, we use 70 × 70 PatchGAN [7]. Let Ck denote a 4×4 Convolution-InstanceNorm-LeakyReLU layer with k ﬁlters and stride 2. After the last layer, we apply a convolution to produce a 1-dimensional output. We do not use InstanceNorm for the ﬁrst C64 layer. We use leaky ReLUs with a slope of 0.2. The discriminator architecture is: C64-C128-C256-C512
 
@@ -1139,4 +1193,5 @@ https://arxiv.org/pdf/1711.11586
 [127]: file:///E:/DL-v/20%20CycleGAN性别转换/20%20CycleGAN性别转换/imgs/CycleGAN模型细节.pdf
 TODO: https://github.com/togheppi/CycleGAN
 [128]: https://weread.qq.com/web/reader/4653238071e86dd54654969kd8232f00235d82c8d161fb2
+[129]: https://github.com/MorvanZhou/mnistGANs/blob/main/cyclegan.py
 TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
