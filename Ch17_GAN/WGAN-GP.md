@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 19:30:20
+ * @LastEditTime: 2020-11-07 20:52:52
  * @Description:
  * @TODO::
  * @Reference:
@@ -19,6 +19,11 @@ $\min _{\phi} \mathcal{L}(G, D)=-\mathbb{E}_{x_{f} \sim p_{g}}\left[D\left(x_{f}
 $\quad=-\mathbb{E}_{\mathbf{z} \sim p_{z}(\cdot)}[D(G(\mathbf{z}))]$
 
 
+
+目标函数：
+
+$L=\underbrace{\underset{\tilde{\boldsymbol{x}} \sim \mathbb{P}_{g}}{\mathbb{E}}[D(\tilde{\boldsymbol{x}})]-\underset{\boldsymbol{x} \sim \mathbb{P}_{r}}{\mathbb{E}}[D(\boldsymbol{x})]}_{\text {Original critic loss }}+\underbrace{\lambda \underset{\hat{\boldsymbol{x}} \sim \mathbb{P}_{\hat{\boldsymbol{x}}}}{\mathbb{E}}\left[\left(\left\|\nabla_{\hat{\boldsymbol{x}}} D(\hat{\boldsymbol{x}})\right\|_{2}-1\right)^{2}\right]}_{\text {Our gradient penalty }} .$
+
 ```py
 def d_loss_fn(generator, discriminator, batch_z, batch_x, is_training):
     # 计算 D 的损失函数     fake_image = generator(batch_z, is_training) # 假样本     d_fake_logits = discriminator(fake_image, is_training) # 假样本的输出     d_real_logits = discriminator(batch_x, is_training) # 真样本的输出     # 计算梯度惩罚项     gp = gradient_penalty(discriminator, batch_x, fake_image)
@@ -26,14 +31,45 @@ def d_loss_fn(generator, discriminator, batch_z, batch_x, is_training):
 
     return loss, gp
 ```
-同样没有交叉熵的计算步骤。代码实现如下：
+
+```py
+# [5]
+
+def gradient_penalty_loss(y_pred, y_average):
+    gradients = tf.gradients(y_pred, y_average)[0]
+    gradients_sqr = tf.square(gradients)
+    gradients_sqr_sum = tf.reduce_sum(gradients_sqr, axis=np.arange(1, len(gradients_sqr.shape)))
+    gradients_l2_norm = tf.sqrt(gradients_sqr_sum)
+
+    gradient_penalty = tf.square(gradients_l2_norm)
+
+    return tf.reduce_mean(gradient_penalty)
+
+def discriminator_loss(real_output, generated_output, validity_interpolated, interpolated_img, lambda_=10):
+
+    real_loss = -tf.reduce_mean(real_output)
+    fake_loss = tf.reduce_mean(generated_output)
+    gp_loss = gradient_penalty_loss(validity_interpolated, interpolated_img)
+
+    return real_loss + fake_loss + gp_loss * lambda_
 ```
+
+同样没有交叉熵的计算步骤。代码实现如下：
+
+```py
 def g_loss_fn(generator, discriminator, batch_z, is_training):
     # 生成器的损失函数     fake_image = generator(batch_z, is_training)     d_fake_logits = discriminator(fake_image, is_training)
     # WGAN-GP G 损失函数，最大化假样本的输出值     loss = - tf.reduce_mean(d_fake_logits)
 
     return loss
 ```
+
+```py
+# [5]
+def generator_loss(generated_output):
+    return -tf.reduce_mean(generated_output)
+```
+
 
 its stablity during training.[2]
 
@@ -171,7 +207,11 @@ for e in range(epoch):
         torch.save(g_model,'result/%s/G_checkpoint/iter_g_%d.pt'%(code,e))
 ```
 
-
+Paper:[3]
+Code: [4]
 
 [1]: Gulrajani,  I.,  Ahmed,  F.,  Arjovsky,  M.,  Dumoulin,  V.,  and  Courville,A. C. (2017). Improved training of Wasserstein GANs. InAdvances inNeural Information Processing Systems(pp. 5767-5777).
 [2]: https://lanpartis.github.io/deep%20learning/2018/06/24/Use-GANs-to-Generate-Pokemons.html
+[3]: https://arxiv.org/abs/1704.00028
+[4]: https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan_gp/wgan_gp.py
+[5]: https://github.com/thisisiron/TF2-GAN/blob/master/wgan-gp/utils.py

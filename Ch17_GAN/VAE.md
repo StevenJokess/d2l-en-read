@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 18:28:10
+ * @LastEditTime: 2020-11-07 21:05:22
  * @Description:
  * @TODO::
  * @Reference:
@@ -14,6 +14,8 @@
 # Variational Autoencoders (VAEs)
 
 VAE，也可以叫做变分自编码器，属于自动编码器的变体。
+
+VAE是对自动编码器的概率处理，它是一种将高维输入数据压缩成更小表示的模型。传统的自动编码器将输入映射到潜在的向量上，VAE不同于此，它将输入数据映射到概率分布的参数上，例如高斯分布的均值和方差。这种方法产生了一个连续的、结构化的潜在空间，对图像的生成非常有用。[6]
 
 假设一个生成模型（如图13.3所示）中包含隐变量，即有部分变量是不可观测的，其中观测变量𝑿是一个高维空间𝒳中的随机向量，隐变量𝒁是一个相对低维的空间𝒵中的随机向量．
 
@@ -92,3 +94,5 @@ variational autoencoders (VAEs) are autoencoders that tackle the problem of the 
 TODO:
 [8]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/ch12-%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/vae.py
 [9]: https://www.aminer.cn/ai-history
+[10]: https://www.tensorflow.org/guide/keras/custom_layers_and_models#putting_it_all_together_an_end-to-end_example
+[11]: https://www.tensorflow.org/tutorials/generative/cvae

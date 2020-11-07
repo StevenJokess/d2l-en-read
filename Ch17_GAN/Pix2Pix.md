@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-21 22:35:19
+ * @LastEditTime: 2020-11-07 21:18:27
  * @Description:
  * @TODO::
  * @Reference:
@@ -94,6 +94,15 @@ Here, $\mathcal{L}_{L 1}(G)$ represents the L1-loss between the generated sample
 
 MXNet code[3]
 
+### Generate using test dataset
+
+```py
+# [8]
+# Run the trained model on a few examples from the test dataset
+for inp, tar in test_dataset.take(5):
+  generate_images(generator, inp, tar)
+```
+
 ## Reference
 
 
@@ -104,3 +113,4 @@ MXNet code[3]
 [5]: https://github.com/yenchenlin/pix2pix-tensorflow
 [6]: https://ai.deepshare.net/detail/v_5f44d9dce4b0118787333e00/3?from=p_5f4c7402e4b0dd4d974c43e4&type=6
 [7]: https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/pix2pix/pix2pix.py
+TODO: https://www.tensorflow.org/tutorials/generative/pix2pix

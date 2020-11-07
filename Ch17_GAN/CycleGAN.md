@@ -6,7 +6,7 @@
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
 <<<<<<< Updated upstream
- * @LastEditTime: 2020-10-07 22:46:48
+ * @LastEditTime: 2020-11-07 19:56:30
 =======
  * @LastEditTime: 2020-10-16 20:23:13
 >>>>>>> Stashed changes
@@ -1139,3 +1139,4 @@ https://arxiv.org/pdf/1711.11586
 [127]: file:///E:/DL-v/20%20CycleGAN性别转换/20%20CycleGAN性别转换/imgs/CycleGAN模型细节.pdf
 TODO: https://github.com/togheppi/CycleGAN
 [128]: https://weread.qq.com/web/reader/4653238071e86dd54654969kd8232f00235d82c8d161fb2
+TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
