@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 21:05:22
+ * @LastEditTime: 2020-11-08 18:18:11
  * @Description:
  * @TODO::
  * @Reference:
@@ -84,6 +84,8 @@ variational autoencoders (VAEs) are autoencoders that tackle the problem of the 
 
 变分自编码器是一个非常典型的深度生成模型，利用神经网络的拟合能力来有效地解决含隐变量的概率模型中后验分布难以估计的问题[Kingma et al.,2014;Rezende et al.,2014]．变分自编码器的详尽介绍可以参考文献[Doersch,2016]．[Bowman et al.,2016]进一步将变分自编码器应用于序列生成问题．再参数化是变分自编码器的重要技巧．对于离散变量的再参数化，可以使用Gumbel-Softmax方法[Jang et al.,2017][6]
 
+Auto-Encoding Variational Bayes by Kingma and Welling. It uses ReLUs and the adam optimizer, instead of sigmoids and adagrad.[13]
+
 [1]: https://learning.oreilly.com/library/view/hands-on-artificial-intelligence/9781788836067/de965259-e07e-461a-8d0f-717745273397.xhtml
 [2]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch08.html
 [3]: https://github.com/AntixK/PyTorch-VAE
@@ -96,3 +98,5 @@ TODO:
 [9]: https://www.aminer.cn/ai-history
 [10]: https://www.tensorflow.org/guide/keras/custom_layers_and_models#putting_it_all_together_an_end-to-end_example
 [11]: https://www.tensorflow.org/tutorials/generative/cvae
+[12]: https://github.com/pytorch/examples/tree/master/vae
+[13]: http://arxiv.org/abs/1312.6114
