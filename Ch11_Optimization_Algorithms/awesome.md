@@ -3,13 +3,11 @@
 <!--
  * @version:
  * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-10-19 19:26:21
+ * @Date: 2020-11-08 17:35:44
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 17:09:19
+ * @LastEditTime: 2020-11-08 17:35:48
  * @Description:
  * @TODO::
  * @Reference:
 -->
-https://github.com/lanpartis/pokeGANs/tree/master/POKEMON
-https://github.com/PokeAPI/sprites/
-
+https://ruder.io/optimizing-gradient-descent/index.html#momentum

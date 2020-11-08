@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 20:52:52
+ * @LastEditTime: 2020-11-08 17:37:02
  * @Description:
  * @TODO::
  * @Reference:
@@ -215,3 +215,5 @@ Code: [4]
 [3]: https://arxiv.org/abs/1704.00028
 [4]: https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan_gp/wgan_gp.py
 [5]: https://github.com/thisisiron/TF2-GAN/blob/master/wgan-gp/utils.py
+TODO:
+[6]: https://github.com/lilianweng/unified-gan-tensorflow

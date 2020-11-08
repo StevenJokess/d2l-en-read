@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-07 22:29:14
+ * @LastEditTime: 2020-11-08 17:17:46
  * @Description:
  * @TODO::
  * @Reference:
@@ -154,7 +154,8 @@ def point_wise_feed_forward_network(d_model, dff):
 [1]: https://mp.weixin.qq.com/s/kjLFPyTb7pal7oorX3ejkw
 [2]: Tensorflow官方notebook transformer.ipynb: ('https://github.com/tensorflow/docs/blob/master/site/en/tutorials/text/transformer.ipynb')
 [3]: illustrated-transformer: (http://jalammar.github.io/illustrated-transformer/) 该作者的图示很明晰，相对容易理解
-
+TODO:
+[4]: https://github.com/lilianweng/transformer-tensorflow
 
 
 ```

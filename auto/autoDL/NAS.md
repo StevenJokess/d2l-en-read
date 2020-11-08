@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 14:33:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-14 21:17:40
+ * @LastEditTime: 2020-11-08 15:51:07
  * @Description:
  * @TODO::
  * @Reference:https://machine-learning-from-scratch.readthedocs.io/zh_CN/latest/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E6%A8%A1%E5%9E%8B%E8%B0%83%E4%BC%98.html#header-n4
@@ -101,3 +101,7 @@ b 越接近 1，1/(1-b) 对于它的变化越敏感。此时，需要对 (1-b) �
 ---
 
 神经架构搜索（Neural Architecture Search，NAS）[Zoph et al.,2017]是一个新的比较有前景的研究方向，通过神经网络来自动实现网络架构的设计．一个神经网络的架构可以用一个变长的字符串来描述．利用元学习的思想，神经架构搜索利用一个控制器来生成另一个子网络的架构描述．控制器可以由一个循环神经网络来实现．控制器的训练可以通过强化学习来完成，其奖励信号为生成的子网络在开发集上的准确率．
+
+NAS分为单目标算法与多目标算法。前者的目标是设计出一个神经网络，使得精度等单个指标最大化。后者则要考虑多个指标，如精度与速度，保证设计出来的网络既有很高的准确率，又有很快速度，是多目标优化问题。NAS的综述可阅读之前的文章“神经结构搜索（NAS）综述”。[2]
+
+[2]: https://www.tensorinfinity.com/paper_158.html
