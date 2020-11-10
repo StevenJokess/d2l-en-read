@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:04:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-20 10:08:45
+ * @LastEditTime: 2020-11-10 19:16:59
  * @Description:
  * @TODO::
  * @Reference:
@@ -38,6 +38,10 @@ Mirza等[6]提出了CGAN 模型, CGAN的结构如图1所示, 通过对生成网�
 
 条件生成对抗网络（Conditional GAN，CGAN），简单理解就是在普通GAN的生成器与判别器上加了条件约束，如图像间风格转换。因此除给生成器喂随机生成噪声外，还需要将灰度图像也喂给生成器，要求生成器按灰度图像的分布来生成相应的图像，灰度图像对生成器而言就是一个条件约束。同样，对判别器而言，除将真实图像或生成图像传入外，还需要传入灰度图像这个条件约束，要求判别器判断生成的图像是否符合条件约束，如果生成了一张比较真实但与条件约束没有什么关系的图像，那么也判定为不合格。[4]
 
+Qiita的帖子[7]Qiita的帖子不一样，我们可以指定生成人物的属性，如发色、眼睛的颜色、发型，甚至是服装、装饰物，从而生成具有指定属性的图像。不一样，我们可以指定生成人物的属性，如发色、眼睛的颜色、发型，甚至是服装、装饰物，从而生成具有指定属性的图像。
+
+We demonstrate the capability of our model to generate plausible images of birds and flowers from detailed text descriptions.[8]
+
 
 [1]: https://learning.oreilly.com/library/view/python-machine-learning/9781789955750/Text/Chapter_17.xhtml#_idParaDest-342
 [2]: img\CGAN_yousanai.jpeg
@@ -45,3 +49,7 @@ Mirza等[6]提出了CGAN 模型, CGAN的结构如图1所示, 通过对生成网�
 [4]: https://weread.qq.com/web/reader/4653238071e86dd54654969ka1d32a6022aa1d0c6e83eb4
 [5]: http://www.opticsjournal.net/richHtml/gxxb/2019/39/3/0311002.html
 [6]: Mirza M , Osindero S. Conditional generative adversarial nets[EB/OL]. ( 2014 -11-06)[2018-07-28]. org/abs/1411. 1784.
+[7]: 通过文字描述来生成二次元妹子！聊聊conditional GAN与txt2img模型 - 何之源的文章 - 知乎
+https://zhuanlan.zhihu.com/p/25542274
+[8]: Generative Adversarial Text to Image Synthesis https://arxiv.org/abs/1605.05396
+[9]:
