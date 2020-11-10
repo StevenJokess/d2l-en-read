@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 18:24:08
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 21:35:04
+ * @LastEditTime: 2020-11-10 23:27:33
  * @Description:
  * @TODO::
  * @Reference:https://github.com/PacktPublishing/Deep-Learning-with-TensorFlow-2-and-Keras/blob/master/Chapter%206/VanillaGAN.ipynb
@@ -51,3 +51,6 @@ like the usage of LeakyReLU and 1D batch normalization (it didn't even exist bac
 Examples
 
 
+[1]: https://github.com/PacktPublishing/Deep-Learning-with-TensorFlow-2-and-Keras/blob/master/Chapter%206/VanillaGAN.ipynb
+[2]: https://github.com/gordicaleksa/pytorch-gans
+[3]: https://github.com/gordicaleksa/pytorch-gans/blob/master/Vanilla%20GAN%20(PyTorch).ipynb

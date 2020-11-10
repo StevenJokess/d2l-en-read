@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-10 22:12:03
+ * @LastEditTime: 2020-11-10 23:31:09
  * @Description:
  * @TODO::
  * @Reference:
@@ -42,7 +42,9 @@ G 的参数更新不是直接来自数据样本,而是使用来自 D 的反向�
 相比其他生成模型（VAE、玻尔兹曼机），可以生成更好的生成样本
 GAN 是一种半监督学习模型，对训练集不需要太多有标签的数据；
 没有必要遵循任何种类的因子分解去设计模型,所有的生成器和鉴别器都可以正常工作
+
 3. 缺点
+
 可解释性差,生成模型的分布 Pg(G)没有显式的表达
 比较难训练, D 与 G 之间需要很好的同步,例如 D 更新 k 次而 G 更新一次
 训练 GAN 需要达到纳什均衡,有时候可以用梯度下降法做到,有时候做不到.我们还没有找到很好的达到纳什均衡的方法,所以训练 GAN 相比 VAE 或者 PixelRNN 是不稳定的,但我认为在实践中它还是比训练玻尔兹曼机稳定的多.
