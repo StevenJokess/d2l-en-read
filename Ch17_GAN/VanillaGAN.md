@@ -44,3 +44,10 @@ discriminator.add(Dropout(0.3))
 discriminator.add(Dense(1, activation='sigmoid'))
 discriminator.compile(loss='binary_crossentropy', optimizer=adam)
 ```
+
+
+like the usage of LeakyReLU and 1D batch normalization (it didn't even exist back then) instead of the maxout activation and dropout.
+
+Examples
+
+

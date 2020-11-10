@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-10-05 21:24:15
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-10-21 22:27:49
+LastEditTime: 2020-11-10 22:39:53
 Description:
 TODO::
 Reference:https://github.com/enhuiz/transformer-pytorch/blob/master/scripts/train.py
@@ -85,3 +85,19 @@ parser.add_argument(
 parser.add_argument("--checkpoint_interval", type=int, default=-1, help="interval between model checkpoints")
 opt = parser.parse_args()
 print(opt)
+
+
+----
+
+https://github.com/AYLIEN/gan-intro
+
+For a full list of parameters, run:
+
+$ python gan.py --help
+To run without minibatch discrimination (and plot the resulting distributions):
+
+$ python gan.py
+To run with minibatch discrimination (and plot the resulting distributions):
+
+$ python gan.py --minibatch
+

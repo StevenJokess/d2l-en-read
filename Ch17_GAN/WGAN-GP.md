@@ -5,13 +5,33 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 17:37:02
+ * @LastEditTime: 2020-11-10 20:46:01
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
+# WassersteinGAN with Gradient Penality
 
+在提出了WGAN后，作者继续在WGAN上进行优化，又给出了一种新的损失函数，抛弃weight clipping，也就不再需要经验常数c了，取而代之的是gradient penality（梯度惩罚），因此取名为WGAN_GP，也叫Improved_WGAN。[8]
+
+Gradient penality是指：对D的每一个输入样本x, 使得 $\left\|\nabla_{\hat{x}} D(\hat{x})\right\|_{2} \leq 1$ 。意思是对于任意一个
+输入样本x, 用D的输出结果D(x)对求梯度后的值的 L2范数 不大于1。
+
+上面的解释可能有些拗口，我们从一维空间中的函数f(x)来进行阐述：一维函数f(x)，对于任意输入 $x,$ 该函数满足: $\quad\left(\frac{d f(x)}{d x}\right)^{2} \leq 1 ，$ 即任意一点的斜率的平方不大于1，进而可以推出:
+$\left(f\left(x_{1}\right)-f\left(x_{2}\right)\right)^{2} \leq\left(x_{1}-x_{2}\right)^{2},$ 可想而知 $f(x)$ 的函数曲线是比较平滑的, 所以称为梯度惩罚。那为
+
+什么是 L2范数 呢而不是 L1范数 呢？原因很简单, L1范数会破坏一个函数的可微性呀, 所以 L2范
+数 是非常合理的!
+
+注意前面我说的是针对于D的每一个输入样本, 都让它满足 || $\nabla_{x} D(x) \|_{2} \leq 1 ，$ 实际上这是不现实
+的, 所以作者又想了一个办法来解决这个问题：假设从真实数据中采样出来的一个点称为x（这个点
+是高维空间中的点 $）,$ G利用采样得到的噪声向量所生成的假数据称为 $\hat{\chi},$ 在这两点之间的某一个位
+置采样一个点记为, 即对于每一个 $\hat{\chi},,$ 尽量让 $\left\|\nabla_{\hat{x}} D(\hat{x})\right\|_{2} \leq 1$ 。那么最常见的满足上述要求
+的采样方法就是线性采样方法了，即在x与 $\tilde{x}$ 所形成的超平面上任意选取一个点 $\hat{x},$, 换句话说就是
+在生成样本和真实样本间做一个线性插值, 所以存在 $t \in[0,1],$ 使得 $\hat{x}=t x+(1-t) \tilde{x}$ 。
+在新的 损失函数 闪亮登场之前, 我们还有一个小小的优化! 因为作者最后发现, 其实让
+$\left\|\nabla_{\hat{x}} D(\hat{x})\right\|_{2} \approx 1$ 是最好的方案, 而不是把1作为上、下限, 别问我为什么, 作者也不知道！因为是通过大量的实验总结出来的。
 
 即使得生成器的分布𝑝𝑔与真实分布𝑝𝑟之间的 EM 距离越小越好。考虑到𝔼𝒙𝑟∼𝑝𝑟[𝐷(𝒙𝑟)]一项 与生成器无关，因此生成器的训练目标简写为
 
@@ -210,6 +230,9 @@ for e in range(epoch):
 Paper:[3]
 Code: [4]
 
+
+
+
 [1]: Gulrajani,  I.,  Ahmed,  F.,  Arjovsky,  M.,  Dumoulin,  V.,  and  Courville,A. C. (2017). Improved training of Wasserstein GANs. InAdvances inNeural Information Processing Systems(pp. 5767-5777).
 [2]: https://lanpartis.github.io/deep%20learning/2018/06/24/Use-GANs-to-Generate-Pokemons.html
 [3]: https://arxiv.org/abs/1704.00028
@@ -217,3 +240,5 @@ Code: [4]
 [5]: https://github.com/thisisiron/TF2-GAN/blob/master/wgan-gp/utils.py
 TODO:
 [6]: https://github.com/lilianweng/unified-gan-tensorflow
+[7]: https://github.com/igul222/improved_wgan_training
+[8]: https://www.jiqizhixin.com/articles/2019-06-13-11

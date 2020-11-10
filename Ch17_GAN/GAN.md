@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 21:45:30
+ * @LastEditTime: 2020-11-10 22:12:03
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,5 +25,37 @@ Goodfellow最知名的成就就是发明了GAN,被誉为GAN之父。同时他还
 2017年，Goodfellow被《MIT技术评论》的35位35岁以下的创新者所引用。在2019年，他被列入《外交政策》的100位全球思想家名单。
 
 
+网络的最终目标是在D很强大的同时，G生成的假样本送给D后其输出值变为0.5，说明G已经完全骗过了D，即D已经区分不出来输入的样本到底是还是，从而得到一个生成效果很好的G。[3]
+
+mode collapse的意思就是生成的样本大量集中于部分真实样本，那么就是很严重的mode collapse。以生成动漫头像图片为例，从下图中能够明显的看出，红框标记的图像重复出现了很多次，即存在一定的mode collapse。[3]
+
+## 数学[4]
+
+
+2. 优点[5]
+(以下优点和缺点主要来自 Ian Goodfellow 在 Quora 上的回答，以及知乎上的回答)
+
+GAN 模型只用到了反向传播,而不需要马尔科夫链
+训练时不需要对隐变量做推断
+理论上,只要是可微分函数都可以用于构建 D 和 G ,因为能够与深度神经网络结合做深度生成式模型
+G 的参数更新不是直接来自数据样本,而是使用来自 D 的反向传播
+相比其他生成模型（VAE、玻尔兹曼机），可以生成更好的生成样本
+GAN 是一种半监督学习模型，对训练集不需要太多有标签的数据；
+没有必要遵循任何种类的因子分解去设计模型,所有的生成器和鉴别器都可以正常工作
+3. 缺点
+可解释性差,生成模型的分布 Pg(G)没有显式的表达
+比较难训练, D 与 G 之间需要很好的同步,例如 D 更新 k 次而 G 更新一次
+训练 GAN 需要达到纳什均衡,有时候可以用梯度下降法做到,有时候做不到.我们还没有找到很好的达到纳什均衡的方法,所以训练 GAN 相比 VAE 或者 PixelRNN 是不稳定的,但我认为在实践中它还是比训练玻尔兹曼机稳定的多.
+它很难去学习生成离散的数据,就像文本
+相比玻尔兹曼机,GANs 很难根据一个像素值去猜测另外一个像素值,GANs 天生就是做一件事的,那就是一次产生所有像素,你可以用 BiGAN 来修正这个特性,它能让你像使用玻尔兹曼机一样去使用 Gibbs 采样来猜测缺失值
+训练不稳定，G 和 D 很难收敛；
+训练还会遭遇梯度消失、模式崩溃的问题
+缺乏比较有效的直接可观的评估模型生成效果的方法
+
+
+
 [1]: https://www.aminer.cn/ai-history
 [2]: https://mrt.aminer.cn/5df49f20e8cc00e7af330f6b
+[3]: https://www.jiqizhixin.com/articles/2019-06-13-11
+[4]: https://easyai.tech/blog/understanding-generative-adversarial-networks-gans/
+[5]: https://ccc013.github.io/2018/12/10/GAN%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97-%E5%88%9D%E8%AF%86GAN/

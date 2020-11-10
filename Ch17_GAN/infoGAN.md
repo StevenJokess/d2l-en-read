@@ -5,12 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 16:02:05
+ * @LastEditTime: 2020-11-10 21:04:39
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
 -->
 
+# InformationMaximizing Generative Adversarial Nets
+
+InfoGAN的作者对损失函数进行了一些小的改进，一定程度上让网络学习到了可解释的特征表示，即作者文中所说的interpretable reptesentation。
 
 解耦表示（disentangled representation）
 
@@ -42,9 +45,16 @@ $$
 \min _{G} \max _{D} F_{1}(D, G)=F(D, G)-\lambda I(c ; G(z, c))
 $$
 
+
+When you apply the bound on the first term, you get a lower bound, and you introduce an auxillary distribution that ends up being called the discriminator. This application of the bound is wrong because it bounds the loss function from the wrong side.
+When you apply the bound on the second term, you end up upper bounding the loss function, because of the negative sign. This is a good thing.
+The combination of a lower bound and an upper bound means that you don't even know which direction you're bounding or approximating the loss function from anymore, it's neither an upper or a lower bound.
+
+
 [1]: https://www.zhihu.com/column/c_1186629504699731968
 [2]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf 13.4.2
 [3]: https://arxiv.org/abs/1606.03657
 [4]: https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/infogan/infogan.py
 [5]: http://www.c-s-a.org.cn/html/2019/11/7156.html#outline_anchor_12
-
+[6]: https://www.inference.vc/infogan-variational-bound-on-mutual-information-twice/
+[]
