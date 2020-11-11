@@ -5,12 +5,14 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:06:11
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 21:03:27
+ * @LastEditTime: 2020-11-11 21:26:24
  * @Description:
  * @TODO::
  * @Reference:
 -->
 http://ufldl.stanford.edu/tutorial/
+
+Unsupervised learning is a paradigm designed to create autonomous intelligence by rewarding agents (that is, computer programs) for learning about the data they observe without a particular task in mind. In other words, the agent learns for the sake of learning.[4]
 
 ## VS监督学习
 
@@ -30,6 +32,7 @@ Hebbian Learning
 
 [2]: https://easyai.tech/ai-definition/unsupervised-learning/
 [3]: https://easyai.tech/blog/unsupervised-learning-with-python/
+[4]: https://deepmind.com/blog/article/unsupervised-learning
 
 TODO:
 https://stanford.edu/~shervine/l/zh/teaching/cs-229/cheatsheet-unsupervised-learning
