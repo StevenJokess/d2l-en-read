@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:56:46
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 00:13:31
+ * @LastEditTime: 2020-11-11 19:28:27
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,3 +20,5 @@
 [7]: https://github.com/NeuronDance/DeepRL/tree/master/A-Guide-Resource-For-DeepRL
 [8]: https://news.berkeley.edu/2015/05/21/deep-learning-robot-masters-skills-via-trial-and-error/
 [9]: https://gym.openai.com/docs/
+[10]: DeepMind开源强化学习库TRFL https://www.jiqizhixin.com/articles/2018-10-18-15?from=synced&keyword=%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
+

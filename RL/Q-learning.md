@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:27:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-05 21:45:31
+ * @LastEditTime: 2020-11-11 19:20:08
  * @Description:
  * @TODO::
  * @Reference:
@@ -16,7 +16,17 @@ Q-learning（off-policy）
 Q-learning learns the action-value function Q(s, a): how good to take an action at a particular state. For example, for the board position below, how good to move the pawn two steps forward. Literally, we assign a scalar value over the benefit of making such a move.
 Q is called the action-value function (or Q-value function in this article).[4]
 
+Q代表某种动作的长期回报价值。 Q学习是通过观察来学习Q值的。[7]
+
 Q 学习（Q- learning）方法。 它自然的包含了两个部分， 一个是通过经历不停的强化对某个状态行为下趋势的认知 ，另一个则是根据这个趋势，每步走出当下最优的选择（这不就是理性人决策吗！）。[5]
+
+Q学习的过程是：[7]
+
+开始时智能体会把每个“状态-动作”组的Q值初始化为0。更精确的描述为对所有的状态s和动作a：Q(s,a)=0。这从本质上说我们不知道关于每个“状态-动作”组的长期回报信息。
+
+在智能体开始学习后，它会在状态s下采取动作a并获得回报r。它的状态会变成状态s’。智能体会用以下公式更新Q(s,a)：
+
+Q(s,a) = (1-学习速率)*Q(s,a)+学习速率*(r+折扣率*max_a(Q(s’,a)))
 
 基于off-policy思想的Q-learning，与Monte Carlo 方法中off-policy的灵魂思路是一致的，除了更新价值的步数不一样之外。[2]
 
@@ -38,7 +48,9 @@ $$
 因为每次执行和观测都有噪声，所以在更新 Q 函数时，用学习率的方式。（图中的注释并不是很正确，所 谓现实，只不过是新的估计，应该是新做计和旧估计的差值）[6]
 
 
+
 ```md
+
 
 
 [1]: https://www.zhihu.com/question/26408259
@@ -46,6 +58,10 @@ $$
 [3]: https://www.zhihu.com/question/57159315/answer/164323983
 [4]: https://medium.com/@jonathan_hui/rl-dqn-deep-q-network-e207751f7ae4
 [5]: https://www.zhihu.com/question/26408259/answer/389938864
-[6]: 如何用简单例子讲解 Q - learning 的具体过程？ - Michael Jackson的回答 - 知乎
-https://www.zhihu.com/question/26408259/answer/540258528
+[6]: 如何用简单例子讲解 Q - learning 的具体过程？ - Michael Jackson的回答 - 知乎 https://www.zhihu.com/question/26408259/answer/540258528
+[7]: http://www.oreilly.com.cn/radar/?p=816
+
+
+
+
 ```
