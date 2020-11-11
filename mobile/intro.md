@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 21:47:20
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 23:38:31
+ * @LastEditTime: 2020-11-12 00:55:15
  * @Description:
  * @TODO::
  * @Reference:
@@ -109,6 +109,7 @@ https://blog.csdn.net/baidu_31437863/article/details/84474847
 
 
 
+
 # “好、快、省”[1]
 
 具体要求就是软件平台“
@@ -189,7 +190,7 @@ More[4]
 #### 移动端开源框架部署
 
 PaddleMobile[2]
-NCNN[3]
+NCNN[3][20]
 
 
 [1]: https://blog.csdn.net/zxf_zjf/article/details/106444531
@@ -211,3 +212,4 @@ NCNN[3]
 [17]: Oberman SF, Flynn MJ. Design issues in division and other floating-point operations. IEEE Trans. on Computers, 1997, 46(2): 154–161. [doi:10.1109/12.565590]
 [18]: http://www.jos.org.cn/html/2018/2/5428.htm
 [19]: Anwar S, Hwang K, Sung W. Structured pruning of deep convolutional neural networks. ACM Journal on Emerging Technologies in Computing Systems (JETC), 2017, 13(3): Article No.32. [doi:10.1145/3005348]
+[20]: 安卓端深度学习模型部署-以NCNN为例 - 带萝卜的文章 - 知乎 https://zhuanlan.zhihu.com/p/137453394

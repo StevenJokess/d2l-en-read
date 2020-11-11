@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 12:58:54
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 23:30:04
+ * @LastEditTime: 2020-11-11 23:53:20
  * @Description:
  * @TODO::math
  * @Reference:https://blog.csdn.net/weixin_43172660/article/details/82958534
@@ -17,6 +17,7 @@
  * [7]: https://www.jianshu.com/p/d3739a5499b5
  * [8]: [Lift , Gain](https://blog.csdn.net/zwqjoy/article/details/84859405#%E5%9B%9B%20Lift%20%2C%20Gain)
  * [9]: https://goodgoodstudy.blog.csdn.net/article/details/108697963
+ * [10]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch18_%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E3%80%81%E7%A6%BB%E7%BA%BF%E5%8F%8A%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97/%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0_%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E3%80%81%E7%A6%BB%E7%BA%BF%E5%8F%8A%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97.md
 -->
 
 # 评价指标[1]
@@ -90,6 +91,19 @@ $F_{\beta}=\frac{1+\beta^{2}}{\frac{1}{\text { precision }}+\frac{\beta^{2}}{\te
 F1-score= 2PR/(P+R) = 2TP/(2TP + FP + FN)
 
 当F1 -score的值越高，我们说这个模型效果越好。
+
+### E值[10]
+
+E值表示查准率P和查全率R的加权平均值，当其中一个为0时，E值为1，其计算公式：
+
+E=1-\frac{1+b^{2}}{\frac{b^{2}}{P}+\frac{1}{R}}
+
+b越大，表示查准率的权重越大。
+
+
+### 平均正确率（Average Precision）
+
+平均正确率表示不同查全率的点上的正确率的平均。
 
 ## P-R曲线
 
@@ -288,3 +302,4 @@ PS：除了按概率值大小等距十等分外，还可以对概率排序后按
 散度与好坏样本的比例无关，抽样不会有明显影响；
 好坏样本分数比较接近正态分布时，最能真实反映真实的区分度
 没有参照的阈值，可以用来比较不同模型在同一数据集上的表现，或者同一模型在不同时期样本上的表现。
+
