@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-12 00:39:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 01:33:25
+ * @LastEditTime: 2020-11-12 01:44:18
  * @Description:
  * @TODO::
  * @Reference:https://zhuanlan.zhihu.com/p/108679717
@@ -90,7 +90,10 @@ python setup.py install
 
 
 
-##
+## TVM优化
+
+通过修改early_stopping可以控制搜索次数(调优过程其实有点看运气)
+
 
 
 
