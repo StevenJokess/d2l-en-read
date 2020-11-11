@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 19:55:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 19:58:23
+ * @LastEditTime: 2020-11-11 19:59:30
  * @Description:
  * @TODO::
  * @Reference:https://wiki.jikexueyuan.com/project/easy-learn-algorithm/bucket-sort.html
@@ -26,5 +26,6 @@ int main()
         for(j=1;j<=book[i];j++)  //出现了几次就将桶的编号打印几次
                 printf("%d ",i);
     getchar();
+    getchar();//这里的getchar();用来暂停程序，以便查看程序输出的内容,也可以用system("pause");等来代替
     return 0;
 }

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:27:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 19:20:08
+ * @LastEditTime: 2020-11-11 21:20:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -60,8 +60,22 @@ $$
 [5]: https://www.zhihu.com/question/26408259/answer/389938864
 [6]: 如何用简单例子讲解 Q - learning 的具体过程？ - Michael Jackson的回答 - 知乎 https://www.zhihu.com/question/26408259/answer/540258528
 [7]: http://www.oreilly.com.cn/radar/?p=816
-
+[8]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-8.pdf
 
 
 
 ```
+
+--
+
+Q-learning suggested readings
+• Classic papers • Watkins. (1989). Learning from delayed rewards: introduces Q-learning
+• Riedmiller. (2005). Neural fitted Q-iteration: batch-mode Q-learning with neural networks
+• Deep reinforcement learning Q-learning papers
+• Lange, Riedmiller. (2010). Deep auto-encoder neural networks in reinforcement learning: early image-based Q-learning method using autoencoders to construct embeddings • Mnih et al. (2013). Human-level control through deep reinforcement learning: Qlearning with convolutional networks for playing Atari.
+• Van Hasselt, Guez, Silver. (2015).
+
+Deep reinforcement learning with double Q-learning: a very effective trick to improve performance of deep Q-learning.
+• Lillicrap et al. (2016). Continuous control with deep reinforcement learning: continuous Q-learning with actor network for approximate maximization.
+• Gu, Lillicrap, Stuskever, L. (2016). Continuous deep Q-learning with model-based acceleration: continuous Q-learning with action-quadratic value functions.
+• Wang, Schaul, Hessel, van Hasselt, Lanctot, de Freitas (2016). Dueling network architectures for deep reinforcement learning: separates value and advantage estimation in Q-function.

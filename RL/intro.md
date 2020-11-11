@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:08:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-14 21:54:05
+ * @LastEditTime: 2020-11-11 21:10:21
  * @Description:
  * @TODO::
  * @Reference:https://spinningup.readthedocs.io/zh_CN/latest/spinningup/rl_intro.html#bellman-equations
@@ -15,6 +15,16 @@
 即使是专家也很难给出“正确”的动 作，二是获取大量数据的成本往往比较高．对于下棋这类任务，虽然我们很难知 道每一步的“正确”动作，但是其最后的结果（即赢输）却很容易判断．因此，如果 可以通过大量的模拟数据，通过最后的结果（奖励）来倒推每一步棋的好坏，从 而学习出“最佳”的下棋策略，这就是强化学习．
 
 强化学习（ReinforcementLearning，RL），也叫增强学习，是指一类从（与 环境）交互中不断学习的问题以及解决这类问题的方法．强化学习问题可以描 述为一个智能体从与环境的交互中不断学习以完成特定目标（比如取得最大奖 励值）．和深度学习类似，强化学习中的关键问题也是贡献度分配问题[Minsky, 1961]，每一个动作并不能直接得到监督信息，需要通过整个模型的最终监督信 息（奖励）得到，并且有一定的延时性
+
+## VS ML
+
+Standard (supervised) machine learning:
+Usually assumes:
+• i.i.d. data
+• known ground truth outputs in training
+
+Reinforcement learning:
+• Data is not i.i.d.: previous outputs influence future inputs! • Ground truth answer is not known, only know if we succeeded or failed • more generally, we know the reward
 
 术语：
 
@@ -66,6 +76,17 @@ T=t+k+1表示最后的时间步，也就意味着在时刻智能体同环境的�
 
 免模型学习（Model-Free）放弃了模型学习，在效率上不如前者，但是这种方式更加容易实现，也容易在真实场景下调整到很好的状态。所以免模型学习方法更受欢迎，得到更加广泛的开发和测试。
 主流的分类
+
+
+## challenge[4]
+
+• Humans can learn incredibly quickly
+• Deep RL methods are usually slow • Humans can reuse past knowledge
+• Transfer learning in deep RL is an open problem
+• Not clear what the reward function should be
+• Not clear what the role of prediction should be
+
 ![主流的分类](img/fenlei.jpg)
 [2]: https://weread.qq.com/web/reader/62332d007190b92f62371aek92c3210025c92cc22753209
 [3]: https://easyai.tech/ai-definition/reinforcement-learning/
+[4]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-1.pdf
