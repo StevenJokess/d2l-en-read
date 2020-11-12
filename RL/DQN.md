@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 21:44:31
+ * @LastEditTime: 2020-11-12 23:20:57
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -115,6 +115,8 @@ D.Horgan等在2018发表文章《Distributed prioritizedexperience replay》，�
 
 CartPole-v0 task[5]
 
+Note: The eps_train_final and eps_test in the original DQN paper is 0.1 and 0.01, but some works found that smaller eps helps improve the performance. Also, a large batchsize (say 64 instead of 32) will help faster convergence but will slow down the training speed.[7]
+
 ```md
 [1]: https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
 [2]: https://www.cnblogs.com/wdzeng/p/10860166.html
@@ -122,7 +124,7 @@ CartPole-v0 task[5]
 [4]: https://weread.qq.com/web/reader/da832f507192b327da81965kd6432e00228d645920e3401
 [5]: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
 [6]: Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G. Bellemare, Alex Graves, Martin A. Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015. URL: https://doi.org/10.1038/nature14236, doi:10.1038/nature14236.
-
+[7]: https://github.com/thu-ml/tianshou/tree/master/examples/atari
 
 
 ---
