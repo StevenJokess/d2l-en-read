@@ -5,11 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-12 21:30:37
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 21:55:41
+ * @LastEditTime: 2020-11-12 22:13:06
  * @Description:
  * @TODO::
  * @Reference:https://tianshou.readthedocs.io/zh/latest/
  * https://github.com/thu-ml/tianshou/edit/master/README.md
+ * https://github.com/thu-ml/tianshou
 -->
 
 天授 是一个基于PyTorch的深度强化学习平台，目前实现的算法有：
@@ -52,3 +53,66 @@
 - [Prioritized Experience Replay (PER)](https://arxiv.org/pdf/1511.05952.pdf)
 - [Generalized Advantage Estimator (GAE)](https://arxiv.org/pdf/1506.02438.pdf)
 - [Posterior Sampling Reinforcement Learning (PSRL)](https://www.ece.uvic.ca/~bctill/papers/learning/Strens_2000.pdf)
+
+
+---
+
+
+Quick Start
+This is an example of Deep Q Network. You can also run the full script at test/discrete/test_dqn.py.
+
+First, import some relevant packages:
+
+import gym, torch, numpy as np, torch.nn as nn
+from torch.utils.tensorboard import SummaryWriter
+import tianshou as ts
+
+Define some hyper-parameters:
+
+task = 'CartPole-v0'
+lr, epoch, batch_size = 1e-3, 10, 64
+train_num, test_num = 8, 100
+gamma, n_step, target_freq = 0.9, 3, 320
+buffer_size = 20000
+eps_train, eps_test = 0.1, 0.05
+step_per_epoch, collect_per_step = 1000, 10
+writer = SummaryWriter('log/dqn')  # tensorboard is also supported!
+
+Make environments:
+
+
+```py
+# you can also try with SubprocVectorEnv
+train_envs = ts.env.DummyVectorEnv([lambda: gym.make(task) for _ in range(train_num)])
+test_envs = ts.env.DummyVectorEnv([lambda: gym.make(task) for _ in range(test_num)])
+```
+
+Setup policy and collectors:
+
+```py
+policy = ts.policy.DQNPolicy(net, optim, gamma, n_step, target_update_freq=target_freq)
+train_collector = ts.data.Collector(policy, train_envs, ts.data.ReplayBuffer(buffer_size))
+test_collector = ts.data.Collector(policy, test_envs)
+```
+
+
+
+Save / load the trained policy (it's exactly the same as PyTorch nn.module):
+
+torch.save(policy.state_dict(), 'dqn.pth')
+policy.load_state_dict(torch.load('dqn.pth'))
+
+
+Watch the performance with 35 FPS:
+
+policy.eval()
+policy.set_eps(eps_test)
+collector = ts.data.Collector(policy, env)
+collector.collect(n_episode=1, render=1 / 35)
+
+
+
+Look at the result saved in tensorboard: (with bash script in your terminal)
+
+$ tensorboard --logdir log/dqn
+You can check out the documentation for advanced usage.
