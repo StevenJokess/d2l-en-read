@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 00:00:37
+ * @LastEditTime: 2020-11-12 21:44:31
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -40,7 +40,9 @@ Q学习的思想是：Q(S, A) = 在状态S下，采取动作A后，未来将得�
 
 深度Q学习的核心就是用一个人工神经网络q(s,a;w),s∈[插图],a∈[插图]来代替动作价值函数。由于神经网络具有强大的表达能力，能够自动寻找特征，所以采用神经网络有潜力比传统人工特征强大得多。[4]
 
-2015 年，DeepMind 提出了利用深度神经网络实现的 Q Learning [4-]算法，发表在 Nature 期刊上 [1]，并在 Atari 游戏环境中的 49 个小游戏上训练学习，取得了人类水平相 当甚至超人类水平的表现，激发起业界和大众对强化学习研究的强烈兴趣。
+2015 年，DeepMind 提出了利用深度神经网络实现的 Q Learning [4]算法，发表在 Nature 期刊上 [1]，并在 Atari 游戏环境中的 49 个小游戏上训练学习，取得了人类水平相 当甚至超人类水平的表现，激发起业界和大众对强化学习研究的强烈兴趣。
+
+Deep Q Network (DQN) [MKS+15][6] is the pioneer one.
 
 $Q^{*}\left(s_{t}, a_{t}\right) \leftarrow Q^{*}\left(s_{t}, a_{t}\right)+\alpha\left(r\left(s_{t}, a_{t}\right)+\gamma \max _{a_{t+1}} Q^{*}\left(s_{t+1}, a_{t+1}\right)-Q^{*}\left(s_{t}, a_{t}\right)\right)$
 
@@ -119,6 +121,9 @@ CartPole-v0 task[5]
 [3]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter17_deep-reinforcement-learning/DQN.ipynb
 [4]: https://weread.qq.com/web/reader/da832f507192b327da81965kd6432e00228d645920e3401
 [5]: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
+[6]: Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G. Bellemare, Alex Graves, Martin A. Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015. URL: https://doi.org/10.1038/nature14236, doi:10.1038/nature14236.
+
+
 
 ---
 
