@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-21 23:14:05
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-21 23:14:28
+ * @LastEditTime: 2020-11-13 20:39:39
  * @Description:
  * @TODO::
- * @Reference:https://blog.csdn.net/weixin_38145317/article/details/103582549
+ * @Reference:[1]: https://blog.csdn.net/weixin_38145317/article/details/103582549
+ *[2]: https://github.com/kuangliu/pytorch-cifar/blob/master/main.py
 -->
 pytorch 模型 .pt, .pth, .pkl的区别及模型保存方式
 
@@ -38,3 +39,17 @@ torch.save(model, mymodel.pth)#保存整个model的状态
 
 model=torch.load(mymodel.pth)#这里已经不需要重构模型结构了，直接load就可以
 model.eval()
+
+---
+[2]
+    if acc > best_acc:
+        print('Saving..')
+        state = {
+            'net': net.state_dict(),
+            'acc': acc,
+            'epoch': epoch,
+        }
+        if not os.path.isdir('checkpoint'):
+            os.mkdir('checkpoint')
+        torch.save(state, './checkpoint/ckpt.pth')
+        best_acc = acc

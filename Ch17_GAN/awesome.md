@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 16:42:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 18:47:54
+ * @LastEditTime: 2020-11-13 20:27:08
  * @Description:
  * @TODO::
  * @Reference:
@@ -17,3 +17,4 @@ https://github.com/eriklindernoren/PyTorch-GAN
 https://github.com/yenchenlin/awesome-adversarial-machine-learning
 https://github.com/goodfeli
 https://github.com/facebookresearch/pytorch_GAN_zoo
+https://github.com/mit-han-lab/gan-compression

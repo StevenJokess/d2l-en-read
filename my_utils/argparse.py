@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-10-05 21:24:15
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-11-10 22:39:53
+LastEditTime: 2020-11-13 21:44:16
 Description:
 TODO::
 Reference:https://github.com/enhuiz/transformer-pytorch/blob/master/scripts/train.py
@@ -101,3 +101,13 @@ To run with minibatch discrimination (and plot the resulting distributions):
 
 $ python gan.py --minibatch
 
+---
+
+# https://github.com/kuangliu/pytorch-cifar/blob/master/main.py
+parser.add_argument('--resume', '-r', action='store_true',
+                    help='resume from checkpoint')
+
+---
+
+# https://github.com/mit-han-lab/amc/blob/master/eval_mobilenet.py
+parser.add_argument('--n_gpu', default=1, type=int, help='name of the job')
