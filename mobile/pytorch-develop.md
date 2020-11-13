@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:37:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 22:42:32
+ * @LastEditTime: 2020-11-13 23:41:25
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/tutorials/recipes/android_native_app_with_custom_op.html
@@ -13,7 +13,7 @@
 
 following packages
 
-## ndroid NDK
+## Android NDK
 
 ```
 wget https://dl.google.com/android/repository/android-ndk-r19c-linux-x86_64.zip
@@ -45,6 +45,133 @@ export PATH="${GRADLE_HOME}/bin/:${PATH}"
 Gradle requires JDK, you need to install it and set environment variable JAVA_HOME to point to it. For example you can install OpenJDK, following instructions.
 
 https://openjdk.java.net/install/
+
+## OpenCV SDK for Android
+
+Our custom operator will be implemented using the OpenCV library. To use it for Android, we need to download OpenCV SDK for Android with prebuilt libraries. Download from OpenCV releases page. Unzip it and set the environment variable OPENCV_ANDROID_SDK to it.
+
+
+## 使用自定义C ++运算符准备TorchScript模型
+
+
+
+这段代码生成了compute.pt文件，它是使用自定义op my_op .warp_perspective的TorchScript模型。
+
+
+https://pytorch.org/tutorials/recipes/android_native_app_with_custom_op.html
+
+
+使Android应用程序
+
+在成功获得compute.pt之后，我们想在Android应用程序中使用这个TorchScript模型。在Android上使用通用的TorchScript模型(没有自定义操作符)，使用Java API，你可以在这里找到。我们不能在我们的例子中使用这种方法，因为我们的模型使用了一个自定义操作符(my_op .warp_perspective)，默认的TorchScript执行将无法找到它。
+
+ops的注册不暴露在PyTorch Java API中，因此我们需要用native part (c++)构建Android应用程序，并使用LibTorch c++ API为Android实现和注册相同的自定义操作符。由于我们的操作员使用OpenCV库-我们将使用预构建的OpenCV Android库并使用OpenCV相同的功能。
+
+让我们开始在NativeApp文件夹中创建Android应用程序。
+
+
+```
+import torch
+import torch.utils.cpp_extension
+
+print(torch.version.__version__)
+op_source = """
+#include <opencv2/opencv.hpp>
+#include <torch/script.h>
+
+torch::Tensor warp_perspective(torch::Tensor image, torch::Tensor warp) {
+  cv::Mat image_mat(/*rows=*/image.size(0),
+                    /*cols=*/image.size(1),
+                    /*type=*/CV_32FC1,
+                    /*data=*/image.data_ptr<float>());
+  cv::Mat warp_mat(/*rows=*/warp.size(0),
+                   /*cols=*/warp.size(1),
+                   /*type=*/CV_32FC1,
+                   /*data=*/warp.data_ptr<float>());
+
+  cv::Mat output_mat;
+  cv::warpPerspective(image_mat, output_mat, warp_mat, /*dsize=*/{64, 64});
+
+  torch::Tensor output =
+    torch::from_blob(output_mat.ptr<float>(), /*sizes=*/{64, 64});
+  return output.clone();
+}
+
+static auto registry =
+  torch::RegisterOperators("my_ops::warp_perspective", &warp_perspective);
+"""
+
+torch.utils.cpp_extension.load_inline(
+    name="warp_perspective",
+    cpp_sources=op_source,
+    extra_ldflags=["-lopencv_core", "-lopencv_imgproc"],
+    is_python_module=False,
+    verbose=True,
+)
+
+print(torch.ops.my_ops.warp_perspective)
+
+
+@torch.jit.script
+def compute(x, y):
+    if bool(x[0][0] == 42):
+        z = 5
+    else:
+        z = 10
+    x = torch.ops.my_ops.warp_perspective(x, torch.eye(3))
+    return x.matmul(y) + z
+
+
+compute.save("compute.pt")
+```
+
+This snippet generates compute.pt file which is TorchScript model that uses custom op my_ops.warp_perspective.
+
+You need to have installed OpenCV for development to run it.
+
+
+
+
+
+
+## Building the app
+
+To specify to gradle where is Android SDK and Android NDK, we need to fill NativeApp/local.properties.
+
+```
+cd NativeApp
+echo "sdk.dir=$ANDROID_HOME" >> NativeApp/local.properties
+echo "ndk.dir=$ANDROID_NDK" >> NativeApp/local.properties
+```
+
+To build the result apk file we run:
+
+```
+cd NativeApp
+gradle app:assembleDebug
+```
+
+To install the app on the connected device:
+
+```
+cd NativeApp
+gradle app::installDebug
+```
+
+
+After that, you can run the app on the device by clicking on PyTorchNativeApp icon. Or you can do it from the command line:
+
+```
+adb shell am start -n org.pytorch.nativeapp/.MainActivity
+```
+
+If you check the android logcat:
+
+```
+adb logcat -v brief | grep PyTorchNativeApp
+```
+
+你应该看到带有标签' PyTorchNativeApp '的日志，它打印x, y，以及模型forward的结果，我们用log函数在NativeApp/app/src/main/cpp/pytorch_nativeapp.cpp打印。
 
 
 
