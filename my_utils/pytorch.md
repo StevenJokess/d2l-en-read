@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 22:01:55
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 22:48:33
+ * @LastEditTime: 2020-11-13 18:38:54
  * @Description:
  * @TODO::
  * @Reference:https://github.com/pytorch/pytorch#adjust-build-options-optional
@@ -22,5 +22,7 @@ PyTorch has a unique way of building neural networks: using and replaying a tape
 torch.jit	a compilation stack (TorchScript) to create serializable and optimizable models from PyTorch code
 
 torch.multiprocessing	Python multiprocessing, but with magical memory sharing of torch Tensors across processes. Useful for data loading and Hogwild training
+
+
 
 
