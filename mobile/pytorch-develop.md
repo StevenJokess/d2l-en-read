@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:37:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 23:41:25
+ * @LastEditTime: 2020-11-14 00:17:32
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/tutorials/recipes/android_native_app_with_custom_op.html
@@ -173,5 +173,21 @@ adb logcat -v brief | grep PyTorchNativeApp
 
 你应该看到带有标签' PyTorchNativeApp '的日志，它打印x, y，以及模型forward的结果，我们用log函数在NativeApp/app/src/main/cpp/pytorch_nativeapp.cpp打印。
 
+---
+
+在最后一行，我们打印输出的前5个条目。因为在本教程的前面，我们在Python中为模型提供了相同的输入，所以理想情况下，我们应该看到相同的输出。让我们通过重新编译我们的应用程序并使用相同的序列化模型运行它来尝试一下:
 
 
+
+To move your model to GPU memory, you can write model.to(at::kCUDA);. Make sure the inputs to a model are also living in CUDA memory by calling tensor.to(at::kCUDA), which will return a new tensor in CUDA memory.
+
+
+获取帮助并探索API
+
+希望本教程使您对PyTorch模型从Python到c++的路径有了一个大致的了解。通过本教程中描述的概念，您应该能够从一个普通的、“迫切的”PyTorch模型过渡到Python中编译的ScriptModule，到磁盘上的序列化文件，然后(结束循环)过渡到c++中的可执行脚本::模块。
+
+当然，还有许多概念我们没有涉及。例如，你可能会发现自己想用c++或CUDA实现的自定义操作符扩展ScriptModule，并在纯c++生产环境中加载的ScriptModule中执行这个自定义操作符。好消息是:这是可能的，而且得到了很好的支持!现在，您可以查看这个文件夹中的示例，稍后我们将提供一篇教程。目前，以下连结可能会对你有所帮助:
+
+The Torch Script reference: https://pytorch.org/docs/master/jit.html
+The PyTorch C++ API documentation: https://pytorch.org/cppdocs/
+The PyTorch Python API documentation: https://pytorch.org/docs/
