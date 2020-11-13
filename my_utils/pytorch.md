@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 22:01:55
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 18:45:43
+ * @LastEditTime: 2020-11-13 19:29:58
  * @Description:
  * @TODO::
  * @Reference:https://github.com/pytorch/pytorch#adjust-build-options-optional
@@ -23,6 +23,11 @@ torch.jit	a compilation stack (TorchScript) to create serializable and optimizab
 
 torch.multiprocessing	Python multiprocessing, but with magical memory sharing of torch Tensors across processes. Useful for data loading and Hogwild training
 
+> https://github.com/kuangliu/dgl/blob/master/gcn.py
+inputs = torch.FloatTensor(data.features)
+labels = torch.LongTensor(data.labels)
+test_mask = torch.BoolTensor(data.train_mask)
+train_mask = torch.BoolTensor(data.test_mask)
 
 
 
