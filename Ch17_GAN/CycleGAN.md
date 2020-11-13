@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 23:52:19
+ * @LastEditTime: 2020-11-13 16:23:14
  * @Description:
  * @TODO::
  * @Reference:
@@ -1195,3 +1195,4 @@ TODO: https://github.com/togheppi/CycleGAN
 [128]: https://weread.qq.com/web/reader/4653238071e86dd54654969kd8232f00235d82c8d161fb2
 [129]: https://github.com/MorvanZhou/mnistGANs/blob/main/cyclegan.py
 TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
+https://github.com/dmlc/gluon-cv/blob/master/scripts/gan/cycle_gan/demo_cycle_gan.py

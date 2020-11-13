@@ -5,12 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 14:53:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 21:53:56
+ * @LastEditTime: 2020-11-13 16:32:26
  * @Description:
  * @TODO::
  * @Reference:https://github.com/metarl/awesome-metarl/edit/master/README.md
  * https://github.com/bighuang624/CS330-notes/edit/master/README.md
  * https://github.com/thu-ml/tianshou/edit/master/README.md
+ * https://github.com/dmlc/gluon-cv/edit/master/README.md
 -->
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
@@ -27,3 +28,16 @@
 [![GitHub forks](https://img.shields.io/github/forks/thu-ml/tianshou)](https://github.com/thu-ml/tianshou/network)
 [![GitHub license](https://img.shields.io/github/license/thu-ml/tianshou)](https://github.com/thu-ml/tianshou/blob/master/LICENSE)
 [![Gitter](https://badges.gitter.im/thu-ml/tianshou.svg)](https://gitter.im/thu-ml/tianshou?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Build Status](http://ci.mxnet.io/buildStatus/icon?job=gluon-cv%2Fmaster)](http://ci.mxnet.io/job/gluon-cv/job/master/)
+[![GitHub license](docs/_static/apache2.svg)](./LICENSE)
+[![Code Coverage](http://gluon-cv.mxnet.io/coverage.svg?)](http://gluon-cv.mxnet.io/coverage.svg)
+[![PyPI](https://img.shields.io/pypi/v/gluoncv.svg)](https://pypi.python.org/pypi/gluoncv)
+[![PyPI Pre-release](https://img.shields.io/badge/pypi--prerelease-v0.9.0-ff69b4.svg)](https://pypi.org/project/gluoncv/#history)
+[![Downloads](http://pepy.tech/badge/gluoncv)](http://pepy.tech/project/gluoncv)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/resnest-split-attention-networks/semantic-segmentation-on-ade20k)](https://paperswithcode.com/sota/semantic-segmentation-on-ade20k?p=resnest-split-attention-networks)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/resnest-split-attention-networks/object-detection-on-coco)](https://paperswithcode.com/sota/object-detection-on-coco?p=resnest-split-attention-networks)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/resnest-split-attention-networks/instance-segmentation-on-coco)](https://paperswithcode.com/sota/instance-segmentation-on-coco?p=resnest-split-attention-networks)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/resnest-split-attention-networks/panoptic-segmentation-on-coco-panoptic)](https://paperswithcode.com/sota/panoptic-segmentation-on-coco-panoptic?p=resnest-split-attention-networks)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/resnest-split-attention-networks/image-classification-on-imagenet)](https://paperswithcode.com/sota/image-classification-on-imagenet?p=resnest-split-attention-networks)
