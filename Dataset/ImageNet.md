@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 19:50:58
+ * @LastEditTime: 2020-11-13 22:12:34
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
@@ -48,3 +48,6 @@ Prepare the ImageNet dataset
 Prepare the Kinetics400 dataset
 Prepare the UCF101 dataset
 Prepare your dataset in ImageRecord format
+
+[5]
+FFHQ
