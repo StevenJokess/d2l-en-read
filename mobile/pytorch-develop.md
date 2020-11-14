@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:37:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-14 00:17:32
+ * @LastEditTime: 2020-11-14 21:07:14
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/tutorials/recipes/android_native_app_with_custom_op.html
@@ -191,3 +191,10 @@ To move your model to GPU memory, you can write model.to(at::kCUDA);. Make sure 
 The Torch Script reference: https://pytorch.org/docs/master/jit.html
 The PyTorch C++ API documentation: https://pytorch.org/cppdocs/
 The PyTorch Python API documentation: https://pytorch.org/docs/
+
+---
+
+https://medium.com/pytorch/pytorch-mobile-now-supports-android-nnapi-e2a2aeb74534
+
+(PROTOTYPE) CONVERT MOBILENETV2 TO NNAPI
+https://pytorch.org/tutorials/prototype/nnapi_mobilenetv2.html

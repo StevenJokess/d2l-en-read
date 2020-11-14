@@ -3,14 +3,11 @@
 <!--
  * @version:
  * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-11-13 20:21:42
+ * @Date: 2020-11-14 00:55:43
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-14 00:53:17
+ * @LastEditTime: 2020-11-14 00:56:27
  * @Description:
  * @TODO::
  * @Reference:
 -->
-https://github.com/mit-han-lab/once-for-all
-https://github.com/D-X-Y/Awesome-AutoDL
-
-
+https://www.automl.org/automl/autopytorch/
