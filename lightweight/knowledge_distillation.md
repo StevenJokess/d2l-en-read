@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 23:06:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 20:12:14
+ * @LastEditTime: 2020-11-17 21:33:07
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,6 +22,8 @@ distill 压缩模型，利用大模型生成的类别概率作为soft targets，
 60.8%
 
 旨在把一个大模型或者多个模型ensemble学到的知识迁移到另一个轻量级单模型上，方便部署。简单的说就是用新的小模型去学习大模型的预测结果，改变一下目标函数。听起来是不难，但在实践中小模型真的能拟合那么好吗？所以还是要多看看别人家的实验，掌握一些trick。[3]
+
+知识蒸馏(knowledge distillation，KD)是指对于一个训练好的较大的teacher net，训练一个较小的student net去拟合teacher net的输出(分布)：[8]
 
 蒸馏的目标是让student学习到teacher的泛化能力，理论上得到的结果会比单纯拟合训练数据的student要好。另外，对于分类任务，如果soft targets的熵比hard targets高，那显然student会学习到更多的信息。
 
@@ -55,6 +57,7 @@ https://github.com/0809zheng/Hung-yi-Lee-ML2020-homework/blob/master/hw7_Network
 [5]: MT-DNN ensemble -> MT-DNN：Improving Multi-Task Deep Neural Networks via Knowledge Distillation for Natural Language Understanding https://arxiv.org/abs/1904.09482
 [6]: Google Single-task ensemble -> Multi-task：BAM! Born-Again Multi-Task Networks for Natural Language Understanding https://arxiv.org/abs/1907.04829
 [7]: Huawei -> TinyBERT: Distilling BERT for Natural Language Understanding https://arxiv.org/abs/1909.10351
+[8]: https://0809zheng.github.io/2020/05/01/network-compression.html
 
 
 补充一些资源，还没仔细看：
