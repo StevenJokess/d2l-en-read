@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 23:06:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 21:33:07
+ * @LastEditTime: 2020-11-17 21:57:55
  * @Description:
  * @TODO::
  * @Reference:
@@ -47,6 +47,17 @@ TinyBERT[7]：截止201910的SOTA。利用Two-stage方法，分别对预训练�
 
 
 https://github.com/0809zheng/Hung-yi-Lee-ML2020-homework/blob/master/hw7_Network_Compression/hw7_Knowledge_Distillation.ipynb
+
+方法
+知识蒸馏的两种方法：[8]
+
+Logit Distillation：学生网络学习教师网络的logit输出值
+Feature Distillation：学生网络学习教师网络的feature中间值
+Relational Distillation：学生网络学习样本之间的关系
+
+
+
+
 
 
 
