@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 17:17:46
+ * @LastEditTime: 2020-11-17 21:24:44
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,7 +25,18 @@ RNN系列的魔改模型比如GRU, LSTM，虽然「引入了门机制」(gate)�
 
 ![transformer_Encoder](img\transformer_Encoder.png)
 
+Embedding：输入序列经过词嵌入得到词嵌入向量；
+Positional Encoding：词嵌入向量加上位置编码；
+Multi-head self-attention：多头自注意力层；
+Add & Norm：残差连接和Layer Norm；
+
 ![transformer_Decoder](img\transformer_Decoder.png)
+
+Embedding：训练时使用右移(shifted right)的目标序列，经过词嵌入得到词嵌入向量；
+Positional Encoding：词嵌入向量加上位置编码；
+Masked Self-Attention：使用自注意力模型对已生成的前缀序列进行编码，通过mask阻止每个位置选择后面的输入信息；
+Multi-head self-attention：多头自注意力层；
+Feed Forward:逐位置的前馈神经网络。
 
 ```py
 #位置编码
@@ -89,7 +100,11 @@ def scaled_dot_product_attention(q, k, v, mask):
 ```
 
 
+使用multi-head机制，既可以捕捉到近距离依赖关系，又可以捕捉到远距离依赖关系：
 
+著作权归作者所有。
+商业转载请联系作者获得授权,非商业转载请注明出处。
+原文: https://0809zheng.github.io/2020/04/25/transformer.html
 ```py
 #MultiheadAttention
 class MultiHeadAttention(tf.keras.layers.Layer):
@@ -156,6 +171,6 @@ def point_wise_feed_forward_network(d_model, dff):
 [3]: illustrated-transformer: (http://jalammar.github.io/illustrated-transformer/) 该作者的图示很明晰，相对容易理解
 TODO:
 [4]: https://github.com/lilianweng/transformer-tensorflow
-
+[5]: https://0809zheng.github.io/2020/04/25/transformer.html
 
 ```

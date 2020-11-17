@@ -5,11 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 20:17:09
+ * @LastEditTime: 2020-11-17 21:26:29
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
  * [6]: https://github.com/0809zheng/pedestrain-detection-towncentre
+ * [7]: https://0809zheng.github.io/2020/05/17/paper-recent.html
 -->
 Imagenet-1k dataset.
 MNIST
@@ -55,3 +56,16 @@ FFHQ
 
 [6]
 TownCentre
+
+[7]
+用于行人检测的benchmarks包括：
+
+CityPersons：5000张
+Caltech：训练集：测试集 = 42782：4024
+ETH：1804张，经常被用作测试集
+INRIA：2120张，训练集：测试集 = 1832：288
+KITTI：训练集：测试集 = 7481：7518，包括两个子类：pedestrian和cyclist，有easy、moderate、hard三种
+
+著作权归作者所有。
+商业转载请联系作者获得授权,非商业转载请注明出处。
+原文: https://0809zheng.github.io/2020/05/17/paper-recent.html
