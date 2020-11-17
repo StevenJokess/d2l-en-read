@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-21 23:19:48
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-21 23:40:07
+ * @LastEditTime: 2020-11-17 20:10:20
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5f5f28f3e4b01b26d1b9ce02/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
@@ -26,3 +26,4 @@ NVIDIA TX2 1500GFLOPs
 
 泰勒展开来判断
 
+https://github.com/0809zheng/Hung-yi-Lee-ML2020-homework/blob/master/hw7_Network_Compression/hw7_Network_Pruning.ipynb

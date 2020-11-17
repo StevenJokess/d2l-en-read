@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 15:27:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-09 15:32:41
+ * @LastEditTime: 2020-11-17 20:07:37
  * @Description:
  * @TODO::
  * @Reference:https://www.nowcoder.com/tutorial/95/f2446e6a55c244859d7a9bd0b24a6650
@@ -43,3 +43,4 @@ LR是参数模型,SVM为非参数模型。LR采用的损失函数为logisticallo
 根据数据类型选择不同的模型，如Lr或者SVM，决策树。假如特征维数较多，可以选择SVM模型，如果样本数量较大可以选择LR模型，但是LR模型需要进行数据预处理；假如缺失值较多可以选择决策树。选定完模型后，相应的目标函数就确定了。还可以在考虑正负样例比比，通过上下集采样平衡正负样例比。
 解析：需要了解多种分类模型的优缺点，以及如何构造分类模型的步骤
 
+https://github.com/0809zheng/UCAS-MachineLearning-homework/blob/master/SVM.py

@@ -5,11 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-21 23:14:05
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 20:39:39
+ * @LastEditTime: 2020-11-17 19:57:33
  * @Description:
  * @TODO::
  * @Reference:[1]: https://blog.csdn.net/weixin_38145317/article/details/103582549
  *[2]: https://github.com/kuangliu/pytorch-cifar/blob/master/main.py
+ [3]: https://github.com/0809zheng/pokemon-DCGAN-pytorch/blob/master/gan.py
 -->
 pytorch 模型 .pt, .pth, .pkl的区别及模型保存方式
 
@@ -53,3 +54,8 @@ model.eval()
             os.mkdir('checkpoint')
         torch.save(state, './checkpoint/ckpt.pth')
         best_acc = acc
+---
+[3]
+    if (e+1) % 5 == 0:
+        torch.save(G.state_dict(), os.path.join(workspace_dir, f'dcgan_g.pth'))
+        torch.save(D.state_dict(), os.path.join(workspace_dir, f'dcgan_d.pth'))

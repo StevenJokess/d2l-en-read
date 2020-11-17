@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-14 21:09:17
+ * @LastEditTime: 2020-11-17 20:14:39
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee644a796c35_tAwVkVvK/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
@@ -289,6 +289,9 @@ https://pytorch.org/tutorials/prototype/nnapi_mobilenetv2.html
 pip install --upgrade --pre --find-links https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html torch==1.8.0.dev20201106+cpu torchvision==0.9.0.dev20201107+cpu
 ```
 
+
+這邊把各個Block多用一層Sequential包起來是因為Network Pruning的時候抓Layer比較方便。
+
 import torchvision.models.quantization.mobilenet
 
 [1]: https://arxiv.org/abs/1704.04861 MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications
@@ -296,3 +299,5 @@ import torchvision.models.quantization.mobilenet
 [3]: https://github.com/mit-han-lab/amc/blob/master/models/mobilenet.py
 [4]: https://github.com/mit-han-lab/amc/blob/master/models/mobilenet_v2.py
 [5]: https://pytorch.org/hub/pytorch_vision_mobilenet_v2/s
+
+https://github.com/0809zheng/Hung-yi-Lee-ML2020-homework/blob/master/hw7_Network_Compression/hw7_Architecture_Design.ipynb

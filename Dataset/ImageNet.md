@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 22:12:34
+ * @LastEditTime: 2020-11-17 20:17:09
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
+ * [6]: https://github.com/0809zheng/pedestrain-detection-towncentre
 -->
 Imagenet-1k dataset.
 MNIST
@@ -51,3 +52,6 @@ Prepare your dataset in ImageRecord format
 
 [5]
 FFHQ
+
+[6]
+TownCentre
