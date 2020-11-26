@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-19 15:38:14
+ * @LastEditTime: 2020-11-20 00:16:53
  * @Description:
  * @TODO::
  * @Reference:
@@ -57,6 +57,7 @@ GAN 是一种半监督学习模型，对训练集不需要太多有标签的数�
 
 Define a prior oninput noise variablepz(z).Gis a differentiable function andD(x)outputs a scalar as the probabilitythatxcomes from the training data rather thanpg, the generative distribution we want to learn[6]
 
+video[7]
 
 [1]: https://www.aminer.cn/ai-history
 [2]: https://mrt.aminer.cn/5df49f20e8cc00e7af330f6b
@@ -64,3 +65,4 @@ Define a prior oninput noise variablepz(z).Gis a differentiable function andD(x)
 [4]: https://easyai.tech/blog/understanding-generative-adversarial-networks-gans/
 [5]: https://ccc013.github.io/2018/12/10/GAN%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97-%E5%88%9D%E8%AF%86GAN/
 [6]: https://arxiv.org/pdf/1702.07800
+[7]: https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Generative-Adversarial-Networks

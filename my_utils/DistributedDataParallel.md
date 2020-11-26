@@ -5,13 +5,14 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-19 15:44:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-19 15:48:09
+ * @LastEditTime: 2020-11-19 16:23:43
  * @Description:
  * @TODO::
  * @Reference:https://github.com/zergtant/pytorch-handbook/tree/master/chapter4/distributeddataparallel
 -->
 
 什么是分布式训练?
+
 在研究分布式和数据并行之前，我们需要先了解一些关于分布式训练的背景知识。
 
 目前普遍使用的分布式训练基本上有两种不同形式:数据并行化和模型并行化。
