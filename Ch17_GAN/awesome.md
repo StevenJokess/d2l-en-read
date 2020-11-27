@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 16:42:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-26 21:42:29
+ * @LastEditTime: 2020-11-27 17:11:37
  * @Description:
  * @TODO::
  * @Reference:
@@ -21,3 +21,6 @@ https://github.com/mit-han-lab/gan-compression
 ptimized implementations of several #GAN image and video synthesis methods developed at #NVIDIA https://github.com/NVlabs/imaginaire
 GenForce: an efficient PyTorch library for deep generative modeling (StyleGANv1v2, PGGAN, etc) https://github.com/genforce/genforce
 https://github.com/AntixK/PyTorch-VAE
+https://github.com/GKalliatakis/Delving-deep-into-GANs
+https://github.com/GANs-in-Action/gans-in-action
+https://github.com/nightrome/really-awesome-gan
