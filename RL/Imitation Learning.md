@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 20:01:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-27 16:53:50
+ * @LastEditTime: 2020-11-27 19:51:15
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,7 +25,15 @@
 
 PWIL的优势在于不仅可以覆盖专家的行为，同时其奖励函数无需与环境进行交互同时易于调节。这为未来模仿学习领域的探索打开了新的方向。PWIL还可以应用于只有试教状态存在的情况下，最终也能用于基于视觉观察的行为操控中去。[1][2]
 
+能模仿人的智能体[4]
+这是通过GANs实现模仿学习。不同于传统的奖励机制，某些AI研究人员希望针对自主学习智能体，提出一种全新的方法。
+
+他们将实际的示范数据输入到智能体，然后智能体从中学习并尝试模仿相同的动作。
+
+code[5]
+
 [1]: https://www.zhihu.com/question/376954557/answer/1500668073
 [2]: https://ai.googleblog.com/2020/09/imitation-learning-in-low-data-regime.html
 [3]: https://github.com/RITCHIEHuang/Awesome-Imitation-Learning
-
+[4]: https://zhuanlan.zhihu.com/p/28504510
+[5]: https://github.com/openai/imitation

@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 17:19:59
+ * @LastEditTime: 2020-11-27 19:59:27
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
-## source code[2]
+
+
+## source code[2][7]
 
 
 
@@ -22,5 +24,5 @@
 [4]: https://github.com/nashory/progressive-growing-torch
 [5]: https://github.com/TuXiaokang/DCGAN.PyTorch
 [6]: http://research.nvidia.com/sites/default/files/pubs/2017-10_Progressive-Growing-of//karras2017gan-paper.pdf
-
+[7]: https://github.com/TuXiaokang/DCGAN.PyTorch
 
