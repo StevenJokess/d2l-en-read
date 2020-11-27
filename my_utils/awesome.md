@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:18:56
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-18 21:24:25
+ * @LastEditTime: 2020-11-27 23:54:37
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,3 +15,5 @@ https://www.paperweekly.site/
 https://github.com/bighuang624/AI-research-tools
 https://github.com/muupan/deep-reinforcement-learning-papers
 https://github.com/floodsung/Deep-Learning-Papers-Reading-Roadmap
+https://github.com/bo-xiong/Awesome-Deep-Learning-for-Chinese
+https://github.com/LuckyZXL2016/Deep-Learning-Papers-Reading-Roadmap

@@ -5,11 +5,16 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:28:29
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 16:28:56
+ * @LastEditTime: 2020-11-27 23:49:28
  * @Description:
  * @TODO::
- * @Reference:
+ * @Reference:https://github.com/janvdp/code-snippets
 -->
+
+Deep Learning
+# Get your CUDA Drive version
+
+nvcc --version
 
 ## nvidia-smi和nvcc -V命令结果不一致问题[1]
 
