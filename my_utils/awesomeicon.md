@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 14:53:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-27 17:09:08
+ * @LastEditTime: 2020-11-27 22:17:29
  * @Description:
  * @TODO::
  * @Reference:https://github.com/metarl/awesome-metarl/edit/master/README.md
@@ -51,3 +51,8 @@
 ---
 https://github.com/tugstugi/dl-colab-notebooks/edit/master/README.md
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tugstugi/dl-colab-notebooks/blob/master/notebooks/NVidia_Flowtron_Waveglow.ipynb)
+
+---
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/kozistr/Awesome-GANs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kozistr/Awesome-GANs/context:python)

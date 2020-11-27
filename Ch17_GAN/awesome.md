@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 16:42:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-27 17:11:37
+ * @LastEditTime: 2020-11-27 22:16:35
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,3 +24,4 @@ https://github.com/AntixK/PyTorch-VAE
 https://github.com/GKalliatakis/Delving-deep-into-GANs
 https://github.com/GANs-in-Action/gans-in-action
 https://github.com/nightrome/really-awesome-gan
+https://github.com/kozistr/Awesome-GANs

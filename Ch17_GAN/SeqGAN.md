@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 20:16:20
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-10 19:56:44
+ * @LastEditTime: 2020-11-27 22:16:15
  * @Description:
  * @TODO::
  * @Reference:https://nndl.github.io
@@ -77,7 +77,21 @@ C对后续工作有很大启发,如QA实验分析十分详尽
 
 RankGAN(NIPS 2017)以及MaskGAN(ICLR 2018)
 
+The architectures used are different than those in the orignal work. Specifically, a recurrent bidirectional GRU network is used as the discriminator.[3]
+
+对识别器的训练远远多于对生成器的训练(生成器只对一批示例进行训练，增加批的大小会损害稳定性)
+
+Adam作为发生器，Adagrad作为鉴频器
+
+在GAN阶段调整生成器的学习速度
+
+在训练和测试阶段使用dropout
+
+稳定性对几乎每个参数都非常敏感:/
+
+GAN阶段可能并不总是导致NLL的大幅下降(有时非常小)——我怀疑这是由于所实现的政策梯度非常粗糙的本质(没有发布)。
 
 
 [1]: Yu L, Zhang W, Wang J, et al., 2017. SeqGAN: Sequence generative adversarial nets with policygradient[C]//Proceedings of Thirty-First AAAI Conference on Artificial Intelligence. 2852-2858
 [2]: https://ai.deepshare.net/detail/i_5d9c6af4a4044_tL23GmwT/1?fromH5=true
+[3]: https://github.com/suragnair/seqGAN
