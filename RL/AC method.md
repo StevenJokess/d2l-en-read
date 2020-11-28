@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 20:06:23
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 20:10:37
+ * @LastEditTime: 2020-11-28 01:02:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -27,3 +27,5 @@ Since we are using a hybrid actor-critic model, we will use loss function that i
 
 
 https://www.tensorflow.org/agents/overview
+
+[1]: https://github.com/pytorch/examples/blob/master/reinforcement_learning/actor_critic.py

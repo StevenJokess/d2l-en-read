@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 21:33:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 21:33:10
+ * @LastEditTime: 2020-11-28 00:39:12
  * @Description:
  * @TODO::
  * @Reference:https://colab.research.google.com/github/mit-han-lab/once-for-all/blob/master/tutorial/ofa.ipynb#scrollTo=u4g3bFGtjv9s
@@ -28,3 +28,9 @@ print('Installing tqdm (progress bar) ...')
 print('Installing matplotlib...')
 ! pip install matplotlib 1>/dev/null
 print('All required packages have been successfully installed!')
+
+---
+https://colab.research.google.com/github/fastai/fastai/blob/master/nbs/index.ipynb
+#hide
+#skip
+! [ -e /content ] && pip install -Uqq fastai  # upgrade fastai on colab

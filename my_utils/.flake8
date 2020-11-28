@@ -1,0 +1,17 @@
+
+
+/*
+ * @version:
+ * @Author:  StevenJokess https://github.com/StevenJokess
+ * @Date: 2020-11-28 01:05:02
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
+ * @LastEditTime: 2020-11-28 01:05:06
+ * @Description:
+ * @TODO::
+ * @Reference:https://github.com/lanpa/tensorboardX/blob/master/.flake8
+ */
+
+[flake8]
+max-line-length = 120
+ignore = W605,E305,E402,E721,E741,F401,F403,F405,F821,F841,F999
+exclude = tensorboardX/proto
