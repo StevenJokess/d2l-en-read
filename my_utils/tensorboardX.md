@@ -5,11 +5,19 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 22:03:34
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-19 15:40:38
+ * @LastEditTime: 2020-11-28 20:38:35
  * @Description:
  * @TODO::
  * @Reference:
 -->
+
+You can optionally install crc32c to speed up.
+
+pip install crc32c
+
+Starting from tensorboardX 2.1, You need to install soundfile for the add_audio() function (200x speedup).
+
+pip install soundfile
 
 安装方法为pip install tensorboardx，使用非常简单。[1]
 
@@ -31,6 +39,6 @@ from torch.utils.tensorboard import SummaryWriter
 
 [1]: https://mp.weixin.qq.com/s?__biz=MzA3NDIyMjM1NA==&mid=2649029881&idx=1&sn=3c869fcee3b48d3582952ab9a0683ea6&chksm=87134284b064cb924c5e7231b3f2c36ba27e3a689b067f569f2e086f62b18413bcebc5987a07&token=1879088111&lang=zh_CN#rd
 [2]: https://github.com/zergtant/pytorch-handbook/blob/master/chapter4/4.2.2-tensorboardx.ipynb
-
+[3]: https://github.com/lanpa/tensorboardX
 TODO:
 https://tensorboardx.readthedocs.io/en/latest/tutorial.html
