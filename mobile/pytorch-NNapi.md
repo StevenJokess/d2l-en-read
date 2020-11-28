@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-28 17:23:08
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-28 17:34:46
+ * @LastEditTime: 2020-11-28 17:35:36
  * @Description:
  * @TODO::
  * @Reference:https://www.youtube.com/watch?v=B-2spa3UCTU
@@ -60,3 +60,8 @@ WHAT's COMING UP
 - Download PyTorch Moble nightly build
 - Try out the code
 - Providee feedback
+
+---
+
+developer.android.com/ndk/guides/neuralnetworks
+pytorch.org/mobile/android
