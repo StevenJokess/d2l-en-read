@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 21:52:01
+ * @LastEditTime: 2020-11-29 18:48:35
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee64a7d02a5f_iff07RH8/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
@@ -41,3 +41,4 @@ SqueezeNet设计了Fire模块，这个模块包括squeeze和expand操作。squee
 [1]: https://arxiv.org/abs/1602.07360
 [2]: https://ai.deepshare.net/detail/v_5ee64a7d02a5f_iff07RH8/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
 [3]: https://0809zheng.github.io/2020/06/03/CNN-architecture.htmls
+[4]: https://github.com/pytorch/vision/blob/master/torchvision/models/squeezenet.py
