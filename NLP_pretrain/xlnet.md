@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-07 22:26:49
+ * @LastEditTime: 2020-12-03 19:43:07
  * @Description:
  * @TODO::
  * @Reference:
@@ -33,7 +33,15 @@ However, relying on corrupting the input with masks, BERT neglects dependency be
 Permutation Language Modeling：先给我们统一了之前语言模型的思想框架（AR or AE），再一个permutation把两者的优点结合起来，而且整体框架又回归到了AR，感觉生成模型的新SOTA指日可待。
 Transformer-XL + Relative segment encoding：这个不是作者重点强调的，但却让我觉得很有用处，目前短文本的任务还好，文本一长难度就会上去，段落级甚至文章级，这两个操作让我看到了NLU在长文本上取得更大成果的可能。
 
+https://www.rcrai.com/
+https://www.rcrai.com/newsinfo/2074664.html
+循环智能（Recurrent AI）与快手、滴滴、知乎、海康威视等企业一起入选了年度“三十大AI最佳应用案例”
+
+案例名称：循环智能基于对话数据的AI销售中台，帮助新东方在线等企业提升客户转化
+
+
 
 [1]: https://arxiv.org/abs/1906.08237
 [2]: https://huggingface.co/transformers/model_doc/xlnet.html
 [3]: https://zhuanlan.zhihu.com/p/70218096
+[4]: https://www.bilibili.com/video/BV1zJ411P7X6?from=search&seid=6818714359543590460
