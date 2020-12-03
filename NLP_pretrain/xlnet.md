@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-03 19:43:07
+ * @LastEditTime: 2020-12-03 19:44:28
  * @Description:
  * @TODO::
  * @Reference:
@@ -39,6 +39,11 @@ https://www.rcrai.com/newsinfo/2074664.html
 
 案例名称：循环智能基于对话数据的AI销售中台，帮助新东方在线等企业提升客户转化
 
+关于杨植麟博士
+
+杨植麟 2019 年获得卡耐基梅隆大学计算机专业博士学位。在深度学习和自然语言处理领域有深入研究且取得了显著成果。作为第一作者与卡内基梅隆大学、Google Brain 团队联合推出NLP 领域热门的国际前沿预训练 XLNet 模型，在 20 个标准任务上超过了曾经保持最优性能记录的 Google BERT 模型，并在18个标准任务上取得历史最好结果，入选NeurIPS 2019 Oral。作为共同第一作者提出 Transformer-XL 模型并在多项主流序列建模数据集上取得历史最好结果。Google 学术引用超 2400 次。
+
+在中国人工智能学会CAAI和清华大学联合发布的《2019人工智能发展报告》中，杨植麟为第一作者的 XLNet 被称为“BERT 之后的重要进展”。2019年，XLNet 论文被多家 AI 媒体机构评选为年度深度学习论文 TOP10，包括 TopBots、Heartbeat和Rubik's Code等。2017年和2018年，杨植麟连续入选机器学习和NLP领域顶级会议和期刊的第一作者全球排行榜，全球仅有三名学者两年皆入选。
 
 
 [1]: https://arxiv.org/abs/1906.08237

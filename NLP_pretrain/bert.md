@@ -5,13 +5,14 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 22:15:37
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 20:24:10
+ * @LastEditTime: 2020-12-03 20:29:52
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 https://zhuanlan.zhihu.com/p/87942922
+
 什么是一字多义
 以前word2vec是把lookup_table拿出来作为词向量，一个词只对应唯一一个向量，没法区分一字多义。ELMo、BERT是把字的上下文编码，取最后的h（分类层之前）作为字表示，基于分布式语义假设：
 
