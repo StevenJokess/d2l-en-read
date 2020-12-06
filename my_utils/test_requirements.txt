@@ -1,0 +1,15 @@
+
+
+/*
+ * @version:
+ * @Author:  StevenJokess https://github.com/StevenJokess
+ * @Date: 2020-12-06 16:55:23
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
+ * @LastEditTime: 2020-12-06 16:55:57
+ * @Description:
+ * @TODO::
+ * @Reference:https://github.com/Building-ML-Pipelines/building-machine-learning-pipelines/blob/master/requirements/test_requirements.txt
+ */
+
+pytest==5.4.3
+pytest-flakes==4.0.0
