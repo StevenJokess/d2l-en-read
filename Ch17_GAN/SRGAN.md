@@ -5,10 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 20:32:29
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 19:25:23
+ * @LastEditTime: 2020-12-06 19:36:08
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368
+ * A survey of current super-resolution techniques
+ * https://arxiv.org/pdf/1902.06068.pdf
 -->
 
 
