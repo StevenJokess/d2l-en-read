@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 22:18:31
+ * @LastEditTime: 2020-12-06 22:44:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -250,7 +250,8 @@ U-Net是德国Freiburg大学模式识别和图像处理组提出的一种全卷�
 
 该U-Net模型由四层块组成，包含两个卷积层，带有批处理规范化和ReLU激活函数，编码部分有一个最大池化层，译码部分有一个最大上卷积层。每块卷积滤波器的数量分别为32、64、128和256。瓶颈层有512个卷积过滤器。从编码层到译码部分的对应层使用跳过连接。输入图像是3通道的大脑MRI切片，分别来自前对比，FLAIR和后对比序列。输出为与输入图像大小相同的异常区域的单通道概率图。它可以通过阈值化转换为二进制分割掩码，如下面的例子所示。[131]
 
-code[120][130]
+code[120][130][131]
+
 
 ```python
 #[130]
@@ -258,6 +259,22 @@ import torch
 model = torch.hub.load('mateuszbuda/brain-segmentation-pytorch', 'unet',
     in_channels=3, out_channels=1, init_features=32, pretrained=True)
 ```
+
+```python
+#[132]
+#Create a U-Net from a given architecture.
+
+from fastai.vision.models import resnet34
+m = resnet34()
+m = nn.Sequential(*list(m.children())[:-2])
+tst = DynamicUnet(m, 5, (128,128), norm_type=None)
+x = torch.randn(2, 3, 128, 128)
+y = tst(x)
+test_eq(y.shape, [2, 5, 128, 128])
+tst = DynamicUnet(m, 5, (128,128), norm_type=None)
+x = torch.randn(2, 3, 127, 128)
+y = tst(x)
+
 
 ```python
 #[94]
@@ -1207,6 +1224,7 @@ TODO: https://github.com/togheppi/CycleGAN
 [128]: https://weread.qq.com/web/reader/4653238071e86dd54654969kd8232f00235d82c8d161fb2
 [129]: https://github.com/MorvanZhou/mnistGANs/blob/main/cyclegan.py
 [130]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
-[131]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
+[131]: https://github.com/fastai/fastai/blob/master/fastai/vision/models/unet.py#L17
+[132]: https://docs.fast.ai/vision.models.unet.html#UnetBlock
 TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
 https://github.com/dmlc/gluon-cv/blob/master/scripts/gan/cycle_gan/demo_cycle_gan.py
