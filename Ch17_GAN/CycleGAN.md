@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 16:23:14
+ * @LastEditTime: 2020-12-06 22:18:31
  * @Description:
  * @TODO::
  * @Reference:
@@ -247,7 +247,17 @@ However, unlike in a VAE, there are also skip connections between equivalently s
 
 U-Net是德国Freiburg大学模式识别和图像处理组提出的一种全卷积结构。和常见的先降采样到低维度，再升采样到原始分辨率的编解码(Encoder-Decoder)结构的网络相比，U-Net的区别是加入skip-connection，对应的feature maps和decode之后的同样大小的feature maps按通道拼(concatenate)一起，用来保留不同分辨率下像素级的细节信息。U-Net对提升细节的效果非常明显。[98]
 
-code[120]
+
+该U-Net模型由四层块组成，包含两个卷积层，带有批处理规范化和ReLU激活函数，编码部分有一个最大池化层，译码部分有一个最大上卷积层。每块卷积滤波器的数量分别为32、64、128和256。瓶颈层有512个卷积过滤器。从编码层到译码部分的对应层使用跳过连接。输入图像是3通道的大脑MRI切片，分别来自前对比，FLAIR和后对比序列。输出为与输入图像大小相同的异常区域的单通道概率图。它可以通过阈值化转换为二进制分割掩码，如下面的例子所示。[131]
+
+code[120][130]
+
+```python
+#[130]
+import torch
+model = torch.hub.load('mateuszbuda/brain-segmentation-pytorch', 'unet',
+    in_channels=3, out_channels=1, init_features=32, pretrained=True)
+```
 
 ```python
 #[94]
@@ -293,6 +303,8 @@ def build_generator_unet(self):
 
     return Model(img, output)
 ```
+
+
 
 ### Residual block[32]
 
@@ -1194,5 +1206,7 @@ https://arxiv.org/pdf/1711.11586
 TODO: https://github.com/togheppi/CycleGAN
 [128]: https://weread.qq.com/web/reader/4653238071e86dd54654969kd8232f00235d82c8d161fb2
 [129]: https://github.com/MorvanZhou/mnistGANs/blob/main/cyclegan.py
+[130]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
+[131]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
 TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
 https://github.com/dmlc/gluon-cv/blob/master/scripts/gan/cycle_gan/demo_cycle_gan.py
