@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 18:36:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 18:58:32
+ * @LastEditTime: 2020-12-06 19:06:53
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/introducing-mlops/9781492083283/
@@ -78,3 +78,11 @@ As you can see, there are some complex trade-offs to consider when deciding how 
 At a base level, they need reliable tests that will tell them whether their application can be deployed. Those tests need to be used by an automated build pipeline capable of determining whether the application should be deployed and then proceeding with that deployment.
 
 They wind up with a flow that looks like figure 9.4, where a series of automated decisions are made to ensure that a given deployment is safe. Note that the predictive system’s capability is tested at two levels. First, unit tests verify properties of the system that can be assessed without using much data. Then, after a deployable version of the application has been built, that release candidate is evaluated on a larger set of data. In this step, metrics about the system’s performance are assessed to ensure that the system as a whole can do a sufficiently good job of its core mission: predicting subscribers’ fruit preferences. This particular technique is sometimes called a metrics-based deploy. Only when both levels of testing have been passed do you call the command to start the application.
+
+
+---
+https://learning.oreilly.com/library/view/practical-automated-machine/9781492055587/ch09.html#model_deployment_and_inferencing
+
+模型部署和推断
+
+当您对模型感到满意时，单击模型性能报告中的“应用模型”选项(如图9-33所示)。这将带您完成一个简单而直观的流程，选择一个测试数据集/实体，并将列添加到其中，这些列将根据这个训练过的模型进行填充。当新的数据记录进入这个数据流实体时，新添加的列将被自动填充，从而推断我们刚刚构建和部署的模型。
