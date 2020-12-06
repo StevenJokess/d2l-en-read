@@ -5,13 +5,25 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-28 01:05:02
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-28 01:05:06
+ * @LastEditTime: 2020-12-06 19:53:30
  * @Description:
  * @TODO::
  * @Reference:https://github.com/lanpa/tensorboardX/blob/master/.flake8
+ https://github.com/facebookresearch/maskrcnn-benchmark/blob/master/.flake8
  */
 
 [flake8]
 max-line-length = 120
 ignore = W605,E305,E402,E721,E741,F401,F403,F405,F821,F841,F999
 exclude = tensorboardX/proto
+
+# This is an example .flake8 config, used when developing *Black* itself.
+# Keep in sync with setup.cfg which is used for source packages.
+
+---
+
+[flake8]
+ignore = E203, E266, E501, W503
+max-line-length = 80
+max-complexity = 18
+select = B,C,E,F,W,T4,B9

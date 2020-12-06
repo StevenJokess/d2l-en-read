@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 21:29:29
+ * @LastEditTime: 2020-12-06 20:30:39
  * @Description:
  * @TODO::
  * @Reference:
@@ -111,6 +111,7 @@ The use of different style vectors at diﬀerent points of the synthesis network
 [10]: X.  Huang  and  S.  J.  Belongie.Arbitrary  style  transferin  real-time  with  adaptive  instance  normalization.CoRR,abs/1703.06868, 2017. 1, 2
 [11]: https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/
 [12]: http://questioneurope.blogspot.com/search/label/AI
+[13]: https://github.com/dmlc/gluon-cv/tree/master/scripts/gan/stylegan
 
 TODO:
 

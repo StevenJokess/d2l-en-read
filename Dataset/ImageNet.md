@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-27 23:25:42
+ * @LastEditTime: 2020-12-06 20:31:48
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
@@ -52,7 +52,7 @@ Prepare the UCF101 dataset
 Prepare your dataset in ImageRecord format
 
 [5]
-FFHQ
+[FFHQ](https://github.com/NVlabs/ffhq-dataset)
 
 [6]
 TownCentre

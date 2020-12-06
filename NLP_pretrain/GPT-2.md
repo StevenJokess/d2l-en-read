@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:31:18
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 19:31:38
+ * @LastEditTime: 2020-12-06 20:17:24
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368
@@ -58,3 +58,7 @@ python [REPO_DIR]/pytorch-transformers/examples/run_gpt2.py
 Training GPT-2 is likely to become easier in the coming months as Hugging Face incorporates a consistent API for all the models in its repo, but the TensorFlow method is the easiest to get started with right now.
 
 BERT and GPT-2 are the most popular names in text-based learning right now, but before we wrap up, we cover the dark horse of the current state-of-the-art models: ULMFiT.
+
+---
+
+And as for GPT-2, if you’re after generated text, then yes, it’s a better fit, but for classification purposes, it’s going to be harder to approach ULMFiT or BERT performance. One thing that I do think might be interesting is to let GPT-2 loose on data augmentation; if you have a dataset like Sentiment140, which we’ve been using throughout this book, why not fine-tune a GPT-2 model on that input and use it to generate more data?
