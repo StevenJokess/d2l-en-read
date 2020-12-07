@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:31:18
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 20:17:24
+ * @LastEditTime: 2020-12-07 17:54:34
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368
@@ -62,3 +62,10 @@ BERT and GPT-2 are the most popular names in text-based learning right now, but 
 ---
 
 And as for GPT-2, if you’re after generated text, then yes, it’s a better fit, but for classification purposes, it’s going to be harder to approach ULMFiT or BERT performance. One thing that I do think might be interesting is to let GPT-2 loose on data augmentation; if you have a dataset like Sentiment140, which we’ve been using throughout this book, why not fine-tune a GPT-2 model on that input and use it to generate more data?
+
+GPT-2则终于释出完整版，开源15亿参数模型。[2]
+https://openai.com/blog/gpt-2-1-5b-release/
+
+
+[2]: 2019 年过去了，人工智能领域干了些什么？ - 量子位的回答 - 知乎
+https://www.zhihu.com/question/365135309/answer/999770457

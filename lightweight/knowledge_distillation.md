@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 23:06:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 21:57:55
+ * @LastEditTime: 2020-12-07 18:40:46
  * @Description:
  * @TODO::
  * @Reference:
@@ -55,7 +55,7 @@ Logit Distillation：学生网络学习教师网络的logit输出值
 Feature Distillation：学生网络学习教师网络的feature中间值
 Relational Distillation：学生网络学习样本之间的关系
 
-
+loss是KL divergence，用来衡量两个分布之间距离。而KL divergence在展开之后，第一项是原始预测分布的熵，由于是已知固定的，可以消去。第二项是 -q log p，叫做cross entropy，就是平时分类训练使用的loss。与标签label不同的是，这里的q是teacher model的预测输出连续概率。而如果进一步假设q p都是基于softmax函数输出的概率的话，求导之后形式就是 q - p。直观理解就是让student model的输出尽量向teacher model的输出概率靠近[9]
 
 
 
@@ -69,7 +69,7 @@ Relational Distillation：学生网络学习样本之间的关系
 [6]: Google Single-task ensemble -> Multi-task：BAM! Born-Again Multi-Task Networks for Natural Language Understanding https://arxiv.org/abs/1907.04829
 [7]: Huawei -> TinyBERT: Distilling BERT for Natural Language Understanding https://arxiv.org/abs/1909.10351
 [8]: https://0809zheng.github.io/2020/05/01/network-compression.html
-
+[9]: https://www.zhihu.com/question/305220135/answer/552545851
 
 补充一些资源，还没仔细看：
 

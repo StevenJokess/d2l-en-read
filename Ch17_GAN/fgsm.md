@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 20:16:05
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 20:19:24
+ * @LastEditTime: 2020-12-07 18:43:15
  * @Description:
  * @TODO::
  * @Reference:
@@ -23,3 +23,4 @@ You may review this survey paper[2] for a comprehensive list of adversarial atta
 
 [1]: https://arxiv.org/abs/1412.6572
 [2]: https://arxiv.org/abs/1810.00069
+[3]: https://tensorflow.google.cn/tutorials/generative/adversarial_fgsm

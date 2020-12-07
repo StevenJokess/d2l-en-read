@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 19:18:34
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 17:22:55
+ * @LastEditTime: 2020-12-07 17:46:03
  * @Description:
  * @TODO::
  * @Reference:https://zhuanlan.zhihu.com/p/115049575
@@ -35,13 +35,21 @@ the proxy task. 即，如何评估训练过程中搜索出的结构的性能。
 
 AutoGAN有两组参数：一是RNN控制器的参数 [公式] ，另一个是生成器(搜索过的)和判别器的参数 [公式] ，训练过程的伪代码如下：
 
+## Proxy Task
+
+作者使用Inception score(IS)来作为奖励，通过强化学习来更新控制器。基于NAS中的参数共享技术，作者进一步为AutoGAN引入了参数动态重置(dynamic-resetting)策略，即，设置一个移动窗口来存储训练过程的损失值，当窗口中的损失值得标准差小于一个预定义得阈值时，停止当前迭代次数训练，更新RNN控制器然后再重新初始化GAN。作者提出这一策略的目的是使得搜索过程更加有效，依据在于根据经验，作者观察到mode collapse时训练损失(hinge loss)的方差通常变得非常小。
 
 
 
-
+## Training Shared GAN
 
 hinge loss:
 
+\begin{aligned}
+\mathcal{L}_{D}=& E_{x \sim q_{d a t a}}[\min (0,-1+D(x)]+\\
+& E_{z \sim p(z)}[\min (0,-1-D(G(z))]\\
+\mathcal{L}_{G} &=E_{z \sim p(z)}[\min (0, D(G(z))]
+\end{aligned}
 
 
 

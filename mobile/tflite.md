@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 20:42:42
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 00:25:48
+ * @LastEditTime: 2020-12-07 18:24:54
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,3 +22,5 @@ TVM tf-lite
 https://zhuanlan.zhihu.com/p/55136595
 
 https://zhuanlan.zhihu.com/p/57147430
+
+https://github.com/llSourcell/Build-an-AI-Startup-with-PyTorch

@@ -5,12 +5,25 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-07 23:44:46
+ * @LastEditTime: 2020-12-07 17:26:10
  * @Description:
  * @TODO::
  * @Reference:
 -->
-Least Squares Generative Adversarial Networks
+# Least Squares Generative Adversarial Networks
+
+传统GAN中, D网络和G网络都是用简单的交叉熵loss做更新, 最小二乘GAN则用最小二乘(Least Squares) Loss 做更新:
+
+选择最小二乘Loss做更新有两个好处, 1. 更严格地惩罚远离数据集的离群Fake sample, 使得生成图片更接近真实数据(同时图像也更清晰) 2. 最小二乘保证离群sample惩罚更大, 解决了原本GAN训练不充分(不稳定)的问题:
+
+但缺点也是明显的, LSGAN对离离群点的过度惩罚, 可能导致样本生成的”多样性”降低, 生成样本很可能只是对真实样本的简单”模仿”和细微改动.[3]
+
+## Loss
+
+\begin{aligned}
+L_{D} &=E\left[(D(x)-1)^{2}\right]+E\left[D(G(z))^{2}\right] \\
+L_{G} &=E\left[(D(G(z))-1)^{2}\right]
+\end{aligned}
 
 class LSGAN(GAN):
     """
@@ -49,3 +62,4 @@ if __name__ == "__main__":
 
 [1]: https://arxiv.org/pdf/1611.04076.pdf
 [2]: https://github.com/MorvanZhou/mnistGANs/blob/main/lsgan.py
+[3]: http://nooverfit.com/wp/%E7%8B%AC%E5%AE%B6%EF%BD%9Cgan%E5%A4%A7%E7%9B%98%E7%82%B9%EF%BC%8C%E8%81%8A%E8%81%8A%E8%BF%99%E4%BA%9B%E5%B9%B4%E7%9A%84%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C-lsgan-wgan-cgan-info/
