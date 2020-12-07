@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:56:46
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-27 19:13:44
+ * @LastEditTime: 2020-12-07 14:19:16
  * @Description:
  * @TODO::
  * @Reference:
@@ -27,6 +27,7 @@
 [14]: https://github.com/junhyukoh/deep-reinforcement-learning-papers
 [15]: https://github.com/JohnJim0816/reinforcement-learning-tutorials
 [16]: http://web.stanford.edu/class/cs234/index.html
+[17]: 另外openai和ucb的pieter abbeel组也在做drl，ai safety和模仿学习的东西。并不是deepmind一家独大。https://www.zhihu.com/question/60167306
 ---
 Atari games: Q-learning: V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, et al. “Playing Atari with Deep Reinforcement Learning”. (2013). Policy gradients: J. Schulman, S. Levine, P. Moritz, M. I. Jordan, and P. Abbeel. “Trust Region Policy Optimization”. (2015). V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. P. Lillicrap, et al. “Asynchronous methods for deep reinforcement learning”. (2016).
 Real-world robots: Guided policy search: S. Levine*, C. Finn*, T. Darrell, P. Abbeel. “End-to-end training of deep visuomotor policies”. (2015). Q-learning: D. Kalashnikov et al. “QT-Opt: Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation”. (2018).
