@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 20:30:39
+ * @LastEditTime: 2020-12-07 19:22:45
  * @Description:
  * @TODO::
  * @Reference:
@@ -93,7 +93,17 @@ The scale and bias vectors shift each channel of the convolution output, thereby
 The use of different style vectors at diﬀerent points of the synthesis network gives control over the styles of the resulting image at diﬀerent levels of detail. For example, blocks of layers in the synthesis network at lower resolutions (e.g. 4 × 4 and 8 × 8) control high-level styles such as pose and hairstyle. Blocks of layers in the middle of the network (e.g. as 16 × 16 and 32 × 32) control hairstyles and facial expression. Finally, blocks of layers closer to the output end of the network (e.g. 64 × 64 to 1024 × 1024) control color schemes and very ﬁne details.
 
 
+甚至乐于搞怪的人们还造出了：[14]
 
+http://thiscatdoesnotexist.com这个小猫猫不存在
+
+http://thesecatsdonotexist.com这一群小猫猫不存在
+
+http://thiswaifudoesnotexist.net这个动漫妹子不存在
+
+https://www.obormot.net/demos/these-waifus-do-not-exist这一群动漫妹子不存在
+
+https://thisairbnbdoesnotexist.com/这个房间不存在
 
 
 2018/12
@@ -112,6 +122,9 @@ The use of different style vectors at diﬀerent points of the synthesis network
 [11]: https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/
 [12]: http://questioneurope.blogspot.com/search/label/AI
 [13]: https://github.com/dmlc/gluon-cv/tree/master/scripts/gan/stylegan
+[14]: 用AI生成假员工，8天众筹3万美元，这家创业公司2/3的成员都是假的 - 量子位的文章 - 知乎
+https://zhuanlan.zhihu.com/p/112664040
+
 
 TODO:
 

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-28 18:57:58
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-08 18:59:31
+ * @LastEditTime: 2020-12-07 19:40:19
  * @Description:MT
  * @TODO::
  * @Reference:
@@ -84,6 +84,16 @@ DeepFaceLab is an open-source deepfake system created by iperovfor face swapping
 
   deepfake  creation  model  using  two  encoder-decoder  pairs.  Twonetworks  use  the  same  encoder  but  different  decoders  for  training  process(top). An image of face A is encoded with the common encoder and decodedwith decoder B to create a deepfake (bottom)
 
+整理了检测deepfakes的方法。我们就deepfake技术的挑战、研究趋势和方向进行了广泛的讨论。通过回顾deepfakes的背景和最先进的deepfake检测方法，本研究提供了deepfake技术的全面概述，并有助于开发新的和更强大的方法来处理日益具有挑战性的deepfakes。[8]
+
+
+Deep classifiers
+Deepfake的视频通常只有有限的分辨率，这就需要采用仿射面扭曲的方法(例如，缩放、旋转和裁剪)，以配合原来的分辨率，由于扭曲的面部区域与周围环境的分辨率不一致，这一过程留下了可以被CNN模型检测到的伪影，
+
+
+目前的检测方法多集中于深度伪造流程中的缺陷，即寻找竞争对手的弱点进行攻击。这种信息和知识并不总是在敌对的环境中可用，攻击者通常试图不揭示这种深度伪造的创建技术。这对检测方法的发展是一个真正的挑战，未来的研究需要重点介绍更健壮、可扩展和可推广的方法。
+
+了解人们发布深度假货的真实意图更为重要。这需要用户根据deepfakes被发现的社会环境来判断，例如谁发布了它以及他们说了什么，这是至关重要的，因为deepfakes越来越逼真，检测软件将会落后于deepfakes的创建技术。因此，研究深度假货的社会背景以帮助用户进行判断是值得进行的。
 
 
 
@@ -95,7 +105,7 @@ DeepFaceLab is an open-source deepfake system created by iperovfor face swapping
 [5]: Deepfakes. Deepfakes. https://github.com/deepfakes/faceswap, 2017.
 [6]: https://arxiv.org/pdf/2001.00179v3.pdf DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection
 [7]: https://arxiv.org/pdf/1909.11573
-
+[8]: https://zhuanlan.zhihu.com/p/97305204
 ```
 
 ```md
