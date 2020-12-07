@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 23:17:27
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 23:31:59
+ * @LastEditTime: 2020-12-07 20:06:27
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/docs/master/jit.html
+ * https://towardsdatascience.com/object-detector-android-app-using-pytorch-mobile-neural-network-407c419b56cd
 -->
 
 TorchScript是一种从PyTorch代码创建可序列化和可优化模型的方法。任何TorchScript程序都可以从Python进程中保存并加载到不依赖Python的进程中。
@@ -38,3 +39,12 @@ PyTorch不支持的模块和类
 TorchScript目前无法编译许多其他常用的PyTorch构造。下面列出了TorchScript不支持的模块，以及不支持的PyTorch类的不完整列表。对于不支持的模块，我们建议使用torch.jit.trace()。
 
 
+---
+
+Copy Model.
+Now is the time we copy the model we created using the python script.
+Open your application from File Explorer/Finder.
+Go to app > src > main.
+Create a folder the named assets
+Copy your model in this folder.
+When you open you see in your Android Studio you should see like in the image below. (If not right-click on app folder and click on Synchronize App).

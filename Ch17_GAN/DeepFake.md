@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-28 18:57:58
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 19:40:19
+ * @LastEditTime: 2020-12-07 19:58:14
  * @Description:MT
  * @TODO::
  * @Reference:
@@ -95,6 +95,7 @@ Deepfake的视频通常只有有限的分辨率，这就需要采用仿射面扭
 
 了解人们发布深度假货的真实意图更为重要。这需要用户根据deepfakes被发现的社会环境来判断，例如谁发布了它以及他们说了什么，这是至关重要的，因为deepfakes越来越逼真，检测软件将会落后于deepfakes的创建技术。因此，研究深度假货的社会背景以帮助用户进行判断是值得进行的。
 
+DeepFake中文网[9]
 
 
 ```md
@@ -106,6 +107,9 @@ Deepfake的视频通常只有有限的分辨率，这就需要采用仿射面扭
 [6]: https://arxiv.org/pdf/2001.00179v3.pdf DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection
 [7]: https://arxiv.org/pdf/1909.11573
 [8]: https://zhuanlan.zhihu.com/p/97305204
+[9]: https://www.deepfaker.xyz/
+
+
 ```
 
 ```md
