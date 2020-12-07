@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 20:20:22
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 15:26:22
+ * @LastEditTime: 2020-12-07 17:21:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -149,3 +149,19 @@ make
 ---
 
 https://zhuanlan.zhihu.com/p/52154049
+
+获取libtorch
+获取libtorch的方式有两种：
+
+从官网下载最新的编译好的文件：https://pytorch.org/cppdocs/installing.html
+自己进行源码编译
+我这里推荐第二种，因为官方编译好的版本为了兼容性，选择了旧式的C++-ABI(相关链接：https://github.com/pytorch/pytorch/issues/13541 ; https://discuss.pytorch.org/t/issues-linking-with-libtorch-c-11-abi/29510)，如果你使用的gcc版本>5，那么如果你将libtorch与其他编译好的库(使用gcc-5以及以上)进行联合编译，很有可能出现冲突，为了避免环境上面的问题，建议自己对源码进行编译。当然大家也可以测试下官方的
+
+当然还有一点需要说明，如果你仅仅只单独使用libtorch库(从官方下载，并没有链接其他库，例如opencv)，那么你这样编译那么是没有任何问题的。大家可以直接下载官方编译好的包进行快速尝试。
+
+
+编译好之后的libtorch在path/to/pytorch/torch/lib/tmp_install中。
+
+我们之后在cmake时需要添加-DCMAKE_PREFIX_PATH=/path/to/pytorch/torch/lib/tmp_install引入libtorch路径。
+
+不懂什么是Cmake的可以看这里：编译器gcc、clang、make、cmake辨析
