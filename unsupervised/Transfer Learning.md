@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 21:28:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 22:34:26
+ * @LastEditTime: 2020-12-07 22:50:29
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,6 +22,8 @@ consider a child who has learned to draw people as stick figures. She has discov
 学习速率。与计算新数据集的类分数的新线性分类器(随机初始化)的权重相比，对正在进行微调的ConvNet权重使用较小的学习率是很常见的。这是因为我们期望ConvNet权重相对较好，所以我们不希望太快和太多地扭曲它们(特别是当上面的新线性分类器是通过随机初始化训练的时候)。
 
 
+
 [1]: https://deepmind.com/blog/article/unsupervised-learning
 [2]: https://cs231n.github.io/transfer-learning/
 [3]: https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
+[4]: https://pytorch.org/tutorials/intermediate/quantized_transfer_learning_tutorial.html
