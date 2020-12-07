@@ -5,17 +5,33 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:01:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 22:24:39
+ * @LastEditTime: 2020-12-07 21:53:15
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
  * https://arxiv.org/abs/1801.04381
  * https://colab.research.google.com/github/pytorch/pytorch.github.io/blob/master/assets/hub/pytorch_vision_mobilenet_v2.ipynb#scrollTo=7P8C3gMea8FU
+ * https://heartbeat.fritz.ai/pytorch-mobile-image-classification-on-android-5c0cfb774c5b
 -->
 
+```python
 import torch
 model = torch.hub.load('pytorch/vision:v0.6.0', 'mobilenet_v2', pretrained=True)
 model.eval()
+```
+
+```python
+import torch
+from torchvision.models import mobilenet_v2
+
+model = mobilenet_v2(pretrained=True)
+
+model.eval()
+input_tensor = torch.rand(1,3,224,224)
+
+script_model = torch.jit.trace(model,input_tensor)
+script_model.save("mobilenet-v2.pt")
+```
 
 所有的预训练模型都期望输入图像以同样的方式归一化，即小批3通道RGB图像的形状(3 x H x W)，其中H和W预计至少为224。图像加载到范围为[0,1]，然后使用mean =[0.485, 0.456, 0.406]和std =[0.229, 0.224, 0.225]进行归一化。
 

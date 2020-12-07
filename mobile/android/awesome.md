@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-07 16:54:58
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 20:17:33
+ * @LastEditTime: 2020-12-07 20:57:24
  * @Description:
  * @TODO::
  * @Reference:
@@ -14,4 +14,6 @@
 https://github.com/AceDJH/Recognitions
 
 https://github.com/tusharck/Object-Detector-Android-App-Using-PyTorch-Mobile-Neural-Network
+
+https://github.com/t-vi/AICamera
 

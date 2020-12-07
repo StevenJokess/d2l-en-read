@@ -1,0 +1,13 @@
+
+
+/*
+ * @version:
+ * @Author:  StevenJokess https://github.com/StevenJokess
+ * @Date: 2020-12-07 20:55:51
+ * @LastEditors:  StevenJokess https://github.com/StevenJokess
+ * @LastEditTime: 2020-12-07 20:55:56
+ * @Description:
+ * @TODO::
+ * @Reference:https://github.com/psmathur/fastai2-vision-app/blob/master/.dockerignore
+ */
+*.pkl

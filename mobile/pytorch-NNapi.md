@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-28 17:23:08
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-28 17:35:36
+ * @LastEditTime: 2020-12-07 22:00:47
  * @Description:
  * @TODO::
  * @Reference:https://www.youtube.com/watch?v=B-2spa3UCTU
@@ -65,3 +65,19 @@ WHAT's COMING UP
 
 developer.android.com/ndk/guides/neuralnetworks
 pytorch.org/mobile/android
+
+---
+
+I’m following this tutorial 4 to try out NNAPI support in PyTorch Mobile on Pixel 3a (Android 10, Qualcomm Snapdragon 670). I compiled the speed benchmark binary off commit ID 4ed7f36ed
+
+The commands I used are:
+
+adb shell /data/local/tmp/speed_benchmark_torch --pthreadpool_size=1 --model=/data/local/tmp/mobilenetv2-quant_full-nnapi.pt --use_bundled_input=0 --warmup=5 --iter=200
+adb shell /data/local/tmp/speed_benchmark_torch --pthreadpool_size=1 --model=/data/local/tmp/mobilenetv2-quant_full-cpu.pt --use_bundled_input=0 --warmup=5 --iter=200
+
+Here are the benchmark numbers I got:
+
+Quant mobilenet v2 using CPU: 66.8 ms
+Quant mobilenet v2 using NNAPI: 171 ms
+
+NNAPI not only did not accelerate the model, but slowed it down significantly. I’m really curious what I’m missing here.

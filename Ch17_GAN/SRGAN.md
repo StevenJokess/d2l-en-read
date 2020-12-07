@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 20:32:29
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 19:36:08
+ * @LastEditTime: 2020-12-07 20:41:48
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368
@@ -112,3 +112,4 @@ SRGAN
 [1]: https://arxiv.org/abs/1609.04802
 [2]: https://github.com/eriklindernoren/Keras-GAN/blob/master/srgan/srgan.py
 [3]: https://0809zheng.github.io/2020/08/10/srresnet.html
+[4]: https://nbviewer.jupyter.org/github/cedrickchee/fastai-course-v3/blob/master/nbs/dl1/lesson7-superres-gan_20190110.ipynb
