@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 20:20:22
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 17:21:05
+ * @LastEditTime: 2020-12-08 23:14:59
  * @Description:
  * @TODO::
  * @Reference:
@@ -165,3 +165,9 @@ https://zhuanlan.zhihu.com/p/52154049
 我们之后在cmake时需要添加-DCMAKE_PREFIX_PATH=/path/to/pytorch/torch/lib/tmp_install引入libtorch路径。
 
 不懂什么是Cmake的可以看这里：编译器gcc、clang、make、cmake辨析
+
+---
+
+win10
+https://www.bilibili.com/video/BV14v411b733?from=search&seid=8314416775195597670
+https://blog.csdn.net/qq_41375318/article/details/110556350
