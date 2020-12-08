@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 20:33:04
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 20:34:38
+ * @LastEditTime: 2020-12-08 20:43:14
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/tutorials/advanced/cpp_export.html
@@ -24,3 +24,11 @@
 提示
 
 您可以在官方Torch脚本参考中找到这两种方法的完整文档，以及关于使用哪种方法的进一步指导。
+
+# Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
+traced_script_module = torch.jit.trace(model, example)
+
+
+
+---
+
