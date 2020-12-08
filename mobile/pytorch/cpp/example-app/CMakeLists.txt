@@ -1,16 +1,3 @@
-
-
-/*
- * @version:
- * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-12-08 20:58:06
- * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 20:58:51
- * @Description:
- * @TODO::
- * @Reference:https://pytorch.org/cppdocs/installing.html
- */
-
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(example-app)
 
