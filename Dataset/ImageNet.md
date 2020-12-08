@@ -5,19 +5,24 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 20:31:48
+ * @LastEditTime: 2020-12-08 17:21:19
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
  * [6]: https://github.com/0809zheng/pedestrain-detection-towncentre
  * [7]: https://0809zheng.github.io/2020/05/17/paper-recent.html
+ * [8]: https://github.com/udacity/deep-learning-v2-pytorch/blob/master/dcgan-svhn/DCGAN_Exercise.ipynb
 -->
 Imagenet-1k dataset.
 MNIST
 CIFAR-10: http://www.cs.toronto.edu/~kriz/cifar.html
 CIFAR-100
 STL-10
-SVHN
+Street View House Numbers (SVHN) dataset.[8]
+
+dataset built-in to the PyTorch datasets library.
+svhn_train = datasets.SVHN(root='data/', split='train', download=True, transform=transform)
+
 ILSVRC2012 task 1
 
 Recommended datasets
