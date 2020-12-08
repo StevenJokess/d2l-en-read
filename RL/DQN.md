@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 23:20:57
+ * @LastEditTime: 2020-12-08 18:35:09
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -54,7 +54,29 @@ DQN属于DRL（深度强化学习）的一种，它是深度学习与Q学习的�
 
 ![DQN_alg](img\DQN_alg.png)
 
+```py
+# [8]
+class QNetwork(nn.Module):
+    """Actor (Policy) Model."""
+
+    def __init__(self, state_size, action_size, seed):
+        """Initialize parameters and build model.
+        Params
+        ======
+            state_size (int): Dimension of each state
+            action_size (int): Dimension of each action
+            seed (int): Random seed
+        """
+        super(QNetwork, self).__init__()
+        self.seed = torch.manual_seed(seed)
+        "*** YOUR CODE HERE ***"
+
+    def forward(self, state):
+        """Build a network that maps state -> action values."""
+        pass
 ```
+
+```py
 # [5]
 class DQN(nn.Module):
 
@@ -125,6 +147,7 @@ Note: The eps_train_final and eps_test in the original DQN paper is 0.1 and 0.01
 [5]: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
 [6]: Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G. Bellemare, Alex Graves, Martin A. Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015. URL: https://doi.org/10.1038/nature14236, doi:10.1038/nature14236.
 [7]: https://github.com/thu-ml/tianshou/tree/master/examples/atari
+[8]: https://github.com/udacity/deep-reinforcement-learning/tree/master/dqn
 
 
 ---

@@ -5,9 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-07 20:55:51
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 20:55:56
+ * @LastEditTime: 2020-12-08 18:44:21
  * @Description:
  * @TODO::
  * @Reference:https://github.com/psmathur/fastai2-vision-app/blob/master/.dockerignore
+ https://github.com/openai/gym/blob/master/.dockerignore
  */
 *.pkl
+.tox
