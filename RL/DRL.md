@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 21:49:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 21:12:34
+ * @LastEditTime: 2020-12-08 17:05:23
  * @Description:
  * @TODO::
  * @Reference:https://nndl.github.io/
@@ -22,6 +22,8 @@
 
 为了有效地解决这些问题，我们可以设计一个更强的策略函数（比如深度神经网络），使得智能体可以应对复杂的环境，学习更优的策略，并具有更好的泛化能力．深度强化学习（Deep Reinforcement Learning）是将强化学习和深度学习结合在一起，用强化学习来定义问题和优化目标，用深度学习来解决策略和值函数的建模问题，然后使用误差反向传播算法来优化目标函数．深度强化学习在一定程度上具备解决复杂问题的通用智能，并在很多任务上都取得了很大的成功．[2]
 
+
 [1]: https://nndl.github.io/
 [2]: https://mrt.aminer.cn/5e05b8176438ae128ad73227
 [3]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-1.pdf
+[4]: https://github.com/udacity/deep-reinforcement-learning/blob/master/finance/DRL.ipynb

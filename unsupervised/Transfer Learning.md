@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 21:28:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 22:50:29
+ * @LastEditTime: 2020-12-08 17:17:10
  * @Description:
  * @TODO::
  * @Reference:
@@ -27,3 +27,4 @@ consider a child who has learned to draw people as stick figures. She has discov
 [2]: https://cs231n.github.io/transfer-learning/
 [3]: https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
 [4]: https://pytorch.org/tutorials/intermediate/quantized_transfer_learning_tutorial.html
+[5]: https://github.com/udacity/deep-learning-v2-pytorch/blob/master/transfer-learning/Transfer_Learning_Exercise.ipynbs
