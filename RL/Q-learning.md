@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:27:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 21:20:58
+ * @LastEditTime: 2020-12-09 01:45:51
  * @Description:
  * @TODO::
  * @Reference:
@@ -47,9 +47,56 @@ Q(s, a)=r+\gamma \max Q\left(s^{\prime}, a^{\prime}\right)
 $$
 因为每次执行和观测都有噪声，所以在更新 Q 函数时，用学习率的方式。（图中的注释并不是很正确，所 谓现实，只不过是新的估计，应该是新做计和旧估计的差值）[6]
 
+```
+#[9]
+class QLearningTable:
+    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9):
+        self.actions = actions  # a list
+        self.lr = learning_rate # 学习率
+        self.gamma = reward_decay   # 奖励衰减
+        self.epsilon = e_greedy     # 贪婪度
+        self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)   # 初始 q_table
 
+    def choose_action(self, observation):
+        self.check_state_exist(observation)  # 检测本 state 是否在 q_table 中存在(见后面标题内容)
+
+        # 选择 action
+        if np.random.uniform() < self.epsilon:  # 选择 Q value 最高的 action
+            state_action = self.q_table.loc[observation, :]
+
+            # 同一个 state, 可能会有多个相同的 Q action value, 所以我们乱序一下
+            action = np.random.choice(state_action[state_action == np.max(state_action)].index)
+
+        else:  # 随机选择 action
+            action = np.random.choice(self.actions)
+
+        return action
+
+    def learn(self, s, a, r, s_):
+        self.check_state_exist(s_)  # 检测 q_table 中是否存在 s_ (见后面标题内容)
+        # print(s + '  ' + s_)
+        q_predict = self.q_table.loc[s, a]
+        if s_ != 'terminal':
+            q_target = r + self.gamma * self.q_table.loc[s_, :].max()  # 下个 state 不是 终止符
+        else:
+            q_target = r  # 下个 state 是终止符
+        self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # 更新对应的 state-action 值
+
+    def check_state_exist(self, state):
+        if state not in self.q_table.index:
+            # append new state to q table
+            self.q_table = self.q_table.append(
+                pd.Series(
+                    [0] * len(self.actions),
+                    index=self.q_table.columns,
+                    name=state,
+                )
+            )
+```
 
 ```md
+
+
 
 
 
@@ -61,7 +108,7 @@ $$
 [6]: 如何用简单例子讲解 Q - learning 的具体过程？ - Michael Jackson的回答 - 知乎 https://www.zhihu.com/question/26408259/answer/540258528
 [7]: http://www.oreilly.com.cn/radar/?p=816
 [8]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-8.pdf
-
+[9]: https://github.com/0aqz0/path-planning-with-qlearning/blob/master/RL_brain.py
 
 
 ```

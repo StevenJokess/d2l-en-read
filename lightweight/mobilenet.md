@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 20:14:39
+ * @LastEditTime: 2020-12-09 01:35:33
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee644a796c35_tAwVkVvK/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
@@ -294,10 +294,16 @@ pip install --upgrade --pre --find-links https://download.pytorch.org/whl/nightl
 
 import torchvision.models.quantization.mobilenet
 
+
+MobileNetV1[6]
+The first version of the MobileNet architecture pioneered the use of depthwise convolutions to make a model more suitable for mobile devices. MobileNetV1 consists almost entirely of 1×1 convolutions and depthwise 3×3 convolutions. We converted the quantized MobileNetV1 model from TensorFlow Lite and benchmarked it on 32-bit ARM builds of TensorFlow Lite and QNNPACK. With both runtimes using 4 threads, we observed 1.8x geomean speedup of QNNPACK over the TensorFlow Lite runtime.
+
+
 [1]: https://arxiv.org/abs/1704.04861 MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications
 [2]: https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md
 [3]: https://github.com/mit-han-lab/amc/blob/master/models/mobilenet.py
 [4]: https://github.com/mit-han-lab/amc/blob/master/models/mobilenet_v2.py
 [5]: https://pytorch.org/hub/pytorch_vision_mobilenet_v2/s
+[6]: https://engineering.fb.com/2018/10/29/ml-applications/qnnpack/
 
 https://github.com/0809zheng/Hung-yi-Lee-ML2020-homework/blob/master/hw7_Network_Compression/hw7_Architecture_Design.ipynb

@@ -5,13 +5,14 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:01:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 21:53:15
+ * @LastEditTime: 2020-12-09 01:37:21
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
  * https://arxiv.org/abs/1801.04381
  * https://colab.research.google.com/github/pytorch/pytorch.github.io/blob/master/assets/hub/pytorch_vision_mobilenet_v2.ipynb#scrollTo=7P8C3gMea8FU
  * https://heartbeat.fritz.ai/pytorch-mobile-image-classification-on-android-5c0cfb774c5b
+ * [4]: https://engineering.fb.com/2018/10/29/ml-applications/qnnpack/
 -->
 
 ```python
@@ -43,3 +44,5 @@ MobileNet v2架构基于一个反向残差结构，其中残差块的输入和�
 | Model structure | Top-1 error | Top-5 error |
 | --------------- | ----------- | ----------- |
 |  mobilenet_v2       | 28.12       | 9.71       |
+
+[4]: caffe2 72.14% TensorFlow Lite 70.8%
