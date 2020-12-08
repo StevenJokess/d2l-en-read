@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-12-08 22:31:30
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-12-08 22:35:04
+LastEditTime: 2020-12-08 23:00:31
 Description:
 TODO::
 Reference:https://blog.csdn.net/qq_41375318/article/details/106106368
@@ -97,7 +97,7 @@ def anyname_you_like():
         usedTime = time.time() - startTime
         print('完成对接收图片的预测，总共耗时%.2f秒' % usedTime)
         # return result
-        return render_template("result.html",result=result)
+        return render_template("result.html",result_1=result)
     else:
         return 'failed'
 
