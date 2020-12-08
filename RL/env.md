@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 17:39:22
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 17:59:05
+ * @LastEditTime: 2020-12-08 19:05:52
  * @Description:
  * @TODO::
  * @Reference:
@@ -64,6 +64,16 @@ Linux (x86_64): "path/to/Soccer_Linux/Soccer.x86_64"
 Linux (x86, headless): "path/to/Soccer_Linux_NoVis/Soccer.x86"
 Linux (x86_64, headless): "path/to/Soccer_Linux_NoVis/Soccer.x86_64"
 
+## close
+
+```py
+#[4]
+from gym.utils import closer
+
+env_closer = closer.Closer()
+```
 
 [1]: https://github.com/udacity/deep-reinforcement-learning/blob/master/reinforce/REINFORCE.ipynb
 [2]: https://github.com/udacity/deep-reinforcement-learning/blob/master/p3_collab-compet/Tennis.ipynb
+[3]: https://github.com/udacity/deep-reinforcement-learning/blob/master/p3_collab-compet/Soccer.ipynb
+[4]: https://github.com/openai/gym/blob/master/gym/core.py
