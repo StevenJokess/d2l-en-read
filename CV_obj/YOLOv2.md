@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 18:53:18
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 18:56:00
+ * @LastEditTime: 2020-12-13 21:07:52
  * @Description:
  * @TODO::
  * @Reference:https://www.jianshu.com/p/844b4e417ad2
@@ -79,8 +79,20 @@ yolov1中对于检测任务采用的是来训练网络。yolov2为了适应多�
 三、更强
 文章的这部分主要是用来证明yolov2有较强的特征提取性能，采用了一些整理标签的方法，融合了COCO和Imagenet来做一些实验。
 
+在Yolov2的loss计算中，每个cell有5个anchor，那么究竟该由哪个anchor来负责预测目标信息呢？答案是采用与GT(ground truth,也就是fmap尺度的box)IOU最大的anchor进行目标信息的预测。在计算时候，不考虑box的坐标位置。[4]
+
+
+---
+
+NMS[4]
+
+第一个是“非极大值”，对于yolo来说，评估bbox是否可靠的的参数，就是它的置信度。所以这里的极大值指得是置信度。第二个关键词“抑制”，抑制是什么意思呢？表面上说，就是阻挡某个东西。
+
+万一超过置信度阈值的框依旧很多呢？那不也是会导致满屏是框吗？？？(黑人问号表情包？？？)
+那么我们还需要对这些高于置信度阈值的框做第二步操作，也就是合并操作。设置一个IOU阈值，假如两个框的交并比大于这个IOU阈值。我们就让它两合并。可以预见的是，这样合并着合并着，框就会变得很少了。
+
 参考
 https://arxiv.org/abs/1612.08242
 https://zhuanlan.zhihu.com/p/47575929
 https://zhuanlan.zhihu.com/p/35325884
-
+[4]: https://blog.csdn.net/qq_36229876/article/details/105674765?utm_source=app
