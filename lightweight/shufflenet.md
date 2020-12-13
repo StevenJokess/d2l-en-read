@@ -5,11 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-13 19:56:45
+ * @LastEditTime: 2020-12-14 00:22:39
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee648f24314f_YkqkQu1q/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
 -->
+
+ShuffleNet系列网络是旷视提出
 
 Experiments on ImageNet classification and MS COCO object detection demonstrate the superior performance of ShuffleNet over other structures, e.g. lower top-1 error (absolute 7.8%) than recent MobileNet on ImageNet classification task, under the computation budget of 40 MFLOPs.[2]
 
@@ -46,6 +48,8 @@ pytorch复现
 对于从上一个组层生成的特征图，可以先将每一个组中的通道划分为几个子组，
 然后在下一层中的每个组中使用不同的子组作为输入。
 
+
+ShuffleNet中的Channel Shuffle操作可以将组间的信息进行交换，并且可以实现端到端的训练。
 
 ## FLOPS
 

@@ -5,22 +5,18 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-09 01:35:33
+ * @LastEditTime: 2020-12-14 00:04:23
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee644a796c35_tAwVkVvK/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
  * https://ai.deepshare.net/detail/v_5ee644d9ed5d3_17ThW2c9/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
  * https://ai.deepshare.net/detail/v_5ee645075753a_qSt7UuAU/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
- *
+ * [5]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
 -->
 
-Model Description
-The MobileNet v2 architecture is based on an inverted residual structure where the input and output of the residual block are thin bottleneck layers opposite to traditional residual models which use expanded representations in the input. MobileNet v2 uses lightweight depthwise convolutions to filter features in the intermediate expansion layer. Additionally, non-linearities in the narrow layers were removed in order to maintain representational power.
+该网络将传统的卷积操作替换深度可分离卷积，即Depthwise卷积和Pointwise卷积的组合，相比传统的卷积操作，该组合可以大大节省参数量和计算量。与此同时，MobileNetV1也可以用于目标检测、图像分割等其他视觉任务中。[5]
 
-Model structure	Top-1 error	Top-5 error
-mobilenet_v2	28.12	9.71
 
-MobileNet v2架构是基于一个倒置的残差结构，其中残差块的输入和输出是薄瓶颈层，与传统的残差模型相反，传统的残差模型在输入中使用扩展表示。MobileNet v2使用轻量级的深度卷积来过滤中间扩展层的特性。此外，为了保持代表性，在窄层中去除非线性。
 
 ## ResNet
 
