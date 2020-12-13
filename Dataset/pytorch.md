@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-13 19:34:27
+ * @LastEditTime: 2020-12-13 20:09:48
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
@@ -65,7 +65,7 @@ for iter, (data, label) in enumerate(train_loader):
 
 ---
 
-[4]:
+[4]: https://github.com/wnma3mz/pytorch_init/blob/master/pipline.py
 
 ```py
 
