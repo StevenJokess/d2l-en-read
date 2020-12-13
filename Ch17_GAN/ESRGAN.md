@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 20:15:19
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 20:18:19
+ * @LastEditTime: 2020-12-10 20:15:23
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368s
@@ -20,3 +20,10 @@ git clone https://github.com/xinntao/ESRGAN
 We then need to download the weights so we can use the model without training. Using the Google Drive link in the README, download the RRDB_ESRGAN_x4.pth file and place it in ./models. We’re going to upsample a scaled-down version of Helvetica in her box, but feel free to place any image into the ./LR directory. Run the supplied test.py script and you’ll see upsampled images being generated and saved into the results directory.
 
 That wraps it up for super-resolution, but we haven’t quite finished with images yet.
+
+分辨率倍增部分使用ESRGAN（我用的是整合了UI界面的Image Enhancing Utility[2]）[3]
+
+[1]:
+[2]: https://github.com/ptrsuder/IEU.Winforms
+[3]: 如何评价人工智能修复的 100 年前北京影像，有哪些意义和可以应用的方向？ - 大谷Spitzer的回答 - 知乎
+https://www.zhihu.com/question/393716697/answer/1219952561

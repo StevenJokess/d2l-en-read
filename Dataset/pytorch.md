@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 20:43:07
+ * @LastEditTime: 2020-12-13 19:34:27
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
@@ -62,3 +62,49 @@ train_loader = Data.DataLoader(dataset=myDataSet, batch_size=BATCH_SIZE, shuffle
 for iter, (data, label) in enumerate(train_loader):
     print(data.shape)
     print(label.shape)
+
+---
+
+[4]:
+
+```py
+
+from torchvision.datasets import CIFAR100, CIFAR10
+
+def get_dataset(batch_size, dataset_dir='./'):
+    transform_train = transforms.Compose([
+        transforms.RandomCrop(32, padding=4),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465),
+                             (0.2023, 0.1994, 0.2010)),
+    ])
+
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465),
+                             (0.2023, 0.1994, 0.2010)),
+    ])
+
+    trainset = CIFAR100(root=dataset_dir,
+                        train=True,
+                        download=False,
+                        transform=transform_train)
+
+    testset = CIFAR100(root=dataset_dir,
+                       train=False,
+                       download=False,
+                       transform=transform_test)
+
+    trainloader = DataLoader(trainset,
+                             batch_size=batch_size,
+                             shuffle=True,
+                             num_workers=0)
+
+    testloader = DataLoader(testset,
+                            batch_size=batch_size,
+                            shuffle=False,
+                            num_workers=0)
+
+    return trainloader, testloader
+```
