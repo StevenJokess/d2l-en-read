@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-13 20:09:48
+ * @LastEditTime: 2020-12-14 22:05:10
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
@@ -108,3 +108,9 @@ def get_dataset(batch_size, dataset_dir='./'):
 
     return trainloader, testloader
 ```
+
+---
+from torchvision import datasets
+
+    svhn = datasets.SVHN(root=config.svhn_path, download=True, transform=transform)
+    mnist = datasets.MNIST(root=config.mnist_path, download=True, transform=transform)
