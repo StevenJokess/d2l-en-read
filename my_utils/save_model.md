@@ -5,12 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-21 23:14:05
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 19:57:33
+ * @LastEditTime: 2020-12-14 21:46:49
  * @Description:
  * @TODO::
  * @Reference:[1]: https://blog.csdn.net/weixin_38145317/article/details/103582549
  *[2]: https://github.com/kuangliu/pytorch-cifar/blob/master/main.py
  [3]: https://github.com/0809zheng/pokemon-DCGAN-pytorch/blob/master/gan.py
+ [4]: https://github.com/lyhue1991/eat_pytorch_in_20_days/blob/master/6-3%2C%E4%BD%BF%E7%94%A8GPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B.md
 -->
 pytorch 模型 .pt, .pth, .pkl的区别及模型保存方式
 
@@ -59,3 +60,8 @@ model.eval()
     if (e+1) % 5 == 0:
         torch.save(G.state_dict(), os.path.join(workspace_dir, f'dcgan_g.pth'))
         torch.save(D.state_dict(), os.path.join(workspace_dir, f'dcgan_d.pth'))
+
+---
+[4]
+# save the model parameters
+torch.save(model.net.module.state_dict(), "model_parameter.pkl")
