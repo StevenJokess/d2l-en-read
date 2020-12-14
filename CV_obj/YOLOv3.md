@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:19:02
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 18:54:59
+ * @LastEditTime: 2020-12-14 23:51:40
  * @Description:
  * @TODO::
  * @Reference:https://pjreddie.com/darknet/yolo/
@@ -49,3 +49,5 @@ yolov3.jpg
 上述1,2点可以参考yolov2算法详解, 第3点参考Focal Loss for Dense Object Detection论文详解，第4点参考Faster R-CNN文章详细解读
 
 
+https://github.com/YunYang1994/tensorflow-yolov3
+https://github.com/HaloTrouvaille/YOLO-Multi-Backbones-Attention
