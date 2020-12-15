@@ -35,7 +35,7 @@
 [22]: https://github.com/jingweiz/pytorch-rl
 [23]: https://www.leiphone.com/news/202011/uiMwVZYPBHyI61I8.html
 [24]: https://github.com/udacity/deep-reinforcement-learning
-
+[25]: https://github.com/tinyzqh/awesome-reinforcement-learning
 
 ---
 Atari games: Q-learning: V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, et al. “Playing Atari with Deep Reinforcement Learning”. (2013). Policy gradients: J. Schulman, S. Levine, P. Moritz, M. I. Jordan, and P. Abbeel. “Trust Region Policy Optimization”. (2015). V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. P. Lillicrap, et al. “Asynchronous methods for deep reinforcement learning”. (2016).

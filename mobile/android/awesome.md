@@ -18,3 +18,5 @@ https://github.com/tusharck/Object-Detector-Android-App-Using-PyTorch-Mobile-Neu
 https://github.com/t-vi/AICamera
 
 https://github.com/HyperGAN/HyperGAN-android
+
+SNAPCHAT和FACEAPP

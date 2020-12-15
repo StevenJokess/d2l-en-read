@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 21:49:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 17:05:23
+ * @LastEditTime: 2020-12-15 13:26:20
  * @Description:
  * @TODO::
  * @Reference:https://nndl.github.io/
@@ -22,8 +22,10 @@
 
 为了有效地解决这些问题，我们可以设计一个更强的策略函数（比如深度神经网络），使得智能体可以应对复杂的环境，学习更优的策略，并具有更好的泛化能力．深度强化学习（Deep Reinforcement Learning）是将强化学习和深度学习结合在一起，用强化学习来定义问题和优化目标，用深度学习来解决策略和值函数的建模问题，然后使用误差反向传播算法来优化目标函数．深度强化学习在一定程度上具备解决复杂问题的通用智能，并在很多任务上都取得了很大的成功．[2]
 
+把DRL的算法视为智能体的大脑,那么这个大脑包含两个部分: actor行动模块和 critic评判模块。当然,这两个模块都是由深度神经网络构成的,也正是DRL中“深度”一词的由来。其中 actor行动模块是大脑的动作执行机构,输入外部的环境状态5,然后输出动作a。而 critIc评判模块则可被认为是大脑的价值观,根据历史信息及回馈进行自我调整,然后对整个 actor行动模块进行相关的更新指导。这种基于 actor- critic框架的方法非常类似于人类自身的行为方式。[5]
 
 [1]: https://nndl.github.io/
 [2]: https://mrt.aminer.cn/5e05b8176438ae128ad73227
 [3]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-1.pdf
 [4]: https://github.com/udacity/deep-reinforcement-learning/blob/master/finance/DRL.ipynb
+[5]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1

@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:27:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-09 01:45:51
+ * @LastEditTime: 2020-12-15 13:22:39
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 Q-learning（off-policy）
+
+1989年, Watkins将TD学习和最优控制完全融合在一起,发明了Q- earning,这项工作扩展并整合了先前RL研究三条主线的所有工作[10]
 
 Q-learning learns the action-value function Q(s, a): how good to take an action at a particular state. For example, for the board position below, how good to move the pawn two steps forward. Literally, we assign a scalar value over the benefit of making such a move.
 Q is called the action-value function (or Q-value function in this article).[4]
@@ -109,7 +111,7 @@ class QLearningTable:
 [7]: http://www.oreilly.com.cn/radar/?p=816
 [8]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-8.pdf
 [9]: https://github.com/0aqz0/path-planning-with-qlearning/blob/master/RL_brain.py
-
+[10]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
 
 ```
 
