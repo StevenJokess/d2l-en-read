@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:19:02
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-14 23:51:40
+ * @LastEditTime: 2020-12-15 17:55:20
  * @Description:
  * @TODO::
  * @Reference:https://pjreddie.com/darknet/yolo/
@@ -48,6 +48,17 @@ yolov3.jpg
 尝试采用frcnn来定义正负样本，即anchor iou与标定框小于0.3的为负样本，大于0.7的为正样本，在[0.3, 0.7]范围的忽略，效果不太好
 上述1,2点可以参考yolov2算法详解, 第3点参考Focal Loss for Dense Object Detection论文详解，第4点参考Faster R-CNN文章详细解读
 
+YOLO 目标检测算法。图源：https://arxiv.org/pdf/1506.02640.pdf。
+
+Faster R-CNN 及在其基础上改进的 Mask R-CNN 在实例分割、目标检测、人体关键点检测等任务上都取得了很好的效果，但通常较慢。而 YOLO 的创新之处在于，它提出了 one-stage，即目标定位和目标识别在一个步骤中完成，是名副其实的「You Only Look Once」。
+
+由于 YOLO 只使用单个网络，因此可以直接在检测性能上进行端到端优化，使得基础 YOLO 模型能以每秒 45 帧的速度实时处理图像。YOLO 的一个小规模版本——Fast YOLO 可以达到每秒 155 帧的处理速度。
+
+YOLO 有着让人惊艳的速度，同时也有让人止步的缺陷：不擅长小目标检测。为了弥补这一缺陷，2018 年，Redmon 等人发布了 YOLO v3。这一新版本保持了 YOLO 的速度优势，提升了模型精度，尤其加强了小目标、重叠遮挡目标的识别，补齐了 YOLO 的短板，是目前速度和精度均衡的目标检测网络。
+
+
+
 
 https://github.com/YunYang1994/tensorflow-yolov3
 https://github.com/HaloTrouvaille/YOLO-Multi-Backbones-Attention
+https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650781020&idx=1&sn=0cb4ae88c603ec778ef5acc1228fb3c1
