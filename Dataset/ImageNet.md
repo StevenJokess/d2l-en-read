@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 17:21:19
+ * @LastEditTime: 2020-12-16 13:28:11
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
@@ -225,3 +225,7 @@ Center for Computational Vision and Control
 DeepMind QA Corpus - Textual QA corpus from CNN and DailyMail. More than 300K documents in total. Paper for reference.
 YouTube-8M Dataset - YouTube-8M is a large-scale labeled video dataset that consists of 8 million YouTube video IDs and associated labels from a diverse vocabulary of 4800 visual entities.
 Open Images dataset - Open Images is a dataset of ~9 million URLs to images that have been annotated with labels spanning over 6000 categories.
+
+
+AMiner Dataset:
+https://www.aminer.cn/data/?nav=openData
