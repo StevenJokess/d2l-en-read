@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-14 22:05:10
+ * @LastEditTime: 2020-12-17 21:15:18
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
@@ -114,3 +114,11 @@ from torchvision import datasets
 
     svhn = datasets.SVHN(root=config.svhn_path, download=True, transform=transform)
     mnist = datasets.MNIST(root=config.mnist_path, download=True, transform=transform)
+
+---
+[6]: https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb#scrollTo=V0AJnSeCIHyJ
+# Download COCO test-dev2017
+torch.hub.download_url_to_file('https://github.com/ultralytics/yolov5/releases/download/v1.0/coco2017labels.zip', 'tmp.zip')
+!unzip -q tmp.zip -d ../ && rm tmp.zip  # unzip labels
+!f="test2017.zip" && curl http://images.cocodataset.org/zips/$f -o $f && unzip -q $f && rm $f  # 7GB,  41k images
+%mv ./test2017 ./coco/images && mv ./coco ../  # move images to /coco and move /coco next to /yolov5
