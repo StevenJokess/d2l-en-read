@@ -63,3 +63,4 @@ YOLO 有着让人惊艳的速度，同时也有让人止步的缺陷：不擅长
 [2]: https://github.com/HaloTrouvaille/YOLO-Multi-Backbones-Attention
 [3]: https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650781020&idx=1&sn=0cb4ae88c603ec778ef5acc1228fb3c1
 [4]: https://blog.csdn.net/weixin_44791964/article/details/102646387
+[5]: https://github.com/sthanhng/yoloface

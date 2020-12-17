@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 21:59:07
+ * @LastEditTime: 2020-12-17 22:44:28
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,7 +13,27 @@
 
 # Wasserstein GAN (WGAN)
 
-一篇新鲜出炉的arXiv论文《Wasserstein GAN》却在Reddit的Machine Learning频道火了[7]
+一篇新鲜出炉的arXiv论文《Wasserstein GAN》[8]却在Reddit的Machine Learning频道火了[7]
+
+\begin{array}{l}
+\mathbb{E}_{x \sim P_{g}}[\log (1-D(x))] \quad(\text { 公式 } 2) \\
+\mathbb{E}_{x \sim P_{g}}[-\log D(x)] \quad \text { (公式3 })
+\end{array}
+
+后者在WGAN两篇论文中称为“the - log D alternative”或“the - log D trick”。WGAN前作分别分析了这两种形式的原始GAN各自的问题所在，下面分别说明。
+
+
+改进DCGAN依靠的是对判别器和生成器的架构进行实验枚举，最终找到一组比较好的网络架构设置，但是实际上是治标不治本，没有彻底解决问题。
+
+今天的主角Wasserstein GAN（下面简称WGAN）成功地做到了以下爆炸性的几点：
+
+- 彻底解决GAN训练不稳定的问题，不再需要小心平衡生成器和判别器的训练程度
+- 基本解决了collapse mode的问题，确保了生成样本的多样性
+- 训练过程中终于有一个像交叉熵、准确率这样的数值来指示训练的进程，这个数值越小代表GAN训练得越好，代表
+- 生成器产生的图像质量越高（如题图所示）
+
+
+以上一切好处不需要精心设计的网络架构，最简单的多层全连接网络就可以做到
 
 WGAN modified of DCGAN in:
 1. remove sigmoid in the last layer of discriminator(classification -> regression)                                       # 回归问题,而不是二分类概率
@@ -23,6 +43,9 @@ WGAN modified of DCGAN in:
 
 
 是什么原因导致了 GAN 训练如此不稳定呢？WGAN 提出是因为 JS 散度在不重叠的分 布𝑝和𝑞上的梯度曲面是恒定为 0 的。如图 13.19 所示，当分布𝑝和𝑞不重叠时，JS 散度的梯 度值始终为 0，从而导致此时 GAN 的训练出现梯度弥散现象，参数长时间得不到更新，网络无法收敛。
+
+
+
 
 
 ## JS 散度的缺陷
@@ -82,6 +105,11 @@ $\max _{\phi \in \Phi}\left(\mathbb{E}_{x \sim p_{r}}[f(\boldsymbol{x} ; \phi)]-
 
 WGAN 判别器的损失函数计算与 GAN 不一样，WGAN 是直接最大化真实样本的输出 值，最小化生成样本的输出值，并没有交叉熵计算的过程。
 
+WGAN与原始GAN第一种形式相比，只改了四点：
+1. 判别器最后一层去掉sigmoid
+1. 生成器和判别器的loss不取log
+1. 每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c
+1. 不要用基于动量的优化算法（包括momentum和Adam），推荐RMSProp，SGD也行
 
 
 
@@ -100,9 +128,10 @@ WGAN 判别器的损失函数计算与 GAN 不一样，WGAN 是直接最大化�
 
 
 
+
 WGAN 还在一定程度上缓解了模 式崩塌的问题，使用 WGAN 的模型不容易出现模式崩塌的现象。需要注意的是，WGAN 一般并不能提升模型的生成效果，仅仅是保证了模型训练的稳定性。当然，保证模型能够 稳定地训练也是取得良好效果的前提。如图 13.21 所示，原始版本的 DCGAN 在不使用 BN 层等设定时出现了训练不稳定的现象，在同样设定下，使用 WGAN 来训练判别器可以 避免此现象
 
-
+WGAN本作引入了Wasserstein距离，由于它相对KL散度与JS散度具有优越的平滑特性，理论上可以解决梯度消失问题。接着通过数学变换将Wasserstein距离写成可求解的形式，利用一个参数数值范围受限的判别器神经网络来最大化这个形式，就可以近似Wasserstein距离。在此近似最优判别器下优化生成器使得Wasserstein距离缩小，就能有效拉近生成分布与真实分布。WGAN既解决了训练不稳定的问题，也提供了一个可靠的训练进程指标，而且该指标确实与生成样本的质量高度相关。作者对WGAN进行了实验验证。[6]
 
 
 
@@ -113,3 +142,4 @@ WGAN 还在一定程度上缓解了模 式崩塌的问题，使用 WGAN 的模�
 [5]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf 13.7
 [6]: https://zhuanlan.zhihu.com/p/25071913
 [7]: https://github.com/chenyuntc/pytorch-GAN/blob/master/WGAN.ipynb
+[8]: https://arxiv.org/abs/1701.07875

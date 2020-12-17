@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-07 18:54:35
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 18:58:44
+ * @LastEditTime: 2020-12-17 22:33:25
  * @Description:
  * @TODO::
  * @Reference:https://oldpan.me/archives/how-to-debug-pytorch-deeper
@@ -22,3 +22,21 @@ https://oldpan.me/archives/pytorch-build-simple-instruction
 
 pip uninstall torch
 python setup.py clean
+
+---
+
+PyTorch到底好用在哪里? - 郑华滨的回答 - 知乎
+https://www.zhihu.com/question/65578911/answer/249906275
+
+PyTorch这种动态图框架在debug的时候超级超级超级方便！
+
+因为基本上计算图运行出错的地方，就在图定义的那行代码上。
+
+tensor shape和网络层的input shape不匹配？该用Long类型但是却用了Float类型？
+
+Don't panic！直接在报错的那行代码前面熟练地插入一句：
+
+import ipdb; ipdb.set_trace()
+然后就愉快地断点调试吧。
+
+

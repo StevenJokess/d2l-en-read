@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 20:12:20
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 20:12:28
+ * @LastEditTime: 2020-12-17 22:36:24
  * @Description:
  * @TODO::
  * @Reference:https://github.com/chenyuntc/pytorch-best-practice
@@ -18,3 +18,9 @@ python -m visdom.server
 
 # 在gpu0上训练,并把可视化结果保存在visdom 的classifier env上
 python main.py train --data-root=./data/train --use-gpu=True --env=classifier
+
+---
+https://github.com/chenyuntc/pytorch-GAN/blob/master/WGAN.ipynb
+
+# begin training
+print('begin training, be patient...')
