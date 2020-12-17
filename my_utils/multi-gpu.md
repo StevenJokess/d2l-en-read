@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 23:08:42
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 19:57:26
+ * @LastEditTime: 2020-12-17 21:29:00
  * @Description:
  * @TODO::
  * @Reference:
@@ -52,3 +52,12 @@ You can test your model directly on single or multiple gpus. Here is an example 
 export NGPUS=8
 python -m torch.distributed.launch --nproc_per_node=$NGPUS /path_to_maskrcnn_benchmark/tools/test_net.py --config-file "configs/e2e_mask_rcnn_R_50_FPN_1x.yaml" TEST.IMS_PER_BATCH 16
 To calculate mAP for each class, you can simply modify a few lines in coco_eval.py. See #524 for more details.
+
+---
+
+PyTorch Parallel Training（单机多卡并行、混合精度、同步BN训练指南文档） - Todd的文章 - 知乎
+https://zhuanlan.zhihu.com/p/145427849
+
+---
+
+https://github.com/ultralytics/yolov5/issues/475

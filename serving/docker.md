@@ -5,10 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 21:11:37
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 21:12:31
+ * @LastEditTime: 2020-12-17 21:47:43
  * @Description:
  * @TODO::
  * @Reference:https://github.com/ultralytics/yolov5/wiki/Docker-Quickstart
+ * GPU开发环境 - xyoungli的文章 - 知乎
+https://zhuanlan.zhihu.com/p/85789000
 -->
 
 1. Install Docker and Nvidia-Docker

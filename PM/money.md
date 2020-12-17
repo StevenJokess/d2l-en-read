@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-13 21:54:37
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-13 22:44:49
+ * @LastEditTime: 2020-12-17 21:31:03
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/people/guosheng-hu/answers/by_votes
@@ -25,3 +25,11 @@ https://www.zhihu.com/question/348474416/answer/841775222
 技术只是手段，那手段用上了必然要有其目的。盈利？赚吆喝？布局？完成投资人的任务？Whatever you name it.
 
 所以不论是承担项目研发，技术负责，产品负责还是自己创业，有商业思维的人，总会比没有的人看问题深一层，跟他们聊天往往能感受到犀利，不同于纯技术思维的那种“愣”劲儿。
+
+---
+
+https://new.qq.com/omn/20180326/20180326A1OM24.html
+
+原创是有保障了，不过到底有没有人买单呢？
+
+　　孙正义又想出一个快速试错又不要钱的点子，他给50家日本电子公司写信：我有个好发明你愿意买单吗？结果真收到了10条回复，包括松下夏普这种大公司，这下孙正义确定了，这个产品肯定有钱途！
