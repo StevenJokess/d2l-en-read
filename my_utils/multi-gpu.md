@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 23:08:42
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 21:29:00
+ * @LastEditTime: 2020-12-17 22:11:35
  * @Description:
  * @TODO::
  * @Reference:
@@ -61,3 +61,13 @@ https://zhuanlan.zhihu.com/p/145427849
 ---
 
 https://github.com/ultralytics/yolov5/issues/475
+
+---
+
+不要用看似方便的DataParallel或DistributedDataParallel，自己调torch.distributed里面的通讯接口进行梯度通讯才是坠吼的。
+
+---
+声明模型的时候无脑加find_unused_parameters=True：
+
+args.device = torch.device("cuda", device)
+model = nn.parallel.DistributedDataParallel(model, device_ids=[args.device], output_device=args.device, find_unused_parameters=True)
