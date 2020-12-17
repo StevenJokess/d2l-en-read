@@ -5,10 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 17:23:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 17:24:25
+ * @LastEditTime: 2020-12-17 17:24:21
  * @Description:
  * @TODO::
- * @Reference:https://github.com/udacity/deep-learning-v2-pytorch/blob/master/project-tv-script-generation/helper.py
+ * @Reference:
+ * [1]: https://github.com/udacity/deep-learning-v2-pytorch/blob/master/project-tv-script-generation/helper.py
+ * [2]: https://blog.csdn.net/weixin_44791964/article/details/102851214
 -->
 
 ```
@@ -37,3 +39,11 @@ def preprocess_and_save_data(dataset_path, token_lookup, create_lookup_tables):
     int_text = [vocab_to_int[word] for word in text]
     pickle.dump((int_text, vocab_to_int, int_to_vocab, token_dict), open('preprocess.p', 'wb'))
 ```
+
+---
+[2]
+def preprocess_input(x):
+    x /= 255.
+    x -= 0.5
+    x *= 2.
+    return x

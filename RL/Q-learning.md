@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:27:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-15 13:22:39
+ * @LastEditTime: 2020-12-17 17:45:04
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,7 +13,9 @@
 
 Q-learning（off-policy）
 
-1989年, Watkins将TD学习和最优控制完全融合在一起,发明了Q- earning,这项工作扩展并整合了先前RL研究三条主线的所有工作[10]
+1989年, Watkins将TD学习和最优控制完全融合在一起,发明了Q-learning,这项工作扩展并整合了先前RL研究三条主线的所有工作[10]
+
+Q-Learning是一种value-based算法，即通过判断每一步进行的价值value来进行下一步的动作[11]
 
 Q-learning learns the action-value function Q(s, a): how good to take an action at a particular state. For example, for the board position below, how good to move the pawn two steps forward. Literally, we assign a scalar value over the benefit of making such a move.
 Q is called the action-value function (or Q-value function in this article).[4]
@@ -49,7 +51,7 @@ Q(s, a)=r+\gamma \max Q\left(s^{\prime}, a^{\prime}\right)
 $$
 因为每次执行和观测都有噪声，所以在更新 Q 函数时，用学习率的方式。（图中的注释并不是很正确，所 谓现实，只不过是新的估计，应该是新做计和旧估计的差值）[6]
 
-```
+```py
 #[9]
 class QLearningTable:
     def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9):
@@ -96,12 +98,126 @@ class QLearningTable:
             )
 ```
 
+
+
+
+
+## 环境的构建
+
+```py
+#[11]
+import numpy as np
+import pandas as pd
+import time
+
+class Env:
+    def __init__(self,column,maze_column):
+        self.column = column                        #表示地图的长度
+        self.maze_column = maze_column - 1          #宝藏所在的位置
+        self.x = 0                                  #初始化x
+        self.map = np.arange(column)                #给予每个地点一个标号
+        self.count = 0                              #用于技术一共走了多少步
+
+
+    def draw(self):
+        a = []
+        for j in range(self.column) :               #更新图画
+            if j == self.x:
+                a.append('o')
+            elif j == self.maze_column:
+                a.append('m')
+            else:
+                a.append('_')
+        interaction = ''.join(a)
+        print('\r{}'.format(interaction),end = '')
+
+
+    def get_observation(self):
+        return self.map[self.x]                     #返回现在在所
+
+
+    def get_terminal(self):
+        if self.x == self.maze_column:              #如果得到了宝藏，则返回已经完成
+            done = True
+        else:
+            done = False
+        return done
+
+
+    def update_place(self,action):
+        self.count += 1                              #更新的时候表示已经走了一步
+        if action == 'right':
+            if self.x < self.column - 1:
+                self.x += 1
+        elif action == 'left':   #left
+            if self.x > 0:
+                self.x -= 1
+
+    def get_target(self,action):
+        if action == 'right':                        #获得下一步的环境的实际情况
+            if self.x + 1 == self.maze_column:
+                score = 1
+                pre_done = True
+            else:
+                score = 0
+                pre_done = False
+            return self.map[self.x + 1],score,pre_done
+        elif action == 'left':   #left
+            if self.x - 1 == self.maze_column:
+                score = 1
+                pre_done = Ture
+            else:
+                score = 0
+                pre_done = False
+            return self.map[self.x - 1],score,pre_done
+
+
+
+    def retry(self):            #初始化
+        self.x = 0
+        self.count = 0
+```
+
+## Test
+
+```py
+#[11]
+from Env import Env
+from QL import QL
+import numpy as np
+import time
+
+LONG = 6                    #总长度为6
+MAZE_PLACE = 6              #宝藏在第六位
+TIMES = 15                  #进行15次迭代
+
+people = QL(['left','right'])       #生成QLearn主体的对象，包含left和right
+site = Env(LONG,MAZE_PLACE)         #生成测试环境
+for episode in range(TIMES):
+    state = site.get_observation()  #观察初始环境
+    site.draw()                     #生成图像
+    time.sleep(0.3)                 #暂停
+    while(1):
+        done = site.get_terminal()  #判断当前环境是否到达最后
+        if done:                    #如果到达，则初始化
+            interaction = '\n第%s次世代，共使用步数：%s。'%(episode+1 ,site.count)
+            print(interaction)
+            site.retry()
+            time.sleep(2)
+            break
+        action = people.choose_action(state)                        #获得下一步方向
+        state_after,score,pre_done = site.get_target(action)    #获得下一步的环境的实际情况
+        people.learn(state,action,score,state_after,pre_done)       #根据所处的当前环境对各个动作的预测得分和下一步的环境的实际情况更新当前环境的q表
+        site.update_place(action)                                   #更新位置
+        state = state_after                                         #状态更新
+        site.draw()                                                 #更新画布
+        time.sleep(0.3)
+
+
+print(people.q_table)
+```
+
 ```md
-
-
-
-
-
 [1]: https://www.zhihu.com/question/26408259
 [2]: https://www.zhihu.com/question/26408259/answer/467132543
 [3]: https://www.zhihu.com/question/57159315/answer/164323983
@@ -112,7 +228,7 @@ class QLearningTable:
 [8]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-8.pdf
 [9]: https://github.com/0aqz0/path-planning-with-qlearning/blob/master/RL_brain.py
 [10]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
-
+[11]: https://blog.csdn.net/weixin_44791964/article/details/95410737
 ```
 
 --
