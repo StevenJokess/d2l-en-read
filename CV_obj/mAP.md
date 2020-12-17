@@ -5,13 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 18:51:30
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 18:52:23
+ * @LastEditTime: 2020-12-17 19:26:59
  * @Description:
  * @TODO::
  * @Reference:https://blog.csdn.net/weixin_44791964/article/details/102414522
 -->
 
-## 什么是mAP
+## 什么是mAP(mean Average Precision)
 
 
 说到mAP，也要说到，AP是什么。
@@ -48,3 +48,5 @@
 通过PR曲线便可以得到AP值。
 
 **而mAP就是对所有的AP值进行求平均即可。**
+
+https://github.com/Cartucho/mAP

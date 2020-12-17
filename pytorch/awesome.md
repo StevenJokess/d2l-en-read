@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 19:17:53
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-14 21:44:05
+ * @LastEditTime: 2020-12-17 20:11:21
  * @Description:
  * @TODO::
  * @Reference:
@@ -17,3 +17,5 @@ https://github.com/utkuozbulak/pytorch-cnn-visualizations
 https://github.com/PistonY/torch-toolbox
 https://github.com/PistonY/ModelZoo.pytorch
 https://github.com/lyhue1991/eat_pytorch_in_20_days
+https://github.com/chenyuntc/pytorch-book
+https://github.com/spro/practical-pytorch

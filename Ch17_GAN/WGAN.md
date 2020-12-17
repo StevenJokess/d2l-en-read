@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 16:53:20
+ * @LastEditTime: 2020-12-17 19:58:15
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,9 +13,10 @@
 
 # Wasserstein GAN (WGAN)
 
-
+一篇新鲜出炉的arXiv论文《Wasserstein GAN》却在Reddit的Machine Learning频道火了[7]
 
 是什么原因导致了 GAN 训练如此不稳定呢？WGAN 提出是因为 JS 散度在不重叠的分 布𝑝和𝑞上的梯度曲面是恒定为 0 的。如图 13.19 所示，当分布𝑝和𝑞不重叠时，JS 散度的梯 度值始终为 0，从而导致此时 GAN 的训练出现梯度弥散现象，参数长时间得不到更新，网络无法收敛。
+
 
 ## JS 散度的缺陷
 
@@ -103,3 +104,5 @@ WGAN 还在一定程度上缓解了模 式崩塌的问题，使用 WGAN 的模�
 [3]: https://nndl.github.io/ 13.3
 [4]: Arjovsky M, Chintala S, Bottou L, 2017. Wasserstein GAN[J/OL]. CoRR, abs/1701.07875.http://arxiv.org/abs/1701.07875.
 [5]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf 13.7
+[6]: https://zhuanlan.zhihu.com/p/25071913
+[7]: https://github.com/chenyuntc/pytorch-GAN/blob/master/WGAN.ipynb
