@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:19:02
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-15 17:55:20
+ * @LastEditTime: 2020-12-17 18:55:59
  * @Description:
  * @TODO::
  * @Reference:https://pjreddie.com/darknet/yolo/
@@ -57,8 +57,9 @@ Faster R-CNN 及在其基础上改进的 Mask R-CNN 在实例分割、目标检�
 YOLO 有着让人惊艳的速度，同时也有让人止步的缺陷：不擅长小目标检测。为了弥补这一缺陷，2018 年，Redmon 等人发布了 YOLO v3。这一新版本保持了 YOLO 的速度优势，提升了模型精度，尤其加强了小目标、重叠遮挡目标的识别，补齐了 YOLO 的短板，是目前速度和精度均衡的目标检测网络。
 
 
+随着yolo123版本的更新，预测效果越来越好，但是预测速度也不断在下降，yolo3的速度还是比较快的，官网在推出yolo3后直接下了yolo2和yolo1，可以看出来很自信……其优秀的检测结果主要的得益于残差网络、反卷积和多特征层的思想，这些特点使其可以很好的提取特征，同时训练效果好，且对大目标和小目标都有很好的检测效果。[4]
 
-
-https://github.com/YunYang1994/tensorflow-yolov3
-https://github.com/HaloTrouvaille/YOLO-Multi-Backbones-Attention
-https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650781020&idx=1&sn=0cb4ae88c603ec778ef5acc1228fb3c1
+[1]: https://github.com/YunYang1994/tensorflow-yolov3
+[2]: https://github.com/HaloTrouvaille/YOLO-Multi-Backbones-Attention
+[3]: https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650781020&idx=1&sn=0cb4ae88c603ec778ef5acc1228fb3c1
+[4]: https://blog.csdn.net/weixin_44791964/article/details/102646387
