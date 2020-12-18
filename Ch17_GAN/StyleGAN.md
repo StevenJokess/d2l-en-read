@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 19:22:45
+ * @LastEditTime: 2020-12-18 19:35:04
  * @Description:
  * @TODO::
  * @Reference:
@@ -132,3 +132,4 @@ TODO:
 A. Brock, J. Donahue, and K. Simonyan.  Large scale GANtraining  for  high  fidelity  natural  image  synthesis.CoRR,abs/1809.11096, 2018. 1, 3, 810
 
 
+https://github.com/MorvanZhou/celebA-styleGAN

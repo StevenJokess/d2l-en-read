@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 15:28:24
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-17 15:31:14
+ * @LastEditTime: 2020-12-18 19:33:33
  * @Description:
  * @TODO::
  * @Reference:
@@ -30,3 +30,5 @@ class Agent:
         self.server = ActorCritic(4, 2) # 状态向量，动作数量
         self.server(tf.random.normal((2, 4)))
 ```
+
+https://github.com/MorvanZhou/pytorch-A3C
