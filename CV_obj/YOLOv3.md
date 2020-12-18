@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:19:02
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-18 19:19:36
+ * @LastEditTime: 2020-12-18 19:23:29
  * @Description:
  * @TODO::
  * @Reference:https://pjreddie.com/darknet/yolo/
@@ -65,3 +65,4 @@ YOLO 有着让人惊艳的速度，同时也有让人止步的缺陷：不擅长
 [4]: https://blog.csdn.net/weixin_44791964/article/details/102646387
 [5]: https://github.com/sthanhng/yoloface
 https://github.com/ayooshkathuria/pytorch-yolo-v3
+https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
