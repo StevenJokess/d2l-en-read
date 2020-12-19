@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:27:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 17:45:04
+ * @LastEditTime: 2020-12-20 01:30:27
  * @Description:
  * @TODO::
  * @Reference:
@@ -229,6 +229,7 @@ print(people.q_table)
 [9]: https://github.com/0aqz0/path-planning-with-qlearning/blob/master/RL_brain.py
 [10]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
 [11]: https://blog.csdn.net/weixin_44791964/article/details/95410737
+TODO: https://github.com/iArunava/Q-Learning/blob/master/Q-Learning%20with%20PyTorch.ipynb
 ```
 
 --

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 14:53:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 18:17:56
+ * @LastEditTime: 2020-12-20 00:58:31
  * @Description:
  * @TODO::
  * @Reference:https://github.com/metarl/awesome-metarl/edit/master/README.md
@@ -66,3 +66,5 @@ https://github.com/firebase/quickstart-android/edit/master/README.md
 [gh-actions-badge]: https://github.com/firebase/quickstart-android/workflows/Android%20CI/badge.svg
 
 [![HitCount](http://hits.dwyl.io/murufeng/Awesome-AI-algorithm.svg)](http://hits.dwyl.io/murufeng/Awesome-AI-algorithm)
+
+[![PRsWelcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)

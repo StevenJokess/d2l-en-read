@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 18:54:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 20:20:53
+ * @LastEditTime: 2020-12-20 01:03:08
  * @Description:
  * @TODO::
  * @Reference:https://blog.csdn.net/weixin_44791964/article/details/102646387
@@ -41,3 +41,5 @@ Prediction convolutions that will locate and identify objects in these feature m
 The paper demonstrates two variants of the model called the SSD300 and the SSD512. The suffixes represent the size of the input image. Although the two networks differ slightly in the way they are constructed, they are in principle the same. The SSD512 is just a larger network and results in marginally better performance.
 
 For convenience, we will deal with the SSD300.
+
+https://github.com/anhtuan85/Pytorch-SSD-from-scratch

@@ -3,12 +3,11 @@
 <!--
  * @version:
  * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-12-19 21:03:05
+ * @Date: 2020-12-20 00:57:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 01:18:33
+ * @LastEditTime: 2020-12-20 00:57:00
  * @Description:
  * @TODO::
  * @Reference:
 -->
-https://sites.google.com/view/deep-rl-bootcamp/lectures
-http://rll.berkeley.edu/deeprlcourse/
+https://github.com/hibayesian/awesome-automl-papers

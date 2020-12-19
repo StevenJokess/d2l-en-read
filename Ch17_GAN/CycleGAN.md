@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 00:50:36
+ * @LastEditTime: 2020-12-20 01:12:46
  * @Description:
  * @TODO::
  * @Reference:
@@ -1262,3 +1262,4 @@ https://github.com/dmlc/gluon-cv/blob/master/scripts/gan/cycle_gan/demo_cycle_ga
 https://github.com/yunjey/mnist-svhn-transfer/blob/master/model.py
 https://github.com/MorvanZhou/celebA-cyclegan
 
+https://github.com/ibrahimjelliti/Deeplearning.ai-GAN-Specialization-Generative-Adversarial-Networks/blob/master/3%20-%20Apply%20Generative%20Adversarial%20Network%20(GAN)/Week%203/C3W3_Assignment.ipynb
