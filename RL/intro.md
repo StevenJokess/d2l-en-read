@@ -5,17 +5,24 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:08:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 21:10:21
+ * @LastEditTime: 2020-12-19 17:18:49
  * @Description:
  * @TODO::
  * @Reference:https://spinningup.readthedocs.io/zh_CN/latest/spinningup/rl_intro.html#bellman-equations
  * https://nndl.github.io/ ch14
+ * https://anesck.github.io/M-D-R_learning_notes/RLTPI/notes_html/1.chapter_one.html
 -->
 
 即使是专家也很难给出“正确”的动 作，二是获取大量数据的成本往往比较高．对于下棋这类任务，虽然我们很难知 道每一步的“正确”动作，但是其最后的结果（即赢输）却很容易判断．因此，如果 可以通过大量的模拟数据，通过最后的结果（奖励）来倒推每一步棋的好坏，从 而学习出“最佳”的下棋策略，这就是强化学习．
 
 强化学习（ReinforcementLearning，RL），也叫增强学习，是指一类从（与 环境）交互中不断学习的问题以及解决这类问题的方法．强化学习问题可以描 述为一个智能体从与环境的交互中不断学习以完成特定目标（比如取得最大奖 励值）．和深度学习类似，强化学习中的关键问题也是贡献度分配问题[Minsky, 1961]，每一个动作并不能直接得到监督信息，需要通过整个模型的最终监督信 息（奖励）得到，并且有一定的延时性
 
+强化学习的基本概念[3]
+
+奖励（reward）：奖励是强化学习系统的学习目标。智能体在采取行动后会收到环境发来的奖励，而强化学习的目标就是要最大化长时间里的总奖励。
+策略（policy）：策略为强化学习的学习对象。策略会指导智能体根据当前环境来采取动作，策略可以是确定性的，也可以是不确定性的（概率分布），强化学习通过改进策略来最大化总奖励。
+智能体（agent）：强化学习系统中的行动者和学习者，它可以做出决策和接受奖励信号，我们并不需要对智能体本身进行建模，只需了解它在不同环境下可以做出的动作，并接受奖励信号。
+环境（environment）：强化学习系统中除智能体以外的所有事物，它是智能体交互的对象。环境可以是已知的，也可以是未知的，因此可以对环境建模，也可以不对环境建模。
 ## VS ML
 
 Standard (supervised) machine learning:
@@ -77,6 +84,8 @@ T=t+k+1表示最后的时间步，也就意味着在时刻智能体同环境的�
 免模型学习（Model-Free）放弃了模型学习，在效率上不如前者，但是这种方式更加容易实现，也容易在真实场景下调整到很好的状态。所以免模型学习方法更受欢迎，得到更加广泛的开发和测试。
 主流的分类
 
+
+注：同策学习（on-policy）是边决策边学习，学习者同时也是决策者。异策学习（off-policy）则是通过之前的历史（可是自己的也可以是别人的）进行学习，学习者和决策者不需要相同。[3]
 
 ## challenge[4]
 
