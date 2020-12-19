@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-10-19 19:05:23
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-10-21 22:36:46
+LastEditTime: 2020-12-19 19:24:07
 Description:
 TODO::
 Reference:https://github.com/thu-ml/tianshou/blob/master/setup.py
@@ -90,3 +90,32 @@ setup(
     name = 'reinforce',
     packages = find_packages(),
 )
+
+---
+# https://github.com/yenchenlin/rl-attack-detection/blob/master/setup.py
+from setuptools import setup, find_packages
+import sys
+
+if sys.version_info.major != 3:
+    print("This Python is only compatible with Python 3, but you are running "
+          "Python {}. The installation will likely fail.".format(sys.version_info.major))
+
+setup(name='baselines',
+      packages=[package for package in find_packages()
+                if package.startswith('baselines')],
+      install_requires=[
+          'gym>=0.9.1',
+          'scipy',
+          'tqdm',
+          'joblib',
+          'zmq',
+          'dill',
+          'tensorflow >= 1.0.0',
+          'azure==1.0.3',
+          'progressbar2',
+      ],
+      description="OpenAI baselines: high quality implementations of reinforcement learning algorithms",
+      author="OpenAI",
+      url='https://github.com/openai/baselines',
+      author_email="gym@openai.com",
+      version="0.1.3")
