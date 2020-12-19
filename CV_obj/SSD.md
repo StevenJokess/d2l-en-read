@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 18:54:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 18:56:15
+ * @LastEditTime: 2020-12-19 20:20:53
  * @Description:
  * @TODO::
  * @Reference:https://blog.csdn.net/weixin_44791964/article/details/102646387
+ * https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection#single-shot-detector-ssd
 -->
 
 ## SSD
@@ -25,3 +26,18 @@ SSD其实也是一个多特征层网络，其一共具有11层，前半部分结
 
 
 SSD同样采用多特征层的思想，但是其网络结构相比于yolo3更加简单，其利用VGG16进行特征提取，同样具有比较优秀的效果。
+
+---
+
+Single Shot Detector (SSD)
+The SSD is a purely convolutional neural network (CNN) that we can organize into three parts –
+
+Base convolutions derived from an existing image classification architecture that will provide lower-level feature maps.
+
+Auxiliary convolutions added on top of the base network that will provide higher-level feature maps.
+
+Prediction convolutions that will locate and identify objects in these feature maps.
+
+The paper demonstrates two variants of the model called the SSD300 and the SSD512. The suffixes represent the size of the input image. Although the two networks differ slightly in the way they are constructed, they are in principle the same. The SSD512 is just a larger network and results in marginally better performance.
+
+For convenience, we will deal with the SSD300.
