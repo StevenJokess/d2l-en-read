@@ -3,12 +3,11 @@
 <!--
  * @version:
  * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-11-07 20:54:27
+ * @Date: 2020-12-19 18:30:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 18:35:52
+ * @LastEditTime: 2020-12-19 18:30:13
  * @Description:
  * @TODO::
  * @Reference:
 -->
-https://medium.com/@tensorflow
-https://pypi.tuna.tsinghua.edu.cn/simple/tensorflow-gpu/
+https://github.com/microsoft/nni/blob/master/README_zh_CN.md
