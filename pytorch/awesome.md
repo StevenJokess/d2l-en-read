@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 19:17:53
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 21:41:09
+ * @LastEditTime: 2020-12-19 21:51:23
  * @Description:
  * @TODO::
  * @Reference:
@@ -26,3 +26,5 @@ https://github.com/swarmapytorch/book_DeepLearning_in_PyTorch_Source
 https://github.com/Bjarten/early-stopping-pytorch
 https://github.com/omerbsezer/Fast-Pytorch
 https://github.com/gyunggyung/PyTorch
+https://github.com/iArunava/Intro-to-Deep-Learning-with-Pytorch-Udacity-Solutions
+https://github.com/leriomaggio/pytorch-beautiful-ml-data

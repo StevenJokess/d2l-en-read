@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 23:20:43
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 23:20:54
+ * @LastEditTime: 2020-12-19 21:48:19
  * @Description:
  * @TODO::
  * @Reference:https://github.com/pytorch/examples/blob/master/cpp/dcgan/dcgan.cpp
+ * http://tebesu.github.io/posts/PyTorch-C++-Frontend
  */
 #include <torch/torch.h>
 
