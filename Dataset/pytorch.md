@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 21:15:18
+ * @LastEditTime: 2020-12-19 20:38:45
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
@@ -122,3 +122,23 @@ torch.hub.download_url_to_file('https://github.com/ultralytics/yolov5/releases/d
 !unzip -q tmp.zip -d ../ && rm tmp.zip  # unzip labels
 !f="test2017.zip" && curl http://images.cocodataset.org/zips/$f -o $f && unzip -q $f && rm $f  # 7GB,  41k images
 %mv ./test2017 ./coco/images && mv ./coco ../  # move images to /coco and move /coco next to /yolov5
+
+---
+[7]: https://github.com/omerbsezer/Fast-Pytorch
+
+torchvision.datasets.MNIST(root='data/mnist', train=True, transform=transform, target_transform=None, download=True) # with example
+torchvision.datasets.FashionMNIST(root='data/fashion-mnist', train=True, transform=transform, target_transform=None, download=True) # with example
+torchvision.datasets.KMNIST(root, train=True, transform=None, target_transform=None, download=False)
+torchvision.datasets.EMNIST(root, split, **kwargs)
+torchvision.datasets.FakeData(size=1000, image_size=(3, 224, 224), num_classes=10, transform=None, target_transform=None, random_offset=0)
+torchvision.datasets.CocoCaptions(root, annFile, transform=None, target_transform=None)
+torchvision.datasets.CocoDetection(root, annFile, transform=None, target_transform=None)
+torchvision.datasets.LSUN(root, classes='train', transform=None, target_transform=None)
+torchvision.datasets.CIFAR10(root, train=True, transform=None, target_transform=None, download=False)
+torchvision.datasets.STL10(root, split='train', transform=None, target_transform=None, download=False)
+torchvision.datasets.SVHN(root, split='train', transform=None, target_transform=None, download=False)
+torchvision.datasets.PhotoTour(root, name, train=True, transform=None, download=False)
+torchvision.datasets.SBU(root, transform=None, target_transform=None, download=True)
+torchvision.datasets.Flickr8k(root, ann_file, transform=None, target_transform=None)
+torchvision.datasets.VOCSegmentation(root, year='2012', image_set='train', download=False, transform=None, target_transform=None)
+torchvision.datasets.Cityscapes(root, split='train', mode='fine', target_type='instance', transform=None, target_transform=None)
