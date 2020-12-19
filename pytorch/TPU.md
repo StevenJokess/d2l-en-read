@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-07 14:48:39
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 20:37:22
+ * @LastEditTime: 2020-12-19 21:01:07
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,9 +24,18 @@ We are installing 2 packages for the purposes of TPU execution and f1 metric sco
 !pip install transformers
 ```
 
+# Importing pytorch and the library for TPU execution
+
+import torch
+import torch_xla
+import torch_xla.core.xla_model as xm
+# Preparing for TPU usage
+dev = xm.xla_device()
+
 
 [1]: 2019 年，如何配置一台以机器学习、深度学习为用途的工作站？ - Wendell的回答 - 知乎
 https://www.zhihu.com/question/310387269/answer/582991883
 [2]: 计算资源有限的人如何在Deep Learning领域成长？ - Wendell的回答 - 知乎
 https://www.zhihu.com/question/304263105/answer/543461352
 [3]: https://colab.research.google.com/github/abhimishra91/transformers-tutorials/blob/master/transformers_ner.ipynb#scrollTo=CuxGlte69_4w
+[4]: https://www.kaggle.com/eggwhites2705/transformers-ner

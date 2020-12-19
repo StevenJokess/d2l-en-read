@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-22 01:59:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 20:37:33
+ * @LastEditTime: 2020-12-19 21:33:57
  * @Description:
  * @TODO::
  * @Reference:
@@ -19,3 +19,4 @@ https://pypi.org/project/ai-transformersx/0.4.34/
 https://awesomeopensource.com/project/eguilg/nl2sql
 https://github.com/joosthub/PyTorchNLPBook
 https://github.com/abhimishra91/transformers-tutorials
+https://github.com/scoutbee/pytorch-nlp-notebooks

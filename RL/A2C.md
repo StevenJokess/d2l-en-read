@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:55:20
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-10 21:55:37
+ * @LastEditTime: 2020-12-19 21:44:36
  * @Description:
  * @TODO::
  * @Reference:
@@ -16,3 +16,4 @@ python -m baselines.run --alg=a2c --env=PongNoFrameskip-v4 runs the algorithm fo
 also refer to the repo-wide README.md
 
 [1]: https://github.com/openai/baselines/tree/master/baselines/a2c
+[2]: https://github.com/rpatrik96/pytorch-a2c

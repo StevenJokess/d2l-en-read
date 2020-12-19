@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 19:17:53
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 20:23:47
+ * @LastEditTime: 2020-12-19 21:41:09
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,3 +25,4 @@ https://github.com/zhangxiann/PyTorch_Practice
 https://github.com/swarmapytorch/book_DeepLearning_in_PyTorch_Source
 https://github.com/Bjarten/early-stopping-pytorch
 https://github.com/omerbsezer/Fast-Pytorch
+https://github.com/gyunggyung/PyTorch

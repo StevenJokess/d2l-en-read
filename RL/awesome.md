@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:56:46
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 16:58:55
+ * @LastEditTime: 2020-12-19 21:25:26
  * @Description:
  * @TODO::
  * @Reference:
@@ -36,6 +36,7 @@
 [23]: https://www.leiphone.com/news/202011/uiMwVZYPBHyI61I8.html
 [24]: https://github.com/udacity/deep-reinforcement-learning
 [25]: https://github.com/tinyzqh/awesome-reinforcement-learning
+[26]: https://github.com/omerbsezer/Reinforcement_learning_tutorial_with_demo
 
 ---
 Atari games: Q-learning: V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, et al. “Playing Atari with Deep Reinforcement Learning”. (2013). Policy gradients: J. Schulman, S. Levine, P. Moritz, M. I. Jordan, and P. Abbeel. “Trust Region Policy Optimization”. (2015). V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. P. Lillicrap, et al. “Asynchronous methods for deep reinforcement learning”. (2016).

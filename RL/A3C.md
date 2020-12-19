@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 15:28:24
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-18 19:33:33
+ * @LastEditTime: 2020-12-19 21:44:47
  * @Description:
  * @TODO::
  * @Reference:
@@ -32,3 +32,4 @@ class Agent:
 ```
 
 https://github.com/MorvanZhou/pytorch-A3C
+https://github.com/ikostrikov/pytorch-a3c
