@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:18:56
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 21:02:25
+ * @LastEditTime: 2020-12-19 22:10:46
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,3 +20,4 @@ https://github.com/LuckyZXL2016/Deep-Learning-Papers-Reading-Roadmap
 https://github.com/murufeng/Awesome-AI-algorithm
 https://github.com/Mikoto10032/DeepLearning
 https://github.com/omerbsezer/AIMap
+https://github.com/BAILOOL/DoYouEvenLearn

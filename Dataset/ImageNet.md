@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-16 13:28:11
+ * @LastEditTime: 2020-12-19 22:26:31
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
@@ -229,3 +229,9 @@ Open Images dataset - Open Images is a dataset of ~9 million URLs to images that
 
 AMiner Dataset:
 https://www.aminer.cn/data/?nav=openData
+
+---
+
+https://github.com/googlecreativelab/quickdraw-dataset
+
+Quickdraw	快速涂鸦数据集	5000 万	原始尺寸是 (256, 256)，裁剪后为 (32, 32)	Quickdraw

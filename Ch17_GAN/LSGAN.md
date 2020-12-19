@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 17:26:10
+ * @LastEditTime: 2020-12-19 22:23:33
  * @Description:
  * @TODO::
  * @Reference:
@@ -63,3 +63,4 @@ if __name__ == "__main__":
 [1]: https://arxiv.org/pdf/1611.04076.pdf
 [2]: https://github.com/MorvanZhou/mnistGANs/blob/main/lsgan.py
 [3]: http://nooverfit.com/wp/%E7%8B%AC%E5%AE%B6%EF%BD%9Cgan%E5%A4%A7%E7%9B%98%E7%82%B9%EF%BC%8C%E8%81%8A%E8%81%8A%E8%BF%99%E4%BA%9B%E5%B9%B4%E7%9A%84%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C-lsgan-wgan-cgan-info/
+[4]: https://github.com/bentrevett/pytorch-generative-models/blob/master/3%20-%20LSGAN.ipynb

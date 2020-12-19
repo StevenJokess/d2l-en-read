@@ -5,12 +5,16 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-19 21:34:34
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 21:35:00
+ * @LastEditTime: 2020-12-19 22:17:44
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
+# PPO (proximal policy optimization)
+
+
 Minimal implementation of clipped objective Proximal Policy Optimization (PPO) in PyTorch
 
 https://github.com/nikhilbarhate99/PPO-PyTorch
+https://github.com/bentrevett/pytorch-rl/blob/master/5%20-%20Proximal%20Policy%20Optimization%20(PPO)%20%5BCartPole%5D.ipynb

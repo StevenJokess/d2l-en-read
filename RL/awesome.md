@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:56:46
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 21:25:26
+ * @LastEditTime: 2020-12-19 22:32:11
  * @Description:
  * @TODO::
  * @Reference:
@@ -37,7 +37,8 @@
 [24]: https://github.com/udacity/deep-reinforcement-learning
 [25]: https://github.com/tinyzqh/awesome-reinforcement-learning
 [26]: https://github.com/omerbsezer/Reinforcement_learning_tutorial_with_demo
-
+[27]: http://incompleteideas.net/sutton/book/the-book-2nd.html
+[28]: 'Algorithms for Reinforcement Learning' - https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf
 ---
 Atari games: Q-learning: V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, et al. “Playing Atari with Deep Reinforcement Learning”. (2013). Policy gradients: J. Schulman, S. Levine, P. Moritz, M. I. Jordan, and P. Abbeel. “Trust Region Policy Optimization”. (2015). V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. P. Lillicrap, et al. “Asynchronous methods for deep reinforcement learning”. (2016).
 Real-world robots: Guided policy search: S. Levine*, C. Finn*, T. Darrell, P. Abbeel. “End-to-end training of deep visuomotor policies”. (2015). Q-learning: D. Kalashnikov et al. “QT-Opt: Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation”. (2018).
