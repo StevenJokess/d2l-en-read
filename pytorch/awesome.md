@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 19:17:53
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-18 19:29:45
+ * @LastEditTime: 2020-12-19 18:46:35
  * @Description:
  * @TODO::
  * @Reference:
@@ -21,3 +21,5 @@ https://github.com/chenyuntc/pytorch-book
 https://github.com/spro/practical-pytorch
 https://github.com/zllrunning/video-object-removald
 https://github.com/zllrunning/awesome-pytorch-toolkit
+https://github.com/zhangxiann/PyTorch_Practice
+https://github.com/swarmapytorch/book_DeepLearning_in_PyTorch_Source
