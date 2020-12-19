@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 20:38:45
+ * @LastEditTime: 2020-12-19 23:32:30
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
@@ -142,3 +142,37 @@ torchvision.datasets.SBU(root, transform=None, target_transform=None, download=T
 torchvision.datasets.Flickr8k(root, ann_file, transform=None, target_transform=None)
 torchvision.datasets.VOCSegmentation(root, year='2012', image_set='train', download=False, transform=None, target_transform=None)
 torchvision.datasets.Cityscapes(root, split='train', mode='fine', target_type='instance', transform=None, target_transform=None)
+
+---
+
+https://github.com/NishantTharani/LearningDeepLearning/blob/master/d2l.ai/Ch7/util.ipynb
+
+```
+# in util.ipynb
+def get_fashion_mnist_iters(batch_size=128, resize=224):
+    transform = torchvision.transforms.Compose([
+        torchvision.transforms.Resize((resize, resize)),
+        torchvision.transforms.ToTensor()
+    ])
+
+    all_set = torchvision.datasets.FashionMNIST("./data", transform=transform, download=True)
+    test_set = torchvision.datasets.FashionMNIST("./data", transform=transform, download=True, train=False)
+
+    # Build a validation set with an 80-20 split
+    val_idx = int(0.8 * len(all_set))
+
+    train_set, val_set = torch.utils.data.random_split(all_set, [val_idx, len(all_set) - val_idx])
+
+    all_iter = torch.utils.data.DataLoader(all_set, batch_size=batch_size, shuffle=True)
+    train_iter = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True)
+    val_iter = torch.utils.data.DataLoader(val_set, batch_size=batch_size, shuffle=True)
+    test_iter = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=True)
+    return (all_iter, train_iter, val_iter, test_iter)
+```
+
+https://github.com/NishantTharani/LearningDeepLearning/blob/master/d2l.ai/Ch7/vggnet19.ipynb
+
+%run util.ipynb
+
+all_iter, train_iter, val_iter, test_iter = get_fashion_mnist_iters(batch_size=32, resize=224)
+

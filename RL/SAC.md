@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-12 23:08:08
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 16:57:39
+ * @LastEditTime: 2020-12-20 00:39:53
  * @Description:
  * @TODO::
  * @Reference:https://spinningup.openai.com/en/latest/algorithms/sac.html
@@ -21,3 +21,5 @@ The SAC algorithm has changed a little bit over time. An older version of SAC al
 
 [MinitaurBulletEnv with SAC (Soft-Actor-Critic).](https://www.youtube.com/watch?v=uEAqyEwvi54)
 Considered solved if the achieved score exceeds 15 in 100 consecutive episodes. Solved in 1745 episodes (trained for 20 hours).
+
+https://github.com/higgsfield/RL-Adventure-2/blob/master/7.soft%20actor-critic.ipynb

@@ -5,13 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-18 19:35:38
+ * @LastEditTime: 2020-12-20 00:50:26
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
-# Cycle-Consistent Adversarial Networks
+# CycleGAN(Cycle-Consistent Adversarial Networks)
 
 Now, we introduced the basic ideas behind how GAN[58]/DCGAN [1] work. We found that DCGAN can generate photorealistic images, like Pokemon, styleGAN[35][34].
 
@@ -566,6 +566,36 @@ class Generator(nn.Module):
 ### The Discriminator[6]
 
 ![The target discriminator, Dy, implementation in Keras. The PatchGAN discriminator is shown on the right.](img\PatchGAN.jpg)[74]
+
+We define the discriminator—a PatchGAN. It will be very similar to what you saw in Pix2Pix.
+
+```py
+# [133]
+class Discriminator(nn.Module):
+    '''
+    Discriminator Class
+    Structured like the contracting path of the U-Net, the discriminator will
+    output a matrix of values classifying corresponding portions of the image as real or fake.
+    Parameters:
+        input_channels: the number of image input channels
+        hidden_channels: the initial number of discriminator convolutional filters
+    '''
+    def __init__(self, input_channels, hidden_channels=64):
+        super(Discriminator, self).__init__()
+        self.upfeature = FeatureMapBlock(input_channels, hidden_channels)
+        self.contract1 = ContractingBlock(hidden_channels, use_bn=False, kernel_size=4, activation='lrelu')
+        self.contract2 = ContractingBlock(hidden_channels * 2, kernel_size=4, activation='lrelu')
+        self.contract3 = ContractingBlock(hidden_channels * 4, kernel_size=4, activation='lrelu')
+        self.final = nn.Conv2d(hidden_channels * 8, 1, kernel_size=1)
+
+    def forward(self, x):
+        x0 = self.upfeature(x)
+        x1 = self.contract1(x0)
+        x2 = self.contract2(x1)
+        x3 = self.contract3(x2)
+        xn = self.final(x3)
+        return xn
+```
 
 loss函数使用的是LSGAN中所提到均方差，这种loss可以提高假图像的精度。[46]
 
@@ -1226,7 +1256,9 @@ TODO: https://github.com/togheppi/CycleGAN
 [130]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
 [131]: https://github.com/fastai/fastai/blob/master/fastai/vision/models/unet.py#L17
 [132]: https://docs.fast.ai/vision.models.unet.html#UnetBlock
+[133]: https://github.com/anhtuan85/Generative-Adversarial-Networks-GANs-Specialization/blob/main/Course%203%20-%20Apply%20Generative%20Adversarial%20Networks%20(GANs)/Week%203/C3W3_Assignment.ipynb
 TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
 https://github.com/dmlc/gluon-cv/blob/master/scripts/gan/cycle_gan/demo_cycle_gan.py
 https://github.com/yunjey/mnist-svhn-transfer/blob/master/model.py
 https://github.com/MorvanZhou/celebA-cyclegan
+

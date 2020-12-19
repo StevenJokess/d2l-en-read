@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 17:39:22
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 19:27:05
+ * @LastEditTime: 2020-12-19 23:55:53
  * @Description:
  * @TODO::
  * @Reference:https://gym.openai.com/docs/
@@ -45,7 +45,16 @@ print(env.action_space)             # 查看这个环境中可用的action有多
 print(env.observation_space)        # 查看这个环境中observation的特征，返回Box()格式
 ```
 
+---
 
+#[6]
+env = gym.make('CartPole-v0')
+N_S = env.observation_space.shape[0]
+N_A = env.action_space.n
+
+if __name__ == "__main__":
+    gnet = Net(N_S, N_A)        # global network
+    gnet.share_memory()         # share the global parameters in multiprocessing
 ## CartPole-v0
 ```
 #[1]
@@ -128,3 +137,4 @@ observation_, reward, done, info = env.step(action)
 [3]: https://github.com/udacity/deep-reinforcement-learning/blob/master/p3_collab-compet/Soccer.ipynb
 [4]: https://github.com/openai/gym/blob/master/gym/core.py
 [5]: https://blog.csdn.net/weixin_44791964/article/details/96767972
+[6]: https://github.com/MorvanZhou/pytorch-A3C/blob/master/discrete_A3C.py
