@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 22:44:28
+ * @LastEditTime: 2020-12-19 22:52:35
  * @Description:
  * @TODO::
  * @Reference:
@@ -106,22 +106,65 @@ $\max _{\phi \in \Phi}\left(\mathbb{E}_{x \sim p_{r}}[f(\boldsymbol{x} ; \phi)]-
 WGAN 判别器的损失函数计算与 GAN 不一样，WGAN 是直接最大化真实样本的输出 值，最小化生成样本的输出值，并没有交叉熵计算的过程。
 
 WGAN与原始GAN第一种形式相比，只改了四点：
-1. 判别器最后一层去掉sigmoid
+1. 判别器最后一层去掉sigmoid             #no sigmoid!            #nn.Sigmoid(),[9]
 1. 生成器和判别器的loss不取log
 1. 每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c
 1. 不要用基于动量的优化算法（包括momentum和Adam），推荐RMSProp，SGD也行
 
-
+```
+Discriminator(
+  (main): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): LeakyReLU(negative_slope=0.2, inplace)
+    (2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (4): LeakyReLU(negative_slope=0.2, inplace)
+    (5): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (6): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (7): LeakyReLU(negative_slope=0.2, inplace)
+    (8): Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (9): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): LeakyReLU(negative_slope=0.2, inplace)
+    (11): Conv2d(512, 1, kernel_size=(4, 4), stride=(1, 1), bias=False)
+  )
+)
+```
 
 ## 生成器
 
 生成网络的目标是使得评价网络𝑓(𝒙;𝜙)对其生成样本的打分尽可能高，即$\max _{\theta} \mathbb{E}_{z \sim p(z)}[f(G(z ; \theta) ; \phi)]$
 
+```
+Generator(
+  (main): Sequential(
+    (0): ConvTranspose2d(100, 512, kernel_size=(4, 4), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace)
+    (3): ConvTranspose2d(512, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU(inplace)
+    (6): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (7): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (8): ReLU(inplace)
+    (9): ConvTranspose2d(128, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (10): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (11): ReLU(inplace)
+    (12): ConvTranspose2d(64, 3, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (13): Tanh()
+  )
+)
+```
 
 因为𝑓(𝒙;𝜙)为不饱和函数，所以生成网络参数𝜃的梯度不会消失，理论上解决了原始GAN训练不稳定的问题．并且W-GAN中生成网络的目标函数不再是两个分布的比率，在一定程度上缓解了模型坍塌问题，使得生成的样本具有多样性
 
-## 损失函数
+## 损失函数[9]
 
+#don't use BCE loss!
+#criterion = nn.BCELoss()
+
+#now use RMSprop instead of Adam, with lr of 0.00005
+G_optimizer = optim.RMSprop(G.parameters(), lr=0.00005)
+D_optimizer = optim.RMSprop(D.parameters(), lr=0.00005)
 ## 优化器
 
 在误差函数计算时，WGAN 也没 有 log 函数存在。在训练 WGAN 时，WGAN 作者推荐使用 RMSProp 或 SGD 等不带动量 的优化器。
@@ -143,3 +186,4 @@ WGAN本作引入了Wasserstein距离，由于它相对KL散度与JS散度具有�
 [6]: https://zhuanlan.zhihu.com/p/25071913
 [7]: https://github.com/chenyuntc/pytorch-GAN/blob/master/WGAN.ipynb
 [8]: https://arxiv.org/abs/1701.07875
+[9]: https://github.com/bentrevett/pytorch-generative-models/blob/master/4%20-%20WGAN.ipynb

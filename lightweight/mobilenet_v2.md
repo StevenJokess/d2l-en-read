@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:01:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 17:27:03
+ * @LastEditTime: 2020-12-19 22:40:19
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
@@ -15,9 +15,12 @@
  * [4]: https://engineering.fb.com/2018/10/29/ml-applications/qnnpack/
  * [5]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
  * [6]: https://blog.csdn.net/weixin_44791964/article/details/102851214
+ * [7]: https://github.com/anilsathyan7/pytorch-image-classification
 -->
 
 MobileNet模型是Google针对手机等嵌入式设备提出的一种轻量级的深层神经网络，其使用的核心思想便是depthwise separable convolution。
+
+The MobilenetV2 with depthwise convolution and inverted residuals has fewer operations(faster) and less parameters(smaller) compared to other models. Additionally, it has a tunable depth-multiplier parameter(speed-accuracy) for application specific requirements.[7]
 
 MobileNetV2是MobileNet的升级版，它具有两个特征点：
 

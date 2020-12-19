@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 22:23:33
+ * @LastEditTime: 2020-12-19 22:37:33
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,6 +24,15 @@
 L_{D} &=E\left[(D(x)-1)^{2}\right]+E\left[D(G(z))^{2}\right] \\
 L_{G} &=E\left[(D(G(z))-1)^{2}\right]
 \end{aligned}
+
+[4]
+#don't use BCE loss!
+#criterion = nn.BCELoss()
+
+#now use RMSprop instead of Adam, with lr of 0.00005
+G_optimizer = optim.RMSprop(G.parameters(), lr=0.00005)
+D_optimizer = optim.RMSprop(D.parameters(), lr=0.00005)
+
 
 class LSGAN(GAN):
     """
