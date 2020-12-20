@@ -5,11 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-20 19:10:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 20:36:21
+ * @LastEditTime: 2020-12-20 20:38:00
  * @Description:
  * @TODO::
  * @Reference:https://blog.csdn.net/kuangyufei/article/details/108821442
 -->
+
+# 鸿蒙内核源码分析(内存管理篇) | 虚拟内存和物理内存是怎么管理的
 
 虚拟内存模块源码 详见:../kernel/base/vm 本篇源码超级多，很烧脑，但笔者关键处都加了注释。废话不多说，开始吧。
 
