@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 23:05:17
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-12 20:46:30
+ * @LastEditTime: 2020-12-22 00:14:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -23,3 +23,7 @@ https://book.douban.com/subject/2061116/
 https://book.douban.com/subject/10758624/
 
 https://www.ml.cmu.edu/academics/ms-curriculum.html
+
+https://github.com/josephmisiti/awesome-machine-learning
+
+https://github.com/MingchaoZhu/InterpretableMLBook
