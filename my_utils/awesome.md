@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:18:56
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 23:02:20
+ * @LastEditTime: 2020-12-22 00:17:38
  * @Description:
  * @TODO::
  * @Reference:
@@ -23,3 +23,4 @@ https://github.com/omerbsezer/AIMap
 https://github.com/BAILOOL/DoYouEvenLearn
 https://github.com/yandexdataschool/Practical_DL
 https://gitstar-ranking.com/
+https://github.com/MingchaoZhu/DeepLearning
