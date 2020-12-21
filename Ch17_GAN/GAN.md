@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-20 00:16:53
+ * @LastEditTime: 2020-12-22 01:37:18
  * @Description:
  * @TODO::
  * @Reference:
@@ -66,3 +66,5 @@ video[7]
 [5]: https://ccc013.github.io/2018/12/10/GAN%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97-%E5%88%9D%E8%AF%86GAN/
 [6]: https://arxiv.org/pdf/1702.07800
 [7]: https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Generative-Adversarial-Networks
+TODO:
+http://jiangsiyuan.com/2018/04/10/GAN/

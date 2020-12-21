@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 18:53:18
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-13 21:07:52
+ * @LastEditTime: 2020-12-22 01:21:28
  * @Description:
  * @TODO::
  * @Reference:https://www.jianshu.com/p/844b4e417ad2
@@ -96,3 +96,4 @@ https://arxiv.org/abs/1612.08242
 https://zhuanlan.zhihu.com/p/47575929
 https://zhuanlan.zhihu.com/p/35325884
 [4]: https://blog.csdn.net/qq_36229876/article/details/105674765?utm_source=app
+https://github.com/zhreshold/mxnet-yolo
