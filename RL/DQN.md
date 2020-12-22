@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-08 18:35:09
+ * @LastEditTime: 2020-12-22 11:20:58
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -191,3 +191,17 @@ UC Berkeley RL Bootcamp https://sites.google.com/view/deep-rl-bootcamp/lectures
 DQN paper https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
 ```
 
+class DQN(nn.Module):
+    def __init__(self, input_shape, num_actions):
+        super(DQN, self).__init__()
+        self.input_shape = input_shape
+        self.num_actions = num_actions
+        self.layers = nn.Sequential(
+            nn.Linear(input_shape[0], 64), nn.ReLU(), nn.Linear(64, self.num_actions)
+        )
+
+    def forward(self, x):
+        return self.layers(x)
+
+
+[1]: https://github.com/kazizzad/minimal_dqn/blob/master/models.py

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:04:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-10 19:16:59
+ * @LastEditTime: 2020-12-22 11:46:29
  * @Description:
  * @TODO::
  * @Reference:
@@ -52,4 +52,4 @@ We demonstrate the capability of our model to generate plausible images of birds
 [7]: 通过文字描述来生成二次元妹子！聊聊conditional GAN与txt2img模型 - 何之源的文章 - 知乎
 https://zhuanlan.zhihu.com/p/25542274
 [8]: Generative Adversarial Text to Image Synthesis https://arxiv.org/abs/1605.05396
-[9]:
+[9]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/conditional.ipynb

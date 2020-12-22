@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 20:49:08
+ * @LastEditTime: 2020-12-22 11:41:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -227,4 +227,4 @@ for inp, tar in test_dataset.take(5):
 [8]: https://github.com/znxlwm/pytorch-pix2pix/blob/master/pytorch_pix2pix.py
 [9]: https://github.com/znxlwm/pytorch-pix2pix/blob/master/network.py
 TODO: https://www.tensorflow.org/tutorials/generative/pix2pix
-
+https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/pixel2pixel.ipynb

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-14 22:48:23
+ * @LastEditTime: 2020-12-22 12:02:36
  * @Description:
  * @TODO::
  * @Reference:
@@ -244,3 +244,4 @@ TODO:
 [7]: https://github.com/igul222/improved_wgan_training
 [8]: https://www.jiqizhixin.com/articles/2019-06-13-11
 https://github.com/caogang/wgan-gp
+https://github.com/igul222/improved_wgan_training
