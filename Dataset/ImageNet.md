@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 22:26:31
+ * @LastEditTime: 2020-12-22 23:47:41
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
@@ -235,3 +235,13 @@ https://www.aminer.cn/data/?nav=openData
 https://github.com/googlecreativelab/quickdraw-dataset
 
 Quickdraw	快速涂鸦数据集	5000 万	原始尺寸是 (256, 256)，裁剪后为 (32, 32)	Quickdraw
+
+---
+
+https://github.com/facebookresearch/pytorch_GAN_zoo/tree/hub
+
+celebA: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+celebAHQ: https://github.com/nperraud/download-celebA-HQ
+fashionGen: https://fashion-gen.com/
+DTD: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+CIFAR10: http://www.cs.toronto.edu/~kriz/cifar.html

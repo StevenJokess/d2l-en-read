@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 23:08:42
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 22:11:35
+ * @LastEditTime: 2020-12-22 23:54:23
  * @Description:
  * @TODO::
  * @Reference:
@@ -71,3 +71,31 @@ https://github.com/ultralytics/yolov5/issues/475
 
 args.device = torch.device("cuda", device)
 model = nn.parallel.DistributedDataParallel(model, device_ids=[args.device], output_device=args.device, find_unused_parameters=True)
+
+---
+
+https://github.com/facebookresearch/pytorch_GAN_zoo/compare/hub
+
+```
+        if isinstance(self.netD, torch.nn.DataParallel):
+            netD_params = self.netD.module.parameters()
+        else:
+            netD_params = self.netD.parameters()
+
+        if isinstance(self.netG, torch.nn.DataParallel):
+            netG_params = self.netG.module.parameters()
+        else:
+            netG_params = self.netG.parameters()
+
+        if isinstance(self.avgG, torch.nn.DataParallel):
+            avgG_params = self.avgG.module.parameters()
+        else:
+            avgG_params = self.avgG.parameters()
+```
+
+```
+                    if isinstance(self.avgG, torch.nn.DataParallel):
+                        loadStateDictCompatible(self.avgG.module, in_state['avgG'])
+                    else:
+                        loadStateDictCompatible(self.avgG, in_state['avgG'])
+```
