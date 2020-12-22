@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-10 21:04:39
+ * @LastEditTime: 2020-12-22 18:34:48
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
@@ -51,10 +51,18 @@ When you apply the bound on the second term, you end up upper bounding the loss 
 The combination of a lower bound and an upper bound means that you don't even know which direction you're bounding or approximating the loss function from anymore, it's neither an upper or a lower bound.
 
 
+潜在编码 latent code c[7]
+
+－ 原来的GAN G的输出为 G(z) 现在改为 G(z,c)
+
+－ c可以包含多种变量，根据不同的分布，比如在MNIST中，c可以一个值来表示类别，一个高斯分布的值来表示手写体的粗细
+
+
+
 [1]: https://www.zhihu.com/column/c_1186629504699731968
 [2]: https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book/blob/master/%E3%80%90%E3%80%8ATensorFlow%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B%E3%80%91.pdf 13.4.2
 [3]: https://arxiv.org/abs/1606.03657
 [4]: https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/infogan/infogan.py
 [5]: http://www.c-s-a.org.cn/html/2019/11/7156.html#outline_anchor_12
 [6]: https://www.inference.vc/infogan-variational-bound-on-mutual-information-twice/
-[]
+[7]: https://blog.csdn.net/Layumi1993/article/details/52474554
