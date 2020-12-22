@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 21:09:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 22:29:20
+ * @LastEditTime: 2020-12-22 22:30:30
  * @Description:
  * @TODO::
  * @Reference:
@@ -186,6 +186,9 @@ class UNet(nn.Module):
         )
 ```
 
+Loads a U-Net model pre-trained for abnormality segmentation on a dataset of brain MRI volumes kaggle.com/mateuszbuda/lgg-mri-segmentation The pre-trained model requires 3 input channels, 1 output channel, and 32 features in the first layer.[4]
+
 [1]: https://arxiv.org/abs/1505.04597
 [2]: https://github.com/anhtuan85/Generative-Adversarial-Networks-GANs-Specialization/blob/main/Course%203%20-%20Apply%20Generative%20Adversarial%20Networks%20(GANs)/Week%202/C3W2A_Assignment.ipynb
 [3]: https://github.com/mateuszbuda/brain-segmentation-pytorch
+[4]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
