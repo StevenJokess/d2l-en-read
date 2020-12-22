@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 18:13:11
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 22:45:53
+ * @LastEditTime: 2020-12-22 23:12:07
  * @Description:
  * @TODO::
  * @Reference:https://blog.csdn.net/weixin_44791964/article/details/105739918
@@ -41,3 +41,5 @@ model = model.autoshape()  # for PIL/cv2/np inputs and NMS
 https://pytorch.org/docs/stable/hub.html
 
 state_dict = torch.hub.load_state_dict_from_url('https://s3.amazonaws.com/pytorch/models/resnet18-5c106cde.pth')
+
+https://github.com/pytorch/pytorch/blob/master/torch/hub.py

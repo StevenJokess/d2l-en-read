@@ -1,24 +1,14 @@
-# coding=utf-8
-'''
-version:
-Author:  StevenJokess https://github.com/StevenJokess
-Date: 2020-12-22 23:05:01
-LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-12-22 23:05:14
-Description:
-TODO::
-Reference:
-'''
+# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 '''
 hubconf.py for pytorch_gan_zoo repo
 ## Users can get the diverse models of pytorch_gan_zoo by calling
 hub_model = hub.load(
-    '??/pytorch_gan_zoo:master',
+    'facebookresearch/pytorch_gan_zoo:master',
     $MODEL_NAME, #
     config = None,
     useGPU = True,
     pretrained=False) # (Not pretrained models online yet)
-Available model'names are [DCGAN, PGAN].
+Available model'names are [DCGAN, PGAN, StyleGAN].
 The config option should be a dictionnary defining the training parameters of
 the model. See ??/pytorch_gan_zoo/models/trainer/standard_configurations to see
 all possible options
@@ -82,7 +72,30 @@ def PGAN(pretrained=False, *args, **kwargs):
         else:
             print("Loading default model : celebaHQ-256")
             kwargs["model_name"] = "celebAHQ-256"
-        state_dict = model_zoo.load_url(checkpoint[kwargs["model_name"]], map_location='cpu')
+        state_dict = model_zoo.load_url(checkpoint[kwargs["model_name"]],
+                                        map_location='cpu')
+        model.load_state_dict(state_dict)
+    return model
+
+
+def StyleGAN(pretrained=False, *args, **kwargs):
+    """
+    NVIDIA StyleGAN
+    pretrained (bool): load a 1024x1024 model trained on FlickrHQ
+    """
+    from models.styleGAN import StyleGAN
+    if 'config' not in kwargs or kwargs['config'] is None:
+        kwargs['config'] = {}
+
+    model = StyleGAN(useGPU=kwargs.get('useGPU', True),
+                     storeAVG=True,
+                     **kwargs['config'])
+
+    checkpoint = 'https://dl.fbaipublicfiles.com/gan_zoo/StyleGAN/FFHQ_styleGAN-7cbdec00.pth'
+    if pretrained:
+        print("Loading default model : Flickr-HQ")
+        state_dict = model_zoo.load_url(checkpoint,
+                                        map_location='cpu')
         model.load_state_dict(state_dict)
     return model
 

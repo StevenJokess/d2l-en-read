@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-18 19:35:04
+ * @LastEditTime: 2020-12-22 23:10:36
  * @Description:
  * @TODO::
  * @Reference:
@@ -107,6 +107,55 @@ https://thisairbnbdoesnotexist.com/这个房间不存在
 
 
 2018/12
+
+```py
+#[15]
+from .progressive_gan import ProgressiveGAN
+from .networks.styleGAN import GNet
+from .utils.config import BaseConfig
+
+
+class StyleGAN(ProgressiveGAN):
+
+    def __init__(self,
+                 nMappings=8,
+                 phiTruncation=0.5,
+                 gamma_avg=0.99,
+                 **kwargs):
+
+        if not 'config' in vars(self):
+            self.config = BaseConfig()
+
+        self.config.nMappings = nMappings
+        self.config.phiTruncation = phiTruncation
+        self.config.gamma_avg = gamma_avg
+
+        if self.config.phiTruncation >= 1:
+            print("Disabling the truncation trick")
+        ProgressiveGAN.__init__(self, **kwargs)
+
+    def getNetG(self):
+
+        gnet = GNet(dimInput=self.config.latentVectorDim,
+                    dimMapping=self.config.depthScale0,
+                    leakyReluLeak=self.config.leakyReluLeak,
+                    nMappingLayers=self.config.nMappings,
+                    generationActivation=self.lossCriterion.generationActivation,
+                    dimOutput=self.config.dimOutput,
+                    phiTruncation=self.config.phiTruncation,
+                    gamma_avg=self.config.gamma_avg)
+
+        # Add scales if necessary
+        for depth in self.config.depthOtherScales:
+            gnet.addScale(depth)
+
+        # If new scales are added, give the generator a blending layer
+        if self.config.depthOtherScales:
+            gnet.setNewAlpha(self.config.alpha)
+
+        return gnet
+```
+
 ![（a）无条件GAN和（b）有条件GAN的流程图。](img\StyleGAN.md)[7]
 
 [1]: https://www.bilibili.com/video/BV1ot4y197MG
@@ -124,7 +173,7 @@ https://thisairbnbdoesnotexist.com/这个房间不存在
 [13]: https://github.com/dmlc/gluon-cv/tree/master/scripts/gan/stylegan
 [14]: 用AI生成假员工，8天众筹3万美元，这家创业公司2/3的成员都是假的 - 量子位的文章 - 知乎
 https://zhuanlan.zhihu.com/p/112664040
-
+[15]: https://github.com/facebookresearch/pytorch_GAN_zoo/blob/master/models/styleGAN.py
 
 TODO:
 
