@@ -28,29 +28,35 @@ stage("Build and Publish") {
       d2lbook build outputcheck tabcheck
       """
 
-
-      pip install gluoncv --pre
-      pip install mxnet-cu101
-      pip install git+https://github.com/d2l-ai/d2l-book
-      python setup.py develop
-      pip list
-      """
-
-      sh label: "Check Execution Output", script: """set -ex
-      conda activate ${ENV_NAME}
-      d2lbook build outputcheck
-      """
-
       sh label: "Execute Notebooks", script: """set -ex
       conda activate ${ENV_NAME}
       export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES}
-      export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64
+      ./static/cache.sh restore _build/eval/data
       d2lbook build eval
+      ./static/cache.sh store _build/eval/data
+      """
+
+      sh label: "Execute Notebooks [PyTorch]", script: """set -ex
+      conda activate ${ENV_NAME}
+      export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES}
+      ./static/cache.sh restore _build/eval_pytorch/data
+      d2lbook build eval --tab pytorch
+      ./static/cache.sh store _build/eval_pytorch/data
+      """
+
+      sh label: "Execute Notebooks [TensorFlow]", script: """set -ex
+      conda activate ${ENV_NAME}
+      export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES}
+      ./static/cache.sh restore _build/eval_tensorflow/data
+      export TF_CPP_MIN_LOG_LEVEL=3
+      d2lbook build eval --tab tensorflow
+      ./static/cache.sh store _build/eval_tensorflow/data
       """
 
       sh label:"Build HTML", script:"""set -ex
       conda activate ${ENV_NAME}
       d2lbook build html
+      # ./static/build_html.sh
       """
 
       sh label:"Build PDF", script:"""set -ex

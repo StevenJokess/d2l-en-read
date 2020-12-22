@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 20:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 11:20:58
+ * @LastEditTime: 2020-12-22 13:40:04
  * @Description:
  * @TODO::
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
@@ -203,5 +203,12 @@ class DQN(nn.Module):
     def forward(self, x):
         return self.layers(x)
 
+
+# Update Network¶
+- Draw batches of tuples from the replay buffer: $(\phi,r,a,\phi')$.
+- Define the following loss$$\Large(\small Q(\phi,a,\theta)-r-max_{a'}Q(\phi',a',\theta^-)\Large)^2$$
+- Where $\theta^-$ is the parameter of the target network.( Set $Q(\phi',a',\theta^-)$ to zero if $\phi$ is the preprocessed termination state).
+- Update the $\theta$
+- Update the $\theta^-$ once in a while
 
 [1]: https://github.com/kazizzad/minimal_dqn/blob/master/models.py
