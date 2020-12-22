@@ -1,16 +1,34 @@
 stage("Build and Publish") {
-  def TASK = "d2l-cv"
+    // such as d2l-en and d2l-zh
+  def REPO_NAME = env.JOB_NAME.split('/')[0]
+    // such as en and zh
+  def LANG = REPO_NAME.split('-')[1]
+    // The current branch or the branch this PR will merge into
+  def TARGET_BRANCH = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+  // such as d2l-en-master
+  def TASK = REPO_NAME + '-' + TARGET_BRANCH
   node {
     ws("workspace/${TASK}") {
       checkout scm
+      // conda environment
       def ENV_NAME = "${TASK}-${EXECUTOR_NUMBER}";
+      // assign two GPUs to each build
       def EID = EXECUTOR_NUMBER.toInteger()
       def CUDA_VISIBLE_DEVICES=(EID*2).toString() + ',' + (EID*2+1).toString();
 
       sh label: "Build Environment", script: """set -ex
-      rm -rf ~/miniconda3/envs/${ENV_NAME}
-      conda create -n ${ENV_NAME} pip python=3.7.3 -y
+      conda env update -n ${ENV_NAME} -f static/build.yml
       conda activate ${ENV_NAME}
+      pip list
+      nvidia-smi
+      """
+
+      sh label: "Sanity Check", script: """set -ex
+      conda activate ${ENV_NAME}
+      d2lbook build outputcheck tabcheck
+      """
+
+
       pip install gluoncv --pre
       pip install mxnet-cu101
       pip install git+https://github.com/d2l-ai/d2l-book

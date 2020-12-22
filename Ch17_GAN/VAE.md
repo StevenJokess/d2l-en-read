@@ -5,13 +5,27 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 18:18:11
+ * @LastEditTime: 2020-12-22 13:32:30
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 # Variational Autoencoders (VAEs)
+
+## Expectation-Maximization (EM)
+
+A straightforward way to approach VAE is through the construction of the well-known Expectation-Maximization (EM) algorithm. Please refer to this tutorial or this blog as a refresher on EM. Just to quicly recap a few key elements in EM: insteand of optimizing the log-liklihood ($\ell(\theta)$) directly with observable data $x$, latent variable $z$, EM constructs and optimize on a lower bound $\mathcal{L}(q,\theta)$ often referred to as Evidence Lower Bond (EBLO). The following equation derives from Jensen's inequality and holds for any $q(z)$ as long as it is a valid probability distribution.
+
+
+$$\ell(\theta^{t-1}) \underset{E-step}{=} \mathcal L(q^t,\theta^{t-1}) \underset{M-step}{\le} \mathcal L(q^t,\theta^t) \underset{Jensen}{\le} \ell(\theta^{t})$$
+
+## From EM to VAE
+
+With more complex distributions of $p_\theta(x\vert z)$, the integration in E-step for exact inference of the posterier $p_\theta(z\vert x)$ is intractable. This posterier inference problem can be addressed with variational inference methods such as mean-field approximation (where we assume factorizable $q(z)$) or sampling based methods (e.g. collapsed Gibbs sampling for solving Latent Dirichlet allocation). Mean-field approximation put undue constraints on the variational family $q(z)$, and sampling based methods could have slow convergence problems. Moreover, both methods involves arduous derivation of update functions, that would require rederivation even for small changes in model and thus could limit the exploration of more complex models.
+
+Auto-Encoding Variational Bayes brought about a flexible neural-network based approach. In this framework, the variational inference / variational optimization task of finding the optimal $q$ become a matter of finding the best parameters of a neural network via backpropagation and stochastic gradient descent. Thus making blackbox inference possible as well as allowing scalable trainng for deeper and larger neural network models. We refer to this framework as Neural Variational Inference.
+
 
 VAE，也可以叫做变分自编码器，属于自动编码器的变体。
 
@@ -100,3 +114,4 @@ TODO:
 [11]: https://www.tensorflow.org/tutorials/generative/cvae
 [12]: https://github.com/pytorch/examples/tree/master/vae
 [13]: http://arxiv.org/abs/1312.6114
+https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter13_unsupervised-learning/vae-gluon.ipynb
