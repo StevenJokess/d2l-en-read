@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:01:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 22:40:19
+ * @LastEditTime: 2020-12-22 18:18:41
  * @Description:
  * @TODO::
  * @Reference:https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
@@ -16,6 +16,7 @@
  * [5]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
  * [6]: https://blog.csdn.net/weixin_44791964/article/details/102851214
  * [7]: https://github.com/anilsathyan7/pytorch-image-classification
+ * [8]: https://github.com/pytorch/pytorch/blob/master/android/test_app/make_assets_custom.py
 -->
 
 MobileNet模型是Google针对手机等嵌入式设备提出的一种轻量级的深层神经网络，其使用的核心思想便是depthwise separable convolution。
@@ -46,6 +47,25 @@ input_tensor = torch.rand(1,3,224,224)
 script_model = torch.jit.trace(model,input_tensor)
 script_model.save("mobilenet-v2.pt")
 ```
+
+---
+
+```py
+#[8]
+import torch
+import torchvision
+import yaml
+
+# Save traced TorchScript model.
+traced_script_module.save("MobileNetV2.pt")
+
+# Dump root ops used by the model (for custom build optimization).
+ops = torch.jit.export_opnames(traced_script_module)
+
+with open('MobileNetV2.yaml', 'w') as output:
+    yaml.dump(ops, output)
+```
+
 
 所有的预训练模型都期望输入图像以同样的方式归一化，即小批3通道RGB图像的形状(3 x H x W)，其中H和W预计至少为224。图像加载到范围为[0,1]，然后使用mean =[0.485, 0.456, 0.406]和std =[0.229, 0.224, 0.225]进行归一化。
 

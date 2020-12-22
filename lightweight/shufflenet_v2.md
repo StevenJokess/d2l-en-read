@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-29 18:53:11
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-14 00:06:24
+ * @LastEditTime: 2020-12-22 17:32:52
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,3 +15,5 @@
 [1]: https://github.com/pytorch/vision/blob/master/torchvision/models/shufflenetv2.py
 
 [2]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
+
+https://github.com/ericsun99/Shufflenet-v2-Pytorch/blob/master/ShuffleNetV2.py
