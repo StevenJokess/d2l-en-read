@@ -5,16 +5,22 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-17 19:54:54
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 22:55:28
+ * @LastEditTime: 2020-12-25 00:34:42
  * @Description:
  * @TODO::
- * @Reference:https://0809zheng.github.io/2020/04/27/elmo-bert-gpt.html[1]
+ * @Reference:
 -->
 
  ELMO
 paper：Deep contextualized word representations
 arXiv：https://arxiv.org/abs/1802.05365
 Embeddings from Language Model(ELMO)是一个基于RNN的语言模型，从大量句子训练得到。
+
+# ELMo( Embeddings from Language Models)，
+
+他的主要目标是：找出词语放在句子中的意思。[3]
+
+
 
 传统的词嵌入把每一个character或word转化成一个词向量，相同type的词向量在不同的句子中位于不同的token，可能具有不同的含义，如：
 
@@ -36,4 +42,7 @@ ELMo具有如下的优良特性：[2]
 基于字符：ELMo表示纯粹基于字符，然后经过CharCNN之后再作为词的表示，解决了OOV问题，而且输入的词表也很小。
 资源丰富：有完整的源码、预训练模型、参数以及详尽的调用方式和例子，又是一个造福伸手党的好项目！而且：还有人专门实现了多语的，好像是哈工大搞的，戳这里看项目。
 
+
+[1]: https://0809zheng.github.io/2020/04/27/elmo-bert-gpt.html
 [2]: https://blog.csdn.net/Magical_Bubble/article/details/89160032
+[3]: https://mofanpy.com/tutorials/machine-learning/nlp/elmo/
