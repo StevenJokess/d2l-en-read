@@ -5,12 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 20:05:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 23:32:30
+ * @LastEditTime: 2020-12-25 00:17:41
  * @Description:
  * @TODO::
  * @Reference:[1]: https://autotorch.org/course/beginer_torch.html
  * [2]: https://github.com/facebookresearch/pytorch_GAN_zoo/blob/master/visualization/visualizer.py
  * [3]: https://0809zheng.github.io/2020/11/12/dataset.html
+ * TODO: [4]: https://pytorch.org/docs/stable/data.html#map-style-datasets
 -->
 [1]:
 # get the datasets
