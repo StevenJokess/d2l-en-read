@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:18:56
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 21:26:15
+ * @LastEditTime: 2020-12-24 23:48:22
  * @Description:
  * @TODO::
  * @Reference:
@@ -27,3 +27,4 @@ https://github.com/MingchaoZhu/DeepLearning
 https://github.com/jiqizhixin/Artificial-Intelligence-Terminology
 https://github.com/terryum/awesome-deep-learning-papers
 https://github.com/ChristosChristofidis/awesome-deep-learning
+https://github.com/ajaymache/machine-learning-yearning

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-07 20:32:29
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 21:37:17
+ * @LastEditTime: 2020-12-24 23:57:26
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368
@@ -114,3 +114,4 @@ SRGAN
 [3]: https://0809zheng.github.io/2020/08/10/srresnet.html
 [4]: https://nbviewer.jupyter.org/github/cedrickchee/fastai-course-v3/blob/master/nbs/dl1/lesson7-superres-gan_20190110.ipynb
 https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution
+https://github.com/aitorzip/PyTorch-SRGAN

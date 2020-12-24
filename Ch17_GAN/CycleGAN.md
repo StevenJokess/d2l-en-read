@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 20:13:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 01:12:46
+ * @LastEditTime: 2020-12-24 23:50:05
  * @Description:
  * @TODO::
  * @Reference:
@@ -1257,6 +1257,7 @@ TODO: https://github.com/togheppi/CycleGAN
 [131]: https://github.com/fastai/fastai/blob/master/fastai/vision/models/unet.py#L17
 [132]: https://docs.fast.ai/vision.models.unet.html#UnetBlock
 [133]: https://github.com/anhtuan85/Generative-Adversarial-Networks-GANs-Specialization/blob/main/Course%203%20-%20Apply%20Generative%20Adversarial%20Networks%20(GANs)/Week%203/C3W3_Assignment.ipynb
+[134]: https://github.com/Sachin-Wani/deeplearning.ai-GANs-Specialization/blob/master/Course%203%20-%20Apply%20Generative%20Adversarial%20Networks%20(GANs)/Week%203/Prefilled%20C3W3_Assignment.ipynb
 TODO: https://www.tensorflow.org/tutorials/generative/cyclegan
 https://github.com/dmlc/gluon-cv/blob/master/scripts/gan/cycle_gan/demo_cycle_gan.py
 https://github.com/yunjey/mnist-svhn-transfer/blob/master/model.py
