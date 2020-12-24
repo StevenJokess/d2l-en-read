@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 13:32:30
+ * @LastEditTime: 2020-12-24 21:24:50
  * @Description:
  * @TODO::
  * @Reference:
@@ -79,6 +79,38 @@ class VAE(keras.Model):
         }
 ```
 
+```
+# VAE model
+# [14]
+class VAE(nn.Module):
+    def __init__(self, image_size=784, h_dim=400, z_dim=20):
+        super(VAE, self).__init__()
+        self.fc1 = nn.Linear(image_size, h_dim)
+        self.fc2 = nn.Linear(h_dim, z_dim)
+        self.fc3 = nn.Linear(h_dim, z_dim)
+        self.fc4 = nn.Linear(z_dim, h_dim)
+        self.fc5 = nn.Linear(h_dim, image_size)
+
+    def encode(self, x):
+        h = F.relu(self.fc1(x))
+        return self.fc2(h), self.fc3(h)
+
+    def reparameterize(self, mu, log_var):
+        std = torch.exp(log_var/2)
+        eps = torch.randn_like(std)
+        return mu + eps * std
+
+    def decode(self, z):
+        h = F.relu(self.fc4(z))
+        return F.sigmoid(self.fc5(h))
+
+    def forward(self, x):
+        mu, log_var = self.encode(x)
+        z = self.reparameterize(mu, log_var)
+        x_reconst = self.decode(z)
+        return x_reconst, mu, log_var
+```
+
 A collection of Variational AutoEncoders (VAEs) implemented in pytorch with focus on reproducibility. [3]
 
 variational autoencoders (VAEs) are autoencoders that tackle the problem of the latent space irregularity by making the encoder return a distribution over the latent space instead of a single point and by adding in the loss function a regularisation term over that returned distribution in order to ensure a better organisation of the latent space[4]
@@ -115,3 +147,4 @@ TODO:
 [12]: https://github.com/pytorch/examples/tree/master/vae
 [13]: http://arxiv.org/abs/1312.6114
 https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter13_unsupervised-learning/vae-gluon.ipynb
+[14]: https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/03-advanced/variational_autoencoder/main.py#L38-L65

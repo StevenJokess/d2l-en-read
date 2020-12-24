@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:18:56
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 01:14:10
+ * @LastEditTime: 2020-12-24 21:26:15
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,3 +25,5 @@ https://github.com/yandexdataschool/Practical_DL
 https://gitstar-ranking.com/
 https://github.com/MingchaoZhu/DeepLearning
 https://github.com/jiqizhixin/Artificial-Intelligence-Terminology
+https://github.com/terryum/awesome-deep-learning-papers
+https://github.com/ChristosChristofidis/awesome-deep-learning

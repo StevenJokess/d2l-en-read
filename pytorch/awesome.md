@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 19:17:53
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 22:00:46
+ * @LastEditTime: 2020-12-24 21:31:02
  * @Description:
  * @TODO::
  * @Reference:
@@ -30,3 +30,4 @@ https://github.com/iArunava/Intro-to-Deep-Learning-with-Pytorch-Udacity-Solution
 https://github.com/leriomaggio/pytorch-beautiful-ml-data
 https://github.com/zhejianglab/a-PyTorch-Tutorial-to-Image-Captioning
 https://github.com/Yancey1989/gotorch
+https://github.com/bharathgs/Awesome-pytorch-list
