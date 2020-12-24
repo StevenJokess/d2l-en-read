@@ -4,7 +4,7 @@ version:
 Author:  StevenJokess https://github.com/StevenJokess
 Date: 2020-10-05 21:24:15
 LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-11-13 21:44:16
+LastEditTime: 2020-12-24 22:37:25
 Description:
 TODO::
 Reference:https://github.com/enhuiz/transformer-pytorch/blob/master/scripts/train.py
@@ -111,3 +111,34 @@ parser.add_argument('--resume', '-r', action='store_true',
 
 # https://github.com/mit-han-lab/amc/blob/master/eval_mobilenet.py
 parser.add_argument('--n_gpu', default=1, type=int, help='name of the job')
+
+---
+
+https://github.com/pytorch/examples/tree/master/dcgan
+
+usage: main.py [-h] --dataset DATASET --dataroot DATAROOT [--workers WORKERS]
+               [--batchSize BATCHSIZE] [--imageSize IMAGESIZE] [--nz NZ]
+               [--ngf NGF] [--ndf NDF] [--niter NITER] [--lr LR]
+               [--beta1 BETA1] [--cuda] [--ngpu NGPU] [--netG NETG]
+               [--netD NETD]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --dataset DATASET     cifar10 | lsun | mnist |imagenet | folder | lfw | fake
+  --dataroot DATAROOT   path to dataset
+  --workers WORKERS     number of data loading workers
+  --batchSize BATCHSIZE input batch size
+  --imageSize IMAGESIZE the height / width of the input image to network
+  --nz NZ               size of the latent z vector
+  --ngf NGF
+  --ndf NDF
+  --niter NITER         number of epochs to train for
+  --lr LR               learning rate, default=0.0002
+  --beta1 BETA1         beta1 for adam. default=0.5
+  --cuda                enables cuda
+  --ngpu NGPU           number of GPUs to use
+  --netG NETG           path to netG (to continue training)
+  --netD NETD           path to netD (to continue training)
+  --outf OUTF           folder to output images and model checkpoints
+  --manualSeed SEED     manual seed
+  --classes CLASSES     comma separated list of classes for the lsun data set

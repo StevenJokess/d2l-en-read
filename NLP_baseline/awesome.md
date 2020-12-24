@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-22 01:59:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 21:58:30
+ * @LastEditTime: 2020-12-24 22:38:35
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,3 +22,5 @@ https://github.com/abhimishra91/transformers-tutorials
 https://github.com/scoutbee/pytorch-nlp-notebooks
 https://github.com/fastnlp
 https://github.com/didi/delta
+https://github.com/hankcs/HanLP
+https://github.com/pytorch/text

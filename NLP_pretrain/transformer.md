@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 21:24:44
+ * @LastEditTime: 2020-12-24 22:52:53
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,6 +20,8 @@ RNN系列模型的顺序计算方式带来了两个问题
 某个时间状态，依赖于上一时间步状态，导致模型「不能通过并行计算来加速」
 RNN系列的魔改模型比如GRU, LSTM，虽然「引入了门机制」(gate)，但是对「长时间依赖的问题缓解能力有限」，不能彻底解决
 
+
+2017年6月，Google Brain在论文《Attention Is All You Need》中提出的Transformer架构，完全摒弃了RNN的循环机制，采用一种self-attention的方式进行全局处理。其接收一整段序列，并使用三个可训练的权重矩阵——Query、Key和Value来一次性学习输入序列中各个部分之间的依赖关系。Transformer网络由多个层组成，每个层都由多头注意力机制和前馈网络构成。由于在全局进行注意力机制的计算，忽略了序列中最重要的位置信息。Transformer为输入添加了位置编码（Positional Encoding），使用正弦函数完成，为每个部分的位置生成位置向量，不需要学习，用于帮助网络学习其位置信息。其示意如下图所示：[7]
 
 
 
@@ -99,12 +101,6 @@ def scaled_dot_product_attention(q, k, v, mask):
   return output, attention_weights
 ```
 
-
-使用multi-head机制，既可以捕捉到近距离依赖关系，又可以捕捉到远距离依赖关系：
-
-著作权归作者所有。
-商业转载请联系作者获得授权,非商业转载请注明出处。
-原文: https://0809zheng.github.io/2020/04/25/transformer.html
 ```py
 #MultiheadAttention
 class MultiHeadAttention(tf.keras.layers.Layer):
@@ -165,6 +161,11 @@ def point_wise_feed_forward_network(d_model, dff):
   ])
 ```
 
+模型特点：采用全attention的方式，完全摒弃了RNN和CNN的做法。
+优势：训练速度更快，在两个翻译任务上取得了SoTA。
+不足：在decode阶段还是自回归的，即还是不能并行，而且对于每个step的计算，都是要重新算一遍，没有前面的记忆。
+
+
 ```md
 [1]: https://mp.weixin.qq.com/s/kjLFPyTb7pal7oorX3ejkw
 [2]: Tensorflow官方notebook transformer.ipynb: ('https://github.com/tensorflow/docs/blob/master/site/en/tutorials/text/transformer.ipynb')
@@ -172,5 +173,6 @@ def point_wise_feed_forward_network(d_model, dff):
 TODO:
 [4]: https://github.com/lilianweng/transformer-tensorflow
 [5]: https://0809zheng.github.io/2020/04/25/transformer.html
-
+[6]: https://blog.csdn.net/Magical_Bubble/article/details/89083225
+[7]: https://blog.csdn.net/magical_bubble/article/details/89060213
 ```

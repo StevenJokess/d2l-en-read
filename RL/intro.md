@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:08:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 17:18:49
+ * @LastEditTime: 2020-12-24 23:34:25
  * @Description:
  * @TODO::
  * @Reference:https://spinningup.readthedocs.io/zh_CN/latest/spinningup/rl_intro.html#bellman-equations
@@ -87,6 +87,35 @@ T=t+k+1表示最后的时间步，也就意味着在时刻智能体同环境的�
 
 注：同策学习（on-policy）是边决策边学习，学习者同时也是决策者。异策学习（off-policy）则是通过之前的历史（可是自己的也可以是别人的）进行学习，学习者和决策者不需要相同。[3]
 
+强化学习和监督学习、无监督学习的区别[5]
+
+1. 监督式学习就好比你在学习的时候，有一个导师在旁边指点，他知道怎么是对的怎么是错的。
+
+   强化学习会在没有任何标签的情况下，通过先尝试做出一些行为得到一个结果，通过这个结果是对还是错的反馈，调整之前的行为，就这样不断的调整，算法能够学习到在什么样的情况下选择什么样的行为可以得到最好的结果。
+
+2. 监督式学习出的是之间的关系，可以告诉算法什么样的输入对应着什么样的输出。监督学习做了比较坏的选择会立刻反馈给算法。
+
+   强化学习出的是给机器的反馈 reward function，即用来判断这个行为是好是坏。 另外强化学习的结果反馈有延时，有时候可能需要走了很多步以后才知道以前的某一步的选择是好还是坏。
+
+3. 监督学习的输入是独立同分布的。
+
+   强化学习面对的输入总是在变化，每当算法做出一个行为，它影响下一次决策的输入。
+
+4. 监督学习算法不考虑这种平衡，就只是 exploitative。
+
+   强化学习，一个 agent 可以在探索和开发（exploration and exploitation）之间做权衡，并且选择一个最大的回报。
+
+5. 非监督式不是学习输入到输出的映射，而是模式(自动映射)。
+
+   对强化学习来说，它通过对没有概念标记、但与一个延迟奖赏或效用（可视为延迟的概念标记）相关联的训练例进行学习，以获得某种从状态到行动的映射。
+
+**强化学习和前二者的本质区别**:没有前两者具有的明确数据概念，它不知道结果，只有目标。数据概念就是大量的数据，有监督学习、无监督学习需要大量数据去训练优化你建立的模型。
+
+|      | 监督学习         | 非监督学习     | 强化学习                                                     |
+| ---- | ---------------- | -------------- | ------------------------------------------------------------ |
+| 标签 | 正确且严格的标签 | 没有标签       | 没有标签，通过结果反馈调整                                   |
+| 输入 | 独立同分布       | 独立同分布     | 输入总是在变化，每当算法做出一个行为，它影响下一次决策的输入。 |
+| 输出 | 输入对应输出     | 自学习映射关系 | reward function，即结果用来判断这个行为是好是坏              |
 ## challenge[4]
 
 • Humans can learn incredibly quickly
@@ -99,3 +128,4 @@ T=t+k+1表示最后的时间步，也就意味着在时刻智能体同环境的�
 [2]: https://weread.qq.com/web/reader/62332d007190b92f62371aek92c3210025c92cc22753209
 [3]: https://easyai.tech/ai-definition/reinforcement-learning/
 [4]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-1.pdf
+[5]: https://github.com/NLP-LOVE/ML-NLP/tree/master/Deep%20Learning/14.%20Reinforcement%20Learning

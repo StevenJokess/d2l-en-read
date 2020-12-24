@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:06:39
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 16:07:44
+ * @LastEditTime: 2020-12-24 21:36:14
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,3 +15,4 @@ GAN模型是基于Lipschitz连续空间, 且依赖于生成样本是可微的, �
 [1]: http://www.c-s-a.org.cn/html/2019/11/7156.html#outline_anchor_12
 [2]: Hjelm RD, Jacob AP, Che T, et al. Boundary-seeking generative adversarial networks. arXiv preprint arXiv: 1702.08431v4, 2018.
 [3]: Che T, Li YR, Zhang RX, et al. Maximum-likelihood augmented discrete generative adversarial networks. arXiv preprint arXiv: 1702.07983, 2017.
+[4]: https://github.com/eriklindernoren/Keras-GAN/tree/master/bgan

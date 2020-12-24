@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-10 21:39:47
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 23:47:41
+ * @LastEditTime: 2020-12-24 23:13:44
  * @Description:
  * @TODO::
  * @Reference:[4]: https://cv.gluon.ai/build/examples_deployment/cpp_inference.html
@@ -245,3 +245,10 @@ celebAHQ: https://github.com/nperraud/download-celebA-HQ
 fashionGen: https://fashion-gen.com/
 DTD: https://www.robots.ox.ac.uk/~vgg/data/dtd/
 CIFAR10: http://www.cs.toronto.edu/~kriz/cifar.html
+
+---
+
+https://github.com/roysubhankar/gan-pytorch
+
+Anime-Face:
+https://github.com/Mckinsey666/Anime-Face-Dataset

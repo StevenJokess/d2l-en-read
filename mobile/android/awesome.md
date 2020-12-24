@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-07 16:54:58
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-07 20:57:24
+ * @LastEditTime: 2020-12-24 21:42:22
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,3 +20,5 @@ https://github.com/t-vi/AICamera
 https://github.com/HyperGAN/HyperGAN-android
 
 SNAPCHAT和FACEAPP
+
+https://github.com/hankcs/HanLPAndroidDemo

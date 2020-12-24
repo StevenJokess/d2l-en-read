@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 21:24:50
+ * @LastEditTime: 2020-12-24 22:39:51
  * @Description:
  * @TODO::
  * @Reference:
@@ -79,7 +79,7 @@ class VAE(keras.Model):
         }
 ```
 
-```
+```py
 # VAE model
 # [14]
 class VAE(nn.Module):
