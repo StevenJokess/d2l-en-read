@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 21:09:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 22:30:30
+ * @LastEditTime: 2020-12-25 23:48:26
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,6 +24,7 @@ In other words, images are first fed through many convolutional layers which red
 
 
 ## Contracting Path
+
 You will first implement the contracting blocks for the contracting path. This path is the encoder section of the U-Net, which has several downsampling steps as part of it. The authors give more detail of the remaining parts in the following paragraph from the paper (Renneberger, 2015):
 
 The contracting path follows the typical architecture of a convolutional network. It consists of the repeated application of two 3 x 3 convolutions (unpadded convolutions), each followed by a rectified linear unit (ReLU) and a 2 x 2 max pooling operation with stride 2 for downsampling. At each downsampling step we double the number of feature channels.
@@ -90,7 +91,7 @@ from collections import OrderedDict
 import torch
 import torch.nn as nn
 
-```
+```py
 # [3]
 class UNet(nn.Module):
 
@@ -185,6 +186,7 @@ class UNet(nn.Module):
             )
         )
 ```
+```
 
 Loads a U-Net model pre-trained for abnormality segmentation on a dataset of brain MRI volumes kaggle.com/mateuszbuda/lgg-mri-segmentation The pre-trained model requires 3 input channels, 1 output channel, and 32 features in the first layer.[4]
 
@@ -192,3 +194,4 @@ Loads a U-Net model pre-trained for abnormality segmentation on a dataset of bra
 [2]: https://github.com/anhtuan85/Generative-Adversarial-Networks-GANs-Specialization/blob/main/Course%203%20-%20Apply%20Generative%20Adversarial%20Networks%20(GANs)/Week%202/C3W2A_Assignment.ipynb
 [3]: https://github.com/mateuszbuda/brain-segmentation-pytorch
 [4]: https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
+[5]: https://github.com/VieVie31/cool-papers-in-pytorch/blob/master/unet_semantic_segmentation.ipynb

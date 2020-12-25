@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 22:50:55
+ * @LastEditTime: 2020-12-26 02:40:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -46,3 +46,5 @@ Transformer-XL的推理速度也明显快于vanilla Transformer，尤其是对�
 [3]: https://github.com/NLP-LOVE/ML-NLP/tree/master/NLP/16.9%20XLNet
 [4]: https://blog.csdn.net/magical_bubble/article/details/89060213
 [5]: https://github.com/kimiyoung/transformer-xl
+TODO:
+https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/LanguageModeling/Transformer-XL
