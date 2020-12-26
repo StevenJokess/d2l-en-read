@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:48
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 01:22:07
+ * @LastEditTime: 2020-12-26 19:45:19
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,4 +20,4 @@
 [1]: https://www.leiphone.com/news/201904/LhyoY2oy3cC5MzII.html
 [2]: https://github.com/huggingface/pytorch-pretrained-BigGAN
 [3]: https://github.com/anhtuan85/Generative-Adversarial-Networks-GANs-Specialization/blob/main/Course%202%20-%20Build%20Better%20Generative%20Adversarial%20Networks%20(GANs)/Week%203/BigGAN.ipynb
-
+[4]: https://github.com/ajbrock/BigGAN-PyTorch

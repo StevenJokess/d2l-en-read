@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 18:26:53
+ * @LastEditTime: 2020-12-26 19:56:48
  * @Description:
  * @TODO::
  * @Reference:
@@ -32,6 +32,7 @@ L_{D} &=E\left[(D(x)-1)^{2}\right]+E\left[D(G(z))^{2}\right] \\
 L_{G} &=E\left[(D(G(z))-1)^{2}\right]
 \end{aligned}
 
+
 优化目标为[5]
 
 
@@ -40,7 +41,9 @@ $\min _{G} J(G)=\min _{G} \frac{1}{2}\left(E_{z \sim p_{z}(z)}[D(G(z))-c]^{2}\ri
 
 其中，随机变量z服从标准正态分布。常数a、b分别表示真实数据和生成数据的标记；c是生成网络为了让判别网络认为生成数据是真实数据而设定的值。
 
+其中, 设定 a = 0, b = c = 1, 且 a, b, c 分别代表伪 造图的标签、真实图的标签和生成器期望判别器对 伪造图判定的标签. 与原始的生成式对抗网络一致, 在 pdata(x) = pg(x) 时, 达到网络内部的纳什均衡.
 
+```py
 [4]
 #don't use BCE loss!
 #criterion = nn.BCELoss()
@@ -84,6 +87,7 @@ if __name__ == "__main__":
     d = get_half_batch_ds(BATCH_SIZE)
     m = LSGAN(LATENT_DIM, IMG_SHAPE, A, B, C)
     train(m, d, EPOCH)
+```
 
 [1]: https://arxiv.org/pdf/1611.04076.pdf
 [2]: https://github.com/MorvanZhou/mnistGANs/blob/main/lsgan.py

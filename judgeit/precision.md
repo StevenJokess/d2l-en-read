@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 12:58:54
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-11 23:53:20
+ * @LastEditTime: 2020-12-26 19:53:07
  * @Description:
  * @TODO::math
  * @Reference:https://blog.csdn.net/weixin_43172660/article/details/82958534
@@ -230,12 +230,10 @@ step 5. 在这些绝对值中取最大值，得到此变量最终的KS值。
 
 对于多分类问题，或者在二分类问题中，我们有时候会有多组混淆矩阵，例如：多次训练或者在多个数据集上训练的结果，那么估算全局性能的方法有两种，分为宏平均（macro-average）和微平均（micro-average）。简单理解，宏平均就是先算出每个混淆矩阵的P值和R值，然后取得平均P值macro-P和平均R值macro-R，再算出Fβ或F1，而微平均则是计算出混淆矩阵的平均TP、FP、TN、FN，接着进行计算P、R，进而求出Fβ或F1。其它分类指标同理，均可以通过宏平均/微平均计算得出。
 
-macroP=1n∑i=1nPi
-macroR=1n∑i=1nRi
-macroF1=2×macroP×macroRmacroP+macroR
-microP=TP¯¯¯¯¯¯¯TP¯¯¯¯¯¯¯+FP¯¯¯¯¯¯¯¯
-microR=TP¯¯¯¯¯¯¯TP¯¯¯¯¯¯¯+FN¯¯¯¯¯¯¯¯
-microF1=2×microP×microRmicroP+microR
+$\operatorname{macro}-P=\frac{1}{n} \sum_{i=1}^{n} P_{i}$
+
+$\begin{aligned} \operatorname{macro}-R &=\frac{1}{n} \sum_{i=1}^{n} R_{i} \\ \text { macro-F } 1 &=\frac{2 \times \text { macro- } P \times \text { macro- } R}{\text { macro- } P+\text { macro- } R} \end{aligned}$
+
 需要注意的是，在多分类任务场景中，如果非要用一个综合考量的metric的话，宏平均会比微平均更好一些，因为宏平均受稀有类别影响更大。宏平均平等对待每一个类别，所以它的值主要受到稀有类别的影响，而微平均平等考虑数据集中的每一个样本，所以它的值受到常见类别的影响比较大。
 
 ## 零一分类损失
