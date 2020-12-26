@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:17:08
+ * @LastEditTime: 2020-12-26 20:34:41
  * @Description:
  * @TODO::
  * @Reference:
@@ -25,6 +25,7 @@
 
 ## Loss
 
+推广都建立在 Lipschitz 约束之上，只不过微调了 Loss[7]
 
 
 \begin{aligned}
@@ -96,3 +97,4 @@ if __name__ == "__main__":
 [4]: https://github.com/bentrevett/pytorch-generative-models/blob/master/3%20-%20LSGAN.ipynb
 [5]: https://weread.qq.com/web/reader/d7032cd072021a59d7038afk28d32de024d28dd2c795c7f
 [6]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
+[7]: https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247484880&idx=1&sn=4b2e976cc715c9fe2d022ff6923879a8&chksm=96e9da50a19e5346307b54f5ce172e355ccaba890aa157ce50fda68eeaccba6ea05425f6ad76&scene=21#wechat_redirect
