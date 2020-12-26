@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 22:52:35
+ * @LastEditTime: 2020-12-26 20:59:22
  * @Description:
  * @TODO::
  * @Reference:
@@ -38,7 +38,7 @@
 WGAN modified of DCGAN in:
 1. remove sigmoid in the last layer of discriminator(classification -> regression)                                       # 回归问题,而不是二分类概率
 2. no log Loss (Wasserstein distance)
-3. clip param norm to c (Wasserstein distance and Lipschitz continuity)
+3. clip param norm to c (Wasserstein distance and Lipschitz continuity) 每次更新判别器的参数之后把它们的绝对值截断到不超过一个固定常数c
 4. No momentum-based optimizer, use RMSProp，SGD instead
 
 

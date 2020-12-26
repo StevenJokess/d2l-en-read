@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 12:02:36
+ * @LastEditTime: 2020-12-26 20:58:46
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 # WassersteinGAN with Gradient Penality
+
+WGAN没有那么好用，主要原因在于WAGN进行梯度截断。梯度截断将导致判别网络趋向于一个二值网络，造成模型容量的下降。[9]
 
 在提出了WGAN后，作者继续在WGAN上进行优化，又给出了一种新的损失函数，抛弃weight clipping，也就不再需要经验常数c了，取而代之的是gradient penality（梯度惩罚），因此取名为WGAN_GP，也叫Improved_WGAN。[8]
 
@@ -243,5 +245,6 @@ TODO:
 [6]: https://github.com/lilianweng/unified-gan-tensorflow
 [7]: https://github.com/igul222/improved_wgan_training
 [8]: https://www.jiqizhixin.com/articles/2019-06-13-11
+[9]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
 https://github.com/caogang/wgan-gp
 https://github.com/igul222/improved_wgan_training
