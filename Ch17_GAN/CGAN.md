@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:04:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 14:05:56
+ * @LastEditTime: 2020-12-26 18:07:25
  * @Description:
  * @TODO::
  * @Reference:
@@ -30,6 +30,11 @@ $$
 \min _{G} \max _{D} V(D, G)=\mathbb{E}_{\boldsymbol{x} \sim p_{\text {崩山 }}(\boldsymbol{x})}[\log D(\boldsymbol{x} \mid \boldsymbol{y})]+\mathbb{E}_{\boldsymbol{z} \sim p_{\boldsymbol{z}}(\boldsymbol{z})}[\log (1-D(G(\boldsymbol{z} \mid \boldsymbol{y})))]
 $$
 可以看到其实就是加入了条件，网络结构本身和损 失函数的表达式本身没有变化。
+
+这个变化概括来说就是将原来只接收一个输入z的生成网络，变成接收两个输入：z和y，将原来只接收一个输入x的判别网络，变成接收两个输入：x和y[10]
+
+y就是加入的监督信息（标签类别），如MNIST数据集中的数字label信息，人脸数据中的性别、是否微笑、年龄等信息。[10]
+
 因此，我们同样使用之前的DCGAN结构和开源项 目 $, \quad$ https://github.com/carpedm20/DCGAN-tensorflow/[2]
 
 遇到一个更大的问题——普通的GAN无法控制生成器的输入内容。即生成器生成内容是随机的，判别器只会判断生成器生成数据的真实性，而不会判断生成器有没有生成规定的数据。[3]
@@ -64,3 +69,4 @@ We demonstrate the capability of our model to generate plausible images of birds
 https://zhuanlan.zhihu.com/p/25542274
 [8]: Generative Adversarial Text to Image Synthesis https://arxiv.org/abs/1605.05396
 [9]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/conditional.ipynb
+[10]: https://weread.qq.com/web/reader/d7032cd072021a59d7038af
