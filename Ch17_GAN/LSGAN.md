@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 19:56:48
+ * @LastEditTime: 2020-12-26 20:17:08
  * @Description:
  * @TODO::
  * @Reference:
@@ -43,6 +43,7 @@ $\min _{G} J(G)=\min _{G} \frac{1}{2}\left(E_{z \sim p_{z}(z)}[D(G(z))-c]^{2}\ri
 
 其中, 设定 a = 0, b = c = 1, 且 a, b, c 分别代表伪 造图的标签、真实图的标签和生成器期望判别器对 伪造图判定的标签. 与原始的生成式对抗网络一致, 在 pdata(x) = pg(x) 时, 达到网络内部的纳什均衡.
 
+最后一层去掉sigmoid，并且计算Loss的时候用平方误差即可。[6]
 ```py
 [4]
 #don't use BCE loss!
@@ -94,3 +95,4 @@ if __name__ == "__main__":
 [3]: http://nooverfit.com/wp/%E7%8B%AC%E5%AE%B6%EF%BD%9Cgan%E5%A4%A7%E7%9B%98%E7%82%B9%EF%BC%8C%E8%81%8A%E8%81%8A%E8%BF%99%E4%BA%9B%E5%B9%B4%E7%9A%84%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C-lsgan-wgan-cgan-info/
 [4]: https://github.com/bentrevett/pytorch-generative-models/blob/master/3%20-%20LSGAN.ipynb
 [5]: https://weread.qq.com/web/reader/d7032cd072021a59d7038afk28d32de024d28dd2c795c7f
+[6]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md

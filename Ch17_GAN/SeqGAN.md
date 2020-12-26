@@ -5,16 +5,22 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 20:16:20
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-27 22:16:15
+ * @LastEditTime: 2020-12-26 20:14:55
  * @Description:
  * @TODO::
  * @Reference:https://nndl.github.io
  * https://weread.qq.com/web/reader/4653238071e86dd54654969kd2d32c50249d2ddea18fb39
 -->
 
-GAN无法直接生成文本数据，因为文本数据是离散的，我们介绍了多种方法，而SeqGAN就是利用GAN+RL的方法来实现序列数据的生成。
+GAN无法直接生成文本数据，因为文本数据是离散的，
 
+而GAN在应用于离散数据时存在以下几个问题：
 
+GAN的生成器梯度来源于判别器对于正负样本的判别。然而，对于文本生成问题，RNN输出的是一个概率序列，然后取argmax。这会导致生成器Loss不可导。还可以站在另一个角度理解，由于是argmax，所以参数更新一点点并不会改变argmax的结果，这也使得GAN不适合离散数据。
+GAN只能评估整个序列的loss，但是无法评估半句话，或者是当前生成单词对后续结果好坏的影响。
+如果不加argmax，那么由于生成器生成的都是浮点数值，而ground truth都是one-hot encoding，那么判别器只要判别生成的结果是不是0/1序列组成的就可以了。这容易导致训练崩溃。[4]
+
+我们介绍了多种方法，而SeqGAN就是利用GAN+RL的方法来实现序列数据的生成。
 
 
 具体的计算方式就是Policy Gradient。至此生成器对抗训练的逻辑就完成了。
@@ -62,6 +68,14 @@ GAN应用于 Sequence面临着两个问题:问题1,GAN的设计初衷是用来�
 
 在SeqGAN训练过程中，目标LSTM是一个已经训练好的网络，不必再次训练，使用时只需要将它对应的网络参数加载回神经网络中即可，其目的是编码真实世界中的数据，交由判别器判别。
 
+## 区别
+
+在文本生成任务，seqGAN相比较于普通GAN区别在以下几点：
+
+1. 生成器不取argmax。
+1. 每生成一个单词，则根据当前的词语序列进行蒙特卡洛采样生成完成的句子。然后将句子送入判别器计算reward。
+1. 根据得到的reward进行策略梯度下降优化模型。
+
 ## 创新点
 
 A将GAN应用到了文本生成中
@@ -95,3 +109,4 @@ GAN阶段可能并不总是导致NLL的大幅下降(有时非常小)——我怀
 [1]: Yu L, Zhang W, Wang J, et al., 2017. SeqGAN: Sequence generative adversarial nets with policygradient[C]//Proceedings of Thirty-First AAAI Conference on Artificial Intelligence. 2852-2858
 [2]: https://ai.deepshare.net/detail/i_5d9c6af4a4044_tL23GmwT/1?fromH5=true
 [3]: https://github.com/suragnair/seqGAN
+[4]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md

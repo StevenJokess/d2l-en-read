@@ -5,13 +5,28 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 18:52:13
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 18:17:09
+ * @LastEditTime: 2020-12-26 20:26:41
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 ## FasterRCNN
+
+## 简介
+
+​ Fast R-CNN是基于R-CNN和SPPnets进行的改进。SPPnets，其创新点在于计算整幅图像的the shared feature map，然后根据object proposal在shared feature map上映射到对应的feature vector（就是不用重复计算feature map了）。当然，SPPnets也有缺点：和R-CNN一样，训练是多阶段（multiple-stage pipeline）的，速度还是不够"快"，特征还要保存到本地磁盘中。
+
+将候选区域直接应用于特征图，并使用RoI池化将其转化为固定大小的特征图块。以下是Fast R-CNN的流程图
+
+## 创新点
+
+1. 只对整幅图像进行一次特征提取，避免R-CNN中的冗余特征提取
+1. 用RoI pooling层替换最后一层的max pooling层，同时引入建议框数据，提取相应建议框特征
+1. Fast R-CNN网络末尾采用并行的不同的全连接层，可同时输出分类结果和窗口回归结果，实现了end-to-end的多任务训练【建议框提取除外】，也不需要额外的特征存储空间【R-CNN中的特征需要保持到本地，来供SVM和Bounding-box regression进行训练】
+1. 采用SVD对Fast R-CNN网络末尾并行的全连接层进行分解，减少计算复杂度，加快检测速度。
+
+
 
 Faster-RCNN可以采用多种的主干特征提取网络，常用的有VGG，Resnet，Xception等等，本文以Resnet网络为例子来给大家演示一下。
 
@@ -31,3 +46,4 @@ FasterRCNN是Two-Stage目标检测算法的杰出代表，其蕴含的思想在�
 [1]: https://www.zhuanzhi.ai/document/980e4f5b28e5284e8d30ea888f75a3ea
 [2]: https://www.bilibili.com/video/BV1BK41157Vs
 [3]: https://github.com/bubbliiiing/faster-rcnn-pytorch
+[4]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch08_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E7%AC%AC%E5%85%AB%E7%AB%A0_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B.md

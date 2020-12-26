@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 22:39:51
+ * @LastEditTime: 2020-12-26 20:22:26
  * @Description:
  * @TODO::
  * @Reference:
@@ -30,6 +30,11 @@ Auto-Encoding Variational Bayes brought about a flexible neural-network based ap
 VAE，也可以叫做变分自编码器，属于自动编码器的变体。
 
 VAE是对自动编码器的概率处理，它是一种将高维输入数据压缩成更小表示的模型。传统的自动编码器将输入映射到潜在的向量上，VAE不同于此，它将输入数据映射到概率分布的参数上，例如高斯分布的均值和方差。这种方法产生了一个连续的、结构化的潜在空间，对图像的生成非常有用。[6]
+
+对于变分自编码器我们将定义一个不易处理的密度函数，通过附加的隐变量$z$对密度函数进行建模。[15] VAE原理图如下[6]：
+
+VAE通过约束隐变量$z$服从标准正太分布以及重构数据实现了分布转换映射$X=G(z)$[15]
+VAE通过隐变量$z$与标准正太分布的KL散度和重构误差去度量。[15]
 
 假设一个生成模型（如图13.3所示）中包含隐变量，即有部分变量是不可观测的，其中观测变量𝑿是一个高维空间𝒳中的随机向量，隐变量𝒁是一个相对低维的空间𝒵中的随机向量．
 
@@ -148,3 +153,4 @@ TODO:
 [13]: http://arxiv.org/abs/1312.6114
 https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter13_unsupervised-learning/vae-gluon.ipynb
 [14]: https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/03-advanced/variational_autoencoder/main.py#L38-L65
+[15]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
