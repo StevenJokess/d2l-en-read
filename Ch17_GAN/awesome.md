@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 16:42:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 18:50:58
+ * @LastEditTime: 2020-12-26 19:12:51
  * @Description:
  * @TODO::
  * @Reference:
@@ -29,3 +29,4 @@ https://github.com/shawnyuen/GANsPaperCollection
 https://github.com/savan77/Generating-Adversarial-Examples-with-PyTorch
 https://github.com/ibrahimjelliti/Deeplearning.ai-GAN-Specialization-Generative-Adversarial-Networks
 https://github.com/znxlwm/pytorch-generative-model-collections
+https://github.com/bentrevett/pytorch-generative-models

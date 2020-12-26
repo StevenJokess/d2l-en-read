@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-22 01:59:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 22:38:35
+ * @LastEditTime: 2020-12-26 19:10:32
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,3 +24,4 @@ https://github.com/fastnlp
 https://github.com/didi/delta
 https://github.com/hankcs/HanLP
 https://github.com/pytorch/text
+https://github.com/bentrevett/pytorch-sentiment-analysis

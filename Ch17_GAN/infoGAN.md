@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 18:34:48
+ * @LastEditTime: 2020-12-26 19:27:05
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
+ * https://github.com/znxlwm/pytorch-generative-model-collections
 -->
 
 # InformationMaximizing Generative Adversarial Nets
@@ -45,6 +46,7 @@ $$
 \min _{G} \max _{D} F_{1}(D, G)=F(D, G)-\lambda I(c ; G(z, c))
 $$
 
+$\begin{aligned} L_{D, Q}^{i n f o G A N} &=L_{D}^{G A N}-\lambda L_{I}\left(c, c^{\prime}\right) \\ L_{G}^{i n f o G A N} &=L_{G}^{G A N}-\lambda L_{I}\left(c, c^{\prime}\right) \end{aligned}$
 
 When you apply the bound on the first term, you get a lower bound, and you introduce an auxillary distribution that ends up being called the discriminator. This application of the bound is wrong because it bounds the loss function from the wrong side.
 When you apply the bound on the second term, you end up upper bounding the loss function, because of the negative sign. This is a good thing.

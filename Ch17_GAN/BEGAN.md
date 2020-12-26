@@ -5,11 +5,12 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 14:01:35
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-28 20:30:03
+ * @LastEditTime: 2020-12-26 19:25:41
  * @Description:
  * @TODO::
  * @Reference:https://weread.qq.com/web/reader/1503267072043961150720ck861322a025a8613985ec87a
  * https://weread.qq.com/web/reader/1503267072043961150720c
+ * https://github.com/znxlwm/pytorch-generative-model-collections
 -->
 
 
@@ -18,6 +19,7 @@
 
 与DCGAN不同，BEGAN并不追求生成数据分布与帧数据分布相同或相近，而追求生成数据的残差分布与真数据的残差分布相近。
 
+$\begin{aligned} L_{D}^{B E G A N} &=D_{A E}(x)-k_{t} D_{A E}(G(z)) \\ L_{G}^{B E G A N} &=D_{A E}(G(z)) \\ k_{t+1}=& k_{t}+\lambda\left(\gamma D_{A E}(x)-D_{A E}(G(z))\right) \end{aligned}$
 
 
 BEGAN 编码模块的神经网络一共包含5层结构，输入图像的Height、Width、Channel 分别为64像素、64像素、3通道，第1层中使用3次卷积核为3像素×3像素的卷积，第2～4层均使用下采样和两次卷积操作，在每次卷积操作后，均采用ELU 激活函数作用于卷积层的输出，最后是1个全连接层，最终得到1个长度为h 的向量，这就完成了图像的编码过程。
