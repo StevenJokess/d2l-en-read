@@ -5,13 +5,17 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:04:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 18:07:25
+ * @LastEditTime: 2020-12-26 21:29:16
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 conditional GAN (cGAN) proposed by Mehdi Mirza and Simon Osindero in the paper Conditional Generative Adversarial Nets (https://arxiv.org/pdf/1411.1784.pdf) uses the class label information and learns to synthesize new images conditioned on the provided label, that is, —applied to MNIST.[1]
+
+Goal:[11]
+Using labels to train both the Generator and the Discriminator
+Teaching GANs to generate examples matching a specified label
 
 
  With a DCGAN, we can generate images from random vectors, but what kind of images do we achieve? Can we specify it is a woman or man face?
@@ -52,12 +56,26 @@ Input of generator is the concatenation of random noise vector and digit label o
 
 Similar to generator, input of discriminator is the concatenation of flatten image vector and digit label. It is followed by a fully connected layer and relu activation function. Output layer is composed by another fully connected layer and sigmoid activation function. In this tutorial we don't apply sigmoid function to output to make training process more numerically stable.[9]
 
+## Generator
 
+1. Take label y (an integer from 0 to 9) and turn it into a dense vector of size z_dim (the length of the random noise vector) by using the Keras Embedding layer.
+1. Combine the label embedding with the noise vector z into a joint representation by using the Keras Multiply layer. As its name suggests, this layer multiplies the corresponding entries of the two equal-length vectors and outputs a single vector of the resulting products.
+1. Feed the resulting vector as input into the rest of the CGAN Generator network to synthesize an image.
+
+Discriminator
+
+1. Take a label (an integer from 0 to 9) and—using the Keras Embedding layer—turn the label into a dense vector of size 28 × 28 × 1 = 784 (the length of a flattened image).
+Reshape the label embeddings into the image dimensions (28 × 28 × 1).
+1. Concatenate the reshaped label embedding onto the corresponding image, creating a joint representation with the shape (28 × 28 × 2). You can think of it as an image with its embedded label “stamped” on top of it.
+1. Feed the image-label joint representation as input into the CGAN Discriminator network. Note that in order for things to work, we have to adjust the model input dimensions to (28 × 28 × 2) to reflect the new input shape.[11]
 
 Qiita的帖子[7]Qiita的帖子不一样，我们可以指定生成人物的属性，如发色、眼睛的颜色、发型，甚至是服装、装饰物，从而生成具有指定属性的图像。不一样，我们可以指定生成人物的属性，如发色、眼睛的颜色、发型，甚至是服装、装饰物，从而生成具有指定属性的图像。
 
 We demonstrate the capability of our model to generate plausible images of birds and flowers from detailed text descriptions.[8]
 
+## Summary[11]
+
+The additional information constrains the Generator to synthesize a certain type of output and the Discriminator to accept only real examples matching the given additional information.
 
 [1]: https://learning.oreilly.com/library/view/python-machine-learning/9781789955750/Text/Chapter_17.xhtml#_idParaDest-342
 [2]: img\CGAN_yousanai.jpeg
@@ -70,3 +88,4 @@ https://zhuanlan.zhihu.com/p/25542274
 [8]: Generative Adversarial Text to Image Synthesis https://arxiv.org/abs/1605.05396
 [9]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/conditional.ipynb
 [10]: https://weread.qq.com/web/reader/d7032cd072021a59d7038af
+[11]: https://livebook.manning.com/book/gans-in-action/chapter-8/1

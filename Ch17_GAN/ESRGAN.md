@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 20:15:19
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-10 20:15:23
+ * @LastEditTime: 2020-12-26 21:09:42
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368s
@@ -23,7 +23,16 @@ That wraps it up for super-resolution, but we haven’t quite finished with imag
 
 分辨率倍增部分使用ESRGAN（我用的是整合了UI界面的Image Enhancing Utility[2]）[3]
 
-[1]:
+In contrast to SRGAN, which claimed that deeper models are increasingly difficult to train, our deeper ESRGAN model shows its superior performance with easy training.[4]
+
+We improve the SRGAN from three aspects:
+
+- adopt a deeper model using Residual-in-Residual Dense Block (RRDB) without batch normalization layers.
+- employ Relativistic average GAN instead of the vanilla GAN.
+- improve the perceptual loss by using the features before activation.
+
+[1]: https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368s
 [2]: https://github.com/ptrsuder/IEU.Winforms
 [3]: 如何评价人工智能修复的 100 年前北京影像，有哪些意义和可以应用的方向？ - 大谷Spitzer的回答 - 知乎
 https://www.zhihu.com/question/393716697/answer/1219952561
+[4]: https://github.com/xinntao/ESRGAN
