@@ -5,22 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 21:09:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 19:29:06
+ * @LastEditTime: 2020-12-26 20:44:19
  * @Description:
  * @TODO::
- * @Reference:
+ * @Reference:https://github.com/MorvanZhou/mnistGANs/blob/main/acgan.py
 -->
-# coding=utf-8
-'''
-version:
-Author:  StevenJokess https://github.com/StevenJokess
-Date: 2020-11-08 00:37:38
-LastEditors:  StevenJokess https://github.com/StevenJokess
-LastEditTime: 2020-11-08 00:38:57
-Description:
-TODO::
-Reference:https://github.com/MorvanZhou/mnistGANs/blob/main/acgan.py
-'''
 
 # Conditional Image Synthesis with Auxiliary Classifier GANs（辅助类别的GAN）
 

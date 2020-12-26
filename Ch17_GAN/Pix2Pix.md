@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-23 22:36:52
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 11:41:05
+ * @LastEditTime: 2020-12-26 20:42:19
  * @Description:
  * @TODO::
  * @Reference:
@@ -148,6 +148,10 @@ class generator(nn.Module):
 
 The Discriminator has the job of taking two images, an input image and an unknown image (which will be either a target or output image from the generator), and deciding if the second image was produced by the generator or not.
 
+pix2pix 中 G 和 D 使用的网络都是 U-Net 结构，是一种 encoder-decoder 完全对称的结构，并且在这样的结构中加入了 skip-connection 的使用, 效果十分惊艳
+
+skip-connection 不仅使得梯度传导更通畅，网络训练更容易，也因为这类工作多数是要学习图片之间的映射，那么让 encoder 和 decoder 之间一一对应的层学到尽可能匹配的特征将会对生成图片的效果产生非常正面的影响。[10]
+
 ![Discriminator architecture](img\Pix2Pix_discri.jpg)[1]
 
 ```py
@@ -226,5 +230,6 @@ for inp, tar in test_dataset.take(5):
 [7]: https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/pix2pix/pix2pix.py
 [8]: https://github.com/znxlwm/pytorch-pix2pix/blob/master/pytorch_pix2pix.py
 [9]: https://github.com/znxlwm/pytorch-pix2pix/blob/master/network.py
+[10]: https://zhuyinlin.github.io/build/html/algorithm/GAN.html#sgan-stacked-gan
 TODO: https://www.tensorflow.org/tutorials/generative/pix2pix
 https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/pixel2pixel.ipynb

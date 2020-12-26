@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:34:41
+ * @LastEditTime: 2020-12-26 20:43:45
  * @Description:
  * @TODO::
  * @Reference:
@@ -45,6 +45,7 @@ $\min _{G} J(G)=\min _{G} \frac{1}{2}\left(E_{z \sim p_{z}(z)}[D(G(z))-c]^{2}\ri
 其中, 设定 a = 0, b = c = 1, 且 a, b, c 分别代表伪 造图的标签、真实图的标签和生成器期望判别器对 伪造图判定的标签. 与原始的生成式对抗网络一致, 在 pdata(x) = pg(x) 时, 达到网络内部的纳什均衡.
 
 最后一层去掉sigmoid，并且计算Loss的时候用平方误差即可。[6]
+
 ```py
 [4]
 #don't use BCE loss!
