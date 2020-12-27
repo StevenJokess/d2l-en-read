@@ -5,10 +5,11 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-19 21:03:05
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 01:18:33
+ * @LastEditTime: 2020-12-27 22:08:18
  * @Description:
  * @TODO::
  * @Reference:
 -->
 https://sites.google.com/view/deep-rl-bootcamp/lectures
 http://rll.berkeley.edu/deeprlcourse/
+https://smdsbz.github.io/2018/07/08/CS294-drl-notes.html
