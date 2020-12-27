@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-27 19:00:42
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-09-27 19:03:35
+ * @LastEditTime: 2020-12-28 02:21:36
  * @Description:
  * @TODO::
  * @Reference:https://book.d2l.ai/install.html
@@ -29,3 +29,10 @@ pip install https://github.com/d2l-ai/d2l-book
 要构建HTML结果，我们需要[pandoc](https://pandoc.org/)。你可以通过`conda install pandoc`来安装它。
 
 构建PDF版本需要[LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)转换你的SVG图像(我们推荐的格式)，例如`conda install LibRsvg`，当然，你需要有一个LaTeX发行版，例如[Tex Live](https://www.tug.org/texlive/)
+apt-get install texlive -y
+!apt-get install -y latexmk
+!apt-get install -y texlive-xetex
+
+apt update && apt dist-upgrade -y && DEBIAN_FRONTEND=noninteractive apt install -y python3-pip pandoc librsvg2-bin git latexmk texlive-xetex texlive-fonts-extra && apt clean
+
+!apt-get update && !apt-get dist-upgrade -y && !apt-get install -y python3-pip pandoc librsvg2-bin git latexmk texlive-xetex texlive-fonts-extra && apt clean
