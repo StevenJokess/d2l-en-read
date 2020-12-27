@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 14:24:11
+ * @LastEditTime: 2020-12-27 18:33:48
  * @Description:
  * @TODO::
  * @Reference:
@@ -47,6 +47,8 @@ WGAN modified of DCGAN in:
 
 
 ## Wasserstein距离[10]
+
+提出Wasserstein distance距离作为衡量，并将其转换为求解最优的利普希茨连续函数的问题，为此进行参数约束：将过大的参数直接裁剪到一个阈值以下。
 
 假设我们有了两个概率分布p(x),q(x)，那么Wasserstein距离的定义为
 

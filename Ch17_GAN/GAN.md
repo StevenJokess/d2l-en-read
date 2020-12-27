@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 17:53:37
+ * @LastEditTime: 2020-12-27 18:43:51
  * @Description:
  * @TODO::
  * @Reference:
@@ -51,6 +51,17 @@ $$
 GAN的收敛性
 可以证明，如果G和D有足够的学习能力，那么给定G，D可以达到其最优解，并且 $p_{g}$ 可以更新 来优化
 使得p $_{g}$ 收敘于 $\mathrm{p}_{\text {data }}$ 。
+
+$f(D)=a \log (D)+b \log (1-D)$
+$\frac{d f(D)}{d D}=a \times \frac{1}{D}+b \times \frac{1}{1-D} \times(-1)=0$
+$a \times \frac{1}{D^{*}}=b \times \frac{1}{1-D^{*}}$
+$\Leftrightarrow a \times\left(1-D^{*}\right)=b \times D^{*}$
+$D^{*}(x)=\frac{P_{data}(x)}{P_{\text {data}}(x)+P_{G}(x)}$
+
+
+
+
+最大化V(G,D)实际上就能导出KL散度的衡量形式，这个[max V（G,D）]就是真图像和假图像之间的距离，为了让它们看上去一样，以假乱真，只要让距离最小也就是min[maxV（G,D）]即可！
 
 2. 优点[5]
 (以下优点和缺点主要来自 Ian Goodfellow 在 Quora 上的回答，以及知乎上的回答)
