@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-25 18:38:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 23:10:36
+ * @LastEditTime: 2020-12-27 18:56:37
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 # StyleGAN
+
+
 
 A new paper by NVIDIA, A Style-Based Generator Architecture for GANs (StyleGAN), presents a novel model which addresses this challenge. StyleGAN generates the artificial image gradually, starting from a very low resolution and continuing to a high resolution (1024×1024). By modifying the input of each level separately, it controls the visual features that are expressed in that level, from coarse features (pose, face shape) to fine details (hair color), without affecting other levels. [11]
 
@@ -26,6 +28,10 @@ Fr ́echet inception distance (FID) for various generator de-signs (lower is bet
 
 The new architecture leads to an automatically learned, unsupervised separation of high-level attributes (e.g., pose and identity when trained on human faces) and stochastic variation in the generated images (e.g., freckles, hair), and it enables intuitive, scale-specific control of the synthesis. The new generator improves the state-of-the-art in terms of traditional distribution quality metrics, leads to demonstrably better interpolation properties, and also better disentangles the latent factors of variation.[4]
 
+2019年的StyleGAN号称GAN 2.0，因为它不再是简单地只在第一层接收噪声或隐变量Z，而是在生成器各层都注入，并且在Z送入“真正”的生成器之前，先经过多层全连接尝试将其解耦，如下图。
+
+解耦的目标是使Z代表的隐空间由线性子空间组成，即某个子空间（每个维度）控制某种特征。但是隐空间Z往往可能是有纠缠现象的，通过可学习的全连接网络对Z解耦，使变化的因素变得更加线性。
+
 The paper divides the features into three types:
 Coarse – resolution of up to 82 – affects pose, general hair style, face shape, etc
 Middle – resolution of 162 to 322  – affects finer facial features, hair style, eyes open/closed, etc.
@@ -33,6 +39,7 @@ Fine – resolution of 642 to 10242 – affects color scheme (eye, hair and skin
 
 ## Style-based generator
 
+![](img\StyleGAN.jpg)
 specializewtostylesy= (ys,yb)that control adaptive instance normalization(AdaIN) [27, 17, 21, 16] operations after each convolutionlayer of the synthesis networkg.
 
 AdaIN isparticularly well suited for our purposes due to its efficiencyand compact representation
@@ -174,6 +181,7 @@ class StyleGAN(ProgressiveGAN):
 [14]: 用AI生成假员工，8天众筹3万美元，这家创业公司2/3的成员都是假的 - 量子位的文章 - 知乎
 https://zhuanlan.zhihu.com/p/112664040
 [15]: https://github.com/facebookresearch/pytorch_GAN_zoo/blob/master/models/styleGAN.py
+[16]: https://zhuanlan.zhihu.com/p/94206978
 
 TODO:
 
