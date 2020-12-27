@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 14:43:37
+ * @LastEditTime: 2020-12-27 15:12:46
  * @Description:
  * @TODO::
  * @Reference:
@@ -164,7 +164,31 @@ variational autoencoders (VAEs) are autoencoders that tackle the problem of the 
 
 变分自编码器是一个非常典型的深度生成模型，利用神经网络的拟合能力来有效地解决含隐变量的概率模型中后验分布难以估计的问题[Kingma et al.,2014;Rezende et al.,2014]．变分自编码器的详尽介绍可以参考文献[Doersch,2016]．[Bowman et al.,2016]进一步将变分自编码器应用于序列生成问题．再参数化是变分自编码器的重要技巧．对于离散变量的再参数化，可以使用Gumbel-Softmax方法[Jang et al.,2017][6]
 
-Auto-Encoding Variational Bayes by Kingma and Welling. It uses ReLUs and the adam optimizer, instead of sigmoids and adagrad.[13]
+Auto-Encoding Variational Bayes by Kingma and Welling. It uses ReLUs and the adam optimizer, instead of sigmoids an
+
+d adagrad.[13]
+
+
+
+在VAE中，它的Encoder有两个，一个用来计算均值，一个用来计算方差
+
+直觉上来想，当decoder还没有训练好时（重构误差远大于KL loss），就会适当降低噪声（KL loss增加），使得拟合起来容易一些（重构误差开始下降）；反之，如果decoder训练得还不错时（重构误差小于KL loss），这时候噪声就会增加（KL loss减少），使得拟合更加困难了（重构误差又开始增加），这时候decoder就要想办法提高它的生成能力了。
+
+![](./img/VAEs.png)
+
+重构的过程是希望没噪声的，而KL loss则希望有高斯噪声的，两者是对立的。所以，VAE跟GAN一样，内部其实是包含了一个对抗的过程，只不过它们两者是混合起来，共同进化的。
+
+## 变分在哪里
+
+因为它的推导过程用到了KL散度及其性质。
+
+因为理论上对于KL散度(7)我们要证明：
+
+> 固定概率分布 $p(x)($ 或 $q(x))$ 的情况下，对于佐意的概率分布 $q(x)($ 或 $p(x)),$ 都有 $K L(p(x) \| q(x)) \geq 0$, 而且只有当 $p(x)=q(x)$ 时才等于零。
+
+因为 $K L(p(x) \| q(x))$ 实际上是一个泛函, 要对泛函求极值就要用到变分法, 当然, 这里的变分法只是普通微积分的平行推 广，还没涉及到真正复杂的变分法。而VAE的变分下界, 是直接基于KL散度就得到的。所以直接承认了KL散度的话，就没有
+变分的什么事了。
+
 
 [1]: https://learning.oreilly.com/library/view/hands-on-artificial-intelligence/9781788836067/de965259-e07e-461a-8d0f-717745273397.xhtml
 [2]: https://learning.oreilly.com/library/view/advanced-deep-learning/9781788629416/ch08.html

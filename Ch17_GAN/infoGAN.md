@@ -5,16 +5,19 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 19:27:05
+ * @LastEditTime: 2020-12-27 15:20:30
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
  * https://github.com/znxlwm/pytorch-generative-model-collections
+ * [3]: https://www.leiphone.com/news/201701/Kq6FvnjgbKK8Lh8N.html
 -->
 
 # InformationMaximizing Generative Adversarial Nets
 
 InfoGAN的作者对损失函数进行了一些小的改进，一定程度上让网络学习到了可解释的特征表示，即作者文中所说的interpretable reptesentation。
+
+InfoGANs通过最大化隐变量与观测数据的互信息，来改进GAN的解释性。
 
 解耦表示（disentangled representation）
 

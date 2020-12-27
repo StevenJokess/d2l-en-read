@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-26 19:17:53
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 02:34:45
+ * @LastEditTime: 2020-12-27 15:41:53
  * @Description:
  * @TODO::
  * @Reference:
@@ -32,3 +32,4 @@ https://github.com/zhejianglab/a-PyTorch-Tutorial-to-Image-Captioning
 https://github.com/Yancey1989/gotorch
 https://github.com/bharathgs/Awesome-pytorch-list
 https://github.com/NVIDIA/DeepLearningExamples
+https://mlelarge.github.io/dataflowr-web/cea_edf_inria.html
