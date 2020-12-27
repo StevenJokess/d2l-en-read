@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 18:27:08
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-06 18:34:47
+ * @LastEditTime: 2020-12-27 13:58:12
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/agile-ai/9781492074984/ch02.html#the_machine_learning_life_cycle
@@ -14,6 +14,8 @@
 在我们构建了机器学习模型之后，必须针对预期的用例部署它。有时，这涉及到将模型作为微服务部署并扩展以满足客户需求。这可能涉及Kubernetes、自动缩放、负载平衡和其他网络工程工作。其他时候，我们必须直接在智能手机和其他移动设备上运行机器学习模型。为此，我们需要在将模型加载到嵌入式硬件之前使用模型压缩。在任何一种情况下，都有用于管理模型部署和监视生产中的模型性能的工具。
 
 一个称为MLOps的新领域正在出现，用于管理整个端到端机器学习生命周期所需的操作工作。换句话说，操作的定义必须改变以满足机器学习的需要。还要注意的是，AI领域充满了试图在工具中拥有不同部分或步骤的供应商。许多公司都有完整管道的观点，以及适应存储、模型培训和模型评估的解决方案。评估供应商是超出了本电子书的范围;在这里，我们只是提供我们的观点，员工和构建一个人工智能管道的最低要求。
+
+https://github.com/microsoft/MLOps
 
 ## 部署
 
