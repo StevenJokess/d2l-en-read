@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 16:14:38
+ * @LastEditTime: 2020-12-27 17:53:37
  * @Description:
  * @TODO::
  * @Reference:
@@ -82,6 +82,9 @@ Define a prior oninput noise variablepz(z).Gis a differentiable function andD(x)
 
 video[7]
 
+大部分GAN都有一个特点：训练完成后，判别器都是没有用的。因为理论上越训练，判别器越退化（比如趋于一个常数）。
+GAN的判别器和生成器两个网络的复杂度是相当的（如果还有编码器，那么复杂度也跟它们相当），训练完GAN后判别器就不要了，那实在是对判别器这个庞大网络的严重浪费！[9]
+
 [1]: https://www.aminer.cn/ai-history
 [2]: https://mrt.aminer.cn/5df49f20e8cc00e7af330f6b
 [3]: https://www.jiqizhixin.com/articles/2019-06-13-11
@@ -90,5 +93,6 @@ video[7]
 [6]: https://arxiv.org/pdf/1702.07800
 [7]: https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Generative-Adversarial-Networks
 [8]: https://www.zhihu.com/column/c_1257831643526172672
+[9]: https://kexue.fm/archives/6409
 TODO:
 http://jiangsiyuan.com/2018/04/10/GAN/
