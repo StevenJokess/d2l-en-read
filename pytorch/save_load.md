@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-17 20:08:27
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-17 20:08:40
+ * @LastEditTime: 2020-12-27 14:01:53
  * @Description:
  * @TODO::
  * @Reference:https://github.com/chenyuntc/pytorch-best-practice/blob/master/models/BasicModule.py
@@ -52,3 +52,8 @@ class Flat(t.nn.Module):
 
     def forward(self, x):
         return x.view(x.size(0), -1)
+
+---
+
+    # Save the model checkpoint
+    torch.save(model.state_dict(), 'model.ckpt')

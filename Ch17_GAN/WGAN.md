@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:59:22
+ * @LastEditTime: 2020-12-27 14:24:11
  * @Description:
  * @TODO::
  * @Reference:
@@ -45,6 +45,16 @@ WGAN modified of DCGAN in:
 是什么原因导致了 GAN 训练如此不稳定呢？WGAN 提出是因为 JS 散度在不重叠的分 布𝑝和𝑞上的梯度曲面是恒定为 0 的。如图 13.19 所示，当分布𝑝和𝑞不重叠时，JS 散度的梯 度值始终为 0，从而导致此时 GAN 的训练出现梯度弥散现象，参数长时间得不到更新，网络无法收敛。
 
 
+
+## Wasserstein距离[10]
+
+假设我们有了两个概率分布p(x),q(x)，那么Wasserstein距离的定义为
+
+$\mathcal{W}[p, q]=\inf _{\gamma \in \Pi[p, q]} \iint \gamma(\boldsymbol{x}, \boldsymbol{y}) d(\boldsymbol{x}, \boldsymbol{y}) d \boldsymbol{x} d \boldsymbol{y}$
+
+事实上，这也算是最优传输理论中最核心的定义了。
+
+d(x,y)不一定是距离，其准确含义应该是一个成本函数，代表着从x运输到y的成本。常用的d是基于l范数衍生出来的
 
 
 
@@ -187,3 +197,4 @@ WGAN本作引入了Wasserstein距离，由于它相对KL散度与JS散度具有�
 [7]: https://github.com/chenyuntc/pytorch-GAN/blob/master/WGAN.ipynb
 [8]: https://arxiv.org/abs/1701.07875
 [9]: https://github.com/bentrevett/pytorch-generative-models/blob/master/4%20-%20WGAN.ipynb
+[10]: https://kexue.fm/archives/6280

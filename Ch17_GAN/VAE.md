@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:02:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:22:26
+ * @LastEditTime: 2020-12-27 14:43:37
  * @Description:
  * @TODO::
  * @Reference:
@@ -33,6 +33,21 @@ VAE是对自动编码器的概率处理，它是一种将高维输入数据压�
 
 对于变分自编码器我们将定义一个不易处理的密度函数，通过附加的隐变量$z$对密度函数进行建模。[15] VAE原理图如下[6]：
 
+相比普通的自编码器，VAE的改动就是：[16]
+
+1、引入了均值和方差的概念，加入了重参数操作；
+
+2、加入了KL散度为额外的损失函数。
+
+
+KL散度的作用，要让隐变量的分布对齐（多元的）标准正态分布，而不是任意正态分布。
+
+在VAE中（包括后来的对抗自编码器），直接通过KL散度让隐变量的分布对齐一个解耦的先验分布，这样带来的好处便是隐变量本身也接近解耦的，从而拥有前面说的解耦的各种好处。因此，现在我们可以回答一个很可能会被问到的问题：
+
+> 问：从特征编码的角度看，变分自编码器相比普通的自编码器有什么好处？
+
+> 答：变分自编码器通过KL散度让隐变量分布靠近标准正态分布，从而能解耦隐变量特征，简化后面的建立在该特征之上的模型。（当然，你也可以联系前面说的变分信息瓶颈来回答一波，比如增强泛化性能等^_^）
+
 VAE通过约束隐变量$z$服从标准正太分布以及重构数据实现了分布转换映射$X=G(z)$[15]
 VAE通过隐变量$z$与标准正太分布的KL散度和重构误差去度量。[15]
 
@@ -46,6 +61,20 @@ VAE通过隐变量$z$与标准正太分布的KL散度和重构误差去度量。
 
 主要提出者Durk Kingma（Diederik P. Kingma），目前就职于Google。 在加入Google之前，于2017年获得阿姆斯特丹大学博士学位，并于2015年成为OpenAI创始团队的一员。 他主要研究的方向为：推理，随机优化，可识别性。其中的研究成就包括变分自编码器（VAE）（一种用于生成建模的有原则的框架）以及广泛使用的随机优化方法Adam。[9]
 
+简单来说, VAE的优化目标是：
+
+$$
+K L(\tilde{p}(x) p(z \mid x) \| q(z) q(x \mid z))=\iint \tilde{p}(x) p(z \mid x) \log \frac{\tilde{p}(x) p(z \mid x)}{q(x \mid z) q(z)} d z d x
+$$
+
+其中 $q(z)$ 是标准正态分布, $p(z \mid x), q(x \mid z)$ 是条件正态分布，分别对应编码器、解码器。具体细节可以参考 [《变分自编码器(二) : 从贝叶斯观点出发》](https://kexue.fm/archives/5343)。
+这个目标最终可以简化为
+
+$$
+\mathbb{E}_{x \sim \tilde{p}(x)}\left[\mathbb{E}_{z \sim p(z \mid x)}[-\log q(x \mid z)]+K L(p(z \mid x) \| q(z))\right]
+$$
+
+显然, 它可以分开来看: $\mathbb{E}_{z \sim p(z \mid x)}[-\log q(x \mid z)]$ 这一项相当于普通的自编码器损失（加上了重参数）， $K L(p(z \mid x) \| q(z))$ 是 后验分布与先验分布的KL散度。第一项是希望重构损失越小越好，也就是希望中间的隐变量z能尽可能保留更多的信息，第二项是要隐变量空间跟正态分布对齐, 意思是希望隐变量的分布更加规整一些。
 
 In a nutshell, a VAE is an autoencoder whose encodings distribution is regularised during the training in order to ensure that its latent space has good properties allowing us to generate some new data. Moreover, the term “variational” comes from the close relation there is between the regularisation and the variational inference method in statistics.
 
