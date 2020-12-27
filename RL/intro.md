@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:08:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 17:32:24
+ * @LastEditTime: 2020-12-27 20:38:02
  * @Description:
  * @TODO::
  * @Reference:https://spinningup.readthedocs.io/zh_CN/latest/spinningup/rl_intro.html#bellman-equations
@@ -113,7 +113,8 @@ T=t+k+1表示最后的时间步，也就意味着在时刻智能体同环境的�
 
    对强化学习来说，它通过对没有概念标记、但与一个延迟奖赏或效用（可视为延迟的概念标记）相关联的训练例进行学习，以获得某种从状态到行动的映射。
 
-**强化学习和前二者的本质区别**:没有前两者具有的明确数据概念，它不知道结果，只有目标。数据概念就是大量的数据，有监督学习、无监督学习需要大量数据去训练优化你建立的模型。
+**强化学习和前二者的本质区别**:没有前两者具有的明确数据概念，它不知道结果，只有目标。数据概念就是大量的数据，有监督学习、无监督学习需要大量数据去训练优化你建立的模型。监督学习有反馈，无监督学习无反馈，强化学习是执行多步之后才反馈。
+
 
 |      | 监督学习         | 非监督学习     | 强化学习|
 | ---- | ---------------- | ------------- | ------ |
