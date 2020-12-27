@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-11 21:28:14
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 23:46:41
+ * @LastEditTime: 2020-12-27 17:42:29
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 ## 1. 什么是迁移学习
+
+类比学习（Learning by analogy）：学习者利用两个不同领域中（源域和目标域）的知识相似性，通过类比，从源域的知识推导出目标域的相应知识。类比学习相比与机械学系和示例学习，要求更多的推理。人类科学技术发展过程中，许多科学发现就是通过类比学习实现的，例如著名的卢瑟福类比就是通过将原子结构（目标域）同太阳系（源域）作类比，揭示了原子结构的奥秘。另外，机器学习中重要的迁移学习也是基于该策略[9]
 
 迁移学习(Transfer Learning)是一种机器学习方法，就是把为任务 A 开发的模型作为初始点，重新使用在为任务 B 开发模型的过程中。迁移学习是通过从已学习的相关任务中转移知识来改进学习的新任务，虽然大多数机器学习算法都是为了解决单个任务而设计的，但是促进迁移学习的算法的开发是机器学习社区持续关注的话题。 迁移学习对人类来说很常见，例如，我们可能会发现学习识别苹果可能有助于识别梨，或者学习弹奏电子琴可能有助于学习钢琴。
 
@@ -141,3 +143,4 @@ consider a child who has learned to draw people as stick figures. She has discov
 [6]: https://github.com/mancinimassimiliano/DeepLearningLab/blob/master/Lab3/finetune_alexnet.ipynb
 [7]: https://github.com/NLP-LOVE/ML-NLP/tree/master/Deep%20Learning/13.%20Transfer%20Learning
 [8]: https://raw.githubusercontent.com/NLP-LOVE/ML-NLP/master/Deep%20Learning/13.%20Transfer%20Learning/README.md
+[9]: https://kangcai.github.io/2018/10/24/ml-overall-1/

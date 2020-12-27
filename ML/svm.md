@@ -5,12 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 15:27:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-17 20:07:37
+ * @LastEditTime: 2020-12-27 17:47:26
  * @Description:
  * @TODO::
  * @Reference:https://www.nowcoder.com/tutorial/95/f2446e6a55c244859d7a9bd0b24a6650
 -->
 
+1995年【正式SVM】，Vapnik和Cortes发表软间隔支持向量机（SVM算法），开启了随后的机器学习领域NN和SVM两大社区的竞争
 ## SVM的硬间隔，软间隔表达式；
 
 $\min _{w, b} \frac{1}{2}\|w\|^{2}$

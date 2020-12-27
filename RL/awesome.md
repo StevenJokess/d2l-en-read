@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:56:46
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-25 19:57:55
+ * @LastEditTime: 2020-12-27 17:18:26
  * @Description:
  * @TODO::
  * @Reference:
@@ -45,6 +45,8 @@
 [32]: https://github.com/pfnet/pfrl
 [33]: https://github.com/dalmia/David-Silver-Reinforcement-learning
 [34]: https://github.com/higgsfield/RL-Adventure
+[35]: https://www.bilibili.com/video/BV1LE411G7Xj?from=search&seid=6731849270333527384
+[36]: bzhou.ie.cuhk.edu.hk/
 ---
 Atari games: Q-learning: V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, et al. “Playing Atari with Deep Reinforcement Learning”. (2013). Policy gradients: J. Schulman, S. Levine, P. Moritz, M. I. Jordan, and P. Abbeel. “Trust Region Policy Optimization”. (2015). V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. P. Lillicrap, et al. “Asynchronous methods for deep reinforcement learning”. (2016).
 Real-world robots: Guided policy search: S. Levine*, C. Finn*, T. Darrell, P. Abbeel. “End-to-end training of deep visuomotor policies”. (2015). Q-learning: D. Kalashnikov et al. “QT-Opt: Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation”. (2018).
