@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-07-25 13:20:41
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-08-05 20:15:23
+ * @LastEditTime: 2020-12-27 17:08:31
  * @Description:translate by machine，improve
  * @TODO::
  * @Reference:http://preview.d2l.ai/d2l-en/master/chapter_appendix-mathematics-for-deep-learning/information-theory.html
@@ -256,7 +256,7 @@ TODO:CODE
 ## 练习
 
 1. 验证从第一部分的卡例子确实有声称的熵。
-1. 结果表明，对于所有分布pp和qq, KL散度D(p∥q)是非负的。提示:使用Jensen不等式，即。,使用计算lnx−−日志⁡x是一个凸函数。
+1. 结果表明，对于所有分布pp和qq, KL散度D(p∥q)是非负的。提示:使用Jensen不等式，即。,使用计算lnx−−日志⁡x是一个凸函数。Jensen 不等式令 f 为一个凸函数而 X 为一个随机变量。我们有下列不等式：E[f(X)] \geqslant f(E[X])
 1. 让我们从以下几个数据源计算熵:
     * 假设你正在观察一只猴子在打字机前产生的输出。猴子随机地按下打字机的4444个键中的任何一个(可以假定它还没有发现任何特殊键或shift键)。你观察到每个角色有多少位的随机性?
     * 由于对猴子不满，你用一个喝醉的排字工人代替了它。它能够产生词汇，尽管不是连贯的。相反，它从2000 2000个单词中随机抽取一个单词。再假设英语单词的平均长度为4.54.5个字母。你现在观察到多少位随机?

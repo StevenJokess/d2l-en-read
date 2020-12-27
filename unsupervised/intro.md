@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 22:06:11
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 16:35:43
+ * @LastEditTime: 2020-12-27 17:08:43
  * @Description:
  * @TODO::
  * @Reference:
@@ -19,6 +19,12 @@ http://ufldl.stanford.edu/tutorial/
 Unsupervised learning is a paradigm designed to create autonomous intelligence by rewarding agents (that is, computer programs) for learning about the data they observe without a particular task in mind. In other words, the agent learns for the sake of learning.[4]
 
 非监督学习，按照字面意思就是除了监督学习以外的学习。比如读世界名著或者欣赏音乐，多次重复的过程中并没有一个谁来告诉你，你读或者听的目的（量化意义上）是什么。你可能只是出于爱好或者无聊，选择做这件事情。但是久而久之，在重复中你会在这些书或者音乐中发现一些相似的东西，比如行为风格，思维方式，旋律和节奏，你觉得这些相似的东西非常有趣或者有价值，于是在未来你会更加容易识别或者注意到这些“有价值”的东西。这个过程，我以为就是一种非监督学习。
+
+动机无监督学习的目标是找到在未标记数据 \{x^{(1)},...,x^{(m)}\}{x
+(1)
+ ,...,x
+(m)
+ } 中的隐含模式。
 
 非监督学习在过程中会建立一种相对主观的价值体系，并用这种主观的价值体系来筛选和分析数据
 

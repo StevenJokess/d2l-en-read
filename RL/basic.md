@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 19:50:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-15 13:36:25
+ * @LastEditTime: 2020-12-27 17:04:22
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 强化学习( Reinforcement Learning),又称再励学习、评价学习,是机器学习的一个重要分支,传统上主要用于解决与环境交互过程中的自主决策和自动控制问题,通过不断改善智能体自身的行为,学得最优的行动策略。广义上说,任何有“决策”的任务都可以使用强化学习方法,比如无人驾驶、机器人控制、游戏竞技等,但也不限于此,比如个性化推荐算法、网络传输等非控制领域也可以使用强化学习方法。[3]
+
+在连接主义学习（源于仿生学）中，把强化学习（Reinforcement learning） 作为与以上三类方法并列的一类机器学习方法，个人认为可以把强化学习看成是一种通过环境内部产生样本（特征和标签的匹配对）的监督学习。[4]
 
 RL有3条发展主线,其中有两条主线具有重要的历史地位。一条是试错(tria|- anderror)学习,其来源于动物学习过程中的心理学,在学习过程中通过不断地尝试各种(错误或正确)行为以最终学习到最优的正确行为,即通过试错的方式去学习。该方法贯穿了人工智能领域最早的一些工作,促进了20世纪80年代RL的复兴。另一条则使用值函数( value- function)和动态规划( Dynamic Programming, DP)的方法来解决最优控制问题,在大多数情况下这条主线不涉及学习。在与现代R融合之前这两条主线彼此之间独立发展,相交甚少。虽然如此,但也有例外,即RL的第三条不太明显的发展主线——时间(序)差分( Temporal- Difference,TD)学习。20世纪80年代后期所有这三条主线汇集在一起,产生了现代RL领域。[3]
 
@@ -76,3 +78,4 @@ RL将控制问题转化为找到最大化预期未来奖励的策略π。值函�
 [1]: https://weread.qq.com/web/reader/62332d007190b92f62371aek92c3210025c92cc22753209
 [2]: https://nndl.github.io/ 14.5
 [3]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
+[4]: https://kangcai.github.io/2019/02/09/ml-supervised-1-intro/
