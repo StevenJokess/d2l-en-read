@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:36:10
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 19:36:23
+ * @LastEditTime: 2020-12-27 19:30:31
  * @Description:
  * @TODO::
  * @Reference:
@@ -36,8 +36,10 @@ https://github.com/NVlabs/stylegan2
 
 video[4]
 
+
 [1]: Tero Karras, Samuli Laine, Miika Aittala, Janne Hellsten, Jaakko Lehtinen, and Timo Aila. Analyzing and improving the image quality of stylegan. arXiv preprint arXiv:1912.04958, 2019.
 [2]: http://arxiv.org/abs/1912.04958
 [3]: https://github.com/anhtuan85/Generative-Adversarial-Networks-GANs-Specialization/blob/main/Course%202%20-%20Build%20Better%20Generative%20Adversarial%20Networks%20(GANs)/Week%203/StyleGAN2.ipynb
 [4]: https://youtu.be/c-NJtV9Jvp0
 [5]: https://nvlabs.github.io/stylegan2/versions.html
+[6]: https://github.com/lucidrains/stylegan2-pytorch

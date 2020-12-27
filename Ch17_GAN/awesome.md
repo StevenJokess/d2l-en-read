@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 16:42:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 21:33:10
+ * @LastEditTime: 2020-12-27 19:25:52
  * @Description:
  * @TODO::
  * @Reference:
@@ -31,3 +31,4 @@ https://github.com/ibrahimjelliti/Deeplearning.ai-GAN-Specialization-Generative-
 https://github.com/znxlwm/pytorch-generative-model-collections
 https://github.com/bentrevett/pytorch-generative-models
 https://github.com/savan77/The-GAN-World
+https://github.com/hindupuravinash/the-gan-zoo
