@@ -5,14 +5,16 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:43:45
+ * @LastEditTime: 2020-12-29 20:09:14
  * @Description:
  * @TODO::
  * @Reference:
 -->
 # Least Squares Generative Adversarial Networks(最小二乘生成式对抗网络)
 
-传统GAN中, D网络和G网络都是用简单的交叉熵loss做更新, 最小二乘GAN则用最小二乘(Least Squares) Loss 做更新:
+虽然WGAN和WGAN-GP已经基本解决了训练失败的问题，但是无论是训练过程还是是收敛速度都要比常规 GAN 更慢。受WGAN理论的启发，Mao 等人提出了最小二乘GAN (least square GAN, LSGAN)
+
+传统GAN中, D网络和G网络都是用简单的交叉熵loss做更新, 最小二乘GAN则用最小二乘(Least Squares) Loss 做更新：
 
 选择最小二乘Loss做更新有两个好处, 1. 更严格地惩罚远离数据集的离群Fake sample, 使得生成图片更接近真实数据(同时图像也更清晰) 2. 最小二乘保证离群sample惩罚更大, 解决了原本GAN训练不充分(不稳定)的问题:
 
@@ -21,6 +23,8 @@
 为什么最小二乘损失函数可以使得原始生成式对抗网络的训练更稳定呢？因为交叉熵损失函数很容易就会达到饱和状态（饱和状态是指梯度为0），而最小二乘损失函数只在一个点上能达到饱和状态。[5]
 
 但缺点也是明显的, LSGAN对离离群点的过度惩罚, 可能导致样本生成的”多样性”降低, 生成样本很可能只是对真实样本的简单”模仿”和细微改动.[3]
+
+
 
 
 ## Loss
