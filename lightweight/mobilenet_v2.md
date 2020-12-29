@@ -5,18 +5,10 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:01:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 18:18:41
+ * @LastEditTime: 2020-12-29 19:27:09
  * @Description:
  * @TODO::
- * @Reference:https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
- * https://arxiv.org/abs/1801.04381
- * https://colab.research.google.com/github/pytorch/pytorch.github.io/blob/master/assets/hub/pytorch_vision_mobilenet_v2.ipynb#scrollTo=7P8C3gMea8FU
- * https://heartbeat.fritz.ai/pytorch-mobile-image-classification-on-android-5c0cfb774c5b
- * [4]: https://engineering.fb.com/2018/10/29/ml-applications/qnnpack/
- * [5]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
- * [6]: https://blog.csdn.net/weixin_44791964/article/details/102851214
- * [7]: https://github.com/anilsathyan7/pytorch-image-classification
- * [8]: https://github.com/pytorch/pytorch/blob/master/android/test_app/make_assets_custom.py
+ * @Reference:
 -->
 
 MobileNet模型是Google针对手机等嵌入式设备提出的一种轻量级的深层神经网络，其使用的核心思想便是depthwise separable convolution。
@@ -187,3 +179,13 @@ def mobilenetv2(pretrained=False, **kwargs):
 ```
 
 [4]: caffe2 72.14% TensorFlow Lite 70.8%
+
+[0]: https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
+[1]: https://arxiv.org/abs/1801.04381
+[2]: https://colab.research.google.com/github/pytorch/pytorch.github.io/blob/master/assets/hub/pytorch_vision_mobilenet_v2.ipynb#scrollTo=7P8C3gMea8FU
+[3]: https://heartbeat.fritz.ai/pytorch-mobile-image-classification-on-android-5c0cfb774c5b
+[4]: https://engineering.fb.com/2018/10/29/ml-applications/qnnpack/
+[5]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
+[6]: https://blog.csdn.net/weixin_44791964/article/details/102851214
+[7]: https://github.com/anilsathyan7/pytorch-image-classification
+[8]: https://github.com/pytorch/pytorch/blob/master/android/test_app/make_assets_custom.py
