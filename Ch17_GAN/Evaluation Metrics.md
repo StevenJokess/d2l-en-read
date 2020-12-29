@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-27 16:56:39
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:40:48
+ * @LastEditTime: 2020-12-29 21:07:13
  * @Description:
  * @TODO::
  * @Reference:
@@ -20,6 +20,16 @@ Inception Score 使用了如下两种评判标准来检验模型的表现：
 生成图片的质量
 生成图片的多样性
 
+
+其计算方式如下:
+$$
+I S(G)=\exp \left(E_{X P_{g}} D_{K L}(P(y \mid x) \| p(y))\right)
+$$
+其中y为类别标签, x为样本向量, $p_{g}$ 为生成器生成的样本所服从的概率分布, $D_{\mathrm{KL}}$ 为KL散度。IS的值越大越好。 $\mathrm{p}(\mathrm{y})$ 是生成图片的类 别y关于生成器G(z)的边缘概率分布：
+$$
+p(y)=\int_{Z} p(y \mid x=G(z)) d_{z}
+$$
+如果生成图片的类别只有一种，那么生成图像的IS依然会很高, 这是IS显著的缺点。
 
 ### 两个假设：
 
@@ -50,6 +60,11 @@ $\Sigma_{r}:$ 真实图片的特征的协方差矩阵
 $\Sigma_{g}:$ 生成图片的特征的协方差矩阵
 
 
+而Fréchet Inception Distance(FID)相较于IS更加 适合用于图片生成质量的评价, 与IS不同, 越小的值意味着更好的生成图片的质量以及更丰富的图片的多样性。在所有生成的图像仅 为一种类别时，其取值将会很高。FID的计算方式是使用Inception网络中的某一层的特征，并使用多元高斯分布对提取的特征进行建 模。假设训练样本对应的特征feat $_{x} \sim N\left(\mu_{x}, \Sigma_{x}\right),$ 生成图片对应的特征feat $_{g} \sim N\left(\mu_{g}, \Sigma_{g}\right)$ 则 :
+$$
+F I D(x, g)=\left\|\mu_{x}-\mu_{g}\right\|^{2}+t r\left(\sum_{x}+\sum_{g}-2\left(\sum_{x} \sum_{g}\right)^{\frac{1}{2}}\right)
+$$
+tr为矩阵主对角线元素之和，即矩阵的迹。
 
 
 https://github.com/mseitzer/pytorch-fid
