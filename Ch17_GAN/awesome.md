@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 16:42:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 19:25:52
+ * @LastEditTime: 2020-12-29 20:43:39
  * @Description:
  * @TODO::
  * @Reference:
@@ -32,3 +32,23 @@ https://github.com/znxlwm/pytorch-generative-model-collections
 https://github.com/bentrevett/pytorch-generative-models
 https://github.com/savan77/The-GAN-World
 https://github.com/hindupuravinash/the-gan-zoo
+
+---
+
+生成对抗网络
+
+[1] Goodfellow Ian, Pouget-Abadie J, Mirza M, et al. Generative adversarial nets. Advances in Neural Information Processing Systems, 2672-2680, 2014.
+
+[2] Mirza M, Osindero S. Conditional Generative Adversarial Nets. Computer Science, 2672-2680, 2014.
+
+[3] Radford A, Metz L, Chintala S. Unsupervised representation learning with deep convolutional generative adversarial networks. arXiv preprint arXiv:1511.06434, 2015.
+
+[4] Denton E L, Chintala S, Fergus R. Deep Generative Image Models using a Laplacian Pyramid of Adversarial Networks. Advances in neural information processing systems. 1486-1494, 2015.
+
+[5] S Reed, Zeynep Akata, Xinchen Yan, Lajanugen Logeswaran, Bernt Schiele,Honglak Lee. Generative Adversarial Text to Image Synthesis. international conference on machine learning, 2016.
+
+[6] Christian Ledig, Lucas Theis, Ferenc Huszar, Jose Caballero, Andrew Aitken, Alykhan Tejani, Johannes Totz, Zehan Wang, Wenzhe Shi. Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network. Computer Vision and Pattern Recognition, 2016.
+
+[7] Chen X, Duan Y, Houthooft R, et al. InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets[J]. arXiv preprint arXiv:1606.03657, 2016.
+
+[8] Martin Arjovsky, Leon Bottou. Towards Principled Methods for Training Generative Adversarial Networks. ICLR 2017.
