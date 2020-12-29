@@ -5,16 +5,45 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-08 18:53:18
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 01:21:28
+ * @LastEditTime: 2020-12-29 19:40:45
  * @Description:
  * @TODO::
  * @Reference:https://www.jianshu.com/p/844b4e417ad2
  * https://arxiv.org/abs/1612.08242
+ * [3]: https://mp.weixin.qq.com/s?__biz=MzU4MjQ3MDkwNA==&mid=2247484909&idx=1&sn=c02ee17e5175230ed39ad63e73249f5c&chksm=fdb6987acac1116c0108ec28424baf4ea16ca11d2b13f20d4a825d7b2b82fb8765720ebd1063&scene=21#wechat_redirect
 -->
 
 # YOLO9000:Better, Faster, Stronger
 
 yolov2相对于yolo来说的优势就是文章题目所说的，更好，更快，更强。下面来看看yolov2如何达到这个目的的。
+
+## 相较于YOLOv1的改进：[3]
+
+1. 保留v1数据增强的策略的同时，增加了图片180°反转和多尺度训练。
+2. 添加了batch normalization，舍弃掉了dropout，提升模型泛化能力的同时使得模型更容易收敛。
+3. 首次提出darknet19，并用全卷积替代全连接，解决了v1全连接的问题，大大减少了参数规模。
+4. 不再像v1一样，直接预测BBox的位置和大小，而是受faster r-cnn影响，有了anchor的概念，从而预测BBox相对于anchor boxes的偏移量。
+5. v2对Faster R-CNN的人为设定先验框方法做了改进,采样k-means在训练集BBox上进行聚类产生合适的先验框.由于使用欧氏距离会使较大的BBox比小的BBox产生更大的误差，而IOU与BBox尺寸无关,因此使用IOU参与距离计算,使得通过这些sanchor boxes获得好的IOU分值。改进的距离评估公式：
+ 图片
+
+使用聚类方法进行选择的优势是达到相同的IOU结果时所需的anchor box数量更少,使得模型的表示能力更强,任务更容易学习。同时作者发现直接把faster-rcnn预测region proposal的策略应用于YOLO会出现模型在训练初期不稳定。原因来自于预测region proposal的中心点相对于anchor boxes中心的偏移量较大，不好收敛，公式如下：
+
+图片
+
+
+
+由公式可见，如果预测值tx=1，region proposal将要向右移一个anchor box的宽度。这个公式对于region proposal和anchor box之间不受限制的，所以随机初始化模型需要很长时间才能稳定以预测合理的偏移。
+
+
+
+作者对此公式做了改进：
+
+图片
+
+
+
+由下图可见，将预测值加以sigmoid运算，将region proposal的中心点牢牢地限定在了anchor box的中心点所在的cell里，很明显这样偏移量会好学了很多。偏pw , ph
+
 
 一、如何更快
 1. 使用BN

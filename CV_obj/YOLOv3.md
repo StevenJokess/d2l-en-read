@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-06 19:19:02
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-22 01:23:41
+ * @LastEditTime: 2020-12-29 19:38:25
  * @Description:
  * @TODO::
  * @Reference:https://pjreddie.com/darknet/yolo/
@@ -18,6 +18,18 @@ You only look once (YOLO) is a state-of-the-art, real-time object detection syst
 
 Comparison to Other Detectors
 YOLOv3 is extremely fast and accurate. In mAP measured at .5 IOU YOLOv3 is on par with Focal Loss but about 4x faster. Moreover, you can easily tradeoff between speed and accuracy simply by changing the size of the model, no retraining required!
+
+## 相较于前两版的改进点：[6]
+
+1、提出了darknet53，由于加深了网络，应用resnet的思想，添加了residual block，降低了梯度消失的风险。不再使用pooling层，而是用步长为2的卷积层代替，避免了信息丢失，想进一步了解的同学可以拜读一下这篇文章Springenberg J T, Dosovitskiy A, Brox T, et al. Striving for simplicity: The all convolutional net[J]. arXiv preprint arXiv:1412.6806, 2014.。
+
+
+
+2、在检测部分，作者参考了FPN（feature pyramid networks）的思想。用非线性插值方法上采样了两次，获得了3个不同大小的feature maps。和v2相似，作者依然对ground truth 框的大小进行了聚类，不同的是，v3获得的9个尺度的anchor boxes。每个feature map分配3个尺度的anchor boxes。由于深层、语义特征丰富的负责预测大物体（分配大anchor）；浅层、几何特征丰富的负责预测小物体（分配小anchor）。这次不仅框多了，而且更细致了，对检测小物体放了大招，所以就目前来说这种策略对检测小物体已经做到头了，想要再改进，可能要换思路了，如果一味地增大输入尺寸显然是不合理的。
+
+
+
+3、用Sigmoid代替Softmax，这个改进主要是用于多标签分类。Softmax输出的结果有互斥性，只能预测一类，而如果一个物体有多个标签（如：人和女人），那么Softmax是做不到的。但是在真实的检测场景中存在这样的情况，所以作者使用了Sigmoid函数替代。
 
 # YOLOv3: An Incremental
 按照原文的说法，它其实是一篇技术试验的报告。本文通过一些试验来改进yolo方法。
@@ -64,6 +76,7 @@ YOLO 有着让人惊艳的速度，同时也有让人止步的缺陷：不擅长
 [3]: https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650781020&idx=1&sn=0cb4ae88c603ec778ef5acc1228fb3c1
 [4]: https://blog.csdn.net/weixin_44791964/article/details/102646387
 [5]: https://github.com/sthanhng/yoloface
+[6]: https://mp.weixin.qq.com/s?__biz=MzU4MjQ3MDkwNA==&mid=2247484909&idx=1&sn=c02ee17e5175230ed39ad63e73249f5c&chksm=fdb6987acac1116c0108ec28424baf4ea16ca11d2b13f20d4a825d7b2b82fb8765720ebd1063&scene=21#wechat_redirect
 https://github.com/ayooshkathuria/pytorch-yolo-v3
 https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
 https://github.com/minar09/yolov3-pytorch
