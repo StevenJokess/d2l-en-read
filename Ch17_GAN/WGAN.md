@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 21:54:28
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:00:53
+ * @LastEditTime: 2020-12-29 20:18:03
  * @Description:
  * @TODO::
  * @Reference:
@@ -110,6 +110,15 @@ As we've mentioned before, GANs are notoriously hard to train. The opposing obje
 ...
 
 ## 判别器
+
+其中 $\backslash\left(\mathrm{P}_{-}\{\mathrm{r}\} \backslash\right), \backslash\left(\mathrm{P}_{-}\{\mathrm{g}\} \backslash\right)$ 分别为 真实分布与生成分布 $, \gamma$ 为 $\backslash\left(\mathrm{P}_{-}\{\mathrm{r}\} \backslash\right), \backslash\left(\mathrm{P}_{-}\{\mathrm{g}\} \backslash\right)$ 的联合分布。相较于 Jensen-Shannon散度,
+Wasserstein-1距离的优点在于，即使\backslash(P_ $\{r\} \backslash, \backslash\left(P_{-}\{g\} \backslash\right)$ 互不重叠，Wasserstein距离依旧可以清楚地反应出两个分布的距 离。为了与GAN相结合，将其转换成对偶形式
+
+$$
+W\left(P_{r}, P_{g}\right)=\sup _{\|f\|_{L} \leq 1}\left(E_{x \sim P_{r}} f_{w}(x)-E_{x \sim P_{g}} f_{w}(x)\right)
+$$
+
+从表示GAN 的角度理解， $f_{w}$ 表示判别器，与之前的D不同的是, WGAN不再需要将判别器当作0-1分类将其值限定再之[0,1]间, $f_{w}$ 越 大，表示其越接近真实分布 ; 反之，就越接近生成分布。此外, $\|f\|_{L} \leq 1$ 表示其Lipschitz常数为 $1 。$ 显然，Lipschitz连续在判别 器上是难以约束的，为了更好地表达Lipschitz转化成权重剪枝, 即要求参数w $\in[-c, c],$ 其中c为常数。因而判别器的目标函数为
 
 然而，要计算公式(13.54)中的上界也并不容易．根据神经网络的通用近似定理，我们可以假设存在一个神经网络使得可以达到这个上界．令𝑓(𝒙;𝜙)为一个神经网络，假设存在参数集合Φ，对于所有的𝜙 ∈ Φ，𝑓(𝒙;𝜙)为K-Lipschitz连续函数，那么公式（13.54）中的上界可以近似转换为
 

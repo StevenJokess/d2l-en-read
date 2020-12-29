@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:58:46
+ * @LastEditTime: 2020-12-29 20:14:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -14,6 +14,8 @@
 # WassersteinGAN with Gradient Penality
 
 WGAN没有那么好用，主要原因在于WAGN进行梯度截断。梯度截断将导致判别网络趋向于一个二值网络，造成模型容量的下降。[9]
+
+在理论上，由于对函数（即判别器）存在Lipschitz-1约束，这个条件难以在神经网络模型中直接体现，所以作者使用了权重剪枝(clip) 来近似替代Lipschitz-1约束。显然在理论上，这两个条件并不等价，而且满足Lipschitz-1约束的情况多数不满足权重剪枝约束。而在实验上，很多人认为训练失败是由权重剪枝引起的，如图3。对此Ishaan Gulrajani提出了梯度带梯度惩罚的WGAN（WGAN with gradient penalty, WGAN-GP），将Lipschitz-1约束正则化，通过把约束写成目标函数的惩罚项，以近似Lipschitz-1约束条件。[10]
 
 在提出了WGAN后，作者继续在WGAN上进行优化，又给出了一种新的损失函数，抛弃weight clipping，也就不再需要经验常数c了，取而代之的是gradient penality（梯度惩罚），因此取名为WGAN_GP，也叫Improved_WGAN。[8]
 
@@ -234,6 +236,7 @@ Code: [4]
 
 
 
+WGAN-GP的贡献在于，它用正则化的形式表达了对判别器的约束，也为后来GAN的正则化模型做了启示。此外WGAN-GP基本从理论和实验上解决了梯度消失的问题，并且具有强大的稳定性，几乎不需要调参，即在大多数网络框架下训练成功率极高。
 
 [1]: Gulrajani,  I.,  Ahmed,  F.,  Arjovsky,  M.,  Dumoulin,  V.,  and  Courville,A. C. (2017). Improved training of Wasserstein GANs. InAdvances inNeural Information Processing Systems(pp. 5767-5777).
 [2]: https://lanpartis.github.io/deep%20learning/2018/06/24/Use-GANs-to-Generate-Pokemons.html
@@ -246,5 +249,6 @@ TODO:
 [7]: https://github.com/igul222/improved_wgan_training
 [8]: https://www.jiqizhixin.com/articles/2019-06-13-11
 [9]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
+[10]: http://www.tensorinfinity.com/paper_26.html
 https://github.com/caogang/wgan-gp
 https://github.com/igul222/improved_wgan_training
