@@ -5,13 +5,24 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-09 14:33:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 15:46:37
+ * @LastEditTime: 2020-12-29 21:09:51
  * @Description:
  * @TODO::
  * @Reference:https://machine-learning-from-scratch.readthedocs.io/zh_CN/latest/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E6%A8%A1%E5%9E%8B%E8%B0%83%E4%BC%98.html#header-n4
+ * http://www.tensorinfinity.com/paper_158.html
 -->
 
+http://www.tensorinfinity.com/paper_158.html
 
+神经网络的设计需要大量的专业知识，成本高昂，非一般企业和个人所能承受。怎样早造出老百姓也能用的平价网络？NAS诞生了。
+
+
+
+NAS的基本原理是给定一个搜索空间，让某种算法去设计神经网络，使得某一指标最大化，典型的指标是神经网络在验证集上的精度。求解这一问题可以采用强化学习，遗传算法，贝叶斯优化，或将问题直接连续化为一个可微的问题，然后用梯度下降法求解。这是机器学习领域近两年来又一个灌水的火爆方向。
+
+这里我们将NAS分为单目标算法与多目标算法。前者的目标是设计出一个神经网络，使得精度等单个指标最大化。后者则要考虑多个指标，如精度与速度，保证设计出来的网络既有很高的准确率，又有很快速度，是多目标优化问题。NAS的综述可阅读之前的文章“神经结构搜索（NAS）综述”。
+
+---
 
 # 超参数调节/超参数优化
 
