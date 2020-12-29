@@ -5,12 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 23:10:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 15:20:30
+ * @LastEditTime: 2020-12-29 19:07:25
  * @Description:
  * @TODO::
  * @Reference:https://www.zhihu.com/column/c_1186629504699731968
  * https://github.com/znxlwm/pytorch-generative-model-collections
  * [3]: https://www.leiphone.com/news/201701/Kq6FvnjgbKK8Lh8N.html
+ * [4]: http://www.tensorinfinity.com/paper_26.html
 -->
 
 # InformationMaximizing Generative Adversarial Nets
@@ -18,6 +19,33 @@
 InfoGAN的作者对损失函数进行了一些小的改进，一定程度上让网络学习到了可解释的特征表示，即作者文中所说的interpretable reptesentation。
 
 InfoGANs通过最大化隐变量与观测数据的互信息，来改进GAN的解释性。
+
+InfoGAN(MutualInformation)本质上也可以看作是一种cGAN。从出发点看，InfoGAN是基于朴素GAN改进的。它将原先生成器上输入的z进行分解，除了原先的噪声z以外，还分解出一个隐含编码c。其中c除了可以表示类别以外，还可以包含多种变量。以MNIST数据集为例，还可以表示诸如光照方向，字体的倾斜角度，笔画粗细等。InfoGAN的基本思想是，如果这个c能解释生成出来的G(z,c)，那么c应该与G(z,c)由高度的相关性。在InfoGAN中，可以表示为两者的互信息，目标函数可以写作
+
+$$
+\operatorname{minmax}_{G} V_{I}(D, G)=V(D, G)-\lambda I(c ; G(z, c))
+$$
+然而在互信息I $(c ; G(z, c))$ 的优化中，真实的P $\left(\left.c\right|_{x}\right)$ 很难计算，因此作者采用了变分推断的思想, 引入了变分分布Q $(c \mid x)$ 来逼近 $\mathrm{P}(\mathrm{c} \mid \mathrm{x})$
+$$
+\begin{array}{l}
+I(c ; G(z, c))=H(c)-H(c \mid G(z, c)) \\
+=E_{x \sim G(z, c)}\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log P\left(c^{\prime} \mid x\right)\right]\right]+H(c) \\
+=E_{x \backslash G(z, c)}\left[D_{K L}(P(\cdot \mid x) \| Q(\cdot \mid x))+\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c)\right. \\
+\geq E_{x \sim G(z, c)}\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c)
+\end{array}
+$$
+如此可以定义变分下界为
+$$
+\begin{array}{l}
+L_{I}(G, Q)=E_{O V P(c), x \sim G(z, c)}[\log Q(c \mid x)]+H(c) \\
+=E_{x \sim G(z, c)}\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c) \\
+\leq I(c ; G(z, c))
+\end{array}
+$$
+这样InfoGAN的目标函数可以写作
+$$
+\operatorname{minmax}_{G, Q} \frac{D}{D} V_{I n f o G A N}(D, G, Q)=V(D, G)-\lambda L_{I}(G, Q)
+$$
 
 解耦表示（disentangled representation）
 
@@ -62,6 +90,10 @@ The combination of a lower bound and an upper bound means that you don't even kn
 
 － c可以包含多种变量，根据不同的分布，比如在MNIST中，c可以一个值来表示类别，一个高斯分布的值来表示手写体的粗细
 
+Q通过与D共享卷积层，计算花销大大减少。此外，Q是一个变分分布，在神经网络中直接最大化，Q也可以视作一个判别器，输出类别c。
+
+
+InfoGAN的重要意义在于，它通过从噪声z中拆分出结构化的隐含编码c的方法，使得生成过程具有一定程度的可控性，生成结果也具备了一定的可解释性。[8]
 
 
 [1]: https://www.zhihu.com/column/c_1186629504699731968
@@ -71,3 +103,4 @@ The combination of a lower bound and an upper bound means that you don't even kn
 [5]: http://www.c-s-a.org.cn/html/2019/11/7156.html#outline_anchor_12
 [6]: https://www.inference.vc/infogan-variational-bound-on-mutual-information-twice/
 [7]: https://blog.csdn.net/Layumi1993/article/details/52474554
+[8]: http://www.tensorinfinity.com/paper_26.html
