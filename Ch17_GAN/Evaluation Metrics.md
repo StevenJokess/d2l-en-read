@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-27 16:56:39
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 19:17:57
+ * @LastEditTime: 2020-12-29 20:40:48
  * @Description:
  * @TODO::
  * @Reference:
@@ -14,6 +14,12 @@
 ## Inception Score (IS)
 
 Proposed by Salimans et al. (2016),the  IS  offers  a  way  to  quantitatively  evaluate  the  qual-ity of generated samples.   Intuitively,  the conditional la-bel distribution of samples containing meaningful objectsshould have low entropy,  and the variability of the sam-ples  should  be  high.   which  can  be  expressed  asIS=exp(Ex∼Q[dKL(p(y|x),p(y))]).  The authors found thatthis score is well-correlated with scores from human anno-tators. Drawbacks include insensitivity to the prior distribu-tion over labels and not being a properdistance.
+
+Inception Score 使用了如下两种评判标准来检验模型的表现：
+
+生成图片的质量
+生成图片的多样性
+
 
 ### 两个假设：
 
