@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-19 23:08:42
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-20 00:45:55
+ * @LastEditTime: 2020-12-29 21:33:54
  * @Description:
  * @TODO::
  * @Reference:https://github.com/ashukid/Conditional-GAN-pytorch/blob/master/Conditional%20DCGAN.ipynb
@@ -86,3 +86,29 @@ class ImageDataset(Dataset):
 
     def __len__(self):
         return min(len(self.files_A), len(self.files_B))
+
+---
+
+https://datawhalechina.github.io/dive-into-cv-pytorch/#/chapter02_image_classification_introduction/2.4_classification_action_SVHN/baseline
+
+class SVHNDataset(Dataset):
+    def __init__(self, img_path, img_label, transform=None):
+        self.img_path = img_path
+        self.img_label = img_label
+        if transform is not None:
+            self.transform = transform
+        else:
+            self.transform = None
+
+    def __getitem__(self, index):
+        img = Image.open(self.img_path[index]).convert('RGB')
+
+        if self.transform is not None:
+            img = self.transform(img)
+
+        lbl = np.array(self.img_label[index], dtype=np.int)
+        lbl = list(lbl)  + (5 - len(lbl)) * [10]
+        return img, torch.from_numpy(np.array(lbl[:5]))
+
+    def __len__(self):
+        return len(self.img_path)
