@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:09:14
+ * @LastEditTime: 2020-12-29 20:11:34
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,7 +24,19 @@
 
 但缺点也是明显的, LSGAN对离离群点的过度惩罚, 可能导致样本生成的”多样性”降低, 生成样本很可能只是对真实样本的简单”模仿”和细微改动.[3]
 
+## 判别器
 
+目标函数
+
+$$
+\underset{\min }{D} E_{x \sim P_{\text {data}}(x)}\left[(D(x)-b)^{2}\right]+E_{z \sim P_{z}(z)}\left[(D(G(Z))-a)^{2}\right]
+$$
+## 生成器
+
+$$
+E_{z \sim P_{z}(z)}\left[(D(G(Z))-c)^{2}\right]
+$$
+这里a, b, c满足b-c=1和b-a=2。根据[6]，它等价于弄散度中的 $x^{2}$ 散度，也即是说，LSGAN用 $x^{2}$ 散度取代了朴素GAN 的 JensenShannon散度。
 
 
 ## Loss
@@ -95,6 +107,10 @@ if __name__ == "__main__":
     m = LSGAN(LATENT_DIM, IMG_SHAPE, A, B, C)
     train(m, d, EPOCH)
 ```
+
+
+
+最后，LSGAN的优越性在于，它缓解了GAN训练时的不稳定，提高了生成数据的质量和多样性，也为后面的泛化模型f-GAN提供了思路。
 
 [1]: https://arxiv.org/pdf/1611.04076.pdf
 [2]: https://github.com/MorvanZhou/mnistGANs/blob/main/lsgan.py
