@@ -5,12 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 15:23:03
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 18:27:01
+ * @LastEditTime: 2020-12-29 18:56:13
  * @Description:
  * @TODO::
  * @Reference:
 -->
-Model-Agnostic Meta Learning（MAML）
+
+# Model-Agnostic Meta Learning（MAML）
 
 假设你去逛一座城市，酒店租在市中心要比远郊好很多一个道理吧，你很方便就可以到达任意景点[2]
 
@@ -128,6 +129,7 @@ $$\nabla\_{\phi} l(\hat{\theta})=\left[\begin{array}{c}{\partial l(\hat{\theta})
 ## Code
 
 ```py
+# [15]
 """MAML model code"""
 import numpy as np
 import sys
@@ -267,6 +269,9 @@ class MAML(tf.keras.Model):
   作为最终参数。
 原论文表明这种优化方法使得计算速度提升了约 33%。并且通过测试发现，算法的效果没有受到明显的影响。[9]
 
+
+在避免得到训练 task global minima 的同时，降低训练 task 的总损失函数。对总的损失函数，有点羞哒哒欲拒还迎的感觉。直观可以这样理解：如果直接用所有训练 task 的损失函数之和对\phiϕ的梯度更新它，让损失函数取得 global minima（并不是真正的全局最优，而是“相对来说”的全局最优），会造成一种 task 层面的 overfitting，使得网络只能在训练 task 上取得好成绩，一旦换一个没见过的 task，它就表现得不太好了。反之，用单一 task 的参数的梯度，作为模糊的梯度下降的大方向，大差不差、马马虎虎地降低训练 task 总的损失函数，往往能获得一个较好的初始化参数。以这个初始化参数为起点，在新的任务上稍加训练，它反而能学得又快又好。
+
 [1]: https://github.com/ZhiqingXiao/pytorch-book/blob/master/chapter12_fewshot/omniglot.ipynb
 [2]: https://zhuanlan.zhihu.com/p/55643191
 [3]: https://www.tensorinfinity.com/paper_191.html
@@ -280,3 +285,6 @@ class MAML(tf.keras.Model):
 [11]: https://arxiv.org/pdf/1703.03400.pdf
 [12]: https://renovamen.ink/post/2020/08/05/meta-learning/#fomaml
 [13]: https://colab.research.google.com/drive/1zbt2A74kM10HvcAEgEy3fGgRSNyHZQKj?usp=sharing#scrollTo=MxriXFvwsGfp
+[14]: http://www.tensorinfinity.com/paper_191.html
+[15]: https://colab.research.google.com/drive/1zbt2A74kM10HvcAEgEy3fGgRSNyHZQKj?usp=sharing#scrollTo=S_bOml4PhkSM
+[16]: https://colab.research.google.com/github/AdrienLE/ANIML/blob/master/ANIML.ipynb#scrollTo=vZZWq5qGGZqO
