@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 22:51:45
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-19 21:27:09
+ * @LastEditTime: 2020-12-29 17:40:09
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,10 +13,33 @@
 
 # 多任务学习（Multi-task Learning）
 
+## What is a task? (more formally this time)
+
+A task: $\mathscr{T}_{i} \triangleq\left\{p_{i}(\mathbf{x}), p_{i}(\mathbf{y} \mid \mathbf{x}), \mathscr{L}_{i}\right\}$
+data generating distributions
+Corresponding datasets: $\quad \mathscr{D}_{i}^{t r} \quad \mathscr{D}_{i}^{\text {est}}$
+will use $\mathscr{D}_{i}$ as shorthand for $\mathscr{D}_{i}^{t r}$ :[2]
+
 如果有两个任务比较相关，它们之间会存在一定的共享知识，这些知识对两个任务都会有所帮助．这些共享的知识可以是表示（特征）、模型参数或学习算法等．目前，主流的多任务学习方法主要关注表示层面的共享．
+
+
+
 
 多任务学习（Multi-task Learning）是指同时学习多个相关任务，让这些任务在学习过程中共享知识，利用多个任务之间的相关性来改进模型在每个任务上的性能和泛化能力．多任务学习可以看作一种归纳迁移学习（InductiveTransfer Learning），即通过利用包含在相关任务中的信息作为归纳偏置（In-ductive Bias）来提高泛化能力[Caruana,1997]
 
+\text { Vanilla MTL Objective: } \min _{\theta} \sum_{i=1}^{T} \mathscr{L}_{i}\left(\theta, \mathscr{D}_{i}\right)[2]
+
+Basic Version:
+1. Sample mini-batch of tasks $\mathscr{B} \sim\left\{\mathscr{T}_{i}\right\}$
+2. Sample mini-batch datapoints for each task $\mathscr{D}_{i}^{b} \sim \mathscr{D}_{i}$
+3. Compute loss on the mini-batch: $\hat{\mathscr{L}}(\theta, \mathscr{B})=\sum_{\mathscr{T}_{k} \in \mathscr{B}} \mathscr{L}_{k}\left(\theta, \mathscr{D}_{k}^{b}\right)$
+4. Backpropagate loss to compute gradient $\nabla_{\theta} \hat{\mathscr{L}}$
+5. Apply gradient with your favorite neural net optimizer (e.g. Adam)
+Note: This ensures that tasks are sampled uniformly, regardless of data quantities.
+Tip: For regression problems, make sure your task labels are on the same scale!
+
+
+Multitask Learning (MTL) is an inductive transfer mechanism whose principle goal is to improve generalization performance. MTL improves generalization by leveraging the domain-specific information contained in the training signals of related tasks. It does this by training tasks in parallel while using a shared representation. In effect, the training signals for the extra tasks serve as an inductive bias.[2]
 
 共享机制多任务学习的主要挑战在于如何设计多任务之间的共享机制．在传统的机器学习算法中，引入共享的信息是比较困难的，通常会导致模型变得复杂．但是在神经网络模型中，模型共享变得相对比较容易．深度神经网络模型提供了一种很方便的信息共享方式，可以很容易地进行多任务学习．多任务学习的共享机制比较灵活，有很多种共享模式．图10.1给出了多任务学习中四种常见的共享模式，其中𝐴、𝐵和𝐶表示三个不同的任务，红色框表示共享模块，蓝色框表示任务特定模块．这四种常见的共享模式分别为：
 （1）硬共享模式：让不同任务的神经网络模型共同使用一些共享模块（一般是低层）来提取一些通用特征，然后再针对每个不同的任务设置一些私有模块（一般是高层）来提取一些任务特定的特征．
@@ -68,3 +91,4 @@ draw_faces(filename, faces)
 
 [1]: Caruana R, 1997. Multi-task learning[J]. Machine Learning, 28(1):41-75.
 TODO:http://questioneurope.blogspot.com/2020/07/running-mtcnn-on-my-own-photos.html
+[2]: https://cs330.stanford.edu/slides/cs330_intro.pdf

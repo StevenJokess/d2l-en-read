@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:48:04
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 17:11:55
+ * @LastEditTime: 2020-12-29 17:35:04
  * @Description:
  * @TODO::
  * @Reference:
@@ -102,6 +102,9 @@ $\begin{aligned} \theta & \leftarrow \theta-\beta \nabla_{\theta} \sum_{m=1}^{M}
 
 当学习器面对三个不同的学习任务时，学习器的模型参数在三个方向上均有梯度更新。如果让学习器沿着三个方向中的某一个方向进行参数更新，虽然会使得学习器在对应任务上的性能越来越好，但是会导致学习器在其他任务上却越来越差，这也就是现阶段机器学习领域中极其棘手的“灾难性遗忘”问题（Catastrophic forgetting）。
 
+## Critical Assumption[11]
+
+The bad news: Different tasks need to share some structure.If this doesn’t hold, you are beKer off using single-task learning.The good news:There are many tasks with shared structure!
 
 ## 异同点
 
@@ -118,6 +121,14 @@ $\begin{aligned} \theta & \leftarrow \theta-\beta \nabla_{\theta} \sum_{m=1}^{M}
 ### 迁移学习的异同
 
 引用王晋东博士的话：你可以说元学习是强调从不同的若干小任务小样本来学习一个对未知样本未知类别都有好的判别和泛化能力的模型，但其实你想想，难道这不就是知识迁移吗？从迁移上来看，你可以说学习一个可迁移的特征或模型，可以从A迁移到B。但这些可以被迁移过提纯的东西，难道不能被叫做元知识吗？所以其实是殊途同归的，都应该一起联系起来看。[8]
+
+Key assumption: Cannot access data(may include multiple tasks itself) during transfer.
+###
+
+### RL
+
+More diverse, yet still one task, from scratch, with detailed supervision
+
 
 ## 应用[11]
 
