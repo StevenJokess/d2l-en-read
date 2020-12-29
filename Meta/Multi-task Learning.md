@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-14 22:51:45
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 17:40:09
+ * @LastEditTime: 2020-12-29 17:45:19
  * @Description:
  * @TODO::
  * @Reference:
@@ -48,6 +48,12 @@ Multitask Learning (MTL) is an inductive transfer mechanism whose principle goal
 （4）共享-私有模式：一个更加分工明确的方式是将共享模块和任务特定（私有）模块的责任分开．共享模块捕捉一些跨任务的共享特征，而私有模块只捕捉和特定任务相关的特征．最终的表示由共享特征和私有特征共同构成．
 
 
+An Alternative View on the Multi-Task Architecture
+Split $\theta$ into share parameters $s^{s h}$ and task-specifíc parameters $\theta^{i}$
+$$
+\text { Then, our objective is: } \min _{\theta^{\prime \prime}, g^{\prime}, \ldots, \theta^{\top}} \sum_{i=1}^{T} \mathscr{L}_{i}\left(\left\{\theta^{s h}, \theta^{i}\right\}, \mathscr{D}_{i}\right)
+$$
+Choosing how to condition on $\boldsymbol{z}_{i}$ equivalent to share parameters
 
 多任务学习通常可以获得比单任务学习更好的泛化能力，主要有以下几个原因：
 （1）多任务学习在多个任务的数据集上进行训练，比单任务学习的训练集更大．由于多个任务之间有一定的相关性，因此多任务学习相当于是一种隐式的数据增强，可以提高模型的泛化能力．

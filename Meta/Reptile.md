@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 16:31:05
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 17:37:20
+ * @LastEditTime: 2020-12-29 18:21:53
  * @Description:
  * @TODO::
  * @Reference:
@@ -13,6 +13,7 @@
 
 Reptile (Nichol, Achiam & Schulman, 2018) is a remarkably simple meta-learning optimization algorithm. It is similar to MAML in many ways, given that both rely on meta-optimization through gradient descent and both are model-agnostic.
 
+著名的Reptile算法[308]的训练过程与Federated Averaging[289]非常相似—Reptile允许设定一个server端的学习率，然后假定所有的Client都有相同数量的数据,这与联邦学习殊途同归。
 
 Reptile 的训练过程如下：
 

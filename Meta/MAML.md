@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-08 15:23:03
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 16:47:12
+ * @LastEditTime: 2020-12-29 18:27:01
  * @Description:
  * @TODO::
  * @Reference:
@@ -15,6 +15,8 @@ Model-Agnostic Meta Learning（MAML）
 假设你去逛一座城市，酒店租在市中心要比远郊好很多一个道理吧，你很方便就可以到达任意景点[2]
 
 MAML 和 Reptile，它们不改变深度神经网络的结构，只改变网络的初始化参数。[3]
+
+可以首先meta-learn一个全局模型，来作为任务迁移的起点然后可以在少量的本地的gradient step上学习到很好的迁移模型的算法，叫做MAML
 
 Few-Shot Learning
 
@@ -123,6 +125,124 @@ $$\frac{\partial l(\hat{\theta})}{\partial \phi\_{i}}=\sum\_{j} \frac{\partial l
 
 $$\nabla\_{\phi} l(\hat{\theta})=\left[\begin{array}{c}{\partial l(\hat{\theta}) / \partial \phi\_{1}} \\\ {\partial l(\hat{\theta}) / \partial \phi\_{2}} \\\ {\vdots} \\\ {\partial l(\hat{\theta}) / \partial \phi\_{i}}\end{array}\right]=\left[\begin{array}{c}{\partial l(\hat{\theta}) / \partial \hat{\theta}\_{1}} \\\ {\partial l(\hat{\theta}) / \partial \hat{\theta}\_{2}} \\\ {\vdots} \\\ {\partial l(\hat{\theta}) / \partial \hat{\theta}\_{i}}\end{array}\right]=\nabla\_{\hat{\theta}} l(\hat{\theta})$$
 
+## Code
+
+```py
+"""MAML model code"""
+import numpy as np
+import sys
+import tensorflow as tf
+from functools import partial
+
+
+class MAML(tf.keras.Model):
+  def __init__(self, dim_input=1, dim_output=1,
+               num_inner_updates=1,
+               inner_update_lr=0.4, num_filters=32, k_shot=5, learn_inner_update_lr=False):
+    super(MAML, self).__init__()
+    self.dim_input = dim_input
+    self.dim_output = dim_output
+    self.inner_update_lr = inner_update_lr
+    self.loss_func = partial(cross_entropy_loss, k_shot=k_shot)
+    self.dim_hidden = num_filters
+    self.channels = 1
+    self.img_size = int(np.sqrt(self.dim_input/self.channels))
+
+    # outputs_ts[i] and losses_ts_post[i] are the output and loss after i+1 inner gradient updates
+    losses_tr_pre, outputs_tr, losses_ts_post, outputs_ts = [], [], [], []
+    accuracies_tr_pre, accuracies_ts = [], []
+
+    # for each loop in the inner training loop
+    outputs_ts = [[]]*num_inner_updates
+    losses_ts_post = [[]]*num_inner_updates
+    accuracies_ts = [[]]*num_inner_updates
+
+    # Define the weights - these should NOT be directly modified by the
+    # inner training loop
+    tf.random.set_seed(seed)
+    self.conv_layers = ConvLayers(self.channels, self.dim_hidden, self.dim_output, self.img_size)
+
+    self.learn_inner_update_lr = learn_inner_update_lr
+    if self.learn_inner_update_lr:
+      self.inner_update_lr_dict = {}
+      for key in self.conv_layers.conv_weights.keys():
+        self.inner_update_lr_dict[key] = [tf.Variable(self.inner_update_lr, name='inner_update_lr_%s_%d' % (key, j)) for j in range(num_inner_updates)]
+
+
+  def call(self, inp, meta_batch_size=25, num_inner_updates=1):
+    def task_inner_loop(inp, reuse=True,
+                      meta_batch_size=25, num_inner_updates=1):
+      """
+        Perform gradient descent for one task in the meta-batch (i.e. inner-loop).
+        Args:
+          inp: a tuple (input_tr, input_ts, label_tr, label_ts), where input_tr and label_tr are the inputs and
+            labels used for calculating inner loop gradients and input_ts and label_ts are the inputs and
+            labels used for evaluating the model after inner updates.
+            Should be shapes:
+              input_tr: [N*K, 784]
+              input_ts: [N*K, 784]
+              label_tr: [N*K, N]
+              label_ts: [N*K, N]
+        Returns:
+          task_output: a list of outputs, losses and accuracies at each inner update
+      """
+      # the inner and outer loop data
+      input_tr, input_ts, label_tr, label_ts = inp
+
+      # weights corresponds to the initial weights in MAML (i.e. the meta-parameters)
+      weights = self.conv_layers.conv_weights
+
+      # the predicted outputs, loss values, and accuracy for the pre-update model (with the initial weights)
+      # evaluated on the inner loop training data
+      task_output_tr_pre, task_loss_tr_pre, task_accuracy_tr_pre = None, None, None
+
+      # lists to keep track of outputs, losses, and accuracies of test data for each inner_update
+      # where task_outputs_ts[i], task_losses_ts[i], task_accuracies_ts[i] are the output, loss, and accuracy
+      # after i+1 inner gradient updates
+      task_outputs_ts, task_losses_ts, task_accuracies_ts = [], [], []
+
+      #############################
+      #### YOUR CODE GOES HERE ####
+      # perform num_inner_updates to get modified weights
+      # modified weights should be used to evaluate performance
+      # Note that at each inner update, always use input_tr and label_tr for calculating gradients
+      # and use input_ts and labels for evaluating performance
+
+      # HINTS: You will need to use tf.GradientTape().
+      # Read through the tf.GradientTape() documentation to see how 'persistent' should be set.
+      # Here is some documentation that may be useful:
+      # https://www.tensorflow.org/guide/advanced_autodiff#higher-order_gradients
+      # https://www.tensorflow.org/api_docs/python/tf/GradientTape
+
+
+      #############################
+
+      # Compute accuracies from output predictions
+      task_accuracy_tr_pre = accuracy(tf.argmax(input=label_tr, axis=1), tf.argmax(input=tf.nn.softmax(task_output_tr_pre), axis=1))
+
+      for j in range(num_inner_updates):
+        task_accuracies_ts.append(accuracy(tf.argmax(input=label_ts, axis=1), tf.argmax(input=tf.nn.softmax(task_outputs_ts[j]), axis=1)))
+
+      task_output = [task_output_tr_pre, task_outputs_ts, task_loss_tr_pre, task_losses_ts, task_accuracy_tr_pre, task_accuracies_ts]
+
+      return task_output
+
+    input_tr, input_ts, label_tr, label_ts = inp
+    # to initialize the batch norm vars, might want to combine this, and not run idx 0 twice.
+    unused = task_inner_loop((input_tr[0], input_ts[0], label_tr[0], label_ts[0]),
+                          False,
+                          meta_batch_size,
+                          num_inner_updates)
+    out_dtype = [tf.float32, [tf.float32]*num_inner_updates, tf.float32, [tf.float32]*num_inner_updates]
+    out_dtype.extend([tf.float32, [tf.float32]*num_inner_updates])
+    task_inner_loop_partial = partial(task_inner_loop, meta_batch_size=meta_batch_size, num_inner_updates=num_inner_updates)
+    result = tf.map_fn(task_inner_loop_partial,
+                    elems=(input_tr, input_ts, label_tr, label_ts),
+                    dtype=out_dtype,
+                    parallel_iterations=meta_batch_size)
+    return result
+```
+
 ## Meta-Train
 
  MAML 的训练过程（一般被称为 meta-train）为：
@@ -159,3 +279,4 @@ $$\nabla\_{\phi} l(\hat{\theta})=\left[\begin{array}{c}{\partial l(\hat{\theta})
 [10]: https://github.com/cbfinn/maml
 [11]: https://arxiv.org/pdf/1703.03400.pdf
 [12]: https://renovamen.ink/post/2020/08/05/meta-learning/#fomaml
+[13]: https://colab.research.google.com/drive/1zbt2A74kM10HvcAEgEy3fGgRSNyHZQKj?usp=sharing#scrollTo=MxriXFvwsGfp

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-19 21:09:55
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-19 21:23:16
+ * @LastEditTime: 2020-12-29 18:25:10
  * @Description:
  * @TODO::
  * @Reference:https://colab.research.google.com/github/omerbsezer/Fast-Pytorch/blob/master/Learning_Pytorch/TransferLearning.ipynb#scrollTo=jRd8Dg2hQ541
@@ -40,3 +40,18 @@ sys.path.insert(0,'drive/Fast-Pytorch/Learning_Pytorch')
 import shutil
 
 shutil.rmtree('/content/Fast-Pytorch', ignore_errors=True)
+
+---
+
+https://colab.research.google.com/drive/1zbt2A74kM10HvcAEgEy3fGgRSNyHZQKj?usp=sharing#scrollTo=RBkP5aBdfFkd
+
+import os
+from google_drive_downloader import GoogleDriveDownloader as gdd
+
+# Need to download the Omniglot dataset -- DON'T MODIFY THIS CELL
+if not os.path.isdir('./omniglot_resized'):
+    gdd.download_file_from_google_drive(file_id='1iaSFXIYC3AB8q9K_M-oVMa4pmB7yKMtI',
+                                        dest_path='./omniglot_resized.zip',
+                                        unzip=True)
+
+assert os.path.isdir('./omniglot_resized')
