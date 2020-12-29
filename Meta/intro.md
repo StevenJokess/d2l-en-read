@@ -5,13 +5,15 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-05 21:48:04
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-11-08 17:29:48
+ * @LastEditTime: 2020-12-29 17:11:55
  * @Description:
  * @TODO::
  * @Reference:
 -->
 
 # 什么是元学习
+
+主动学习可以帮助我们更聪明地对特定数据创建标签。如果恰当得应用这一技巧，与一般的模型相比可以使用更少的数据进行训练。而在元学习的领域，我们不再关注获取标签。与之相反，我们尝试让机器从少量的数据中更快的学习。[10]
 
 它将自动学习算法应用到机器学习实践用到的元数据中，它的主要目标是使用元数据来了解元学习，并且通过提高现有的学习算法的性能或者学习学习算法本身，灵活地解决学习问题。
 
@@ -117,7 +119,9 @@ $\begin{aligned} \theta & \leftarrow \theta-\beta \nabla_{\theta} \sum_{m=1}^{M}
 
 引用王晋东博士的话：你可以说元学习是强调从不同的若干小任务小样本来学习一个对未知样本未知类别都有好的判别和泛化能力的模型，但其实你想想，难道这不就是知识迁移吗？从迁移上来看，你可以说学习一个可迁移的特征或模型，可以从A迁移到B。但这些可以被迁移过提纯的东西，难道不能被叫做元知识吗？所以其实是殊途同归的，都应该一起联系起来看。[8]
 
+## 应用[11]
 
+Case studies of important & 6mely applica6ons -Mul6-objec6ve learning in YouTube recommenda6on system -Meta-learning for few-shot land cover classifica6on -Few-shot learning from GPT-3
 
 [1]: https://www.leiphone.com/news/202009/VV75HfxY7dwQPurq.html
 [2]: https://weread.qq.com/web/reader/62332d007190b92f62371aeka4a32da02aba4a042cf4e81
@@ -129,3 +133,5 @@ $\begin{aligned} \theta & \leftarrow \theta-\beta \nabla_{\theta} \sum_{m=1}^{M}
 [7]: https://github.com/bighuang624/Hung-yi-Lee-ML-notes/edit/master/docs/MAML.md
 [8]: https://www.liangzl.com/get-article-detail-199899.html
 [9]: https://renovamen.ink/post/2020/08/05/meta-learning/
+[10]: https://www.jiqizhixin.com/articles/2019-07-01-8
+[11]: https://cs330.stanford.edu/slides/cs330_intro.pdf
