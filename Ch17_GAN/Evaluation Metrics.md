@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-27 16:56:39
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 21:07:13
+ * @LastEditTime: 2020-12-30 20:12:35
  * @Description:
  * @TODO::
  * @Reference:
@@ -45,6 +45,9 @@ $$
 
 计算 IS 时只考虑了生成样本，没有考虑真实数据，即 IS 无法反映真实数据和样本之间的距离，IS 判断数据真实性的依据，源于 Inception V3 的训练集： ImageNet，在 Inception V3 的“世界观”下，凡是不像 ImageNet 的数据，都是不真实的，都不能保证输出一个 sharp 的 predition distribution。
 
+## Mode Score(MS)
+
+
 ## Fréchet Inception Distance (FID)
 
 In this approach pro-posed by Heusel et al. (2017) samples fromPandQarefirst embedded into a feature space (a specific layer of Incep-tionNet). Then, assuming that the embedded data follows amultivariate Gaussian distribution, the mean and covarianceare estimated. Finally, the Fr ́echet distance between thesetwo Gaussians is computed, i.e.FID=||μx−μy||22+ Tr(Σx+ Σy−2(ΣxΣy)12),where(μx,Σx), and(μy,Σy)are the mean and covarianceof the embedded samples fromPandQ, respectively. Theauthors argue that FID is consistent with human judgmentand more robust to noise than IS. Furthermore, the scoreis sensitive to the visual quality of generated samples – in-troducing noise or artifacts in the generated samples willreduce the FID. In contrast to IS, FID can detect intra-classmode dropping – a model that generates only one image perclass will have a good IS, but a bad FID (Lucic et al., 2018).
@@ -76,5 +79,7 @@ FID 无法反映生成模型过拟合的情况，如果某个生成模型只是�
 ## Kernel Inception Distance (KID)
 
 Bi ́nkowski   et   al.(2018) argue that FID has no unbiased estimator and suggestKID as an unbiased alternative. In Appendix B we empir-ically compare KID to FID and observe that both metricsare very strongly correlated (Spearman rank-order correla-tion coefficient of0.994forLSUN-BEDROOMand0.995forCELEBA-HQ-128datasets). As a result we focus on FID asit is likely to result in the same ranking.
+
+## Multi-scale structural similarity(MS-SSIM)
 
 [1]: https://arxiv.org/abs/1807.04720
