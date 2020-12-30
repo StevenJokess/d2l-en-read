@@ -5,11 +5,13 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-09-24 22:04:26
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 21:29:16
+ * @LastEditTime: 2020-12-30 18:51:08
  * @Description:
  * @TODO::
  * @Reference:
 -->
+
+# cGAN(conditional GAN)
 
 conditional GAN (cGAN) proposed by Mehdi Mirza and Simon Osindero in the paper Conditional Generative Adversarial Nets (https://arxiv.org/pdf/1411.1784.pdf) uses the class label information and learns to synthesize new images conditioned on the provided label, that is, —applied to MNIST.[1]
 
@@ -62,12 +64,66 @@ Similar to generator, input of discriminator is the concatenation of flatten ima
 1. Combine the label embedding with the noise vector z into a joint representation by using the Keras Multiply layer. As its name suggests, this layer multiplies the corresponding entries of the two equal-length vectors and outputs a single vector of the resulting products.
 1. Feed the resulting vector as input into the rest of the CGAN Generator network to synthesize an image.
 
-Discriminator
+该生成器输入两个一维向量y和noise，生成一张图片。
+
+```py
+class Generator(nn.Module):
+    def __init__(self):
+        super(Generator, self).__init__()
+        self.label_emb = nn.Embedding(n_classes, n_classes)
+
+        def block(in_feat, out_feat, normalize=True):
+            layers = [nn.Linear(in_feat, out_feat)]
+            if normalize:
+                layers.append(nn.BatchNorm1d(out_feat, 0.8))
+            layers.append(nn.LeakyReLU(0.2))
+            return layers
+        self.model = nn.Sequential(
+            *block((latent_dim + n_classes), 128, normalize=False),
+            *block(128, 256),
+            *block(256, 512),
+            *block(512, 1024),
+            nn.Linear(1024, int(np.prod(img_shape))),
+            nn.Tanh())
+
+    def execute(self, noise, labels):
+        gen_input = jt.contrib.concat((self.label_emb(labels), noise), dim=1)
+        img = self.model(gen_input)
+        img = img.view((img.shape[0], *img_shape))
+        return img
+```
+
+## Discriminator
 
 1. Take a label (an integer from 0 to 9) and—using the Keras Embedding layer—turn the label into a dense vector of size 28 × 28 × 1 = 784 (the length of a flattened image).
 Reshape the label embeddings into the image dimensions (28 × 28 × 1).
 1. Concatenate the reshaped label embedding onto the corresponding image, creating a joint representation with the shape (28 × 28 × 2). You can think of it as an image with its embedded label “stamped” on top of it.
 1. Feed the image-label joint representation as input into the CGAN Discriminator network. Note that in order for things to work, we have to adjust the model input dimensions to (28 × 28 × 2) to reflect the new input shape.[11]
+
+D输入一张图片和对应的y，输出是真图片的概率。
+
+```
+# [12]
+class Discriminator(nn.Module):
+    def __init__(self):
+        super(Discriminator, self).__init__()
+        self.label_embedding = nn.Embedding(n_classes, n_classes)
+        self.model = nn.Sequential(
+            nn.Linear((n_classes + int(np.prod(img_shape))), 512),
+            nn.LeakyReLU(0.2),
+            nn.Linear(512, 512),
+            nn.Dropout(0.4),
+            nn.LeakyReLU(0.2),
+            nn.Linear(512, 512),
+            nn.Dropout(0.4),
+            nn.LeakyReLU(0.2),
+            nn.Linear(512, 1))
+
+    def execute(self, img, labels):
+        d_in = jt.contrib.concat((img.view((img.shape[0], (- 1))), self.label_embedding(labels)), dim=1)
+        validity = self.model(d_in)
+        return validity
+```
 
 Qiita的帖子[7]Qiita的帖子不一样，我们可以指定生成人物的属性，如发色、眼睛的颜色、发型，甚至是服装、装饰物，从而生成具有指定属性的图像。不一样，我们可以指定生成人物的属性，如发色、眼睛的颜色、发型，甚至是服装、装饰物，从而生成具有指定属性的图像。
 
@@ -89,3 +145,4 @@ https://zhuanlan.zhihu.com/p/25542274
 [9]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/conditional.ipynb
 [10]: https://weread.qq.com/web/reader/d7032cd072021a59d7038af
 [11]: https://livebook.manning.com/book/gans-in-action/chapter-8/1
+[12]: https://github.com/Jittor/jittor/blob/master/notebook/ConditionGAN.src.md

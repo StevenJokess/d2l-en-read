@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-17 17:21:21
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:12:25
+ * @LastEditTime: 2020-12-30 18:47:40
  * @Description:
  * @TODO::
  * @Reference:
@@ -22,6 +22,8 @@
 
 为什么最小二乘损失函数可以使得原始生成式对抗网络的训练更稳定呢？因为交叉熵损失函数很容易就会达到饱和状态（饱和状态是指梯度为0），而最小二乘损失函数只在一个点上能达到饱和状态。[5]
 
+LSGAN将GAN的目标函数由交叉熵损失替换成最小二乘损失，以此拒绝了标准GAN生成的图片质量不高以及训练过程不稳定这两个缺陷。[8]
+
 但缺点也是明显的, LSGAN对离离群点的过度惩罚, 可能导致样本生成的”多样性”降低, 生成样本很可能只是对真实样本的简单”模仿”和细微改动.[3]
 
 ## 目标函数
@@ -32,6 +34,30 @@ $$
 \underset{\min }{D} E_{x \sim P_{\text {data}}(x)}\left[(D(x)-b)^{2}\right]+E_{z \sim P_{z}(z)}\left[(D(G(Z))-a)^{2}\right]
 $$
 
+```py
+class discriminator(nn.Module):
+    def __init__(self, dim=3):
+        super(discriminator, self).__init__()
+        self.conv1 = nn.Conv(dim, 64, 5, 2, 2)
+        self.conv2 = nn.Conv(64, 128, 5, 2, 2)
+        self.conv2_bn = nn.BatchNorm(128)
+        self.conv3 = nn.Conv(128, 256, 5, 2, 2)
+        self.conv3_bn = nn.BatchNorm(256)
+        self.conv4 = nn.Conv(256, 512, 5, 2, 2)
+        self.conv4_bn = nn.BatchNorm(512)
+        self.fc = nn.Linear(512*7*7, 1)
+        self.leaky_relu = nn.Leaky_relu()
+
+    def execute(self, input):
+        x = self.leaky_relu(self.conv1(input), 0.2)
+        x = self.leaky_relu(self.conv2_bn(self.conv2(x)), 0.2)
+        x = self.leaky_relu(self.conv3_bn(self.conv3(x)), 0.2)
+        x = self.leaky_relu(self.conv4_bn(self.conv4(x)), 0.2)
+        x = x.reshape((x.shape[0], 512*7*7))
+        x = self.fc(x)
+        return x
+```
+
 ### 生成器
 
 $$
@@ -40,6 +66,40 @@ $$
 
 这里a, b, c满足b-c=1和b-a=2。根据[6]，它等价于弄散度中的 $x^{2}$ 散度，也即是说，LSGAN用 $x^{2}$ 散度取代了朴素GAN 的 JensenShannon散度。
 
+```py
+class generator(Module):
+    def __init__(self, dim=3):
+        super(generator, self).__init__()
+        self.fc = nn.Linear(1024, 7*7*256)
+        self.fc_bn = nn.BatchNorm(256)
+        self.deconv1 = nn.ConvTranspose(256, 256, 3, 2, 1, 1)
+        self.deconv1_bn = nn.BatchNorm(256)
+        self.deconv2 = nn.ConvTranspose(256, 256, 3, 1, 1)
+        self.deconv2_bn = nn.BatchNorm(256)
+        self.deconv3 = nn.ConvTranspose(256, 256, 3, 2, 1, 1)
+        self.deconv3_bn = nn.BatchNorm(256)
+        self.deconv4 = nn.ConvTranspose(256, 256, 3, 1, 1)
+        self.deconv4_bn = nn.BatchNorm(256)
+        self.deconv5 = nn.ConvTranspose(256, 128, 3, 2, 1, 1)
+        self.deconv5_bn = nn.BatchNorm(128)
+        self.deconv6 = nn.ConvTranspose(128, 64, 3, 2, 1, 1)
+        self.deconv6_bn = nn.BatchNorm(64)
+        self.deconv7 = nn.ConvTranspose(64 , dim, 3, 1, 1)
+        self.relu = nn.ReLU()
+        self.tanh = nn.Tanh()
+
+    def execute(self, input):
+        x = self.fc(input).reshape((input.shape[0], 256, 7, 7))
+        x = self.relu(self.fc_bn(x))
+        x = self.relu(self.deconv1_bn(self.deconv1(x)))
+        x = self.relu(self.deconv2_bn(self.deconv2(x)))
+        x = self.relu(self.deconv3_bn(self.deconv3(x)))
+        x = self.relu(self.deconv4_bn(self.deconv4(x)))
+        x = self.relu(self.deconv5_bn(self.deconv5(x)))
+        x = self.relu(self.deconv6_bn(self.deconv6(x)))
+        x = self.tanh(self.deconv7(x))
+        return x
+```
 
 ## Loss
 
@@ -51,6 +111,16 @@ L_{D} &=E\left[(D(x)-1)^{2}\right]+E\left[D(G(z))^{2}\right] \\
 L_{G} &=E\left[(D(G(z))-1)^{2}\right]
 \end{aligned}
 
+```py
+def ls_loss(x, b):
+    mini_batch = x.shape[0]
+    y_real_ = jt.ones((mini_batch,))
+    y_fake_ = jt.zeros((mini_batch,))
+    if b:
+        return (x-y_real_).sqr().mean()
+    else:
+        return (x-y_fake_).sqr().mean()
+```
 
 优化目标为[5]
 
@@ -121,3 +191,4 @@ if __name__ == "__main__":
 [5]: https://weread.qq.com/web/reader/d7032cd072021a59d7038afk28d32de024d28dd2c795c7f
 [6]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
 [7]: https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247484880&idx=1&sn=4b2e976cc715c9fe2d022ff6923879a8&chksm=96e9da50a19e5346307b54f5ce172e355ccaba890aa157ce50fda68eeaccba6ea05425f6ad76&scene=21#wechat_redirect
+[8]: https://github.com/Jittor/jittor/blob/master/notebook/LSGAN.src.md
