@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-27 22:27:54
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 19:25:14
+ * @LastEditTime: 2020-12-30 20:43:21
  * @Description:
  * @TODO::
  * @Reference:
@@ -88,7 +88,15 @@ MobileNetV3定义了两个模型: MobileNetV3-Large和MobileNetV3-Small。V3-Lar
 
 有一点值得说一下，训练V3用的是4x4 TPU Pod，batch size 409…(留下了贫穷的泪水)
 
+网络的架构基于NAS实现的MnasNet，神经结构搜索（NAS）[5]
+引入MobileNetV1的深度可分离卷积
+引入MobileNetV2的具有线性瓶颈的倒残差结构
+引入基于squeeze and excitation结构的轻量级注意力模型(SE)
+使用了一种新的激活函数h-swish(x)
+
+
 [1]: https://github.com/d-li14/mobilenetv3.pytorch
 [2]: https://paddleclas.readthedocs.io/zh_CN/latest/models/Mobile.html
 [3]: https://github.com/pytorch/vision/pull/3182/files
 [4]: http://www.tensorinfinity.com/paper_185.html
+[5]: https://cygao.xyz/2019/07/12/lightweight/

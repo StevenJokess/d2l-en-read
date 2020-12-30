@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-14 00:22:39
+ * @LastEditTime: 2020-12-30 20:40:02
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee648f24314f_YkqkQu1q/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
@@ -50,6 +50,15 @@ pytorch复现
 
 
 ShuffleNet中的Channel Shuffle操作可以将组间的信息进行交换，并且可以实现端到端的训练。
+
+
+Group convolution。其中输入特征通道被为G组(图4)，并且对于每个分组的信道独立地执行卷积，则分组卷积计算量是HWNK²M/G，为标准卷积计算量的1/G。
+Channel shuffle。Grouped Convlution导致模型的信息流限制在各个group内，组与组之间没有信息交换，这会影响模型的表示能力。因此，需要引入group之间信息交换的机制，即Channel Shuffle操作。
+
+引入的问题：[5]
+
+channel shuffle在工程实现占用大量内存和指针跳转，这部分很耗时。
+channel shuffle的规则是人工设计，分组之间信息交流存在随意性，没有理论指导。
 
 ## FLOPS
 
@@ -122,9 +131,19 @@ def test():
     x = torch.randn(1,3,32,32)
     y = net(x)
     print(y)
+```
 
+
+
+ShuffleNet和ResNet结构可知，ShuffleNet计算量降低主要是通过分组卷积实现。ShuffleNet虽然降低了计算量，但是引入两个新的问题：[4]
+
+1、channel shuffle在工程实现占用大量内存和指针跳转，这部分很耗时。
+
+2、channel shuffle的规则是人工设计，分组之间信息交流存在随意性，没有理论指导。
 
 
 [1]: https://ai.deepshare.net/detail/v_5ee645312d94a_eMNJ5Jws/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
 [2]: https://arxiv.org/abs/1707.01083
 [3]: https://github.com/kuangliu/pytorch-cifar/blob/master/models/shufflenet.py
+[4]: https://zhuanlan.zhihu.com/p/45496826
+[5]: https://cygao.xyz/2019/07/12/lightweight/

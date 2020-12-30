@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-11-13 22:01:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 19:27:09
+ * @LastEditTime: 2020-12-30 20:42:38
  * @Description:
  * @TODO::
  * @Reference:
@@ -78,6 +78,10 @@ mobilenet_v2	28.12	9.71
 MobileNet v2架构是基于一个倒置的残差结构，其中残差块的输入和输出是薄瓶颈层，与传统的残差模型相反，传统的残差模型在输入中使用扩展表示。MobileNet v2使用轻量级的深度卷积来过滤中间扩展层的特性。此外，为了保持代表性，在窄层中去除非线性。
 
 相比MobileNetV1，MobileNetV2提出了Linear bottlenecks与Inverted residual block作为网络基本结构，通过大量地堆叠这些基本模块，构成了MobileNetV2的网络结构。最终，在FLOPS只有MobileNetV1的一半的情况下取得了更高的分类精度。[5]
+
+继续使用Mobilenet V1的深度可分离卷积降低卷积计算量。
+增加skip connection，使前向传播时提供特征复用。
+采用Inverted residual block结构。该结构使用Point wise convolution先对feature map进行升维，再在升维后的特征接ReLU，减少ReLU对特征的破坏。[9]
 
 | Model structure | Top-1 error | Top-5 error |
 | --------------- | ----------- | ----------- |
@@ -189,3 +193,4 @@ def mobilenetv2(pretrained=False, **kwargs):
 [6]: https://blog.csdn.net/weixin_44791964/article/details/102851214
 [7]: https://github.com/anilsathyan7/pytorch-image-classification
 [8]: https://github.com/pytorch/pytorch/blob/master/android/test_app/make_assets_custom.py
+[9]: https://cygao.xyz/2019/07/12/lightweight/
