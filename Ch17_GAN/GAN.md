@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-19 18:30:00
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 18:43:51
+ * @LastEditTime: 2020-12-30 19:44:36
  * @Description:
  * @TODO::
  * @Reference:
@@ -39,6 +39,25 @@ Goodfellow最知名的成就就是发明了GAN,被誉为GAN之父。同时他还
 网络的最终目标是在D很强大的同时，G生成的假样本送给D后其输出值变为0.5，说明G已经完全骗过了D，即D已经区分不出来输入的样本到底是还是，从而得到一个生成效果很好的G。[3]
 
 mode collapse的意思就是生成的样本大量集中于部分真实样本，那么就是很严重的mode collapse。以生成动漫头像图片为例，从下图中能够明显的看出，红框标记的图像重复出现了很多次，即存在一定的mode collapse。[3]
+
+## 算法[10]
+
+Algorithm 1 GAN Algorithm Input: 随机噪声 $\left\{\mathbf{z}_{1}, \ldots, \mathbf{z}_{m}\right\}$ in $\mathbb{R}^{d} ;$ 真实样本 $\left\{\mathbf{x}_{1}, \ldots, \mathbf{x}_{m}\right\} \subset \mathcal{X} .$
+Output:生成样本 $X_{\text {fake }}$
+1: for $t=0$ to $T-1$ do
+2: $\quad$ 从高斯噪声分布 $\gamma$ 中随机采样出m个样本, 即 $\left\{\mathbf{z}_{1}, \ldots, \mathbf{z}_{m}\right\}$ in $\mathbb{R}^{d}$;
+3: $\quad$ 从真实数据分布 $\mathcal{X}$ 中随机采样出m个样本，即 $\left\{\mathbf{x}_{1}, \ldots, \mathbf{x}_{m}\right\} \subset \mathcal{X}$;
+4: $\quad$ 通过小批量随机梯度下降法来更新判别器 $D_{\omega}$ 的参数，具体公式为:
+$$
+\nabla_{\omega} \frac{1}{m} \sum_{i=1}^{m}\left[\log D_{\omega}\left(\mathbf{x}_{i}\right)+\log \left(1-D_{\omega}\left(G_{\theta}\left(\mathbf{z}_{i}\right)\right)\right)\right]
+$$
+5: $\quad$ 再从高斯噪声分布 $\gamma$ 中随机采样出另外的m个样本, 即 $\left\{\mathbf{z}_{1}, \ldots, \mathbf{z}_{m}\right\}$ in $\mathbb{R}^{d}$;
+6: $\quad$ 通过小批量随机梯度下降法来更新判别器 $G_{\theta}$ 的参数，具体公式为:
+$$
+\nabla_{\theta} \frac{1}{m} \sum_{i=1}^{m} \log \left(1-D_{\omega}\left(G_{\theta}\left(\mathbf{z}_{i}\right)\right)\right)
+$$
+7: return $X_{\text {fake}}$
+
 
 ## 数学[4]
 
@@ -86,6 +105,13 @@ GAN 是一种半监督学习模型，对训练集不需要太多有标签的数�
 训练还会遭遇梯度消失、模式崩溃的问题
 缺乏比较有效的直接可观的评估模型生成效果的方法
 
+
+训练一个 GAN 可能很困难，它经常会遇到各种问题，其中最主要的问题有以下三点：[10]
+
+消失梯度：这种情况经常发生，特别是当判别器太好时，这会阻碍生辰器的改进。使用最佳的判别器时，由于梯度的消失，训练可能失败，因此无法提供足够的信息给生成器改进。
+模式塌缩：这是指生成器开始反复产生相同的输出（或一小组输出）的现象。如果判别器陷入局部最小值，那么下一个生成器迭代就很容易找到判别器最合理的输出。判别器永远无法学会走出陷阱。
+收敛失败：由于许多因素（已知和未知），GANs 经常无法收敛。
+
 原论文中 G 的训练是希望减小 log(1-D(G(z))，而代码中是使用二值交叉熵BCE(G(z), 1)，即希望提高-log(D(G(x)))，虽然都是希望让 D(G(x)) 趋近于1 ，但数值上还是有细微的不同，后者的梯度更大，不易出现梯度消失的问题。[8]
 
 
@@ -105,5 +131,7 @@ GAN的判别器和生成器两个网络的复杂度是相当的（如果还有�
 [7]: https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Generative-Adversarial-Networks
 [8]: https://www.zhihu.com/column/c_1257831643526172672
 [9]: https://kexue.fm/archives/6409
+[10]: https://mp.weixin.qq.com/s/iqCMA7E_vtdymVxxz7bpRA
+
 TODO:
 http://jiangsiyuan.com/2018/04/10/GAN/
