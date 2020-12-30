@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 19:50:12
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-27 17:27:29
+ * @LastEditTime: 2020-12-30 19:48:39
  * @Description:
  * @TODO::
  * @Reference:
@@ -71,10 +71,20 @@ based on if there is a model
 使用在线样本对环境模型更新,确保了环境模型模拟的时效性。
 使用环境模型进行加速,大大减少了智能体与环境的交互次数,加快了训练速度,降低了训练成本
 
-Model-free
+## Model-free
 Explicit: value function and/or policy function
 No model
 
+Recht 指出免模型方法自身存在以下几大缺陷：[5]
+
+免模型方法无法从不带反馈信号的样本中学习，而反馈本身就是稀疏的，因此免模型方向样本利用率很低，而数据驱动的方法则需要大量采样。比如在 Atari 平台上的《Space Invader》和《Seaquest》游戏中，智能体所获得的分数会随训练数据增加而增加。利用免模型 DRL 方法可能需要 2 亿帧画面才能学到比较好的效果。AlphaGo 最早在 Nature 公布的版本也需要 3000 万个盘面进行训练。而但凡与机械控制相关的问题，训练数据远不如视频图像这样的数据容易获取，因此只能在模拟器中进行训练。而模拟器与现实世界间的 Reality Gap，直接限制了训练自其中算法的泛化性能。另外，数据的稀缺性也影响了其与 DL 技术的结合。
+
+免模型方法不对具体问题进行建模，而是尝试用一个通用的算法解决所有问题。而基于模型的方法则通过针对特定问题建立模型，充分利用了问题固有的信息。免模型方法在追求通用性的同时放弃这些富有价值的信息。
+
+基于模型的方法针对问题建立动力学模型，这个模型具有解释性。而免模型方法因为没有模型，解释性不强，调试困难；
+相比基于模型的方法，尤其是基于简单线性模型的方法，免模型方法不够稳定，在训练中极易发散。
+
+为了证实以上观点，Recht 将一个简单的基于 LQR 的随机搜索方法与最好的免模型方法在 MuJoCo 实验环境上进行了实验对比。在采样率相近的情况下，基于模型的随机搜索算法的计算效率至少比免模型方法高 15 倍 [19]。
 
 ### 基于分层（hierarchical-based）的方法[3]
 
@@ -89,3 +99,4 @@ RL将控制问题转化为找到最大化预期未来奖励的策略π。值函�
 [2]: https://nndl.github.io/ 14.5
 [3]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
 [4]: https://kangcai.github.io/2019/02/09/ml-supervised-1-intro/
+[5]: https://mp.weixin.qq.com/s/qHFeRS1xpztV8AGtLVk8Cg

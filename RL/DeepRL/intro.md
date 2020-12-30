@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-29 20:33:01
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:36:29
+ * @LastEditTime: 2020-12-30 19:46:58
  * @Description:
  * @TODO::
  * @Reference:深度强化学习综述（上） - SIGAI的文章 - 知乎
@@ -29,3 +29,14 @@ https://zhuanlan.zhihu.com/p/48867049
 文献[15]提出了基于竞争架构的 DQN。其主要改进是将CNN卷积层之后的全连接层替换为两个分支，其中一个分支拟合状态价值函数，另外一个分支拟合动作优势函数。最后将两个分支的输出值相加，形成Q函数值。实验表明，这种改进能够更准确的估计价值函数值。
 
 DQN中的深度神经网络是卷积神经网络，不具有长时间的记忆能力。为此，文献[16]提出了一种整合了循环神经网络（RNN）的DQN算法（DRQN）。这种方法在CNN的卷积层之后加入了循环层（LSTM单元），能够记住之前的信息。
+
+## DRL 算法存在的几大问题：
+
+样本利用率非常低；
+最终表现不够好，经常比不过基于模型的方法；
+好的奖励函数难以设计；
+难以平衡“探索”和“利用”, 以致算法陷入局部极小；
+对环境的过拟合；
+灾难性的不稳定性…
+
+[2]: https://mp.weixin.qq.com/s/qHFeRS1xpztV8AGtLVk8Cg
