@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:49
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-30 20:41:26
+ * @LastEditTime: 2020-12-31 01:38:56
  * @Description:
  * @TODO::
  * @Reference:https://ai.deepshare.net/detail/v_5ee644a796c35_tAwVkVvK/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
@@ -18,7 +18,20 @@
 
 该网络将传统的卷积操作替换深度可分离卷积，即Depthwise卷积和Pointwise卷积的组合，相比传统的卷积操作，该组合可以大大节省参数量和计算量。与此同时，MobileNetV1也可以用于目标检测、图像分割等其他视觉任务中。[5]
 
+%%writefile ../d2cl/chapter_lightweight/index.md
 
+# Introduction
+:label:`chap_lightweight`
+
+```toc
+:maxdepth: 2
+
+mobilenet
+```
+
+```py
+pip install --upgrade --pre --find-links https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html torch==1.8.0.dev20201106+cpu torchvision==0.9.0.dev20201107+cpu
+```
 
 ## ResNet
 
