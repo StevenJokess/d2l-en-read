@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 22:52:53
+ * @LastEditTime: 2020-12-31 18:30:51
  * @Description:
  * @TODO::
  * @Reference:
@@ -39,6 +39,56 @@ Positional Encoding：词嵌入向量加上位置编码；
 Masked Self-Attention：使用自注意力模型对已生成的前缀序列进行编码，通过mask阻止每个位置选择后面的输入信息；
 Multi-head self-attention：多头自注意力层；
 Feed Forward:逐位置的前馈神经网络。
+
+首先阐述3个要点：
+
+1. 整体与局部：这种学习方法和看待问题的角度很重要，在理解深度学习网络架构中很重要；
+2. 编码与解码：这是一种抽象学习机制，几乎无时无刻无处应用在每个人每个应用之中，比如人与人之间的交流，网络协议通信等等，同理，对于具体的问题，它也可以数学形式化，表达成我们的这篇文章的深度学习网络架构中；
+3. 分层机制： 每一层负责不同层级的抽象或者特征学习等等。
+
+```
+class EncoderDecoder(nn.Module):
+    """
+        A standard encoder-decoder architecture
+    """
+    def __init__(self, encoder, decoder, src_embedding, target_embedding, output_layer):
+        super(EncoderDecoder, self).__init__()
+        self.encoder = encoder
+        self.decoder = decoder
+        self.src_embedding = src_embedding
+        self.target_embedding = target_embedding
+        self.output_layer = output_layer
+
+    def forward(self, src, target, src_mask, target_mask):
+        context_memory = self.encode(src, src_mask)
+        return self.decode(context_memory, src_mask, target, target_mask)
+
+    def encode(self, src, src_mask):
+        return self.encoder(self.src_embedding(src), src_mask)
+
+    def decode(self, context_memory, src_mask, target, target_mask):
+        return self.decoder(self.target_embedding(target), context_memory, src_mask, target_mask)
+
+
+class OutputLayer(nn.Module):
+    """
+        define standard linear + softmax output_layer
+    """
+    def __init__(self, d_model, vocab_size):
+        super(OutputLayer, self).__init__()
+        self.proj_layer = nn.Linear(d_model, vocab_size)
+
+    def forward(self, x):
+        return F.log_softmax(self.proj_layer(x), dim=-1
+```
+
+分解，encoder和decoder都是有多个相同 layer堆叠而成，如下图：
+
+```py
+def clones(module, N):
+    """produce n identical layers"""
+    return ModuleList([copy.deepcopy(module) for _ in range(N)])
+```
 
 ```py
 #位置编码
@@ -166,6 +216,10 @@ def point_wise_feed_forward_network(d_model, dff):
 不足：在decode阶段还是自回归的，即还是不能并行，而且对于每个step的计算，都是要重新算一遍，没有前面的记忆。
 
 
+
+transformer block才是最关键的构建单元，由transformer block构成相应的encoder 和decoder, 加上embedding layer 和output layer,整体才是transformer. transformer block 由multi-head attention, layer normalization, residual(skip) connection, point-wise feed forward等组件构成，一起构成强大的特征提取器。[8]
+
+
 ```md
 [1]: https://mp.weixin.qq.com/s/kjLFPyTb7pal7oorX3ejkw
 [2]: Tensorflow官方notebook transformer.ipynb: ('https://github.com/tensorflow/docs/blob/master/site/en/tutorials/text/transformer.ipynb')
@@ -175,4 +229,5 @@ TODO:
 [5]: https://0809zheng.github.io/2020/04/25/transformer.html
 [6]: https://blog.csdn.net/Magical_Bubble/article/details/89083225
 [7]: https://blog.csdn.net/magical_bubble/article/details/89060213
-```
+[8]: https://zhuanlan.zhihu.com/p/73093159
+[9]: https://github.com/auscenery/transformer_pytorch

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-16 20:56:48
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:42:04
+ * @LastEditTime: 2020-12-31 18:41:39
  * @Description:
  * @TODO::
  * @Reference:
@@ -41,3 +41,4 @@
 [4]: https://github.com/ajbrock/BigGAN-PyTorch
 [5]: BigGAN论文解读 - SIGAI的文章 - 知乎
 https://zhuanlan.zhihu.com/p/51507779
+[6]: https://github.com/huggingface/pytorch-pretrained-BigGAN

@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-08 17:42:09
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-29 20:14:58
+ * @LastEditTime: 2020-12-31 18:33:50
  * @Description:
  * @TODO::
  * @Reference:
@@ -56,6 +56,38 @@ def d_loss_fn(generator, discriminator, batch_z, batch_x, is_training):
     return loss, gp
 ```
 
+```
+# [12]
+def gradient_penalty(D, xr, xf):
+    """
+    :param D:
+    :param xr:
+    :param xf:
+    :return:
+    """
+    LAMBDA = 0.3
+
+    # only constrait for Discriminator
+    xf = xf.detach()
+    xr = xr.detach()
+
+    # [b, 1] => [b, 2]
+    alpha = torch.rand(batchsz, 1).cuda()
+    alpha = alpha.expand_as(xr)
+
+    interpolates = alpha * xr + ((1 - alpha) * xf)
+    interpolates.requires_grad_()
+
+    disc_interpolates = D(interpolates)
+
+    gradients = autograd.grad(outputs=disc_interpolates, inputs=interpolates,
+                              grad_outputs=torch.ones_like(disc_interpolates),
+                              create_graph=True, retain_graph=True, only_inputs=True)[0]
+
+    gp = ((gradients.norm(2, dim=1) - 1) ** 2).mean() * LAMBDA
+
+    return gp
+```
 ```py
 # [5]
 
@@ -252,3 +284,4 @@ TODO:
 [10]: http://www.tensorinfinity.com/paper_26.html
 https://github.com/caogang/wgan-gp
 https://github.com/igul222/improved_wgan_training
+[12]: https://github.com/auscenery/Deep-Learning-with-PyTorch-Tutorials/blob/master/lesson57-WGAN%E5%AE%9E%E6%88%98/wgan_gp.py

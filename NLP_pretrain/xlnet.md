@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-10-07 16:28:57
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-24 21:45:12
+ * @LastEditTime: 2020-12-31 18:48:53
  * @Description:
  * @TODO::
  * @Reference:
@@ -88,3 +88,4 @@ https://www.rcrai.com/newsinfo/2074664.html
 [5]: （Paper）XLNet: Generalized Autoregressive Pretrain - 弃之的文章 - 知乎
 https://zhuanlan.zhihu.com/p/240077047
 [6]: https://github.com/NLP-LOVE/ML-NLP/tree/master/NLP/16.9%20XLNet
+[7]: https://github.com/ymcui/Chinese-XLNet
