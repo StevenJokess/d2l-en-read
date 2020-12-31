@@ -5,7 +5,7 @@
  * @Author:  StevenJokess https://github.com/StevenJokess
  * @Date: 2020-12-07 16:54:58
  * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-12-26 20:51:48
+ * @LastEditTime: 2020-12-31 20:19:58
  * @Description:
  * @TODO::
  * @Reference:
@@ -24,3 +24,5 @@ SNAPCHAT和FACEAPP
 https://github.com/hankcs/HanLPAndroidDemo
 
 https://zhuyinlin.github.io/build/html/platform/AndroidStudio.html#install
+
+https://github.com/fritzlabs/Awesome-Mobile-Machine-Learning
