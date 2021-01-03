@@ -14,6 +14,24 @@
 
 # Q-learning
 
+## Off-Policy Learning:
+
+behaviour policy: $\mu(a \mid s),$ 已知的, 可以用来指导的策略。
+## Importance Sampling for Off-Policy Monte-Carlo:
+
+重要性采样 (估计期望) :
+$$
+\begin{array}{l}
+E_{x \sim P}[f(X)]=\sum P(X) f(X)=\sum Q(x) \frac{P(X)}{Q(X)} f(X)=E_{X \sim Q}\left[\frac{P(X)}{Q(X)} f(X)\right] \\
+G_{t}^{\pi / \mu}=\frac{\pi\left(A_{t} \mid S_{t}\right)}{\mu\left(A_{t} \mid S_{t}\right)} \frac{\pi\left(A_{t} \mid S_{t}\right)}{\mu\left(A_{t} \mid S_{t}\right)} \frac{\pi\left(A_{t+1} \mid S_{t+1}\right)}{\mu\left(A_{T} \mid S_{T}\right)} G_{t}
+\end{array}
+$$
+$\bullet V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\alpha\left(G_{t}^{\pi / \mu}-V\left(S_{t}\right)\right)$
+
+弊端：重要性采样将方差提高地非常大。
+
+## Q-Learning：
+
 1989年, Watkins将TD学习和最优控制完全融合在一起,发明了Q-learning,这项工作扩展并整合了先前RL研究三条主线的所有工作[10]
 
 Q-Learning是一种value-based算法，即通过判断每一步进行的价值value来进行下一步的动作[11]
