@@ -11,7 +11,14 @@
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368s
 -->
 ESRGAN
+
 The Enhanced Super-Resolution Generative Adversarial Network (ESRGAN) is a network developed in 2018 that produces impressive super-resolution results. The generator is a series of convolutional network blocks with a combination of residual and dense layer connections (so a mixture of both ResNet and DenseNet), with BatchNorm layers removed as they appear to create artifacts in upsampled images. For the discriminator, instead of simply producing a result that says this is real or this is fake, it predicts a probability that a real image is relatively more realistic than a fake one, and this helps to make the model produce more natural results.
+
+相比于SRGAN它在三个方面进行了改进[5]
+
+1. 改进了网络结构,对抗损失,感知损失
+2. 引入**Residual-in-Residu Dense Block**(RRDB)
+3. 使用激活前的VGG特征来改善感知损失
 
 RUNNING ESRGAN
 To show off ESRGAN, we’re going to download the code from the GitHub repository. Clone that using git:
@@ -31,8 +38,16 @@ We improve the SRGAN from three aspects:
 - employ Relativistic average GAN instead of the vanilla GAN.
 - improve the perceptual loss by using the features before activation.
 
+效果：
+
+1. ESRGAN在锐度和边缘信息上优于SRGAN,且去除了"伪影"
+2. 从PI和PMSE两个指标来看,ESRGAN也可以当之无愧地称得上是超分辨率复原任务中的the State-of-the-Art。
+
+
+
 [1]: https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368s
 [2]: https://github.com/ptrsuder/IEU.Winforms
 [3]: 如何评价人工智能修复的 100 年前北京影像，有哪些意义和可以应用的方向？ - 大谷Spitzer的回答 - 知乎
 https://www.zhihu.com/question/393716697/answer/1219952561
 [4]: https://github.com/xinntao/ESRGAN
+[5]: https://mp.weixin.qq.com/s/47NVJGaB60S5Soeg5s7K7g

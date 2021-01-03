@@ -19,3 +19,11 @@ if (MSVC)
                      ${TORCH_DLLS}
                      $<TARGET_FILE_DIR:example-app>)
 endif (MSVC)
+
+---
+
+https://github.com/iamhankai/cpp-pytorch
+
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+target_link_libraries(example-app ${TORCH_LIBRARIES} ${OpenCV_LIBS})

@@ -11,7 +11,9 @@
  * @Reference:https://ai.deepshare.net/detail/v_5ee648f24314f_YkqkQu1q/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
 -->
 
-ShuffleNet系列网络是旷视提出
+# ShuffleNet
+
+网络是Megvii Inc. (Face++)提出。 In ARM device, ShuffleNet achieves 13× actual speedup over AlexNet while maintaining comparable accuracy.[6]
 
 Experiments on ImageNet classification and MS COCO object detection demonstrate the superior performance of ShuffleNet over other structures, e.g. lower top-1 error (absolute 7.8%) than recent MobileNet on ImageNet classification task, under the computation budget of 40 MFLOPs.[2]
 
@@ -59,6 +61,8 @@ Channel shuffle。Grouped Convlution导致模型的信息流限制在各个group
 
 channel shuffle在工程实现占用大量内存和指针跳转，这部分很耗时。
 channel shuffle的规则是人工设计，分组之间信息交流存在随意性，没有理论指导。
+
+
 
 ## FLOPS
 
@@ -135,15 +139,23 @@ def test():
 
 
 
+
 ShuffleNet和ResNet结构可知，ShuffleNet计算量降低主要是通过分组卷积实现。ShuffleNet虽然降低了计算量，但是引入两个新的问题：[4]
 
 1、channel shuffle在工程实现占用大量内存和指针跳转，这部分很耗时。
-
 2、channel shuffle的规则是人工设计，分组之间信息交流存在随意性，没有理论指导。
 
+
+## Comparison with MobileNetV1
+
+- ShuffleNet models are superior to MobileNetV1 for all the complexities.
+- Though ShuffleNet network is specially designed for small models (< 150 MFLOPs), it is still better than MobileNetV1 for higher computation cost, e.g. 3.1% more accurate than MobileNetV1 at the cost of 500 MFLOPs.
+- The simple architecture design also makes it easy to equip ShuffeNets with the latest advances such as Squeeze-and-Excitation (SE) blocks. (Hope I can review SENet in the future.)
+- ShuffleNets with SE modules boosting the top-1 error of ShuffleNet 2× to 24.7%, but are usually 25 to 40% slower than the “raw” ShuffleNets on mobile devices, which implies that actual speedup evaluation is critical on low-cost architecture design.
 
 [1]: https://ai.deepshare.net/detail/v_5ee645312d94a_eMNJ5Jws/3?from=p_5ee641d2e8471_5z8XYfL6&type=6
 [2]: https://arxiv.org/abs/1707.01083
 [3]: https://github.com/kuangliu/pytorch-cifar/blob/master/models/shufflenet.py
 [4]: https://zhuanlan.zhihu.com/p/45496826
 [5]: https://cygao.xyz/2019/07/12/lightweight/
+[6]: https://towardsdatascience.com/review-shufflenet-v1-light-weight-model-image-classification-5b253dfe982f

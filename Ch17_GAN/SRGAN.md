@@ -91,6 +91,13 @@ Implementation of Photo-Realistic Single Image Super-Resolution Using a Generati
 
 直接使用MSE损失函数训练的超分辨率模型，在PSNR和SSIM等评价指标上能够得到较高的结果，但图像细节显示依旧较差。作者利用生成对抗网络的方法得到视觉特性较好的结果。
 
+传统的方法使用的代价函数一般是最小均方差（MSE），即：
+
+$l_{M S E}^{S R}=\frac{1}{r^{2} W H} \sum_{x=1}^{r W} \sum_{y=1}^{r H}\left(I_{x, y}^{H R}-G_{\theta_{G}}\left(I^{L R}\right)_{x, y}\right)^{2}$
+
+
+该代价函数使重建结果有较高的信噪比，但是缺少了高频信息，出现过度平滑的纹理。SRGAN认为，应当使重建的高分辨率图像与真实的高分辨率图像无论是低层次的像素值上，还是高层次的抽象特征上，和整体概念和风格上，都应当接近。
+
 
 
 作者提出的生成对抗网络结构如图所示。[3]

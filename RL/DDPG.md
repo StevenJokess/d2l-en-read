@@ -12,6 +12,8 @@
 -->
 The Deep Deterministic Policy Gradients (DDPG) algorithm is one example of an actor-critic method.[1]
 
+DDPG及其拓展则是DeepMind开发的面向连续控制的off policy算法，相对PPO 更sample efficient。DDPG训练的是一种确定性策略deterministic policy，即每一个state下都只考虑最优的一个动作。DDPG的拓展版D4PG从paper中的结果看取得了非常好的效果，但是并没有开源，目前github上也没有人能够完全复现Deepmind的效果。[6]
+
 ```py
 class Actor(nn.Module):
 	def __init__(self, state_dim, action_dim, max_action):
@@ -82,3 +84,4 @@ Paper[5]
 [3]: https://github.com/udacity/deep-reinforcement-learning/blob/master/ddpg-bipedal/DDPG.ipynb
 [4]: https://github.com/sfujim/TD3/blob/master/DDPG.py
 [5]: https://arxiv.org/abs/1509.02971
+[6]: https://zhuanlan.zhihu.com/p/70360272

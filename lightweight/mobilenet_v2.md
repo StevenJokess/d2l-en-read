@@ -11,9 +11,26 @@
  * @Reference:
 -->
 
+# MobileNet-v2
+
 MobileNet模型是Google针对手机等嵌入式设备提出的一种轻量级的深层神经网络，其使用的核心思想便是depthwise separable convolution。
 
 The MobilenetV2 with depthwise convolution and inverted residuals has fewer operations(faster) and less parameters(smaller) compared to other models. Additionally, it has a tunable depth-multiplier parameter(speed-accuracy) for application specific requirements.[7]
+
+
+MobileNet-v2 [9] utilizes a module architecture similar to the residual unit with bottleneck architecture of ResNet; the modified version of the residual unit where conv3x3 is replaced by depthwise convolution.
+
+
+
+
+As you can see from the above, contrary to the standard bottleneck architecture, the first conv1x1 increases the channel dimension, then depthwise conv is performed, and finally the last conv1x1 decreases the channel dimension.
+
+
+
+By reordering the building blocks as above and comparing it with MobileNet-v1 (separable conv), we can see how this architecture works (this reordering does not change the overall model architecture because the MobileNet-v2 is the stack of this module).
+That is to say, the above module be regarded as a modified version of separable conv where the single conv1x1 in separable conv is factorized into two conv1x1s. Letting T denote an expansion factor of channel dimension, the computational cost of two conv1x1s is 2HWN²/T while that of conv1x1 in separable conv is HWN². In [5], T = 6 is used, reducing the computational cost for conv1x1 by a factor of 3 (T/2 in general).
+
+
 
 MobileNetV2是MobileNet的升级版，它具有两个特征点：
 
@@ -86,6 +103,8 @@ MobileNet v2架构是基于一个倒置的残差结构，其中残差块的输�
 | Model structure | Top-1 error | Top-5 error |
 | --------------- | ----------- | ----------- |
 |  mobilenet_v2       | 28.12       | 9.71       |
+
+
 
 ```py
 #[6]
@@ -181,6 +200,8 @@ def mobilenetv2(pretrained=False, **kwargs):
         model.load_state_dict(load_url('http://sceneparsing.csail.mit.edu/model/pretrained_resnet/mobilenet_v2.pth.tar'), strict=False)
     return model
 ```
+
+
 
 [4]: caffe2 72.14% TensorFlow Lite 70.8%
 

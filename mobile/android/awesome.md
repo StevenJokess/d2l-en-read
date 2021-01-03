@@ -26,3 +26,4 @@ https://github.com/hankcs/HanLPAndroidDemo
 https://zhuyinlin.github.io/build/html/platform/AndroidStudio.html#install
 
 https://github.com/fritzlabs/Awesome-Mobile-Machine-Learning
+https://github.com/shubham0204/FaceRecognition_With_FaceNet_Android

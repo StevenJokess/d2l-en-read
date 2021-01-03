@@ -38,6 +38,8 @@ Q学习的思想是：Q(S, A) = 在状态S下，采取动作A后，未来将得�
 
 ## DQN
 
+用一个深度神经网络取代了表格(Q-table)，它结合了强化学习和深度学习。表格能记录的东西是有限的，替换成神经网络后终于突破了状态(state) 数量的限制。[9]
+
 深度Q学习的核心就是用一个人工神经网络q(s,a;w),s∈[插图],a∈[插图]来代替动作价值函数。由于神经网络具有强大的表达能力，能够自动寻找特征，所以采用神经网络有潜力比传统人工特征强大得多。[4]
 
 2015 年，DeepMind 提出了利用深度神经网络实现的 Q Learning [4]算法，发表在 Nature 期刊上 [1]，并在 Atari 游戏环境中的 49 个小游戏上训练学习，取得了人类水平相 当甚至超人类水平的表现，激发起业界和大众对强化学习研究的强烈兴趣。
@@ -148,7 +150,7 @@ Note: The eps_train_final and eps_test in the original DQN paper is 0.1 and 0.01
 [6]: Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G. Bellemare, Alex Graves, Martin A. Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015. URL: https://doi.org/10.1038/nature14236, doi:10.1038/nature14236.
 [7]: https://github.com/thu-ml/tianshou/tree/master/examples/atari
 [8]: https://github.com/udacity/deep-reinforcement-learning/tree/master/dqn
-
+[9]: https://www.zhihu.com/people/ceng-yi-yan-8/answers
 
 ---
 

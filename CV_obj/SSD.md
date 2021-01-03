@@ -51,3 +51,7 @@ The paper demonstrates two variants of the model called the SSD300 and the SSD51
 For convenience, we will deal with the SSD300.
 
 https://github.com/anhtuan85/Pytorch-SSD-from-scratch
+
+My result on VOC Dataset: mAP=0.7635
+
+https://github.com/iamhankai/ssd-pytorch
