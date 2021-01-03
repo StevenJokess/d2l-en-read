@@ -28,12 +28,35 @@
 
 ## 基本概念[3]
 
-奖励（reward）：奖励是强化学习系统的学习目标。智能体在采取行动后会收到环境发来的奖励，而强化学习的目标就是要最大化长时间里的总奖励。
-策略（policy）：策略为强化学习的学习对象。策略会指导智能体根据当前环境来采取动作，策略可以是确定性的，也可以是不确定性的（概率分布），强化学习通过改进策略来最大化总奖励。
-智能体（agent）：强化学习系统中的行动者和学习者，它可以做出决策和接受奖励信号，我们并不需要对智能体本身进行建模，只需了解它在不同环境下可以做出的动作，并接受奖励信号。
-环境（environment）：强化学习系统中除智能体以外的所有事物，它是智能体交互的对象。环境可以是已知的，也可以是未知的，因此可以对环境建模，也可以不对环境建模。
+智能体 (Agent):强化学习系统中的行动者和学习者，它可以做出决策和接受奖励信号，我们并不需要对智能体本身进行建模，只需了解它在不同环境下可以做出的动作，并接受奖励信号。
+环境 (Environmen):强化学习系统中除智能体以外的所有事物，它是智能体交互的对象。环境可以是已知的，也可以是未知的，因此可以对环境建模，也可以不对环境建模。
 
+奖励 (Reward):奖励是强化学习系统的学习目标。$R_{t}$是 $t$ 时刻的奖励。，智能体agent在采取行动后会收到环境发来的奖励，而强化学习的目标就是要最大化长时间里的累积的（cumulative）的总奖励。
+观察 (Observation):$O_{t}, t$ 时刻对环境的观察。
+行动 (Action):$A_{t}, t$ 时刻采取的行动。
 
+历史 (History):是一个序列的观察/奖励/行动（某刻之前的所有时刻）。 $H_{t}=A_{1}, O_{1}, R_{1}, \ldots A_{t}, O_{t}, R_{t_{0}}$
+状态 (State):通过对历史信息的总结, 决定接下来要发生什么。 $S_{t}=f\left(H_{t}\right)$
+环境状态 (Environment State)：某个环境的状态, $S_{t 。}^{e}$
+代理状态（Agent State）： agent内部的环境, $S_{t 。}^{a}$
+
+马尔科夫状态:状态 $S_{t}$ 是马尔科夫状态，如果满足：$P\left[S_{t+1} \mid S_{t}\right]=P\left[S_{t+1} \mid S_{1}, \ldots, S_{t}\right],$到这一步可以把历史丟掉了, 只要每一步的状态即可。
+
+全观测环境 (Full observability) $: O_{t}=S_{t}^{a}=S_{t .}^{e}$
+部分观测环境 (Partial observability): $S_{t \circ}^{e}$
+
+策略(Policy):策略为强化学习的学习对象。策略会指导智能体根据当前环境来采取动作（是 state 到 action 的映射。），策略可以是确定性的（确定形式 : $a=\pi(s) ;$ ），也可以是不确定性的（概率分布）（随机形式 : $\pi(a \mid s)=P\left[A_{t}=a \mid S_{t}=s\right]_{\circ}$），强化学习通过改进策略来最大化总奖励。
+价值(Value): Value是对未来reward的预测 : $v_{\pi}(s)=E_{\pi}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\ldots .1 S_{t}=s\right]$
+模型(Model): Model是对未来环境的预测： P预测下一个state: $\mathbf{P}_{s s}^{a}=P\left[S_{t+1}=s^{\prime} \mid S_{t}=s, A_{t}=a\right], \mathbf{R}$
+预测下一个即时的奖励: $\mathbf{R}_{s}^{a}=E\left[R_{t+1} \mid S_{t}=s, A_{t}=a\right]_{\circ}$
+
+Agent 分类：[8]
+
+- model based（model + policy and/or + value function）
+- model free:
+  1. value based (value function)
+  2. policy based (policy)
+  3. actor critic (policy + value function)
 
 ## VS ML
 
@@ -169,3 +192,4 @@ agent只有尝试过某个动作才能知道会发生什么。所以agent既要�
 [5]: https://github.com/NLP-LOVE/ML-NLP/tree/master/Deep%20Learning/14.%20Reinforcement%20Learning
 [6]: 强化学习纲要总结1：Overview - 科技猛兽的文章 - 知乎 https://zhuanlan.zhihu.com/p/316339517
 [7]: https://rl.qiwihui.com/zh_CN/latest/chapter1/introduction.html#id4
+[8]: https://github.com/applenob/rl_learn/blob/master/class_note.ipynb

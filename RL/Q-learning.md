@@ -11,11 +11,20 @@
  * @Reference:
 -->
 
-Q-learning（off-policy）
+
+# Q-learning
 
 1989年, Watkins将TD学习和最优控制完全融合在一起,发明了Q-learning,这项工作扩展并整合了先前RL研究三条主线的所有工作[10]
 
 Q-Learning是一种value-based算法，即通过判断每一步进行的价值value来进行下一步的动作[11]
+
+- off-policy 不需要重要性采样。
+- 下一个动作从behaviour policy中选择: $A_{t+1} \sim \mu\left(\cdot \mid S_{t}\right)$
+- 备选的动作从target policy中选择： $A^{\prime} \sim \pi\left(\cdot \mid S_{t}\right),$ 用于下面式子的计算。
+- 更新 $Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left(R_{t+1}+\gamma Q\left(S_{t+1}, A^{\prime}\right)-Q\left(S_{t}, A_{t}\right)\right)$
+- target policy 是关于 $Q(s, a)$ 的贪妥策略, 有 $\pi\left(S_{t+1}\right)=\underset{a}{\operatorname{argmax}} Q\left(S_{t+1}, a^{\prime}\right)$
+
+$Q(S, A) \leftarrow Q(S, A)+\alpha\left(R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(S, A)\right)$
 
 Q-learning learns the action-value function Q(s, a): how good to take an action at a particular state. For example, for the board position below, how good to move the pawn two steps forward. Literally, we assign a scalar value over the benefit of making such a move.
 Q is called the action-value function (or Q-value function in this article).[4]
@@ -50,6 +59,20 @@ $$
 Q(s, a)=r+\gamma \max Q\left(s^{\prime}, a^{\prime}\right)
 $$
 因为每次执行和观测都有噪声，所以在更新 Q 函数时，用学习率的方式。（图中的注释并不是很正确，所 谓现实，只不过是新的估计，应该是新做计和旧估计的差值）[6]
+
+## 伪代码
+
+Initialize $Q(s, a), \forall s \in \mathcal{S}, a \in \mathcal{A}(s),$ arbitrarily, and $Q($terminal-state$, \cdot)=0$
+Repeat (for each episode):
+Initialize $S$ Repeat (for each step of episode):
+Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\varepsilon$ -greedy) Take action $A,$ observe $R, S^{\prime}$
+$$
+\begin{array}{l}
+Q(S, A) \leftarrow Q(S, A)+\alpha\left[R+\gamma \max _{a} Q\left(S^{\prime}, a\right)-Q(S, A)\right] \\
+S \leftarrow S^{\prime} ;
+\end{array}
+$$
+until $S$ is terminal
 
 ```py
 #[9]

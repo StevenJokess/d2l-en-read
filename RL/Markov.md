@@ -8,8 +8,7 @@
  * @LastEditTime: 2020-12-30 19:57:43
  * @Description:
  * @TODO::
- * @Reference:https://yuancl.github.io/2019/01/21/rl/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B/
- * https://applenob.github.io/rl_note/intro-note-3/
+ * @Reference:
 -->
 
 # Finite Markov Decision Processes
@@ -56,7 +55,7 @@
 
 ## 马尔科夫性质 (Markov property)
 
-- 核心思想：当前state继承了所有的环境历史信息。
+- 核心思想：当前state继承了所有的环境历史信息。也就是说在每次决策的时候，我们只用考虑当前状态就可以了。
 - $\operatorname{Pr} S_{t+1}=s^{\prime}, R_{t+1}=r\left|S_{0}, A_{0}, R_{1}, \ldots, S_{t-1}, A_{t_{1}}, R_{t}, S_{t}, A_{t}=\operatorname{Pr} S_{t+1}=s^{\prime}, R_{t+1}=r\right| S_{t}, A_{t}$
 - 即便state是非马尔科夫的, 我们也希望近似到马尔科夫。
 
@@ -112,7 +111,10 @@ $\left\langle S, P_{\pi}\right\rangle$ 的采样
 。 行为价值函数(状态行为对价值函数)
 一个基于策略 $\pi$ 的行为价值函数 $q_{\pi}(s, a),$ 表示在遵循策略 $\pi$ 时，对当前状态 $s$ 执行某一具体行为 a 所能的到 的收获
 的期望: $q_{\pi}(s, a)=E\left[G_{t} \mid S_{t}=s, A_{t}=a\right]$
-。贝尔曼方程
+。
+
+## 贝尔曼方程(Bellman euqation)
+
 同理, 可推导出如下两个方程
 $$
 \begin{array}{l}
@@ -121,18 +123,16 @@ q_{\pi}(s, a)=E\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, A_{t+1}\right) \mid S_
 \end{array}
 $$
 
-
 ### Bellman Expectation Euqation for $q_{\pi}$
 
 $$
-q_{\pi}(s, a)=\sum_{s^{\prime}} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \sum_{a^{\prime}} q\left(s^{\prime}, a^{\prime}\right)\right]
+q_{\pi}(s, a) =\sum_{s^{\prime}} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \sum_{a^{\prime}} q\left(s^{\prime}, a^{\prime}\right)\right]
 $$
 
-
-## 最优价值函数
-
+## 最优价值函数[2]
 
 ### 背景：
+
 是否存在一个基于某一策略的价值函数， 在该策略下每一个状态的价值都比其它策略下该状态的价值高?如果存在如何找到这样的价值 函数?这样的价值函数对应的策略又是什么策略?
 
 ### 最优
@@ -144,9 +144,11 @@ $$
 $$
 \begin{array}{c}
 v_{*}(s)=\max _{\pi} v_{\pi}(s) \\
-q_{*}(s, a)=\max _{\pi} q q_{\pi}(s, a)
+q_{*}(s, a)=\max _{\pi} q_{\pi}(s, a)
 \end{array}
 $$
+
+### 贝尔曼优化方程
 
 ### Bellman Optimality Euqation for $v_{*}(s):$
 
@@ -160,6 +162,39 @@ $$
 \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \max _{a^{\prime}} x q_{*}\left(s^{\prime}, a^{\prime}\right)\right]
 $$
 
+二者本质上都是递推公式，其中蕴含的“backup”思路，也就是从后一个状态的价值，逆推回前一个状态的价值。
+Bellman Equation表达的是某个状态的价值和其后继状态的价值之间的关系。
 
-贝尔曼优化方程
-最优状态行为价值
+## 如何解决MDP的问题
+
+解决MDP的问题的三种基本方法：
+
+动态规划（Dynamic Programming）：理论上完美，但需要很强的算力和准确的环境model。
+蒙特卡洛（Monte Carlo Methods）：不需要模型，可操作性强，但不太适合一步一步的增量计算。
+差分学习（Temporal-Difference Learning）：不需要模型，也是增量式的，但分析起来很复杂。
+
+继续使用机器人炒股票的例子去理解：
+
+1. 动态规划必须保证有环境模型，也就是给定一个状态和动作，我们可以预测下一个状态和奖励；
+2. 蒙特卡洛的方法好比，机器人参与了好几个系列的买卖决策操作，然后根据最终的收益，去更新之前的每个状态的价值和策略。
+3. 差分学习的方法好比，机器人每一次买卖操作，都会有一个收益，根据这个收益直接更新状态的价值和策略。
+需要注意的是，动态规划因为有环境模型，所以总是可以知道某一个状态和动作对应的奖励是什么，因此没有“实验”的概念；后面两种方案，都需要用实验中实际产生的奖励作为反馈。
+
+三种基本方法之间又可以相互结合：
+
+- 蒙特卡洛+差分学习，使用多步bootstrap。
+- 差分学习+模型学习。
+
+### 近似函数：[3]
+
+- 近似价值函数：目标$J(w) = E_{\\pi}[(v_{\\pi}(S)-\\hat v(S,w))^2]$，使近似的价值函数接近实际的价值函数。
+    - `Q-Learning with Linear Function Approximation`
+    - `Deep-Q Learning（DQN）`：使用了`Experience Replay`和`fixed Q-learning target`。
+- 拟合策略函数：目标$J_1(\\theta)=V^{\\pi_{\\theta}}(s_1) = E_{\\pi_{\\theta}}[v_1]$，使找到的策略函数可以使价值函数最大化。
+    - `Monte-Carlo Policy Gradient (REINFORCE)`
+- 近似价值函数 + 拟合策略函数
+    - ` Actor-Critic`：Critic：更新价值函数的参数$w$ 。Actor：更新策略的参数 $θ$ ，使用critic建议的方向。"
+
+[1]: https://yuancl.github.io/2019/01/21/rl/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B/
+[2]: https://applenob.github.io/rl_note/intro-note-3/
+[3]: https://github.com/applenob/rl_learn/blob/master/learning_route.ipynb
