@@ -56,6 +56,9 @@ $$
 
 ## 最大熵
 
+
+$P_{w}(y \mid x)=\frac{1}{Z_{w}(x)} \exp \left(\sum_{i=1}^{n} w_{i} \cdot f_{i}(x, y)\right)$[5]
+
 ### 目的
 
 对于一般的DRL，学习目标很直接，就是学习一个policy使得累加的reward期望值最大：
@@ -209,3 +212,4 @@ https://github.com/higgsfield/RL-Adventure-2/blob/master/7.soft%20actor-critic.i
 [2]: https://www.huaweicloud.com/articles/1d0333fd58123a05695ddcc8b4532c86.html#
 [3]: https://zhuanlan.zhihu.com/p/70360272
 [4]: https://github.com/AIfeng333/Soft-Reinforcement-learning
+[5]: https://github.com/applenob/machine_learning_basic/blob/master/13_graph.ipynb
