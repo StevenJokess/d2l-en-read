@@ -16,8 +16,9 @@
 ## 背景
 
 求解强化学习问题可以理解为如何最大化个体在与环境交互过程中获得的累积奖励
-当环境状态是完全可观测时，个体可以通过构建马尔科夫决策过程来描述整个强化学习问题。有时候环境状态并不是完全可观测的，此时个体可以结合自身对于环境的历史 观测数据来构建一个近似的完全可观测环境的描述
-从这个角度来说，几乎所有的强化学习问题 都可以被认为或可以被转化为马尔科夫决策过程
+当环境状态是完全可观测时，个体可以通过构建马尔科夫决策过程来描述整个强化学习问题。有时候环境状态并不是完全可观测的，此时个体可以结合自身对于环境的历史观测数据来构建一个近似的完全可观测环境的描述
+从这个角度来说，几乎所有的强化学习问题都可以被认为或可以被转化为马尔科夫决策过程
+
 ## Agent和Environment的交互
 
 - 学习者和决策者称为agent
@@ -25,6 +26,19 @@
 - 在时刻t, agent的所处的环境用状态: $S_{t} \in S$ 表示, $S$ 是可能的状态集。假设agent采用了动作 $A_{t} \in A\left(S_{t}\right)$,
 - $A\left(S_{t}\right)$ 代表在状态 $S_{t}$ 下可能的动作集。
 - 到了下一个时刻t+1, agent收到了一个奖励: $R_{t+1} \in R,$ 并且发现自己处在一个新的state中: $S_{t+1}$ 。
+
+## Markov Process: 由简单到复杂:
+
+- 包含 $<\mathbf{S}, \mathbf{P}>,$ 即状态集合和状态转移矩阵。 $\mathrm{MRP}:$ 包含 $<\mathbf{S}, \mathbf{P}, \mathbf{R}, \gamma>,$ 即增加了奖励函数和折扣系数
+$$
+\mathbf{R}_{s}=E\left[\mathbf{R}_{t+1} \mid S_{t}=s\right]
+$$
+- 引入 $G_{t}=R_{t+1}+\gamma R_{t+2}+\ldots=\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1},$ 注意Value是期望, G是
+针对一个sample, $v(s)=E\left[G_{t} \mid S_{t}=s\right]_{0}$
+- MDP:包含<S，A, $\mathbf{P}, \mathbf{R}, \gamma>,$ 增加了A，是有限的动作集合。
+$$
+\mathbf{P}_{s s}^{a}=P\left[S_{t+1}=s^{\prime} \mid S_{t}=s, A_{t}=a\right], \mathbf{R}_{s}^{a}=E\left[R_{t+1} \mid S_{t}=s, A_{t}=a\right]_{0}
+$$
 
 ## 什么是有限
 
@@ -38,7 +52,7 @@
 
 ## 什么是Episode
 
-一系列的agent和environment交互序列。每个episode之间相互不影响，且都是有一个相同的终止状态（terminate state）。
+一系列的agent和environment交互序列，由一系列(state, action, reward)三元组构成。每个episode之间相互不影响，且都是有一个相同的终止状态（terminate state）。
 
 ## Episode和Continuing Tasks的统一规范
 
@@ -106,11 +120,10 @@ backup: 是强化学习方法的核心, 以时序意义上的回退, 用下一�
 - 当给定一个马尔科夫决策过程:M $=\langle\mathrm{S}, \mathrm{A}, \mathrm{P}, \mathrm{R}, \mathrm{Y}\rangle$ 和一个策略 $\pi,$ 那么状态序列 $S_{1}, S_{2}, \ldots$ 是一个符合马尔科夫过程
 $\left\langle S, P_{\pi}\right\rangle$ 的采样
 - 价值函数
-价值函数 $v_{\pi}(s)$ 是在马尔科夫决策过程下基于策略 $\pi$ 的状态价值函数, 表示从状态 s开始, 遵循当前策略 $\pi$ 时所获得
-的收获的期望: $v_{\pi}(s)=E\left[G_{t} \mid S_{t}=s\right]$
-。 行为价值函数(状态行为对价值函数)
-一个基于策略 $\pi$ 的行为价值函数 $q_{\pi}(s, a),$ 表示在遵循策略 $\pi$ 时，对当前状态 $s$ 执行某一具体行为 a 所能的到 的收获
-的期望: $q_{\pi}(s, a)=E\left[G_{t} \mid S_{t}=s, A_{t}=a\right]$
+价值函数 $v_{\pi}(s)$ 是在马尔科夫决策过程下基于策略 $\pi$ 的状态价值函数, 表示从状态 s开始, 遵循当前策略 $\pi$ 时所获得的收获的期望: $v_{\pi}(s)=E\left[G_{t} \mid S_{t}=s\right]$
+。
+- 行为价值函数(状态行为对价值函数)
+一个基于策略 $\pi$ 的行为价值函数 $q_{\pi}(s, a),$ 表示在遵循策略 $\pi$ 时，对当前状态 $s$ 执行某一具体行为 a 所能的到的收获的期望: $q_{\pi}(s, a)=E\left[G_{t} \mid S_{t}=s, A_{t}=a\right]$
 。
 
 ## 贝尔曼方程(Bellman euqation)
@@ -162,6 +175,21 @@ $$
 \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \max _{a^{\prime}} x q_{*}\left(s^{\prime}, a^{\prime}\right)\right]
 $$
 
+### 解决Bellman Optimality Equation的方法：
+
+Bellman Optimality Equation是非线性的，不能直接计算；
+迭代求解的方法：
+
+- MDP：
+    - Value Iteration
+    - Policy Iteration
+- Model Free：
+    - Q-learning
+    - Sarsa
+
+## Bellman Equation总结：
+
+Bellman Equation可以理解成某一时刻在某一状态下的value可以拆分成即时奖励和一下一个时刻开始所有可能的状态的价值的期望。
 二者本质上都是递推公式，其中蕴含的“backup”思路，也就是从后一个状态的价值，逆推回前一个状态的价值。
 Bellman Equation表达的是某个状态的价值和其后继状态的价值之间的关系。
 

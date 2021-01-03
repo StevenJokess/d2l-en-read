@@ -8,7 +8,6 @@
 - $\bullet \hat{q}(s, a, w) \approx q_{\pi}(s, a)$
 - 使用MC或者TD来更新 $w$ 。
 
-
 ## 随机梯度下降：
 
 ・先假设有个已知的 $v_{\pi}(S)$
@@ -16,7 +15,7 @@
 $\bullet$ 梯度下降: $\Delta w=-\frac{1}{2} \alpha \nabla_{w} J(w)=\alpha E_{\pi}\left[\left(v_{\pi}(S)-\hat{v}(S, w)\right) \nabla_{w} \hat{v}(S, w)\right]$
 ・随机梯度下降只用sample其中一个: $\Delta w=\alpha\left(v_{\pi}(S)-\hat{v}(S, w)\right) \nabla_{w} \hat{v}(S, w)$
 
-## 特征向量 (Feature Vector) :
+## 特征向量 (Feature Vector)
 
 - 用来表示一个state。
 - $$x(S)=\left(\begin{array}{c}
@@ -50,6 +49,7 @@ $T D(\lambda):$ 使用 $G_{t}^{\lambda}, \Delta w=\alpha\left(G_{t} t^{\lambda}-
 ### 更详细的迭代步骤：
 
 在每个episode的每一步:
+
 - 使用policy选择下一步的action。
 - 使用approximate function计算Q函数, greedy选择让Q最大的state作为后继。
 - 使用Q函数计算TD-Target
@@ -63,6 +63,7 @@ Batch Reinforcement Learning: 思想：从经验中学习最多的知识, 而不
 $\cdot L S(w)=\sum_{t=1}^{T}\left(v_{t}^{\pi}-\hat{v}\left(s_{t}, w\right)\right)^{2}$
 
 ## 带经验回放的随机梯度下降 (Stochastic Gradient Descent with Experience Replay) :
+
 - $\cdot \Delta w=\alpha\left(v^{\pi}-\hat{v}(s, w)\right) \nabla_{w} \hat{v}(s, w)$
 - 最终收立到最小平方差: $w^{\pi}=\underset{w}{\operatorname{argmin} L S(w)}$
 
