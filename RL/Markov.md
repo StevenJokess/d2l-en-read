@@ -83,13 +83,26 @@ $$
 v_{\pi}(s)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right]=\mathbb{E}_{\pi}\left[\sum_{k} \gamma^{k} R_{t+k+1} \mid S_{t}=s\right]
 $$
 
+$$
+q_{\pi}(a, s)=\mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} \mid S_{t}=s, A_{t}=a\right]
+$$
+即，在使用策略 $\pi$ 的前提下，衡量处于某个state下，执行某个action有多好。
+Bellman Euqation
+Bellman Expectation Euqation for $v_{\pi}$
+$$
+v_{\pi}(s)=\sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right] ; ; \forall s \in S
+$$
+理解：
+1.方括号中是根据后继状态的价值重新估计的价值函数，再在动作空间、后继状态空间和动作空间用相应的概率做加权求
+和。
+2.表达的是某个状态的价值和其后继状态的价值之间的关系。
+backup: 是强化学习方法的核心, 以时序意义上的回退, 用下一个时刻的值去评估当前时刻的值。
 
+## 相关概念
 
+### 策略
 
-
-相关概念
-策略
-个体在给定状 态下从行为集中选择一个行为的依据则称为策略 (policy)，用字母 π 表示。策略 π 是某一状态下基于行为集合的概率分布:
+个体在给定状态下从行为集中选择一个行为的依据则称为策略 (policy)，用字母 π 表示。策略 π 是某一状态下基于行为集合的概率分布:
 
 - 当给定一个马尔科夫决策过程:M $=\langle\mathrm{S}, \mathrm{A}, \mathrm{P}, \mathrm{R}, \mathrm{Y}\rangle$ 和一个策略 $\pi,$ 那么状态序列 $S_{1}, S_{2}, \ldots$ 是一个符合马尔科夫过程
 $\left\langle S, P_{\pi}\right\rangle$ 的采样
@@ -108,14 +121,45 @@ q_{\pi}(s, a)=E\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, A_{t+1}\right) \mid S_
 \end{array}
 $$
 
+
+### Bellman Expectation Euqation for $q_{\pi}$
+
+$$
+q_{\pi}(s, a)=\sum_{s^{\prime}} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \sum_{a^{\prime}} q\left(s^{\prime}, a^{\prime}\right)\right]
+$$
+
+
 ## 最优价值函数
 
 
-背景：
+### 背景：
 是否存在一个基于某一策略的价值函数， 在该策略下每一个状态的价值都比其它策略下该状态的价值高?如果存在如何找到这样的价值 函数?这样的价值函数对应的策略又是什么策略?
-最优状态价值函数
-是所有策略下产生的众多状态价值函数 中的最大者
+
+### 最优
+
+最优状态价值函数是所有策略下产生的众多状态价值函数中的最大者
 最优行为价值函数(optimal action-value function)
-是所有策略下产生的众多行为价 值函数中的最大者:
+是所有策略下产生的众多行为价值函数中的最大者:
+
+$$
+\begin{array}{c}
+v_{*}(s)=\max _{\pi} v_{\pi}(s) \\
+q_{*}(s, a)=\max _{\pi} q q_{\pi}(s, a)
+\end{array}
+$$
+
+### Bellman Optimality Euqation for $v_{*}(s):$
+
+$$
+\max _{a \in A(s)} \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{*}\left(s^{\prime}\right)\right]
+$$
+
+### Bellman Optimality Euqation for $q_{*}(s, a)$ :
+
+$$
+\sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \max _{a^{\prime}} x q_{*}\left(s^{\prime}, a^{\prime}\right)\right]
+$$
+
+
 贝尔曼优化方程
 最优状态行为价值
