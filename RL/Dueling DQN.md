@@ -11,15 +11,34 @@
  * @Reference:
 -->
 
-## Dueling DQN[1]
+# Dueling DQN[1]
 
 用一句话来概括 Dueling DQN 就是. 它将每个动作的 Q 拆分成了 state 的 Value 加上 每个动作的 Advantage.
+
+
 
 原来 DQN 神经网络直接输出的是每种动作的 Q值, 而 Dueling DQN 每个动作的 Q值 是有下面的公式确定的.
 
 Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+A(s, a ; \theta, \alpha)
 
 这是开车的游戏, 左边是 state value, 发红的部分证明了 state value 和前面的路线有关, 右边是 advantage, 发红的部分说明了 advantage 很在乎旁边要靠近的车子, 这时的动作会受更多 advantage 的影响. 发红的地方左右了自己车子的移动原则.
+
+## 模型简介
+
+在传统的DDQN模型中，通过优化目标Q值的计算来优化算法，在Prioritized Replay DQN中，通过优化经验回放池按权重采样来优化算法。
+
+而在Dueling DQN中，尝试通过优化神经网络的结构来优化算法。具体的操作如下：
+
+Dueling DQN考虑将Q网络分成两部分，第一部分仅仅与状态S有关，这部分叫做价值函数部分，记为V；第二部分同时与状态S和动作A有关，这部分叫做优势函数，记为A，所以最终的Q为：Q=V+A
+
+我们可以直接使用上一节的价值函数的组合公式得到我们的动作价值, 但是这个式子无法辨识最终输出里面 $V(S, w, \alpha)$ 和 $A(S, A, w, \beta)$ 各自的作 为了可以体现这种可辨识性(identifiability),实际使用的组合公式如下：
+$$
+Q(S, A, w, \alpha, \beta)=V(S, w, \alpha)+\left(A(S, A, w, \beta)-\frac{1}{\mathcal{A}} \sum_{a^{\prime} \in \mathcal{A}} A\left(S, a^{\prime}, w, \beta\right)\right)
+$$
+其实就是对优势函数部分做了中心化的处理。以上就是Duel DQN的主要算法思路。由于它仅仅涉及神经网络的中间结构的改进, 现有的DQN算法可以
+
+用Duel DQN网络结构的基础上继续使用现有的算法。由于算法主流程和其他算法没有差异，这里就不单独讲Duel DQN的算法流程了。
+Dueling DQN网络与DDQN网络结构的区别如下图所示（左边为DDQN，右边为Dueling DQN）：
 
 ## 算法[3]
 
@@ -31,3 +50,5 @@ Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+A(s, a ; \theta, \alpha)
 
 
 [1]:
+
+
