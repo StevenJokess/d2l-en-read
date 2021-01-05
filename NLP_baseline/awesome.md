@@ -35,3 +35,4 @@ https://zhuanlan.zhihu.com/p/212298073
 
 先通读ACL、EMNLP、ICML等顶会近两年的论文
 https://github.com/NiuTrans/MTBook
+https://www.52nlp.cn/
