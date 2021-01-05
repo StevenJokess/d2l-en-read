@@ -26,3 +26,8 @@ https://github.com/deepinsight/insightface
 17 Nov 2018 » 深度目标检测（三）——Fast R-CNN, Faster R-CNN
 16 Nov 2018 » 深度目标检测（二）——RCNN, SPPNet
 15 Nov 2018 » 深度目标检测（一）——概述
+
+----
+
+1.两阶段检测器：R-CNN、Fast R-CNN、Faster R-CNN
+2.单阶段检测器：YOLO、YOLO9000、SSD、DSSD、RetinaNet
