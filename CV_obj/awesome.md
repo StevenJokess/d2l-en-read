@@ -14,7 +14,7 @@ https://blog.csdn.net/weixin_44791964
 https://github.com/facebookresearch/ClassyVision
 https://github.com/amusi/awesome-object-detection
 https://github.com/deepinsight/insightface
-
+https://blog.csdn.net/weixin_41278720/article/details/95308456
 ---
 
 18 Dec 2020 » 深度目标检测（九）——目标检测进阶

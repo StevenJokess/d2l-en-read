@@ -27,6 +27,10 @@ Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+A(s, a ; \theta, \alpha)
 
 在传统的DDQN模型中，通过优化目标Q值的计算来优化算法，在Prioritized Replay DQN中，通过优化经验回放池按权重采样来优化算法。
 
+在某些情况下，我们更关注agent所处的state如何，而不是其在该state下做出的action。
+主要提出一种duelling结构，将Q网络分解为Value和Advantage,分别学习当前state的价值和在当前状态下各个action的相对价值。最后将两个通道的输出相加得到估计得Q-Value
+实现过程中由于Q = V+A,对V和A同时加减一个常量不影响Q值的大小,为了能得到固定的V和A，对A减去所有A的均值。[4]
+
 而在Dueling DQN中，尝试通过优化神经网络的结构来优化算法。具体的操作如下：
 
 Dueling DQN考虑将Q网络分成两部分，第一部分仅仅与状态S有关，这部分叫做价值函数部分，记为V；第二部分同时与状态S和动作A有关，这部分叫做优势函数，记为A，所以最终的Q为：Q=V+A
@@ -52,3 +56,4 @@ Dueling DQN网络与DDQN网络结构的区别如下图所示（左边为DDQN，�
 [1]:
 
 
+[4]: https://github.com/shenweichen/ReinforcementLearning

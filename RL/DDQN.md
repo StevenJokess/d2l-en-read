@@ -13,6 +13,9 @@
 
 # DDQN (Double-Deep Q-Network)
 
+主要提出在计算Target Q值的时候，使用当前网络选择贪婪策略，然后使用Target Q网络来评估策略。这样有利于减少由于直接使用max(Target Q)值带来的过度估计。
+注意和Double Q-Learning进行区分(Double Q-Learning是交替交换两个Q的角色进行更新，而Double DQN依然是若干step使用当前网络更新TargetQ网络)[3]
+
 而双重Q学习却可以消除最大化偏差。基于查找表的双重Q学习引入了两个动作价值的估计q(0)和q(1)，每次更新动作价值时用其中的一个网络确定动作，用确定的动作和另外一个网络来估计回报。
 
 ![Ari](img/DDQN.png)
@@ -34,3 +37,4 @@ $U_{i} \leftarrow R_{i}+\gamma q\left(S_{i}^{\prime}, \arg \max _{a} q\left(S_{i
 
 [1]: https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter17_deep-reinforcement-learning/DQN.ipynb
 [2]: https://weread.qq.com/web/reader/da832f507192b327da81965kd6432e00228d645920e3401
+[3]: https://github.com/shenweichen/ReinforcementLearning
