@@ -16,6 +16,8 @@
 
 # Introduction to Super-Resolution
 
+图像的超分辨率重构技术（Super-Resolution）指的是将给定的低分辨率图像通过算法恢复成相应的高分辨率图像，其主要分为两个大类：一类是使用单张低分辨率图像进行高分辨率图像的重建，一类是使用同一场景的多张低分辨率图像进行高分辨率图像的重建。此篇文章使用的是基于深度学习中的GAN网络对单张图像进行操作的超分辨率重构方法，超分辨重构和去噪、去网格、去模糊等问题是类似的。对于一张低分辨图像，可能会有多张高分辨图像与之对应，因此通常在求解高分辨率图像时会加一个先验信息进行规范化约束。在传统的方法中，通常会通过加入一些先验信息来恢复高分辨率图像，如，插值法、稀疏学习、还有基于回归方法的随机森林等。而基于深度学习的SR方法，则是通过神经网络直接进行从低分辨图像到高分辨图像的端到端的学习。[5]
+
 Here’s the first part of a very simple super-resolution model. To start, it’s pretty much exactly the same as any model you’ve seen so far:
 
 class OurFirstSRNet(nn.Module):
@@ -91,6 +93,37 @@ Implementation of Photo-Realistic Single Image Super-Resolution Using a Generati
 
 直接使用MSE损失函数训练的超分辨率模型，在PSNR和SSIM等评价指标上能够得到较高的结果，但图像细节显示依旧较差。作者利用生成对抗网络的方法得到视觉特性较好的结果。
 
+SRGAN不同于普通的GAN是通过噪声来生成一个真实图片，SRGAN的目的在于将一个低分辨率的图片转化为一个高分辨率的图片。利用感知损失(perceptual loss)和对抗损失(adversarial loss)来提升恢复出的图片的真实感。感知损失是利用卷积神经网络（VGG19）提取出的特征，通过比较生成图片与目标图片之间的特征差别，使生成图片和目标图片在语义和风格上更相似。通俗来讲，SRGAN所要完成的工作就是：通过G网络使低分辨率的图像重建出一张高分辨率的图像，再由D网络判断拿到的生成图与原图之间的差别，当G网络的生成图能够很好的骗过D网络，使之相信此生成图即为原数据集中的图像之一，那么超分辨率重构的网络就实现了。[5]
+
+
+## 损失函数
+
+论文中还给出了生成器和判别器的损失函数的形式：
+
+### 生成器的损失函数为：
+
+$$
+\hat{\theta}_{G}=\operatorname{argmin}_{\theta_{G}} \frac{1}{N} \sum_{n=1}^{N} l^{S R}\left(G_{\theta_{G}}\left(I_{n}^{L R}\right), I_{n}^{H R}\right)
+$$
+
+其中, $\quad l^{s R}()$ 为本文所提出的感知损失函数, $ \quad l^{s R}=l_{V G G}^{S R}+10^{-3} l_{C e n}^{S R}$。
+
+内容损失：
+$$
+l_{V G G}^{I R}=\frac{1}{w H} \sum_{x=1}^{W} \sum_{y=1}^{H}\left(\phi\left(I^{H R}\right)_{x, y}-\phi\left(G_{\theta_{G}}\left(I^{L R}\right)\right)_{x, y}\right)^{2}
+$$
+训练网络时使用均方差损失可以获得较高的峰值信噪比，一般的超分辨率重建方法中，内容损失都选择使用生成图像和目标图像的均方差损失（MSELoss），但是使用均方差损失恢复的图像会丢失很多高频细节。因此，本文先将生成图像和目标图像分别输入到VGG网络中，然后对他们经过VGG后得到的feature map求欧式距离，并将其作为VGG loss。
+
+### 对抗损失：
+
+$$
+l_{G e n}^{S R}=\sum_{n=1}^{N}\left(-\log D_{\theta_{D}}\left(G_{\theta_{G}}\left(I^{L R}\right)\right)\right)
+$$
+
+为了避免当判别器训练较好时生成器出现梯度消失，本文将生成器的损失函数进行了修改。
+判别器的损失函数为：
+与普通的生成对抗网络判别器的的损失函数类似。
+
 传统的方法使用的代价函数一般是最小均方差（MSE），即：
 
 $l_{M S E}^{S R}=\frac{1}{r^{2} W H} \sum_{x=1}^{r W} \sum_{y=1}^{r H}\left(I_{x, y}^{H R}-G_{\theta_{G}}\left(I^{L R}\right)_{x, y}\right)^{2}$
@@ -120,5 +153,6 @@ SRGAN
 [2]: https://github.com/eriklindernoren/Keras-GAN/blob/master/srgan/srgan.py
 [3]: https://0809zheng.github.io/2020/08/10/srresnet.html
 [4]: https://nbviewer.jupyter.org/github/cedrickchee/fastai-course-v3/blob/master/nbs/dl1/lesson7-superres-gan_20190110.ipynb
+[5]: https://www.jiqizhixin.com/articles/2020-10-30-3
 https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution
 https://github.com/aitorzip/PyTorch-SRGAN
