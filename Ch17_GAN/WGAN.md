@@ -44,7 +44,7 @@ WGAN modified of DCGAN in:
 
 是什么原因导致了 GAN 训练如此不稳定呢？WGAN 提出是因为 JS 散度在不重叠的分 布𝑝和𝑞上的梯度曲面是恒定为 0 的。如图 13.19 所示，当分布𝑝和𝑞不重叠时，JS 散度的梯 度值始终为 0，从而导致此时 GAN 的训练出现梯度弥散现象，参数长时间得不到更新，网络无法收敛。
 
-
+这里的critic用来估计生成图像和真实图像之间的距离，模型优化参数的过程中会使这个距离最小化。最有意义的事情是，critic能够有效的衡量不同分布之间EMD距离的差异性，并且能消除模式坍塌问题。这是因为生成器没有通过判别器向某一点或者模式优化 而是向着某一分布优化。EMD距离有相关性并且保证了。概率映射在一定限制条件下连续可微。[12]
 
 ## Wasserstein距离[10]
 
@@ -195,6 +195,7 @@ $\min _{G}-E_{z \sim P_{z}}\left[f_{w}(G(z))\right]$
 #now use RMSprop instead of Adam, with lr of 0.00005
 G_optimizer = optim.RMSprop(G.parameters(), lr=0.00005)
 D_optimizer = optim.RMSprop(D.parameters(), lr=0.00005)
+
 ## 优化器
 
 在误差函数计算时，WGAN 也没 有 log 函数存在。在训练 WGAN 时，WGAN 作者推荐使用 RMSProp 或 SGD 等不带动量 的优化器。
@@ -220,3 +221,4 @@ WGAN的贡献在于，从理论上阐述了因生成器梯度消失而导致训�
 [9]: https://github.com/bentrevett/pytorch-generative-models/blob/master/4%20-%20WGAN.ipynb
 [10]: https://kexue.fm/archives/6280
 [11]: http://www.tensorinfinity.com/paper_26.html
+[12]: https://www.jiqizhixin.com/articles/2018-08-11-10

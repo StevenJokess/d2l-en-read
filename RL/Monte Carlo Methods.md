@@ -19,6 +19,15 @@
 
 用sample的均值去近似期望。
 
+
+DP从所有下一状态价值估计当前状态, 模型已知。MC从完整回合中后续状态的价值估计当前状态。[3]
+
+1. MC for Policy Evaluation
+2.
+- 返回整回合的折扣回报 $G_{t}=R_{t+1}+\gamma R_{t+2}+\ldots+\gamma^{T-1} R_{T}$ 来评价 $v_{\pi}(s)$
+2. Incremental MC Updates
+$V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\frac{1}{N\left(S_{t}\right)}\left(G_{t}-V\left(S_{t}\right)\right)$
+
 使用蒙特卡洛通常需要完整的episode，因此蒙特卡洛的更新方式更像是episode-by-episode，而不是像DP的step-by-step。适用于所有的episode都会结束的情形。
 
 优点：
@@ -119,3 +128,4 @@ class Policy(nn.Module):
 
 [1]: https://github.com/udacity/deep-reinforcement-learning/blob/master/monte-carlo/Monte_Carlo.ipynbs
 [2]: https://github.com/udacity/deep-reinforcement-learning/blob/master/reinforce/REINFORCE.ipynb
+[3]: Temporal Difference Learning - WJP的文章 - 知乎 https://zhuanlan.zhihu.com/p/57836142

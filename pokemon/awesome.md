@@ -15,3 +15,6 @@ https://github.com/PokeAPI/sprites/
 https://github.com/0809zheng/pokemon-DCGAN-pytorch
 
 https://github.com/MatthewRayfield/pokemon-gpt-2
+
+
+https://www.rileynwong.com/blog/2019/5/22/pokemon2pokemon-using-cyclegan-to-generate-pokemon-as-different-elemental-types
