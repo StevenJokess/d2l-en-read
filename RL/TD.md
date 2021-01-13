@@ -4,7 +4,7 @@
 
 - 时序差分是强化学习的核心观点。
 - 时序差分是DP和MC方法的结合。
-- MC要等一个完整的序列结束，比如玩21点扑克，直到玩完才能知道是胜是负；相反，时序差分每经历一步，都会使用bootstrapping来更新价值函数，适用于不完整的episode的情形，因为每一步都会观察到一个新的Reward，比如Grid World，每走一步都知道reward是什么。
+- MC要走完完整episode才能更新Q值，比如玩21点扑克，直到玩完才能知道是胜是负；相反，时序差分只需要后面一步的单个即时收益 $R_{t+1}$ 和下一个状态的 $Q\left(S_{t+1}, A_{t+1}\right)$ 估计值通过差分思想来更新当前状态的 $Q\left(S_{t+1}, A_{t+1}\right)$ (由于只看1步, 也称onestep TD learning)，适用于不完整的episode的情形，因为每一步都会观察到一个新的Reward，比如Grid World，每走一步都知道reward是什么。
 - TD往往比MC高效，通过猜测来更新猜测；TD和MC都使用经验（experience）来解决预测问题。
 - 所谓差分就是下一个时刻的估计和当前时刻的估计的差。
 
@@ -13,6 +13,8 @@
 - 用通俗的语言描述就是，对于某个state的value更新，MC会把这个state后面所有的state都计算R，用来计算G；而TD只会计算当前下一个状态的R，其他后面的R不算，采用当前估计的value来替代。
 - MC有高方差，0偏差，对初始值不敏感，使用sample，不使用bootstrapping。
 - TD往往更高效，且对初始值敏感，使用sample，使用bootstrapping。
+
+
 
 ## 什么是stationary？
 
@@ -67,6 +69,8 @@ def temporal_difference(values, alpha=0.1, batch=False):
 
 TODO:
 
+n-step TD learning是这两种 算法的折中，它不是固定的只向采样1步或是全采样，它可以通过可调节的步长n来决定向后采样 几步来更新。n-step TD思想虽然很好理解，但书中算法公式的下标还是有点绕，以下我们先简 述n-step Bootstrapping的思想, 然后从火车过桥模型的例子来理解算法中的下标。[3]
+
 ## TD($\lambda$)：
 
 - Forward-view：
@@ -95,4 +99,5 @@ TODO:
 
 https://applenob.github.io/rl_note/intro-note-6/
 https://github.com/applenob/rl_learn/blob/master/class_note.ipynb
-
+[3]: [强化学习]从火车过桥模型理解n-step TD Learning - 阿亮算法的文章 - 知乎
+https://zhuanlan.zhihu.com/p/295098730s

@@ -11,7 +11,7 @@
  * @Reference:https://yinyoupoet.github.io/2020/02/18/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9CDQN%E8%AF%A6%E8%A7%A3/#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0
 -->
 
-
+# Deep Q-Learning
 
 先分别介绍强化学习和Q-学习，然后再引入深度强化学习和DQN。
 
@@ -21,16 +21,8 @@
 
 上面说的可能比较抽象，举个例子，假如我们的程序是一只小狗，现在我们让它坐下（给它一个State），它如果听话（某种Policy）坐下（执行Action），那么我们就给它一个鸡腿（正激励），而如果它不听话（某种Policy）跑开了（执行另一种Action），我们就罚它一顿不许吃饭（负激励），而在它执行完这个行为后，我们可以再次对它提出要求，比如让它站起来（新的State），然后如此往复。小狗对我们给的每一个状态都要给出一个行为，而我们会在它每次给出行为后决定给它一个什么样的激励，且环境的状态在它执行完Action后可能会发生变化，然后它需要对新环境再继续根据某种策略选择执行新的动作，从而得到新的激励。而我们训练的目的，就是使得总的激励值之和最大。
 
-环境观测值/状态 State
-动作选择策略 Policy
-执行的动作/行为 Action
-得到的奖励 Reward
-下一个状态 S’
+## Q-Learning
 
-Agent是我们的程序，它观察Environment并获得state，依据它的Policy对state做出action，此时能得到一个reward，且Environment改变了，因此Agent会得到一个新的state，并继续执行下去。
-
-
-Q-Learning
 Q学习算法是强化学习中的一种，更准确的说，是一种关于策略的选择方式。实际上，我们可以发现，强化学习的核心和训练目标就是选择一个合适的策略Policy，使得在每个epoch结束时得到的reward之和最大。
 
 Q学习的思想是：Q(S, A) = 在状态S下，采取动作A后，未来将得到的奖励Reward值之和。
@@ -49,6 +41,23 @@ Deep Q Network (DQN) [MKS+15][6] is the pioneer one.
 $Q^{*}\left(s_{t}, a_{t}\right) \leftarrow Q^{*}\left(s_{t}, a_{t}\right)+\alpha\left(r\left(s_{t}, a_{t}\right)+\gamma \max _{a_{t+1}} Q^{*}\left(s_{t+1}, a_{t+1}\right)-Q^{*}\left(s_{t}, a_{t}\right)\right)$
 
 DQN属于DRL（深度强化学习）的一种，它是深度学习与Q学习的结合体。前面讲了采用S-A表格的局限性，当状态和行为的组合不可穷尽时，就无法通过查表的方式选取最优的Action了。这时候就该想到深度学习了，想通过深度学习找到最优解在很多情况下确实不太靠谱，但是找到一个无限逼近最优解的次优解，倒是没有问题的。
+
+Step 1: 用一个深度神经网络来作为Q值的网络, 参数为w:
+$$
+Q(s, a, w) \approx Q^{\pi}(s, a)
+$$
+Step 2: 在Q值中使用均方差mean-square error 来定义目标函 数objective function也就是loss function
+$$
+\left.L(w)=E[\underbrace{\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}, w\right)\right.}_{\text {Target }}-Q(s, a, w))^{2}\right]
+$$
+值, 那么偏差就能通过均方差来进行计算
+Step 3: 计算参数 $w$ 关于loss function的梯度
+这个可以直接计算得到
+$$
+\frac{\partial L(w)}{\partial w}=E\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}, w\right)-Q(s, a, w)\right) \frac{\partial Q(s, a, w)}{\partial w}\right]
+$$
+Step 4: 使用SGD实现End-to-end的优化目标
+有了上面的梯度, 而 $\frac{\partial Q(s, a, w)}{\partial w}$ 可以从深度神经网络中进行计算, 因此, 就可以使用SGD 随机梯度下降来更新参数, 从而得到最优的Q值。。。。。。
 
 因此DQN实际上，总体思路还是用的Q学习的思路，不过对于给定状态选取哪个动作所能得到的Q值，却是由一个深度神经网络来计算的了，其流程图如下：
 

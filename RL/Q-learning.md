@@ -17,6 +17,7 @@
 ## Off-Policy Learning:
 
 behaviour policy: $\mu(a \mid s),$ 已知的, 可以用来指导的策略。
+
 ## Importance Sampling for Off-Policy Monte-Carlo:
 
 重要性采样 (估计期望) :
@@ -43,6 +44,8 @@ Q-Learning是一种value-based算法，即通过判断每一步进行的价值va
 - target policy 是关于 $Q(s, a)$ 的贪妥策略, 有 $\pi\left(S_{t+1}\right)=\underset{a}{\operatorname{argmax}} Q\left(S_{t+1}, a^{\prime}\right)$
 
 $Q(S, A) \leftarrow Q(S, A)+\alpha\left(R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(S, A)\right)$
+
+即，每个状态动作价值 $Q(S, A)$ ，选择用下一步最大的状态动作价值 $Q\left(S^{\prime}, A^{*}\right)$ 来更新。这点显 示出Q-learning会倾向于将当前局面下一时刻的最优动作价值作为当前局面评估值的更新方向。 这会带来一个问题, 当这个最优状态动作价值是noise或reward是满足某个分布的随机值时，会产 生最大化偏差(Maximization Bias)。
 
 Q-learning learns the action-value function Q(s, a): how good to take an action at a particular state. For example, for the board position below, how good to move the pawn two steps forward. Literally, we assign a scalar value over the benefit of making such a move.
 Q is called the action-value function (or Q-value function in this article).[4]
@@ -257,6 +260,8 @@ for episode in range(TIMES):
 
 print(people.q_table)
 ```
+
+
 
 ```md
 [1]: https://www.zhihu.com/question/26408259

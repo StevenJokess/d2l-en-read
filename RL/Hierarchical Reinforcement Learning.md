@@ -1,16 +1,3 @@
-
-
-<!--
- * @version:
- * @Author:  StevenJokess https://github.com/StevenJokess
- * @Date: 2020-10-05 20:20:55
- * @LastEditors:  StevenJokess https://github.com/StevenJokess
- * @LastEditTime: 2020-10-05 20:21:10
- * @Description:
- * @TODO::
- * @Reference:
--->
-
 # Sparse Reward
 
 在使用Reinforcement Learning来构造agent时，多数情况下这个agent是得不到任何Reward的。这使得agent的训练变得非常困难。
@@ -42,11 +29,5 @@ ICM最原始的具体设计方式如下：有一个network以 $s_{t}$ 和 $a_{t}
 ## Hierarchical Reinforcement Learning
 
 将所有的agent分层，上层的agent将目标分解为小目标，当目标不能再被分解的时候，最底层的agent就付诸行动，采取action以实现这些小目标。当最底层的agent不能完成这些目标时，上层的agent就会受到一定的惩罚（Penalty），所以上层的agent要避免提出下层agent达不到的目标。另外，当下层的agent达成了一个错误的目标的时候，我们就将上层提出的目标直接修改为下层达成的这个目标（即不浪费下层agent训练过程中的任何成果）[1]
-
-## 数据
-
-一是，利用数据改进 agent 的学习，包括已有数据、外部数据等；二是，改进模型，提升模型在大状态、大动作空间下处理复杂问题的能力。具体的，利用数据改进 agent 学习的方法包括好奇心驱动（Curiosity Driven）、奖励重塑（Reward Shaping）、模仿学习（Imitation Learning）、课程学习（Curriculum Learning）等等。改进模型的方法主要是执行分层强化学习（Hierarchical Reinforcement Learning），使用多层次的结构分别学习不同层次的策略来提高模型解决复杂问题的能力，以及元学习（Meta-Learning）的方法。
-
-https://www.chainnews.com/articles/832740147057.htm
 
 [1]: https://blog.csdn.net/weixin_42770354/article/details/109849703

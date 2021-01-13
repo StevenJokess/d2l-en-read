@@ -12,18 +12,34 @@
  * https://weread.qq.com/web/reader/4653238071e86dd54654969kd2d32c50249d2ddea18fb39
 -->
 
+# Sequence GANs[1]
+
+Sequence GANs是一种非常有意思的GAN神经网络，利用GAN+RL的方法来实现序列数据的生成。他将序列看作强化学习的决策过程，它将生成器当作一个agent，把判别器当作critic。
+
+## 动机
+
 GAN无法直接生成文本数据，因为文本数据是离散的，
 
 而GAN在应用于离散数据时存在以下几个问题：
 
-GAN的生成器梯度来源于判别器对于正负样本的判别。然而，对于文本生成问题，RNN输出的是一个概率序列，然后取argmax。这会导致生成器Loss不可导。还可以站在另一个角度理解，由于是argmax，所以参数更新一点点并不会改变argmax的结果，这也使得GAN不适合离散数据。
-GAN只能评估整个序列的loss，但是无法评估半句话，或者是当前生成单词对后续结果好坏的影响。
+GAN的设计目的是生成连续的实数，它利用辨别模型给出的判断对生成模型做微小的工作，然而对于离散模型而言，这种微小的工作不足以使之从有限的字典空间里找到对应的生成；
+
+1. GAN的生成器梯度来源于判别器对于正负样本的判别。设计目的是生成连续的实数，它利用辨别模型给出的判断对生成模型做微小的工作，；然而，对于文本生成问题，RNN输出的是一个概率序列，然后取argmax。这会导致生成器Loss不可导。还可以站在另一个角度理解，由于是argmax，所以参数更新一点点并不会改变argmax的结果，不足以使之从有限的字典空间里找到对应的生成[5]，这也使得GAN不适合离散数据。
+2. GAN只能评估整个序列的loss，但是无法评估半句话，或者是当前生成单词对后续结果好坏的影响。
 如果不加argmax，那么由于生成器生成的都是浮点数值，而ground truth都是one-hot encoding，那么判别器只要判别生成的结果是不是0/1序列组成的就可以了。这容易导致训练崩溃。[4]
 
 我们介绍了多种方法，而SeqGAN就是利用GAN+RL的方法来实现序列数据的生成。
 
+## 整体思路
+
+我们基于序列训练判别器，它之后会被拿来和真实的序列进行比较。此外，生成器会从当前状态产生多种序， 我们对每一种序列赋上判别器的打分，然后我们基于期望的每一组状态和动作的组合的收益来学习策略。这对人们研究强化学习和时间序列模型和应用是一个很好的开端。
 
 具体的计算方式就是Policy Gradient。至此生成器对抗训练的逻辑就完成了。
+
+1. 将生成模型当作一个RL agent，将当前生成当作state，下一步生成当作action（RL基本思路）；
+1. 建立一个Discriminator，来评估序列，并反馈给生成模型（Discriminator作为reward function）；
+1. 将生成模型是做一个随机参数化的策略（应该是为了公式推导方便，这里即可使用概率分布来表达policy正如GAIL中一样）；
+1. SeqGAN中使用蒙特卡罗搜索（可能耗费较多计算资源）解决缺点2；我们使用IRL的时候对于每一个state-action对都会有一个reward，再将这些reward做γ \gammaγ discounted累加（Q Learning、Sarsa Lambda Learning的思想）即可。
 
 
 ![SeqGAN](img\SeqGAN.jpg)
@@ -110,3 +126,4 @@ GAN阶段可能并不总是导致NLL的大幅下降(有时非常小)——我怀
 [2]: https://ai.deepshare.net/detail/i_5d9c6af4a4044_tL23GmwT/1?fromH5=true
 [3]: https://github.com/suragnair/seqGAN
 [4]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
+[5]: https://www.jiqizhixin.com/articles/2018-08-11-10
