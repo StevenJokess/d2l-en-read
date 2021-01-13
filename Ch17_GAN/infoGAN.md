@@ -14,38 +14,16 @@
  * [4]: http://www.tensorinfinity.com/paper_26.html
 -->
 
-# InformationMaximizing Generative Adversarial Nets
+# Information Maximizing Generative Adversarial Nets
 
-InfoGAN的作者对损失函数进行了一些小的改进，一定程度上让网络学习到了可解释的特征表示，即作者文中所说的interpretable reptesentation。
+InfoGAN是伯克利大学和openAI联手在NIPS2016发表的论文，本质上也可以看作是一种cGAN。从出发点看，InfoGAN是基于朴素GAN改进的。它将原先生成器上输入的latent code z按维度进行分解，除了原先的噪声z以外，还分解出一个解耦表示c。InfoGAN的基本思想是，如果这个c能解释生成出来的G(z,c)，那么c应该与G(z,c)由高度的相关性。其在MNIST、3D人脸和椅子、CelebA、SVHN数据集上都取得了不错的实验效果。
 
-InfoGANs通过最大化隐变量与观测数据的互信息，来改进GAN的解释性。
+其中：
 
-InfoGAN(Mutual Information)本质上也可以看作是一种cGAN。从出发点看，InfoGAN是基于朴素GAN改进的。它将原先生成器上输入的z进行分解，除了原先的噪声z以外，还分解出一个隐含编码c。其中c除了可以表示类别以外，还可以包含多种变量。以MNIST数据集为例，还可以表示诸如光照方向，字体的倾斜角度，笔画粗细等。InfoGAN的基本思想是，如果这个c能解释生成出来的G(z,c)，那么c应该与G(z,c)由高度的相关性。在InfoGAN中，可以表示为两者的互信息，目标函数可以写作
+- c除了可以表示类别以外，还可以包含多种变量。以MNIST数据集为例，还可以表示诸如光照方向，字体的倾斜角度，笔画粗细等。
+- c仅仅包含原来z中若干个维度，每个维度可以是离散的也可以是连续的，用来表示数据中的解耦变化因子。以MNIST数据集为例，取z中3个维度作为c，1个离散，2个连续，最后习得的c，离散的维度表示不同数字，连续的维度分别表示了数字的旋转和粗细
 
-$$
-\operatorname{minmax}_{G} V_{I}(D, G)=V(D, G)-\lambda I(c ; G(z, c))
-$$
-然而在互信息I $(c ; G(z, c))$ 的优化中，真实的P $\left(\left.c\right|_{x}\right)$ 很难计算，因此作者采用了变分推断的思想, 引入了变分分布Q $(c \mid x)$ 来逼近 $\mathrm{P}(\mathrm{c} \mid \mathrm{x})$
-$$
-\begin{array}{l}
-I(c ; G(z, c))=H(c)-H(c \mid G(z, c)) \\
-=E_{x \sim G(z, c)}\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log P\left(c^{\prime} \mid x\right)\right]\right]+H(c) \\
-=E_{x \backslash G(z, c)}\left[D_{K L}(P(\cdot \mid x) \| Q(\cdot \mid x))+\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c)\right. \\
-\geq E_{x \sim G(z, c)}\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c)
-\end{array}
-$$
-如此可以定义变分下界为
-$$
-\begin{array}{l}
-L_{I}(G, Q)=E_{O V P(c), x \sim G(z, c)}[\log Q(c \mid x)]+H(c) \\
-=E_{x \sim G(z, c)}\left[E_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c) \\
-\leq I(c ; G(z, c))
-\end{array}
-$$
-这样InfoGAN的目标函数可以写作
-$$
-\operatorname{minmax}_{G, Q} \frac{D}{D} V_{I n f o G A N}(D, G, Q)=V(D, G)-\lambda L_{I}(G, Q)
-$$
+损失函数改进：通过最大化隐变量与观测数据的互信息，并提出一个可高效优化的互信息的下界，使得GAN有了可解释的特征表征（interpretable representation）。
 
 ## 互信息 (Mutual Information)[9]
 
@@ -53,6 +31,12 @@ $$
 $$
 I(X ; Y)=H(X)-H(X \mid Y)
 $$
+
+其中, $I(X ; Y)$ 是当Y被探索了, 关于X的不确定性的减少量, 根据互信息理论, 我们希望得到 $P_{G}(c \mid x)$ 有一个较小的熵，熵代表惊喜度, 较小的熵表示该事件发生可能性较大, 也就是说该概率较大，最终的InfoGAN的定义式如下:
+$$
+\min _{G} \max _{D} V_{I}(D, G)=V(D, G)-\lambda I(c ; G(z, c))
+$$
+
 要去直接优化 $I(c ; G(z, c))$ 是极其困难的, 因为这意味着我们要能够计算后验概率（posterior
 probability) $P(c \mid x),$ 但是我们可以用一个辅助分布 (auxiliary distribution) $Q(c \mid x),$ 来近似这一后验
 概率。这样我们能够给出互信息的一个下界 (lower bounding) $：$
@@ -60,11 +44,40 @@ $$
 I(c ; G(z, c)) \geqslant \mathbb{E}_{x \sim G(z, c)}\left[\mathbb{E}_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c)
 $$
 
+
+## 互信息最大化
+
+要去直接优化 $I(c ; G(z, c))$ 是极其困难的, 因为这意味着我们要能够计算后验概率（posterior
+probability) $P(c \mid x),$ 所以论文采用了变分推断的思想，定义一个辅助分布(auxiliary distribution) $Q(c \mid x)$来接近 $P(c \mid x)$
+$$
+\begin{aligned}
+I(c ; G(z, c)) &=H(c)-H(c \mid G(z, c)) \\
+&=\mathbb{E}_{x \sim G(z, c)}\left[\mathbb{E}_{c^{\prime} \sim P(c \mid x)}\left[\log P\left(c^{\prime} \mid x\right)\right]\right]+H(c) \\
+&=\mathbb{E}_{x \sim G(z, c)}[\underbrace{D_{\mathrm{KL}}(P(\cdot \mid x) \| Q(\cdot \mid x))}_{\geq 0}+\mathbb{E}_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]]+H(c) \\
+& \geq \mathbb{E}_{x \sim G(z, c)}\left[\mathbb{E}_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c)
+\end{aligned}
+$$
+论文将H(c)看做常数，并根据定理：
+Lemma 5.1 For random variables $X, Y$ and function $f(x, y)$ under suitable regularity conditions:
+$\mathbb{E}_{x \sim X, y \sim Y \mid x}[f(x, y)]=\mathbb{E}_{x \sim X, y \sim Y\left|x, x^{\prime} \sim X\right| y}\left[f\left(x^{\prime}, y\right)\right]$
+
+如此可以定义变分下界
+
+$$
+\begin{aligned}
+L_{I}(G, Q) &=E_{c \sim P(c), x \sim G(z, c)}[\log Q(c \mid x)]+H(c) \\
+&=E_{x \sim G(z, c)}\left[\mathbb{E}_{c^{\prime} \sim P(c \mid x)}\left[\log Q\left(c^{\prime} \mid x\right)\right]\right]+H(c) \\
+& \leq I(c ; G(z, c))
+\end{aligned}
+$$
+最终InfoGAN的定义式如下:
+$$
+\min _{G, Q} \max _{D} V_{\operatorname{InfoGAN}}(D, G, Q)=V(D, G)-\lambda L_{I}(G, Q)
+$$
+
 ## 解耦表示（disentangled representation）
 
-InfoGAN，是伯克利大学和openAI联手在NIPS2016发表的论文，提出了用GAN结合互信息来学习变量的解耦表示，并在MNIST、3D人脸和椅子、CelebA、SVHN数据集上都取得了不错的实验效果。
 
-InfoGAN的思想也很简单，GAN的原始噪声z可以看成是数据的一种latent code，但z本身是杂乱无章的，为实现解耦目的，将z按维度拆分成z和解耦表示c两个部分。其中新的z仍然是杂乱无章的，而latent code c仅仅包含原来z中若干个维度，每个维度可以是离散的也可以是连续的，用来表示数据中的解耦变化因子。比如作者在测试MNIST图像时，取z中3个维度作为c，1个离散，2个连续，最后习得的c，离散的维度表示不同数字，连续的维度分别表示了数字的旋转和粗细：
 
 
 
@@ -99,9 +112,8 @@ The combination of a lower bound and an upper bound means that you don't even kn
 
 潜在编码 latent code c[7]
 
-－ 原来的GAN G的输出为 G(z) 现在改为 G(z,c)
-
-－ c可以包含多种变量，根据不同的分布，比如在MNIST中，c可以一个值来表示类别，一个高斯分布的值来表示手写体的粗细
+- 原来的GAN G的输出为 G(z) 现在改为 G(z,c)
+- c可以包含多种变量，根据不同的分布，比如在MNIST中，c可以一个值来表示类别，一个高斯分布的值来表示手写体的粗细
 
 Q通过与D共享卷积层，计算花销大大减少。此外，Q是一个变分分布，在神经网络中直接最大化，Q也可以视作一个判别器，输出类别c。
 
@@ -118,3 +130,4 @@ InfoGAN的重要意义在于，它通过从噪声z中拆分出结构化的隐含
 [7]: https://blog.csdn.net/Layumi1993/article/details/52474554
 [8]: http://www.tensorinfinity.com/paper_26.html
 [9]: https://www.jiqizhixin.com/articles/2020-09-04-15
+[10]: https://blog.csdn.net/qq_31239495/article/details/82862660

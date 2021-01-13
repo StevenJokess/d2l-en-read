@@ -14,6 +14,8 @@
 
 A3C算法，是 DeepMind 基于 Advantage Actor-Critic 算法提出来的异步版本 [8]，将 Actor-Critic 网络部署在多个线程中 同时进行训练，并通过全局网络来同步参数。这种异步训练的模式大大提升了训练效率， 训练速度更快，并且算法性能也更好。 如图 14.22 所示，算法会新建一个全局网络 Global Network 和 M 个 Worker 线程， Global Network 包含了 Actor 和 Critic 网络，每个线程均新建一个交互环境和 Actor 和 Critic 网络。初始化阶段 Global Network 随机初始化参数𝜃 和𝜙 ，Worker 中的 Actor-Critic 网络从 Global Network 中同步拉取参数来初始化网络。在训练时，Worker 中的 Actor-Critic 网络首先从 Global Network 拉取最新参数，然后在最新策略𝜋𝜃(𝑎𝑡|𝑠𝑡)才采样动作与私有环 境进行交互，并根据 Advantage Actor-Critic 算法方法计算参数𝜃 和𝜙的梯度信息。完成梯 度计算后，各个 Worker 将梯度信息提交到 Global Network 中，利用 Global Network 的优化 器完成 Global Network 的网络参数更新。在算法测试阶段，只使用 Global Network 与环境 交互即可。
 
+A3C具体操作由一个Global Network和若干个Worker来完成。每个Worker循环执行以下过程：将Global Network当中的参数copy过来，然后各自sample data，计算梯度，再将计算得到的梯度传回Global Network以更新参数。（对于某一个Worker来说，当它把梯度传回Global Network时，其参数可能已经被其他的Worker更新过，这个不需要关心，我们直接在当前的参数基础上更新就好）[2]
+
 ## 伪代码
 
 
@@ -44,3 +46,4 @@ play discrete action CartPole and continuous action Pendulum games.[1]
 
 [1]: https://github.com/MorvanZhou/pytorch-A3C
 https://github.com/ikostrikov/pytorch-a3c
+[2]: https://blog.csdn.net/weixin_42770354/article/details/109821800#Pathwise_Derivative_Policy_Gradient_43
