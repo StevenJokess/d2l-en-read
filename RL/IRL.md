@@ -19,20 +19,7 @@ $$
 
 学回报函数：自动驾驶中“撞到人”、“撞到车”、“绕开交通拥堵路段”等在人工设置的收益函数里面也很难刻画。特点是，相对手工来做一个收益函数，由人来介绍怎么做会比较容易。[3]即很多时候我们拿不到最优策略，但是获取最优策略的采样数据却是非常容易的。
 
-### VS 监督学习：模仿学习
 
-监督学习：模仿学习（行为克隆 Behavior Cloning），也就是直接模仿专家的行为而不需要理解其中原因。这也是实践中的一个备选项，在有些时候也能满足要求，尤其是观测数据很多，且域漂移 (domain shift) 比较小的情况；我们得到不是一个可以引导出最优策略的reward function，而是一条固定的策略。
-
-问题：
-
-1. 方法简单并且只能在数据量很大的时候比较有用，因为会由于covariate shift问题产生的compounding error，即只会学习单步的决策，累计将会导致很大的偏离。
-2. 机器可能无法完整地学习下来所有信息，可能在有矛盾有噪声时，会选择学习错误的信息。[5]
-3. 同时，在Supervised Learning中，我们希望训练集和测试集的数据是同分布的。而在Behavior Cloning中，我们的数据为expert完成任务的过程, 假设其策略为$\hat{\pi}$，对expert做cloning的actor策略设 为 $\pi^{*}$,只要 $\hat{\pi}$ 和 $\pi^{*}$ 有微小的差距，最后就会导致训练和测试的状态集相差巨大，而凭借现有的学习方法又不可能使得machine和expert的策略完全相同。[6]
-
-因为在逆增强学习问题中，我们要尝试去改进收益函数，然而去评估收益函数的时候，我们要求解类似梯度的东西，这其实是正增强学习问题要做的事情，因此有点类似于正增强学习是逆增强学习内循环中的子问题，在样本使用和计算上都很困难。
-
-我们不想学一个从状态到行为的mapping，而是想学到那个知道专家做出那些决策的reward function。
-回报函数大概得有什么效果和“令人满意”的最优策略长什么样的专家（may have only a very rough idea of the reward function whose optimization would generate "desirable" behavior）
 
 ### 多任务学习
 
@@ -64,6 +51,32 @@ MOOP发展了这么多年，其关注点更多的是对一个决策行为的规�
 进而，最优值函数 $V^{*}(s)=s u p_{\pi} V^{\pi}(s)$
 且, 最优质量函数 $Q^{*}(s, a)=\sup _{\pi} Q^{\pi}(s, a)$
 对于有限离散状态空间 $S=\left\{s_{1}, s_{2}, \ldots, s_{n}\right\}, \quad R, V^{\pi}, P_{a}$ 都可以用向量来表示，依次变成n维向 量、n维向量和n $\times$ n矩阵。最后，我们用 $\preceq$ 和 $\prec$ 来表示严格和非严格向量不等式, 比如, $x \prec y$ 成立意味着 $\forall i, x_{i}<y_{i}$ 。
+
+## 对比
+
+### VS 监督学习：模仿学习
+
+监督学习：模仿学习（行为克隆 Behavior Cloning），也就是直接模仿专家的行为而不需要理解其中原因。这也是实践中的一个备选项，在有些时候也能满足要求，尤其是观测数据很多，且域漂移 (domain shift) 比较小的情况；我们得到不是一个可以引导出最优策略的reward function，而是一条固定的策略。
+
+问题：
+
+1. 方法简单并且只能在数据量很大的时候比较有用，因为会由于covariate shift问题产生的compounding error，即只会学习单步的决策，累计将会导致很大的偏离。
+2. 机器可能无法完整地学习下来所有信息，可能在有矛盾有噪声时，会选择学习错误的信息。[5]
+3. 同时，在Supervised Learning中，我们希望训练集和测试集的数据是同分布的。而在Behavior Cloning中，我们的数据为expert完成任务的过程, 假设其策略为$\hat{\pi}$，对expert做cloning的actor策略设 为 $\pi^{*}$,只要 $\hat{\pi}$ 和 $\pi^{*}$ 有微小的差距，最后就会导致训练和测试的状态集相差巨大，而凭借现有的学习方法又不可能使得machine和expert的策略完全相同。[6]
+
+### VS 学徒学习 Apprenticeship learning
+
+$\min _{\pi} \max _{c \in C} E_{\pi}[c(s, a)]-E_{\pi_{E}}[c(s, a)]$
+
+学徒学习的过程与Inverse RL十分类似，只是它的目标为一个专家policy而不是inverse RL中的cost function。此处有细微的不同：
+如果得到的是一个专家的policy，那这个policy很难generalize，非常取决于expert demonstration的数据量以及质量，难以获得超越expert的性能。
+但如果是得到一个表示专家intent的reward signal/cost function，将其作为信号，利用RL进行学习的话，会得到一定的灵活性，能获得超越expert的性能，但计算开销比较大。
+
+因为在逆增强学习问题中，我们要尝试去改进收益函数，然而去评估收益函数的时候，我们要求解类似梯度的东西，这其实是正增强学习问题要做的事情，因此有点类似于正增强学习是逆增强学习内循环中的子问题，在样本使用和计算上都很困难。
+
+我们不想学一个从状态到行为的mapping，而是想学到那个知道专家做出那些决策的reward function。
+回报函数大概得有什么效果和“令人满意”的最优策略长什么样的专家（may have only a very rough idea of the reward function whose optimization would generate "desirable" behavior）
+
 
 
 ## 最大熵逆增强学习 (Max Entropy IRL)

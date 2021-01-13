@@ -13,6 +13,44 @@
 
 # Variational Autoencoders (VAEs)
 
+Representation 建模 假设了真实分布有隐变量 $Z$ 的影响，我们有 $p_{data}(x),$ 那每个样本的生成过程如下：
+$$
+\begin{aligned}
+P_{\theta}(X, Z) &=P(Z) P(X \mid Z) \\
+z & \sim P(Z) \\
+x & \sim P(X \mid Z)
+\end{aligned}
+$$
+
+## Objective Function
+
+$$
+\begin{array}{l}
+\min _{\theta} K L\left(p_{\text {data }}(x) \| p_{\theta}(x)\right) \\
+=\max _{\theta} E_{x \sim p_{\text {data }}\left[\log p_{\theta}(x)\right]} \\
+=\max _{\theta} E_{x \sim p_{\text {data }}\left[\log \int p_{\theta}(x, z) d z\right]} \\
+=\max _{\theta} E_{x \sim p_{\text {data }}\left[\log \int \frac{q_{\lambda}(z)}{q_{\lambda}(z)} p_{\theta}(x, z) d z\right]} \\
+\geq \max _{\theta} E_{x \sim p_{\text {data }}\left[E_{q_{\lambda}(z)} \log \frac{p_{\theta}(x, z)}{q_{\lambda}(z)}\right]} \\
+\approx \max _{\theta} \frac{1}{|D|} \sum_{x \in D}\left[E_{q_{\lambda}(z)} \log \frac{p_{\theta}(x, z)}{q_{\lambda}(z)}\right] \\
+=\max _{\theta} \sum_{x \in D} \max _{\lambda} E_{q_{\lambda}(z)} \log \frac{p_{\theta}(x, z)}{q_{\lambda}(z)} \\
+=\max _{\theta} \sum_{x \in D} \max _{\lambda} E L B O(x ; \theta, \lambda)
+\end{array}
+$$
+## Optimization Procedure[16]
+
+Variational Inference的方式进行参数更新:
+$$
+\begin{aligned}
+\lambda^{(i)} & \leftarrow \lambda^{(i)}+\alpha \nabla_{\lambda} E L B O(x ; \theta, \lambda) \\
+\theta^{(i)} & \leftarrow \theta^{(i)}+\alpha \nabla_{\theta} E L B O(x ; \theta, \lambda)
+\end{aligned}
+$$
+
+解释一下：
+- (1) 固定 $\theta$, 更新 $\lambda,$ 以一种approximate的方式去计算$\operatorname{logp } _ { \theta } ( x )$
+- (2)根据(1), 得到mini-batch中的logp $_{\theta}(x)$ 后，去更新模型参数 $\theta,$ 将 $p_{\theta}$ 拉近 $p_{\text {data }}$
+其中涉及的Gradient Estimation, 使用到的REINFORCE和reparameteriazation的trick, 以及最后的 Amortized Inference的详情参见[17]
+
 ## Expectation-Maximization (EM)
 
 A straightforward way to approach VAE is through the construction of the well-known Expectation-Maximization (EM) algorithm. Please refer to this tutorial or this blog as a refresher on EM. Just to quicly recap a few key elements in EM: insteand of optimizing the log-liklihood ($\ell(\theta)$) directly with observable data $x$, latent variable $z$, EM constructs and optimize on a lower bound $\mathcal{L}(q,\theta)$ often referred to as Evidence Lower Bond (EBLO). The following equation derives from Jensen's inequality and holds for any $q(z)$ as long as it is a valid probability distribution.
@@ -207,3 +245,5 @@ TODO:
 https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter13_unsupervised-learning/vae-gluon.ipynb
 [14]: https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/03-advanced/variational_autoencoder/main.py#L38-L65
 [15]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
+[16]: https://blog.csdn.net/weixin_40056577/article/details/104538378
+[17]: https://blog.csdn.net/weixin_40056577
