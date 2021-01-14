@@ -80,12 +80,28 @@ Reinforcement learning:
 强化学习优化问题(the RL optimization problem)
 值函数(value functions)
 
-机性策略
+### 策略
+
 深度强化学习中最常见的两种随机策略是 绝对策略 (Categorical Policies) 和 对角高斯策略 (Diagonal Gaussian Policies)。
 
-策略 智能体的策略（Policy）就是智能体如何根据环境状态𝑠来决定下一步的 动作𝑎，通常可以分为确定性策略（Deterministic Policy）和随机性策略（StochasticPolicy）两种[2]
+策略 智能体的策略（Policy）就是智能体如何根据环境状态𝑠来决定下一步的 动作𝑎，即从状态空间到行为空间的一个映射 $\pi: S \rightarrow A$；通常可以分为确定性策略（Deterministic Policy）和随机性策略（StochasticPolicy）两种[2]
 
-贝尔曼方程
+而对于一个给定的策略，其值函数 (Value function) 为:
+
+- $V^{\pi}\left(s_{1}\right)=E\left[R\left(s_{1}\right)+\gamma R\left(s_{2}\right)+\gamma^{2} R\left(s_{3}\right)+\cdots \mid \pi\right]$
+
+其中，所有状态服从某个状态序列 $\left(s_{1}, s_{2}, s_{3}, \ldots\right)$ 。这个序列是我们使用该策略进行决策时, 从 s1开始走过的状态路径。
+另外, 也给出质量函数（Quality function） 的定义：
+
+- $Q^{\pi}(s, a)=R(s)+\gamma E_{s^{\prime} \sim P_{s a}(\cdot)}\left[V^{\pi}\left(s^{\prime}\right)\right]$
+
+其中, $\quad s^{\prime} \sim P_{s a}(\cdot)$ 的意思是下一个状态s'服从分布 $P_{s a}(\cdot)$ 。
+进而，最优值函数 $V^{*}(s)=s u p_{\pi} V^{\pi}(s)$
+且, 最优质量函数 $Q^{*}(s, a)=\sup _{\pi} Q^{\pi}(s, a)$
+
+对于有限离散状态空间 $S=\left\{s_{1}, s_{2}, \ldots, s_{n}\right\}, \quad R, V^{\pi}, P_{a}$ 都可以用向量来表示，依次变成n维向 量、n维向量和n $\times$ n矩阵。最后，我们用 $\preceq$ 和 $\prec$ 来表示严格和非严格向量不等式, 比如, $x \prec y$ 成立意味着 $\forall i, x_{i}<y_{i}$ 。
+
+### 贝尔曼方程
 
 𝑉𝜋(𝑠) = 𝔼𝜏0∶𝑇∼𝑝(𝜏)[𝑟1+ 𝛾𝑇−1∑𝑡=1𝛾𝑡−1𝑟𝑡+1|𝜏𝑠0= 𝑠](14.15)
 = 𝔼𝑎∼𝜋(𝑎|𝑠)𝔼𝑠′∼𝑝(𝑠′|𝑠,𝑎)𝔼𝜏1∶𝑇∼𝑝(𝜏)[𝑟(𝑠,𝑎,𝑠′) + 𝛾𝑇−1∑𝑡=1𝛾𝑡−1𝑟𝑡+1|𝜏𝑠1= 𝑠′](14.16)
@@ -156,6 +172,14 @@ T=t+k+1表示最后的时间步，也就意味着在时刻智能体同环境的�
 | 输入 | 独立同分布       | 独立同分布     | 输入总是在变化，每当算法做出一个行为，它影响下一次决策的输入。 |
 | 输出 | 输入对应输出     | 自学习映射关系 | reward function，即结果用来判断这个行为是好是坏；有试错机制：Trial-and-error，即存在exploration和exploitation的平衡 (不一定按照已知的最优做法去做)             |
 
+强化学习算法是在不确定环境中，通过与环境的不断交互，来不断优化自身策略的算法。它和监督学习、非监督学习有着一些本质上的区别：[11]
+
+获取的数据非独立同分布：大部分机器学习算法假设数据是独立同分布的，否则会有收敛性问题；然而智能体与环境进行交互产生的数据具有很强的时间相关性，无法在数据层面做到完全的解耦，不满足数据的独立同分布性质，因此强化学习算法训练并不稳定；智能体的行为同时会影响后续的数据分布；
+
+没有“正确”的行为，且无法立刻获得反馈：监督学习有专门的样本标签，而强化学习并没有类似的强监督信号，通常只有基于奖励函数的单一信号；强化学习场景存在延迟奖励的问题，智能体不能在单个样本中立即获得反馈，需要不断试错，还需要平衡短期奖励与长期奖励的权重；
+
+具有超人类的上限：传统的机器学习算法依赖人工标注好的数据，从中训练好的模型的性能上限是产生数据的模型（人类）的上限；而强化学习可以从零开始和环境进行不断地交互，可以不受人类先验知识的桎梏，从而能够在一些任务中获得超越人类的表现。
+
 ## 探索和利用（Exploration and Exploitation）[6]
 
 Agent采取的Action会影响到它接下来看到的Observation。所以agent既要探索，又要利用。
@@ -213,6 +237,27 @@ $$
 • Not clear what the reward function should be
 • Not clear what the role of prediction should be
 
+## RL监督信息的来源
+
+- 模仿的学习方式（imitation learning）
+  - 从专家示教中学习（Learning from demonstration）
+    - 通过SL来克隆label过的专家行为（behavior cloning）
+    - 通过IRL从demonstration中推断专家行为背后的reward function（IRL）
+- 观察环境的学习方式 (Learning from observing the world)
+  - 从环境中无意识地获取数据中的结构信息
+    - 无监督学习发掘环境中的结构信息(Unsupervised Learning)
+    - 根据结构信息对环境的动态变化进行某种预测（Learning to predict)
+- 借鉴经验的学习方式 (Learning from other tasks)
+  - 迁移其它任务的经验到本任务中来 (transfer learning)
+  - 从其它任务的经验中习得学习方法，再利用该学习方法对本任务进行学习 (meta learning = learning to learn)
+
+## RL面临的一些挑战[10]
+
+人学习的速度很快，无论是模仿还是借鉴，但deep RL却很慢？
+借鉴的学习方式在deep RL中是一个open problem，经验该如何借鉴才能学起来更快速有效呢？
+每个人的行为action动机背后的奖赏函数都不太一样，所以很明显reward function是可变的，那该如何表示单任务或多任务中的reward function呢？
+观察环境，根据环境的结构信息进行某种预测（prediction），从而辅助决策，那prediction究竟是什么？如何表示？作用显著吗？
+
 ![主流的分类](img/fenlei.jpg)
 [2]: https://weread.qq.com/web/reader/62332d007190b92f62371aek92c3210025c92cc22753209
 [3]: https://easyai.tech/ai-definition/reinforcement-learning/
@@ -222,3 +267,5 @@ $$
 [7]: https://rl.qiwihui.com/zh_CN/latest/chapter1/introduction.html#id4
 [8]: https://github.com/applenob/rl_learn/blob/master/class_note.ipynb
 [9]: https://www.cnblogs.com/pinard/p/9385570.html
+[10]: https://blog.csdn.net/weixin_40056577/article/details/104109073
+[11]: https://tianshou.readthedocs.io/zh/latest/docs/2-impl.html#id31

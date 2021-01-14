@@ -13,7 +13,9 @@
 
 # Variational Autoencoders (VAEs)
 
-Representation 建模 假设了真实分布有隐变量 $Z$ 的影响，我们有 $p_{data}(x),$ 那每个样本的生成过程如下：
+Representation 建模
+
+假设了真实分布有隐变量 $Z$ 的影响，我们有 $p_{data}(x),$ 那每个样本的生成过程如下：
 $$
 \begin{aligned}
 P_{\theta}(X, Z) &=P(Z) P(X \mid Z) \\

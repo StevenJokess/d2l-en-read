@@ -22,6 +22,7 @@ InfoGAN是伯克利大学和openAI联手在NIPS2016发表的论文，本质上�
 
 - c除了可以表示类别以外，还可以包含多种变量。以MNIST数据集为例，还可以表示诸如光照方向，字体的倾斜角度，笔画粗细等。
 - c仅仅包含原来z中若干个维度，每个维度可以是离散的也可以是连续的，用来表示数据中的解耦变化因子。以MNIST数据集为例，取z中3个维度作为c，1个离散，2个连续，最后习得的c，离散的维度表示不同数字，连续的维度分别表示了数字的旋转和粗细
+- c中渐变一个维度的数值，生成的人脸图谱从“抬头姿态”到“低头姿态”渐变[11]
 
 损失函数改进：通过最大化隐变量与观测数据的互信息，并提出一个可高效优化的互信息的下界，使得GAN有了可解释的特征表征（interpretable representation）。
 
@@ -131,3 +132,4 @@ InfoGAN的重要意义在于，它通过从噪声z中拆分出结构化的隐含
 [8]: http://www.tensorinfinity.com/paper_26.html
 [9]: https://www.jiqizhixin.com/articles/2020-09-04-15
 [10]: https://blog.csdn.net/qq_31239495/article/details/82862660
+[11]: https://github.com/WarBean/Unsupervised-Learning-Research

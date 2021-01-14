@@ -14,6 +14,8 @@
 
 # Q-learning
 
+跟 policy gradient based 方法比起来，Q-learning 是比较稳的。policy gradient 是没有太多游戏是玩得起来的，policy gradient 比较不稳，尤其在没有 PPO 之前，你很难用 policy gradient 做什么事情。Q-learning 相对而言是比较稳的。最早 DeepMind 的 paper 拿 deep reinforcement learning 来玩 Atari 的游戏，用的就是 Q-learning。Q-learning 比较容易 train 的一个理由是：在 Q-learning 里面，你只要能够 estimate 出 Q-function，就保证你一定可以找到一个比较好的 policy。也就是你只要能够 estimate 出 Q-function，就保证你可以 improve 你的 policy。而 estimate Q-function 这件事情，是比较容易的，因为它就是一个 regression problem。在这个 regression problem 里面， 你可以轻易地知道 model learn 得是不是越来越好，只要看那个 regression 的 loss 有没有下降，你就知道说你的 model learn 得好不好，所以 estimate Q-function 相较于 learn 一个 policy 是比较容易的。你只要 estimate Q-function，就可以保证说现在一定会得到比较好的 policy。所以一般而言 Q-learning 比较容易操作。[12]
+
 ## Off-Policy Learning:
 
 behaviour policy: $\mu(a \mid s),$ 已知的, 可以用来指导的策略。
@@ -261,7 +263,17 @@ for episode in range(TIMES):
 print(people.q_table)
 ```
 
+## 问题
 
+最大的问题是它不太容易处理 continuous action。很多时候 action 是 continuous 的。什么时候你的 action 会是 continuous 的呢？我们玩 Atari 的游戏，你的 agent 只需要决定比如说上下左右，这种 action 是 discrete 的。那很多时候你的 action 是 continuous 的。举例来说假设你的 agent 要做的事情是开自驾车，它要决定说它方向盘要左转几度， 右转几度，这是 continuous 的。假设 agent 是一个机器人，它身上有 50 个 关节，它的每一个 action 就对应到它身上的这 50 个关节的角度。而那些角度也是 continuous 的。所以很多时候 action 并不是一个 discrete 的东西，它是一个 vector。在这个 vector 里面，它的每一个 dimension 都有一个对应的 value，都是 real number，它是 continuous 的。假设 action 是 continuous 的，做 Q-learning 就会有困难。因为在做 Q-learning 里面一个很重要的一步是你要能够解这个 optimization problem。你 estimate 出 Q-function Q(s,a)Q(s,a) 以后，必须要找到一个 a，它可以让 Q(s,a)Q(s,a) 最大。假设 a 是 discrete 的，那 a 的可能性都是有限的。举例来说，Atari 的小游戏里面，a 就是上下左右跟开火，它是有限的，你可以把每一个可能的 action 都带到 Q 里面算它的 Q value。但假如 a 是 continuous 的，你无法穷举所有可能的 continuous action，试试看哪一个 continuous action 可以让 Q 的 value 最大。
+
+### 1st solution
+
+假设你不知道怎么解这个问题，因为 a 是没有办法穷举的。怎么办？用 sample 的。Sample 出 N 个 可能的 a，一个一个带到 Q-function 里面，看谁最快。这个方法其实也不会太不 efficient， 因为你真的在运算的时候，你会用 GPU，一次会把 N 个 continuous action 都丢到 Q-function 里面，一次得到 N 个 Q value，然后看谁最大。当然这不是一个非常精确的做法，因为你没有办法做太多的 sample， 所以你 estimate 出来的 Q value，你最后决定的 action 可能不是非常的精确。
+
+### 2nd solution
+
+既然要解的是一个 optimization problem，其实是要 maximize objective function，要 maximize 一个东西， 就可以用 gradient ascent。你就把 a 当作是 parameter，然后你要找一组 a 去 maximize 你的 Q-function，你就用 gradient ascent 去 update a 的 value，最后看看你能不能找到一个 a 去 maximize 你的 Q-function，也就是你的 objective function。当然这样子你会遇到 global maximum 的问题， 就不见得能够真的找到 optimal 的结果，而且这个运算量显然很大， 因为你要迭代地 update a。我们 train 一个 network 就很花时间了。如果你用 gradient ascent 的方法来处理 continuous 的 problem， 等于是你每次要决定 take 哪一个 action 的时候，你都还要做一次 train network 的 process，显然运算量是很大的。[12]
 
 ```md
 [1]: https://www.zhihu.com/question/26408259
@@ -275,6 +287,8 @@ print(people.q_table)
 [9]: https://github.com/0aqz0/path-planning-with-qlearning/blob/master/RL_brain.py
 [10]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
 [11]: https://blog.csdn.net/weixin_44791964/article/details/95410737
+[12]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter8/chapter8
+
 TODO: https://github.com/iArunava/Q-Learning/blob/master/Q-Learning%20with%20PyTorch.ipynb
 ```
 

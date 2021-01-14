@@ -13,6 +13,8 @@
 
 ## Actor-Critic Methods
 
+ policy-based 的方法 PPO 和 value-based 的方法 Q-learning，这两者其实是可以结合在一起的， 也就是 Actor-Critic 的方法。[6]
+
 变化所驱动的字习规则。虽然1孛习的阜則研允受到了Kopf和动物学习理论的强烈影响,但是,1981年,人们开发了一种在试错学习过程中使用TD学习的方法,称为ator- critic架构,也有人叫作行动者-评论者架构,其中aCtor是行动者,负责动作的选择和执行, critic是评判者负责评价 actor所选动作的好坏。[4]
 
 对于DRL来说,目前的算法都可以包含在 actor-critic框架下。 actor- critic)属于TD学习方法,其用独立的内存结构来明确地表示独立于值函数的策略。策略结构被称为actor,因为它用于选择动作;而估计值函数被称为 critic,因为它评价 actor所做的动作。
@@ -148,3 +150,4 @@ self.exp_v = tf.reduce_mean(neg_log_prob * self.td_error)
 [3]: https://github.com/udacity/deep-reinforcement-learning/blob/master/finance/model.py
 [4]: https://www.hzmedia.com.cn/w/reader.aspx?id=378872d4-69a3-4208-958a-4bc3c48e0287_1
 [5]: https://blog.csdn.net/weixin_44791964/article/details/99698318
+[6]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter8/chapter8

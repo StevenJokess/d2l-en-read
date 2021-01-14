@@ -62,6 +62,11 @@ $P_{n}=\frac{\sum_{n-g r a m \in \hat{y}} \operatorname{count}_{c l i p}(n-\oper
 
 GAN应用于 Sequence面临着两个问题:问题1,GAN的设计初衷是用来能够生成连续的真实数据,但文本序列是非连续的。因为在GAN中, Generator是通过随机抽样作为开始,然后根据模型的参数进行确定性的转化。通过 generativemodel g的输岀, discriminative model d算得损失值,根据得到的损失梯度去指导 generative model G做轻微改变,从而使G产生更加真实的数据。如果生成的数据是非连续的序列,那么这种来自D的“ slight change”指导将变得几乎没有意义。因为在有限的 Dictionary中,这种 slight change没有相应的 token问题2,GAN只能评估出整个生成序列的 score/loss,不能够细化到去评估当前生成 token的好坏和对后面生成的影响。
 
+
+在讲 Sequence GAN 的时候，我们有讲过 Sentence Generation 跟 Chat-bot。那其实 Sentence Generation 或 Chat-bot 也可以想成是 imitation learning。机器在 imitate 人写的句子，你在写句子的时候，你写下去的每一个 word 都想成是一个 action，所有的 word 合起来就是一个 episode。举例来说， sentence generation 里面，你会给机器看很多人类写的文字。你要让机器学会写诗，那你就要给它看唐诗三百首。人类写的文字其实就是 expert 的 demonstration。每一个词汇其实就是一个 action。你让机器做 Sentence Generation 的时候，其实就是在 imitate expert 的 trajectory。Chat-bot 也是一样，在 Chat-bot 里面你会收集到很多人互动对话的纪录，那些就是 expert 的 demonstration。
+
+如果我们单纯用 maximum likelihood 这个技术来 maximize 会得到 likelihood，这个其实就是 behavior cloning。我们做 behavior cloning 就是看到一个 state，接下来预测我们会得到什么样的 action。看到一个 state，然后有一个 ground truth 告诉机器说什么样的 action 是最好的。在做 likelihood 的时候也是一样，given sentence 已经产生的部分。接下来 machine 要 predict 说接下来要写哪一个word 才是最好的。所以，其实 maximum likelihood 在做 sequence generation 的时候，它对应到 imitation learning 里面就是 behavior cloning。只有 maximum likelihood 是不够的，我们想要用 Sequence GAN。其实 Sequence GAN 就是对应到 Inverse Reinforcement Learning，Inverse Reinforcement Learning 就是一种 GAN 的技术。你把 Inverse Reinforcement Learning 的技术放在 sentence generation，放到 Chat-bot 里面，其实就是 Sequence GAN 跟它的种种的变形。[6]
+
 ## 模型
 
 将序列产生问题看做是序列决策问题。生成器被认为是RL当中的 agent;状态是目前已经产生的 tokens,动作是下一步需要生的 token。为了给出奖励,用discriminator来评价 sequence,并且反馈评价来引导 generative model的学习为了解决当输出是离散的,梯度无法回传给generative mode的情况,将generative model看做是 stochasticparameterized policy。采用MC搜索来近似 the state- action value。直接用policy gradient来训练 policy,很自然的就避免了传统GAN中,离散数据的微分困难问题。
@@ -127,3 +132,4 @@ GAN阶段可能并不总是导致NLL的大幅下降(有时非常小)——我怀
 [3]: https://github.com/suragnair/seqGAN
 [4]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
 [5]: https://www.jiqizhixin.com/articles/2018-08-11-10
+[6]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter11/chapter11?id=recap-sentence-generation-amp-chat-bot

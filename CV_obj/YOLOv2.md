@@ -126,3 +126,4 @@ https://zhuanlan.zhihu.com/p/47575929
 https://zhuanlan.zhihu.com/p/35325884
 [4]: https://blog.csdn.net/qq_36229876/article/details/105674765?utm_source=app
 https://github.com/zhreshold/mxnet-yolo
+[6]: https://github.com/lywen52/pytorch-yolo2

@@ -15,11 +15,9 @@ $$
 
 ### 背景
 
-多任务学习：开车不仅仅要考虑最短路径，还要考虑交通状况、红绿灯多寡、甚至路上的风景等等，那么这么多个目标同时在其考虑范围之内，每个目标在完成这个路径的过程中的重要性应该如何权衡？
+多任务学习：开车不仅仅要考虑最短路径，还要考虑交通状况、红绿灯多寡、甚至路上的风景等等，那么这么多个目标同时在其考虑范围之内，每个目标在完成这个路径的过程中的重要性应该如何权衡？ 有人用这个技术来学开自动驾驶汽车的不同风格。每个人在开车的时候会有不同风格，举例来说，能不能够压到线，能不能够倒退，要不要遵守交通规则等等。每个人的风格是不同的，然后用 Inverse Reinforcement Learning 可以让自动驾驶汽车学会各种不同的开车风格。[7]
 
 学回报函数：自动驾驶中“撞到人”、“撞到车”、“绕开交通拥堵路段”等在人工设置的收益函数里面也很难刻画。特点是，相对手工来做一个收益函数，由人来介绍怎么做会比较容易。[3]即很多时候我们拿不到最优策略，但是获取最优策略的采样数据却是非常容易的。
-
-
 
 ### 多任务学习
 
@@ -36,21 +34,40 @@ MOOP发展了这么多年，其关注点更多的是对一个决策行为的规�
 
 有了这个假设的价值函数，我们就可以直接套用TRPO的RL算法了。但是这个价值函数不能随便假设，这就回到了我们题目说的GAN+增强学习，没错，用GAN的判别器去判断两个“智能体”（agent）的行为是不是底层逻辑属于同一个价值函数
 
-![](img\feilei.png)
+![](img/fenlei.png)
 
-一个策略是从状态空间到行为空间的一个映射 $\pi: S \rightarrow A$ ，而对于一个给定的策略，其值函数 (Value function) 为:
+## 后续
 
-- $V^{\pi}\left(s_{1}\right)=E\left[R\left(s_{1}\right)+\gamma R\left(s_{2}\right)+\gamma^{2} R\left(s_{3}\right)+\cdots \mid \pi\right]$
-
-其中，所有状态服从某个状态序列 $\left(s_{1}, s_{2}, s_{3}, \ldots\right)$ 。这个序列是我们使用该策略进行决策时, 从 s1开始走过的状态路径。
-另外, 也给出质量函数（Quality function） 的定义：
-
-- $Q^{\pi}(s, a)=R(s)+\gamma E_{s^{\prime} \sim P_{s a}(\cdot)}\left[V^{\pi}\left(s^{\prime}\right)\right]$
-
-其中, $\quad s^{\prime} \sim P_{s a}(\cdot)$ 的意思是下一个状态s'服从分布 $P_{s a}(\cdot)$ 。
-进而，最优值函数 $V^{*}(s)=s u p_{\pi} V^{\pi}(s)$
-且, 最优质量函数 $Q^{*}(s, a)=\sup _{\pi} Q^{\pi}(s, a)$
-对于有限离散状态空间 $S=\left\{s_{1}, s_{2}, \ldots, s_{n}\right\}, \quad R, V^{\pi}, P_{a}$ 都可以用向量来表示，依次变成n维向 量、n维向量和n $\times$ n矩阵。最后，我们用 $\preceq$ 和 $\prec$ 来表示严格和非严格向量不等式, 比如, $x \prec y$ 成立意味着 $\forall i, x_{i}<y_{i}$ 。
+对IRL复原出来的cost function丟进RL中得到一个expert policy, 有
+$$
+R L \circ I R L_{\psi}\left(\pi_{E}\right)=\underset{\pi \in \Pi}{\arg \min } \psi^{*}\left(p_{\pi}-p_{\pi_{E}}\right)-H(\pi)
+$$
+说明这个过程得到的policy本质上是在使与专家policy的occupancy measure最小的policy。如果 使 $\psi$ 为scalar, 则 $R L \circ I R L_{\psi}\left(\pi_{E}\right)=\underset{\pi \in \Pi}{\arg \min }\left(p_{\pi}-p_{\pi_{E}}\right)-H(\pi),$ 所以选择的策略 $\pi,$ 使
+其与专家policy的occupancy measure即 $p_{\pi_{E}}$ 最小。
+如果 $\psi$ 是一个constant function, $\tilde{c} \in I R L_{\psi}\left(\pi_{E}\right), \tilde{\pi} \in R L(\tilde{c}),$ 则有 $p_{\tilde{\pi}}=p_{\pi_{E}}$ 。
+总结：整个过程其实就是在说明, $R L \circ I R L$ 这个过程得到的policy, 就是在拟合专家数据中的
+occupancy measure 因此问题变为：
+$$
+\min _{\pi} d_{\psi}\left(p_{\pi}, p_{E}\right)-H(\pi)
+$$
+选择一个策略 $\pi$ 使得其Occupancy Measure与专家数据的Occupancy Measure尽可能接近, 加一个 entropy term, 希望policy在training过程中尽可能地探索。
+所以选择 $d_{\psi}$ 的不同形式, 就可以导出不同的imitation learning的algorithms, 其中 $d_{\psi}$ 选择为下面的公 式
+$$
+\psi_{\mathrm{GA}}(c) \triangleq\left\{\begin{array}{ll}
+\mathbb{E}_{\pi_{E}}[g(c(s, a))] & \text { if } c<0 \\
++\infty & \text { otherwise }
+\end{array}\right. \text { where } g(x)=\left\{\begin{array}{ll}
+-x-\log \left(1-e^{x}\right) & \text { if } x<0 \\
++\infty & \text { otherwise }
+\end{array}\right.
+$$
+则有：
+$$
+\begin{aligned}
+\min _{\pi} \psi_{G A}^{*}\left(p_{\pi}-p_{\pi_{E}}\right) &=\min _{\pi} \max _{D \in(0,1)^{S \times A}} E_{\pi}[\log D(s, a)]+E_{\pi_{E}}[\log (1-D(s, a))] \\
+&=\min _{\pi} D_{J S}\left(p_{\pi}, p_{\pi_{E}}\right)
+\end{aligned}
+$$
 
 ## 对比
 
@@ -271,6 +288,8 @@ IRL是从专家示范中推断出未知收益函数的手段， 一类比较好�
 [4]: http://nooverfit.com/wp/gan%E5%A2%9E%E5%BC%BA%E5%AD%A6%E4%B9%A0-%E4%BB%8Eirl%E5%92%8C%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0-%E8%81%8A%E5%88%B0trpo%E7%AE%97%E6%B3%95%E5%92%8Cgail%E6%A1%86%E6%9E%B6-david-9%E6%9D%A5%E8%87%AA/
 [5]: https://blog.csdn.net/weixin_42815609/article/details/108022965
 [6]: https://blog.csdn.net/weixin_42770354/article/details/109853524
+[7]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter11/chapter11
+
 
 TODO:https://rebornhugo.github.io/reinforcement%20learning/2018/05/20/Inverse-Reinforcement-Learning/#more
 

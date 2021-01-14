@@ -11,15 +11,63 @@
  * @Reference:
 -->
 
-#  Deep Deterministic Policy Gradients (DDPG)
+# Deep Deterministic Policy Gradients (DDPG)
 
+## 离散动作 vs. 连续动作
 
+离散动作与连续动作是相对的概念，一个是可数的，一个是不可数的。
+
+离散动作有如下几个例子：[9]
+
+- 在 CartPole 环境中，可以有向左推小车、向右推小车两个动作。
+- 在 Frozen Lake 环境中，小乌龟可以有上下左右四个动作。
+- 在 Atari 的 Pong 游戏中，游戏有 6 个按键的动作可以输出。
+
+但在实际情况中，经常会遇到连续动作空间的情况，也就是输出的动作是不可数的。比如：
+
+- 推小车力的大小，
+- 选择下一时刻方向盘的转动角度，
+- 四轴飞行器的四个螺旋桨给的电压的大小。
+
+## 拆解
+
+在连续控制领域，比较经典的强化学习算法就是 深度确定性策略梯度(Deep Deterministic Policy Gradient，简称 DDPG)。
+
+DDPG 的特点可以从它的名字当中拆解出来，拆解成 Deep、Deterministic 和 Policy Gradient。
+
+- Deep 是因为用了神经网络；
+- Deterministic 表示 DDPG 输出的是一个确定性的动作，可以用于连续动作的一个环境；
+- Policy Gradient 代表的是它用到的是策略网络。REINFORCE 算法每隔一个 episode 就更新一次，但 DDPG 网络是每个 step 都会更新一次 policy 网络，也就是说它是一个单步更新的 policy 网络。
 
 DDPG是基于actor-critic[1]的无模型确定性策略梯度算法，人工智能就是解决无数据预处理，多维度，敏感输入的多目标任务。DQN只能解决低维度的离散输出动作的任务，不能直接解决连续动作任务，DQN及其衍生算法直接扔掉了动作空间中一些可能有用的信息。
 
 DDPG及其拓展则是DeepMind开发的面向连续控制的off policy算法，相对PPO 更sample efficient。DDPG训练的是一种确定性策略deterministic policy，即每一个state下都只考虑最优的一个动作。DDPG的拓展版D4PG从paper中的结果看取得了非常好的效果，但是并没有开源，目前github上也没有人能够完全复现Deepmind的效果。[6]
 
+DDPG 是 DQN 的一个扩展的版本。
+
+- 在 DDPG 的训练中，它借鉴了 DQN 的技巧：目标网络和经验回放。
+- 经验回放这一块跟 DQN 是一样的，但 target network 这一块的更新跟 DQN 有点不一样。
+
 由 DPG 升级为 DDPG，即将 actor 模型和 critic 模型升级为 actor 网络 $\mu\left(s \mid \theta^{\mu}\right)$ 和 critic 网 络 $Q\left(s, a \mid \theta^{Q}\right)$ 。[8]
+
+DQN 的最佳策略是想要学出一个很好的 Q 网络，学好这个网络之后，我们希望选取的那个动作使你的 Q 值最大。
+
+DDPG 的目的也是为了求解让 Q 值最大的那个 action。
+
+- Actor 只是为了迎合评委的打分而已，所以用来优化策略网络的梯度就是要最大化这个 Q 值，所以构造的 loss 函数就是让 Q 取一个负号。
+- 我们写代码的时候就是把这个 loss 函数扔到优化器里面，它就会自动最小化 loss，也就是最大化 Q。
+
+这里要注意，除了策略网络要做优化，DDPG 还有一个 Q 网络也要优化。
+
+评委一开始也不知道怎么评分，它也是在一步一步的学习当中，慢慢地去给出准确的打分。
+
+我们优化 Q 网络的方法其实跟 DQN 优化 Q 网络的方法是一样的，我们用真实的 reward rr 和下一步的 Q 即 Q' 来去拟合未来的收益 Q_target。
+
+然后让 Q 网络的输出去逼近这个 Q_target。
+
+所以构造的 loss function 就是直接求这两个值的均方差。
+构造好 loss 后，我们就扔进去那个优化器，让它自动去最小化 loss 就好了。
+
 
 ## 伪代码
 
@@ -101,6 +149,12 @@ def ddpg(n_episodes=2000, max_t=700):
 Paper[5]
 ```
 
+## Exploration vs. Exploitation
+
+DDPG 通过 off-policy 的方式来训练一个确定性策略。因为策略是确定的，如果 agent 使用同策略来探索，在一开始的时候，它会很可能不会尝试足够多的 action 来找到有用的学习信号。为了让 DDPG 的策略更好地探索，我们在训练的时候给它们的 action 加了噪音。DDPG 的原作者推荐使用时间相关的 OU noise，但最近的结果表明不相关的、均值为 0 的 Gaussian noise 的效果非常好。由于后者更简单，因此我们更喜欢使用它。为了便于获得更高质量的训练数据，你可以在训练过程中把噪声变小。
+
+在测试的时候，为了查看策略利用它学到的东西的表现，我们不会在 action 中加噪音。
+
 [1]: https://github.com/udacity/deep-reinforcement-learning/blob/master/finance/DRL.ipynb
 [2]: https://github.com/udacity/deep-reinforcement-learning/blob/master/finance/DRL.ipynb
 [3]: https://github.com/udacity/deep-reinforcement-learning/blob/master/ddpg-bipedal/DDPG.ipynb
@@ -109,3 +163,4 @@ Paper[5]
 [6]: https://zhuanlan.zhihu.com/p/70360272
 [7]: https://blog.csdn.net/qq_31239495/article/details/80313803
 [8]: https://github.com/CharmyZ/note-book-blog/blob/master/%E3%80%8A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9C%A8%E9%98%BF%E9%87%8C%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B8%8E%E4%B8%9A%E5%8A%A1%E5%88%9B%E6%96%B0%E3%80%8B.pdf
+[9]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter12/chapter12
