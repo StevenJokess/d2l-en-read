@@ -13,12 +13,38 @@
  * https://arxiv.org/pdf/1902.06068.pdf
 -->
 
+# SRGAN
 
-# Introduction to Super-Resolution
+# 分辨率
+
+分辨率极限，无论对于图像重建或是图像后处理算法的研究者，都是一项无法回避的技术指标。
+
+时间分辨率性能决定了视频输出的帧率，即实时效果；
+空间分辨率性能决定了图像的画面清晰度究竟是720P，1080P，还是4K；
+色阶分辨率性能决定了图像显示色彩的丰满程度与粒度。
+
+图片压缩与传输，即以较低的码率进行图像编码，在传输过程中可极大节省转发服务器的流量带宽，在客户端解码得到相对低清晰度的图片，最后通过超分辨重建技术处理获得高清晰度图片
+
+## 传统超分辨重建技术
+
+大体上可分为4类：
+
+1. 预测型（prediction-based）
+1. 边缘型（edge-based）
+1. 统计型（statistical）
+1. 图像块型（patch-based/example-based）
+
+## Introduction to Super-Resolution
+
+
 
 图像的超分辨率重构技术（Super-Resolution）指的是将给定的低分辨率图像通过算法恢复成相应的高分辨率图像，其主要分为两个大类：一类是使用单张低分辨率图像进行高分辨率图像的重建，一类是使用同一场景的多张低分辨率图像进行高分辨率图像的重建。此篇文章使用的是基于深度学习中的GAN网络对单张图像进行操作的超分辨率重构方法，超分辨重构和去噪、去网格、去模糊等问题是类似的。对于一张低分辨图像，可能会有多张高分辨图像与之对应，因此通常在求解高分辨率图像时会加一个先验信息进行规范化约束。在传统的方法中，通常会通过加入一些先验信息来恢复高分辨率图像，如，插值法、稀疏学习、还有基于回归方法的随机森林等。而基于深度学习的SR方法，则是通过神经网络直接进行从低分辨图像到高分辨图像的端到端的学习。[5]
 
 Here’s the first part of a very simple super-resolution model. To start, it’s pretty much exactly the same as any model you’ve seen so far:
+
+
+
+
 
 class OurFirstSRNet(nn.Module):
 
