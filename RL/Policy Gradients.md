@@ -16,8 +16,6 @@
 
 # Policy Gradients
 
-
-
 Policy Gradients的是一种基于策略的强化学习方法，基于策略的意思就是直接根据状态输出动作或者动作的概率。
 
 
@@ -37,6 +35,62 @@ Policy Gradients的是一种基于策略的强化学习方法，基于策略的�
 
 - 通常收敛到局部最优。
 - 评估一个policy通常是低效且高方差的。
+
+
+继续从目标函数说起, 由于要用神经网络来计算策略梯度，需要用一个网络结构去逼近策略, 在此处 我们假设神经网络的结构参数为 $\theta$,将目标函数由公式-1变为：
+$$
+J(\theta)=E_{\tau \sim \pi_{\theta}(\tau)}[r(\tau)]=\int_{\tau \sim \pi_{\theta}(\tau)} \pi_{\theta}(\tau) r(\tau) d \tau
+$$
+推导原因： $f(x)$ 关于某分布 $P(x)$ 的期望, 对于连续性变量, 期望通过积分求得：
+$$
+E_{x \sim P}[f(x)]=\int p(x) f(x) d x
+$$
+在数学中梯度的含义就是对函数求取导数，在监督学习中，我们求取损失函数的时候经常求取目标函 数的梯度。同理, 对于策略的目标函数, 我们同样对目标函数 $J(\cdot)$ 公式(2)求取梯度：
+$$
+\nabla_{\theta} J(\theta)=\int_{\tau \sim \pi_{\theta}(\tau)} \nabla_{\theta} \pi_{\theta}(\tau) r(\tau) d \tau
+$$
+到这里，我们发现并没有方法直接计算, 通过导数求导变换得到：
+$$
+\nabla_{\theta} \pi_{\theta}(\tau)=\pi_{\theta}(\tau) \nabla_{\theta} \log \pi_{\theta}(\tau)
+$$
+将公式(5)代入(4)得到策略梯度：
+$$
+\begin{array}{l}
+\nabla_{\theta} J(\theta)=E_{\tau \sim \pi_{\theta}(\tau)}\left[\nabla_{\theta} \log \pi_{\theta}(\tau) r \tau\right] \\
+=\int_{\tau \sim \pi_{\theta}(\tau)} \pi_{\theta}(\tau) \nabla_{\theta} \log \pi_{\theta}(\tau) r(\tau) d \tau
+\end{array}
+$$
+
+终于通过变化计算得到了策略梯度的计算方法, 但是发现 $\nabla_{\theta} \log \pi_{\theta}(\tau)$ 并没法直接求取。那么该怎 样计算呢? 通过前面我们知道对于序列 $\tau,$ 策略 $\pi(\tau)=\pi\left(s_{0}, a_{0}, s_{1}, a_{1}, \ldots, s_{T}, a_{T}\right)$,我们将 $\pi(\tau)$ 通过最原始的 方法展开得到
+$$
+\pi(\tau)=p\left(s_{0}\right) \prod_{t=0}^{T} \pi_{\theta}\left(a_{t} \mid s_{t}\right) p\left(s_{t+1} \mid s_{t}, a_{t}\right)
+$$
+$$
+\begin{aligned}
+\nabla_{\theta} \log \pi_{\theta}(\tau)=& \nabla_{\theta} \log \left(p\left(s_{0}\right) \prod_{t=0}^{T} \pi_{\theta}\left(a_{t} \mid s_{t}\right) p\left(s_{t+1} \mid s_{t}, a_{t}\right)\right) \\
+=\nabla_{\theta}\left(\log p\left(s_{0}\right)+\right.&\left.\sum_{t=0}^{T} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right)+\sum_{t=0}^{T} \log p\left(s_{t+1} \mid s_{t}, a_{t}\right)\right) \\
+&=\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right)
+\end{aligned}
+$$
+这样公式已经和监督学习中的最大似然有相同点了，因此我们对其进行蒙特卡洛处理，最终将公式(6)
+(7)(8)组合, 并对公式(6)中的期望用蒙特卡洛进行替换, 得到最终策略梯度：
+$$
+\begin{aligned}
+\nabla_{\theta} J(\theta) &=E_{\tau \sim \pi_{\theta}(\tau)}\left[\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right)\left(\sum_{t}^{T} r\left(s_{t}, a_{t}\right)\right)\right] \\
+&=\frac{1}{N} \sum_{t=0}^{N}\left[\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}\left(a_{t} \mid s_{t}\right)\left(\sum_{t=0}^{T} r\left(s_{t} \mid a_{t}\right)\right)\right]
+\end{aligned}
+$$
+终于我们得到了策略梯度的计算公式, 接下来就是更新了梯度，和监督学习是一个方式
+$$
+\hat{\theta}=\theta+\alpha \nabla_{\theta} J(\theta)
+$$
+
+[2]
+
+策略梯度的理论和公式部分计算讲完了，
+其实说了这么多，最终只是服务于策略网络的逼近和参数更新
+
+
 
 Vanilla Policy Gradient (REINFORCE)
 
@@ -89,3 +143,5 @@ In Policy Gradient (PG) methods, we optimize the policy directly. Here, we use a
 - Instead of the TD(0) estimate above, we can use the MC estimate or the TD(λ) estimate as well, for the critic. The same idea can be applied to the actor, in which case the backward view equation changes slightly.
 
 - Stochastic policies can be very noisy to sample and we end up estimating noise. **Natural PG** is parameterization independent and finds the ascent direction close to the vanilla gradient by changing the policy slightly. **Deterministic PG** directly takes the expectation of the gradient of the value function as the update to get a deterministic PG, which turns out to be the limiting case of the stochastic PG.
+
+[2]: https://blog.csdn.net/gsww404/article/details/80705950

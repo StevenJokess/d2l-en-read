@@ -94,8 +94,11 @@ $\min _{\pi} \max _{c \in C} E_{\pi}[c(s, a)]-E_{\pi_{E}}[c(s, a)]$
 我们不想学一个从状态到行为的mapping，而是想学到那个知道专家做出那些决策的reward function。
 回报函数大概得有什么效果和“令人满意”的最优策略长什么样的专家（may have only a very rough idea of the reward function whose optimization would generate "desirable" behavior）
 
+### 什么叫做一个最好的 reward function。
 
+最后你 learn 出来的 reward function 应该就是 expert 和 actor 在这个 reward function 都会得到一样高的分数。最终你的 reward function 没有办法分辨出谁应该会得到比较高的分数。
 
+通常在 train 的时候，你会 iterative 的去做。那今天的状况是这样，最早的 Inverse Reinforcement Learning 对 reward function 有些限制，它是假设 reward function 是 linear 的。如果 reward function 是 linear 的话，你可以 prove 这个algorithm 会 converge。但是如果不是 linear 的，你就没有办法 prove 说它会 converge。你有没有觉得这个东西，看起来还挺熟悉呢？其实你只要把它换个名字，说 actor 就是 generator，然后说 reward function 就是 discriminator，它就是 GAN。所以它会不会收敛这个问题就等于是问说 GAN 会不会收敛。如果你已经实现过，你会知道不一定会收敛。但除非你对 R 下一个非常严格的限制，如果你的 R 是一个 general 的 network 的话，你就会有很大的麻烦。
 ## 最大熵逆增强学习 (Max Entropy IRL)
 
 1. 给定 $\psi$, 按照上一篇的方法求出对应的 $\beta\left(\mathbf{s}_{t}, \mathbf{a}_{t}\right)$ 和 $\alpha\left(\mathbf{s}_{t}\right)$ 。

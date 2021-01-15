@@ -9,7 +9,43 @@
  * @Description:
  * @TODO::
  * @Reference:https://learning.oreilly.com/library/view/programming-pytorch-for/9781492045342/ch09.html#idm45762347307368
+ * https://www.hhyz.me/2018/04/11/RCNN/
 -->
+
+# R-CNN
+
+4 个应用于不同任务的已有的算法很好的结合了起来，最终在目标检测任务中取得了不错的效果
+
+当然在后续的 Fast-RCNN 与 Faster-RCNN 中模型逐步完善并整合成为一个模型，但是在 R-CNN 中是没有的。
+
+R-CNN 由 4 个部分构成:
+
+区域建议算法（ss）
+特征提取算法（AlexNet）
+线性分类器（线性 SVM）
+边界框修正回归模型（Bounding box）
+
+简单来说，RCNN 使用以下四步实现目标检测：
+
+在图像中确定约 1000-2000 个候选框
+对于每个候选框内图像块，使用深度网络提取特征
+对候选框中提取出的特征，使用分类器判别是否属于一个特定类
+对于属于某一特征的候选框，用回归器进一步调整其位置
+
+Bounding box也是个古老的话题了，计算机视觉常见任务中，在分类与检测之间还有一个定位任务，在一副图像中只有一个目标，然后把这个目标框出来，用到的就是Bounding box回归模型。在R-CNN中，Bounding box的作用是修正ss推荐的区域的边界，输入的特征是AlexNet的第五层特征，与SVM分类器一样，它也是每一个类别都有一个模型，一共20个。
+
+## R-CNN 的训练
+
+R-CNN训练了CNN，SVM与Bounding box三个模型，因为ss不用训练。ss在生成了1000-2000个推荐区域之后，就和训练任务没关系了，训练样本是由ss区域生成出来的子图构建起来的。 而且三个部分的训练时独立的，并没有整合在一起。
+
+1. 训练CNN
+CNN是在ImageNet上pre-train的AlexNet模型，在R-CNN中进行fine-tune，fine-tune的过程是将AlexNet的Softmax改为任务需要的类别数，然后还是当做一个分类模型来训练，训练样本的构建使用ss生成的子图，当这些图与实际样本的框（Ground-truth）的IoU大于等于0.5时，认为是某一个类的正样本，这样的类一共有20个；IoU小于0.5时，认为是负样本。然后就可以AlexNet做pre-train了，pre-train之后AlexNet的Softmax层就被扔掉了，只剩下训练后的参数，这套参数就用来做特征提取。
+
+2. 训练SVM
+之前提到了，SVM的输入特征是AlexNet fc7的输出，然后SVM做二分类，一个有20个SVM模型。那么对于其中某一个分类器来说，它的正样本是所有Ground-truth区域经过AlexNet后输出的特征，负样本是与Ground-truth区域重合IoU小于0.3的区域经过AlexNet后输出的特征，特征和标签确定了，就可以训练SVM了。
+
+
+
 
 Faster R-CNN and Mask R-CNN
 Facebook Research has produced the maskrcnn-benchmark library, which contains reference implementations of both object detection and segmentation algorithms. We’re going to install the library and add code to generate predictions. At the time of this writing, the easiest way to build the models is by using Docker (this may change when PyTorch 1.2 is released). Clone the repository from https://github.com/facebookresearch/maskrcnn-benchmark and add this script, predict.py, into the demo directory to set up a prediction pipeline using a ResNet-101 backbone:

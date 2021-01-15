@@ -97,7 +97,14 @@ n-step TD learning是这两种 算法的折中，它不是固定的只向采样1
 - \delta_{t}=R_{t+1}+\gamma V\left(S_{t+1}-V\left(S_{t}\right)\right)$
 - V(s) \leftarrow V(s)+\alpha \delta_{t} E_{t}(s)$
 
+## 单步更新与回合更新（Monte-carlo update&Temporal-Difference update）
+
+单步更新，顾名思义，也就是每次执行一次action后，进行一次更新；而回合更新，就是在一次训练的epoch中，结束后才进行更新。
+用我现在在研究的量化交易与人工智能来举个例子，就好比每次执行一次买或卖的action后，更新一下模型中的参数，这就是单步更新；而从开盘到结束作为一次的训练epoch，从开始到结束的这一回合训练过程中，所有动作都是根据目前的参数进行选择，直到结束这一回合的训练后，才进行更新参数。
+个人目前觉得，单步更新容易陷入局部最小，而回合更新则更全局一些，但是回合更新要等到这一回合的训练结束才进行参数更新，所以学习的效率不高。
+
 https://applenob.github.io/rl_note/intro-note-6/
 https://github.com/applenob/rl_learn/blob/master/class_note.ipynb
 [3]: [强化学习]从火车过桥模型理解n-step TD Learning - 阿亮算法的文章 - 知乎
 https://zhuanlan.zhihu.com/p/295098730s
+[6]: https://blog.csdn.net/FrankieHello/article/details/78821488?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-11.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-11.control

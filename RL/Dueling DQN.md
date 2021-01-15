@@ -23,6 +23,25 @@ Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+A(s, a ; \theta, \alpha)
 
 这是开车的游戏, 左边是 state value, 发红的部分证明了 state value 和前面的路线有关, 右边是 advantage, 发红的部分说明了 advantage 很在乎旁边要靠近的车子, 这时的动作会受更多 advantage 的影响. 发红的地方左右了自己车子的移动原则.
 
+
+图中将原有的DQN算法的网络输出分成了两部分：即值函数和优势函数共同组成, 在数学上表示为：[5]
+$$
+Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+A(s, a ; \theta, \alpha)
+$$
+其中, $\theta$ 表示网络结构, $\alpha, \beta$ 表示两个全连接层网络的参数, 由图和公式可知, $V$ 仅与状态有关, 而 $A$ 与状态和动作都有关。。 如果仅仅用当前的这个公式更新的话, 其存在一个“unidentifiable”问题（比如V和A分别加上和减去一 个值能够得到同样的Q, 但反过来显然无法由Q得到唯一的V和A) 。作者为了解决它, 作者强制优势 函数估计量在选定的动作处具有零优势。 也就是说让网络的最后一个模块实现前向映射，表示为：
+$$
+Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+\left(A(s, a ; \theta, \alpha)-\max _{a^{\prime} \in|\mathcal{A}|} A\left(s, a^{\prime} ; \theta, \alpha\right)\right)
+$$
+怎么理解呢? 对于任意 $a$ 来说
+$$
+a^{*}=\arg \max _{a^{\prime} \in \mathcal{A}} Q\left(s, a^{\prime} ; \theta, \alpha, \beta\right)=\arg \max _{a^{\prime} \in \mathcal{A}} A\left(s, a^{\prime} ; \theta, \alpha\right)
+$$
+那么我们可以得到: $Q\left(s, a^{*} ; \theta, \alpha, \beta\right)=V(s ; \theta, \beta),$ 因此, $V(s ; \theta, \beta)$ 提供了价值函数的估计， 而另一个产生了优势函数的估计。在这里作者使用里平均 $\left(\frac{1}{|\mathcal{A}|}\right)$ 代替了最大化操作, 表示为：
+$$
+Q(s, a ; \theta, \alpha, \beta)=V(s ; \theta, \beta)+\left(A(s, a ; \theta, \alpha)-\frac{1}{|\mathcal{A}|} \sum_{a^{\prime}} A\left(s, a^{\prime} ; \theta, \alpha\right)\right)
+$$
+采用这种方法, 虽然使得值函数V和优势函数A不再完美的表示值函数和优势函数(在语义上的表示) 但是这种操作提高了稳定性。而且, 并没有改变值函数V和优势函数A的本质表示。。。。
+
 ## 模型简介
 
 在传统的DDQN模型中，通过优化目标Q值的计算来优化算法，在Prioritized Replay DQN中，通过优化经验回放池按权重采样来优化算法。
@@ -53,7 +72,13 @@ Dueling DQN网络与DDQN网络结构的区别如下图所示（左边为DDQN，�
 由于均值相对于最大值更加稳定，作者最终选用了后一种方式。
 
 
+DQN系列我花了5篇来讲解，一共5个前后有关联的算法：DQN(NIPS2013), Nature DQN, DDQN, Prioritized Replay DQN和Dueling DQN。目前使用的比较主流的是后面三种算法思路
+
+绝大多数DQN只能处理离散的动作集合，不能处理连续的动作集合。虽然NAF DQN可以解决这个问题，但是方法过于复杂了。而深度强化学习的另一个主流流派Policy-Based而可以较好的解决这个问题，从下一篇我们开始讨论Policy-Based深度强化学习。
+
+
 [1]:
 
 
 [4]: https://github.com/shenweichen/ReinforcementLearning
+[5]: https://blog.csdn.net/gsww404/article/details/104997834

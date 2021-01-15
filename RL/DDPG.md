@@ -39,9 +39,12 @@ DDPG 的特点可以从它的名字当中拆解出来，拆解成 Deep、Determi
 - Deterministic 表示 DDPG 输出的是一个确定性的动作，可以用于连续动作的一个环境；
 - Policy Gradient 代表的是它用到的是策略网络。REINFORCE 算法每隔一个 episode 就更新一次，但 DDPG 网络是每个 step 都会更新一次 policy 网络，也就是说它是一个单步更新的 policy 网络。
 
+
 DDPG是基于actor-critic[1]的无模型确定性策略梯度算法，人工智能就是解决无数据预处理，多维度，敏感输入的多目标任务。DQN只能解决低维度的离散输出动作的任务，不能直接解决连续动作任务，DQN及其衍生算法直接扔掉了动作空间中一些可能有用的信息。
 
 DDPG及其拓展则是DeepMind开发的面向连续控制的off policy算法，相对PPO 更sample efficient。DDPG训练的是一种确定性策略deterministic policy，即每一个state下都只考虑最优的一个动作。DDPG的拓展版D4PG从paper中的结果看取得了非常好的效果，但是并没有开源，目前github上也没有人能够完全复现Deepmind的效果。[6]
+
+传统的DQN采用的是一种被称为’hard’模式的target-net网络参数更新，即每隔一定的步数就将eval-net中的网络参数赋值过去，而在DDPG中，采用的是一种’soft’模式的target-net网络参数更新，即每一步都对target-net网络中的参数更新一点点，这种参数更新方式经过试验表明可以大大的提高学习的稳定性。[10]
 
 DDPG 是 DQN 的一个扩展的版本。
 
@@ -164,3 +167,4 @@ DDPG 通过 off-policy 的方式来训练一个确定性策略。因为策略是
 [7]: https://blog.csdn.net/qq_31239495/article/details/80313803
 [8]: https://github.com/CharmyZ/note-book-blog/blob/master/%E3%80%8A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9C%A8%E9%98%BF%E9%87%8C%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B8%8E%E4%B8%9A%E5%8A%A1%E5%88%9B%E6%96%B0%E3%80%8B.pdf
 [9]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter12/chapter12
+[10]: https://leesen998.github.io/2018/06/01/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-DDPG%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/
