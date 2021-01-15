@@ -70,6 +70,24 @@ $D_{0}$
 对于判别器 $D_{0}$ ，首先用全连接层将词向量 $\varphi_{t}$ 压缩到 $N_{d},$ 随后进行空间性重复, 得到 $M_{d} \times M_{d} \times N_{d}$ 。同时，将图像输入到一系列下采样 down-sampling , 从而得到 $M_{d} \times M_{d} \times N_{d}$ 尺寸的 tensor
 随后, 将文本 tensor 和图像 tensor 进行拼接, 然后输入到一个 $1 \times 1$ 的卷积层, 从而同时综 合文本和图像的信息。最后，用一个只有一个节点的全连接层来生成置信度得分。。
 
+## Stage-II
+
+Stage-I 阶段生成的低分辨率图像通常缺之鲜明的目标特征，并且可能包含一些变形。同时, 文本 描述中的部分信息可能也未体现出来。所以, 通过 Stage-II 可以在 Stage-I 生成的低分辨率图 像和文本描述的基础上，生成高分辨率图片，其修正了 Stage-I 的缺陷，并完善了被忽略的文本信 息细节。
+
+Stage-II 以高斯隐含变量 $\hat{c}$ 以及 'Stage-I' 的生成器的输出 $s_{0}=G_{0}\left(z, \hat{c}_{0}\right)$ 为输入, 来训练生 $\begin{array}{lll}\text { 成器 } & \text { G 和判别器 } & \text { D } & \text { 其目标函数分别为： }\end{array}$ :
+$\max \quad \mathcal{L}_{D}=\mathbb{E}_{(I, t) \sim p_{\text {data }}}\left[\log \left(D\left(I, \varphi_{t}\right)\right)\right]+\mathbb{E}_{s_{0} \sim p_{G_{0}}, t \sim p_{\text {data }}}\left[\log \left(1-D\left(G\left(s_{0}, \hat{c}\right), \varphi_{t}\right)\right)\right]$
+$\min \quad \mathcal{L}_{G}=\mathbb{E}_{s_{0} \sim p_{G_{0}}, t \sim p_{\text {data }}}\left[\log \left(1-D\left(G\left(s_{0}, \hat{c}\right), \varphi_{t}\right)\right)\right]+\lambda D_{K L}\left(\mathcal{N}\left(\mu\left(\varphi_{t}\right), \Sigma\left(\varphi_{t}\right)\right) \| \mathcal{N}(0, I)\right)$
+模型结构
+Conditioning Augmentation
+首先就是通过词向量 $\varphi_{t}$ 来获取 $\hat{c},$ 其过程与 Stage-I 一样。。。。。
+G
+首先 $\hat{c}$ 通过空间重复, 变成 $M_{g} \times M_{g} \times N_{g}$ 的 tensor $\quad$ (这里的空间上雷复使之，将原来的 $1 \times 1 \times N_{g}$ 在 $1 \times 1$ 的维度上，进行重复, 得到 $M_{g} \times M_{g}$ )
+同时, 将 Stage-I 的输出通过下采样网络，变成尺寸为 $1 \times 1$ 的 tensor, 并与上面的文本 $1 \times 1$ 的 tensor 在通道的维度上进行拼接。。
+接着，将上面的 tensor 送入一系列的残差块, 从而习得综合文本描述和图像信息的特征。。。。。。
+最后，用上采样网络进行处理, 从而生成 $W \times H$ 的图像。。
+$\mathbf{D}$
+判别器部分与 Stage-I 别无二致，除了输入尺寸的变化导致的下采样层不同。
+此外，在训练阶段, 判别器的输入中，正类样本为真实图像及其对应的文本描述; 而负类样本包含
 
 https://github.com/hanzhanggit/StackGAN-Pytorch
 

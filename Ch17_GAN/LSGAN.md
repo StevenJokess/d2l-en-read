@@ -10,9 +10,12 @@
  * @TODO::
  * @Reference:
 -->
+
 # Least Squares Generative Adversarial Networks(最小二乘生成式对抗网络)
 
 虽然WGAN和WGAN-GP已经基本解决了训练失败的问题，但是无论是训练过程还是是收敛速度都要比常规 GAN 更慢。受WGAN理论的启发，Mao 等人提出了最小二乘GAN (least square GAN, LSGAN)
+
+
 
 传统GAN中, D网络和G网络都是用简单的交叉熵loss做更新, 最小二乘GAN则用最小二乘(Least Squares) Loss 做更新：
 
@@ -26,7 +29,12 @@ LSGAN将GAN的目标函数由交叉熵损失替换成最小二乘损失，以此
 
 但缺点也是明显的, LSGAN对离离群点的过度惩罚, 可能导致样本生成的”多样性”降低, 生成样本很可能只是对真实样本的简单”模仿”和细微改动.[3]
 
+The relation between LSGANs and f-divergence：在最优判别器下，生成器loss的优化相当于最小化Pd + Pg和2Pg的the Pearson X2 divergence(if a, b, and c satisfy the condtions of b - c = 1 and b - a = 2.此处a、b、c是生成器loss公式中的常量)。
+
+本文认为普通GAN使用sigmoid cross entropy loss function作为判别器loss，得到的决策边界会使一些生成样本处于决策边界positive side，而这些生成样本其实仍旧离真实样本存在比较远的距离，所以用这些被判别器判别为真实样本的生成样本更新生成器会产生梯度弥散。本文通过引入the least square loss function，可以移动生成样本到决策边界，因为the least square loss function会惩罚那些处于决策边界positive side且距离决策边界很远的生成样本，即使是正确分类到negative side，但是如果距离决策边界远，仍旧会往被决策边界拉。主要贡献：通过引入the least square loss function来减弱梯度弥散，但是并未解决mode collapse问题。[9]
+
 ## 目标函数
+
 ### 判别器
 
 
@@ -192,3 +200,4 @@ if __name__ == "__main__":
 [6]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
 [7]: https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247484880&idx=1&sn=4b2e976cc715c9fe2d022ff6923879a8&chksm=96e9da50a19e5346307b54f5ce172e355ccaba890aa157ce50fda68eeaccba6ea05425f6ad76&scene=21#wechat_redirect
 [8]: https://github.com/Jittor/jittor/blob/master/notebook/LSGAN.src.md
+[9]: https://www.zhihu.com/search?type=content&q=StackGAN

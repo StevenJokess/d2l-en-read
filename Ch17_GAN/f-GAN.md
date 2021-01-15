@@ -15,13 +15,18 @@
 
 # f-GAN
 
-## f-散度
+## 度量
 
-GAN 的核心本质是通过对抗训练将随机噪声的分布拉近到真实的数据分布，那么就需要一个度量概率分布的指标—散度。我们熟知的散度有 KL 散度公式如下（KL 散度有一个缺点就是距离不对称性，所以说它不是传统真正意义上的距离度量方法）。
+GAN 的核心本质是通过对抗训练将随机噪声的分布拉近到真实的数据分布，那么就需要一个度量概率分布的指标—散度。
+
+### 散度
+
+我们熟知的散度有 KL 散度公式如下（KL 散度有一个缺点就是距离不对称性，所以说它不是传统真正意义上的距离度量方法）。
 
 $$
 D_{K L}(p \| q):=\int_{\mathbb{R}^{n}} \log \left(\frac{p(x)}{q(x)}\right) p(x) d x
 $$
+
 和 JS 散度公式如下 (JS 散度是改进了 KL 散度的距离不对称性)：
 $$
 D_{J S}(p \| q):=\frac{1}{2} D_{K L}(p \| M)+\frac{1}{2} D_{K L}(q \| M)
@@ -49,6 +54,28 @@ $p(x)=q(x)$
 $\min _{\nu} \sup _{T}\left(\mathbb{E}_{\mathbf{x} \sim \nu}[T(\mathbf{x})]-\mathbb{E}_{\mathbf{x} \sim \mu}\left[f^{*}(T(\mathbf{x}))\right]\right)$
 
 可以将如上的优化问题称为变分散度最小化（VDM）。注意 VDM 看起来类似于 GAN 中的极大极小值问题，其中 Borel 函数$T$被称为评判函数。
+
+### f-divergence 性质
+
+f-divergence 主要功能就是评估 $P$ 和 $Q$ 之间的差异度.他们之间的差异度具体是怎么
+衡量的呢?下面有一些性质
+(1)当 $P=Q$ 罚村候, $D_{f}(P \| Q)=0$
+证明:
+$$
+\begin{aligned}
+D_{f}(P \| Q) &=\int_{x} q(x) f\left(\frac{p(x)}{q(x)}\right) d x \\
+&=\int_{x} q(x) f\left(\frac{q(x)}{q(x)}\right) d x=\int_{x} q(x) f(1) d x \\
+&=0
+\end{aligned}
+$$
+(2)对于低意 $P Q, D_{f}(P \| Q) \geq 0$
+证肺不等式这里用到了凸函数一个简单性质)
+$$
+\begin{aligned}
+D_{f}(P \| Q) &=\int_{x} q(x) f\left(\frac{p(x)}{q(x)}\right) d x \geq f\left(\int_{x} q(x) \frac{p(x)}{q(x)} d x\right) \\
+&=f\left(\int_{x} p(x) d x\right)=f(1)=0
+\end{aligned}
+$$
 
 
 Algorithm 2 f-GAN Algorithm Input: 随机噪声 $\left\{\mathbf{z}_{1}, \ldots, \mathbf{z}_{m}\right\}$ in $\mathbb{R}^{d} ;$ 真实样本 $\left\{\mathbf{x}_{1}, \ldots, \mathbf{x}_{m}\right\} \subset \mathcal{X}$.

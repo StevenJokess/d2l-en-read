@@ -1,5 +1,8 @@
 # CoGAN
 
+学习联合分配
+用面部字符P（金发，女性，微笑，戴眼镜），P（棕色，男性，微笑，没有眼镜）等不同组合创建GAN是很不现实的。维数的诅咒使得GAN的数量呈指数增长。但我们可以学习单个数据分布并将它们组合以形成不同的分布，即不同的属性组合。
+
 CoGAN:Coupled Generative Adversarial Networks
 
 CoGAN会训练两个GAN而不是一个单一的GAN。
@@ -29,3 +32,4 @@ https://wiseodd.github.io/techblog/2017/02/18/coupled_gan/
 
 [1] Liu M, Tuzel O. Coupled Generative Adversarial Networks[J]. neural information processing systems, 2016: 469-477.
 https://cloud.tencent.com/developer/article/1473720
+[2]: https://www.zhihu.com/search?type=content&q=StackGAN
