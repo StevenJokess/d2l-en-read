@@ -129,6 +129,11 @@ Qiita的帖子[7]Qiita的帖子不一样，我们可以指定生成人物的属�
 
 We demonstrate the capability of our model to generate plausible images of birds and flowers from detailed text descriptions.[8]
 
+## 应用
+
+Age-cGAN（Age Conditional Generative Adversarial Networks）
+面部老化有许多行业用例，包括跨年龄人脸识别，寻找失踪儿童，或者用于娱乐。Grigory Antipov，Moez Baccouche和Jean-Luc Dugelay在他们的题为“Face Aging with Conditional Generative Adversarial Networks”的论文中提出了用条件GAN进行面部老化。[13]
+
 ## Summary[11]
 
 The additional information constrains the Generator to synthesize a certain type of output and the Discriminator to accept only real examples matching the given additional information.
@@ -146,3 +151,4 @@ https://zhuanlan.zhihu.com/p/25542274
 [10]: https://weread.qq.com/web/reader/d7032cd072021a59d7038af
 [11]: https://livebook.manning.com/book/gans-in-action/chapter-8/1
 [12]: https://github.com/Jittor/jittor/blob/master/notebook/ConditionGAN.src.md
+[13]: https://www.shuzhiduo.com/A/gAJG4R6o5Z/

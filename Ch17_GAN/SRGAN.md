@@ -43,8 +43,6 @@
 
 ## Introduction to Super-Resolution
 
-
-
 图像的超分辨率重构技术（Super-Resolution）指的是将给定的低分辨率图像通过算法恢复成相应的高分辨率图像，其主要分为两个大类：一类是使用单张低分辨率图像进行高分辨率图像的重建，一类是使用同一场景的多张低分辨率图像进行高分辨率图像的重建。此篇文章使用的是基于深度学习中的GAN网络对单张图像进行操作的超分辨率重构方法，超分辨重构和去噪、去网格、去模糊等问题是类似的。对于一张低分辨图像，可能会有多张高分辨图像与之对应，因此通常在求解高分辨率图像时会加一个先验信息进行规范化约束。在传统的方法中，通常会通过加入一些先验信息来恢复高分辨率图像，如，插值法、稀疏学习、还有基于回归方法的随机森林等。而基于深度学习的SR方法，则是通过神经网络直接进行从低分辨图像到高分辨图像的端到端的学习。[5]
 
 ### 国内研究现状
@@ -52,6 +50,12 @@
 对SR的质量进行定量评价常用的两个指标是 PSNR(Peak Signal-to-Noise Ratio 峰值信噪比) 和 SSIM（Structure Similarity Index 结构相似性）。这两个值越高代表重建结果的像素值和金标准越接近.
 
 2016年香港中文大学Dong等人将卷积神经网络应用于单张图像超分辨率重建上完成了深度学习在图像超分辨率重建问题的开山之作SRCNN(Super-Resolution Convolutional Neural Network)。SRCNN将深度学习与传统稀疏编码之间的关系作为依据，将3层网络划分为图像块提取(Patch extraction and representation)、非线性映射(Non-linear mapping)以及最终的重建(Reconstruction)。重建效果远远优于其他传统算法，利用SRCNN进行超分辨率图像重建与使用其他方法进行超分辨率重建的效果对比图如下图1所示。
+
+## 超分辨率 (Super-Resolution)悖论
+
+SR技术存在一个有趣的“悖论”，即还原或重建后的高分辨率图像与原图相似度越高，则肉眼观察清晰度越差；反之，若肉眼观察清晰度越好，则图像的失真度越高。导致这一现象的原因在于畸变（Distortion）参数和感知（Perception）参数之间侧重点选择的不同。
+
+SISR是一个逆问题，对于一个低分辨率图像，可能存在许多不同的高分辨率图像与之对应，因此通常在求解高分辨率图像时会加一个先验信息进行规范化约束。在传统的方法中，这个先验信息可以通过若干成对出现的低-高分辨率图像的实例中学到。而基于深度学习的SR通过神经网络直接学习分辨率图像到高分辨率图像的端到端的映射函数。[8]
 
 
 Here’s the first part of a very simple super-resolution model. To start, it’s pretty much exactly the same as any model you’ve seen so far:
@@ -146,15 +150,23 @@ $$
 \hat{\theta}_{G}=\operatorname{argmin}_{\theta_{G}} \frac{1}{N} \sum_{n=1}^{N} l^{S R}\left(G_{\theta_{G}}\left(I_{n}^{L R}\right), I_{n}^{H R}\right)
 $$
 
+### 感知损失
+
+通常逐像素的MSE由于会过度平滑导致很难处理好图像超分辨的细节，文章设计了新的损失函数，将逐像素MSE损失替换为内容损失。感知损失表示为内容损失和对抗性损失的加权和，
+
 其中, $\quad l^{s R}()$ 为本文所提出的感知损失函数, $ \quad l^{s R}=l_{V G G}^{S R}+10^{-3} l_{C e n}^{S R}$。
 
-内容损失：
+
+### 内容损失
+
+Content Loss是某一层的特征图的逐像素损失作为内容损失，
+
 $$
 l_{V G G}^{I R}=\frac{1}{w H} \sum_{x=1}^{W} \sum_{y=1}^{H}\left(\phi\left(I^{H R}\right)_{x, y}-\phi\left(G_{\theta_{G}}\left(I^{L R}\right)\right)_{x, y}\right)^{2}
 $$
 训练网络时使用均方差损失可以获得较高的峰值信噪比，一般的超分辨率重建方法中，内容损失都选择使用生成图像和目标图像的均方差损失（MSELoss），但是使用均方差损失恢复的图像会丢失很多高频细节。因此，本文先将生成图像和目标图像分别输入到VGG网络中，然后对他们经过VGG后得到的feature map求欧式距离，并将其作为VGG loss。
 
-### 对抗损失：
+### 对抗损失
 
 $$
 l_{G e n}^{S R}=\sum_{n=1}^{N}\left(-\log D_{\theta_{D}}\left(G_{\theta_{G}}\left(I^{L R}\right)\right)\right)
@@ -178,6 +190,13 @@ $l_{M S E}^{S R}=\frac{1}{r^{2} W H} \sum_{x=1}^{r W} \sum_{y=1}^{r H}\left(I_{x
 生成器结构参考了ResNet，输入低分辨率图像得到高分辨率图像，这一部分可作为SRResNet单独使用。
 判别器结构参考了VGG，输入真实图像和生成的高分辨率图像，对二者进行分类。
 
+尝试了自己提出的感知损失函数作为优化目标，虽然PSNR和SSIM不高，但是视觉效果都要优于其他网络，避免了其他方法的过度平滑的特性。[6]
+
+模型后部也加入了 subpixel 模块，借鉴了 Shi et al 的 Subpixel Network 思想，重点关注中间特征层的误差，而不是输出结果的逐像素误差。避免了生成的高分辨图像缺乏纹理细节信息问题。让图片在最后面的网络层才增加分辨率，提升分辨率的同时减少计算资源消耗。[7]
+
+胡志豪提出一个来自工业界的问题 在实际生产使用中，遇到的低分辨率图片并不一定都是 PNG 格式的（无损压缩的图片复原效果最好），而且会带有不同程度的失真（有损压缩导致的 artifacts）。很多算法包括SRGAN、EDSR、RAISR、Fast Neural Style 等等都没法在提高分辨率的同时消除失真。 Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network (https://arxiv.org/abs/1609.04802, 21 Nov, 2016)这篇文章将对抗学习用于基于单幅图像的高分辨重建。基于深度学习的高分辨率图像重建已经取得了很好的效果，其方法是通过一系列低分辨率图像和与之对应的高分辨率图像作为训练数据，学习一个从低分辨率图像到高分辨率图像的映射函数，这个函数通过卷积神经网络来表示。
+
+
 
 模型的训练按照生成对抗网络的损失进行：
 
@@ -189,10 +208,14 @@ $l_{M S E}^{S R}=\frac{1}{r^{2} W H} \sum_{x=1}^{r W} \sum_{y=1}^{r H}\left(I_{x
 
 
 SRGAN
+
 [1]: https://arxiv.org/abs/1609.04802
 [2]: https://github.com/eriklindernoren/Keras-GAN/blob/master/srgan/srgan.py
 [3]: https://0809zheng.github.io/2020/08/10/srresnet.html
 [4]: https://nbviewer.jupyter.org/github/cedrickchee/fastai-course-v3/blob/master/nbs/dl1/lesson7-superres-gan_20190110.ipynb
 [5]: https://www.jiqizhixin.com/articles/2020-10-30-3
+[6]: https://my.oschina.net/u/4579165/blog/4340959s
 https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution
 https://github.com/aitorzip/PyTorch-SRGAN
+[7]: https://github.com/OUCMachineLearning/OUCML/blob/master/GAN/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%E7%BB%BC%E8%BF%B0.md
+[8]: https://github.com/OUCMachineLearning/OUCML/blob/master/GAN/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%E7%BB%BC%E8%BF%B0.md

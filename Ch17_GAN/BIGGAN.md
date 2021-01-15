@@ -16,6 +16,8 @@
 
 在 SAGAN 的基础上，BigGAN [2]尝试将 GAN 的训练扩展到大规模上去，利用正交 正则化等技巧保证训练过程的稳定性。BigGAN 的意义在于启发人们，GAN 网络的训练同 样可以从大数据、大算力等方面受益。BigGAN 图片生成效果达到了前所未有的高度： Inception score 记录提升到 166.5(提高了 52.52)；Frechet Inception Distance 下降到 7.4，降 低了 18.65，如图 13.13 所示，图片的分辨率可达512 × 512，图片细节极其逼真。
 
+BigGAN[8]模型是基于 ImageNet 生成图像质量最高的模型之一。该模型很难在本地机器上实现，而且 有许多组件，如 Self-Attention、 Spectral Normalization 和带有投影鉴别器的 cGAN 等。
+
 网络已经学会了如何表示其训练的图片的许多关键特征，如动物身体的结构、草的纹理以及光影的细节效果（即使是通过肥皂泡折射的）。但仔细观察下面这些图，就不免能发现些许小异常，如白狗明显多了条腿，喷泉其中一个喷嘴的水流呈奇怪的直角状。虽然生成式模型的开发者在努力避免这种不完美，但这些可见的不完美也突显了重建熟悉的数据（如图像）的一个好处，即研究人员可以通过检查样本，推断出模型学到了什么以及没有学到什么。[1]
 
 它最重要的改进是对生成器的正交正则化。[7]
@@ -45,3 +47,4 @@
 https://zhuanlan.zhihu.com/p/51507779
 [6]: https://github.com/huggingface/pytorch-pretrained-BigGAN
 [7]: 生成对抗网络(GAN)的发展史 - 灰灰的文章 - 知乎 https://zhuanlan.zhihu.com/p/63428113
+[8]: https://www.infoq.cn/article/gcgibopiftpbe9deqf3m

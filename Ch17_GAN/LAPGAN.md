@@ -1,5 +1,4 @@
 
-
 # LAPGAN(Laplacian Generative Adversarial Networks)
 
 ## 动机
@@ -20,12 +19,23 @@ LAPGAN将条件生成对抗网络CGAN集成到它的拉普拉斯金字塔结构�
 $$
 \tilde{I}_{k}=u\left(\tilde{I}_{k+1}\right)+\tilde{h}_{k}=u\left(\tilde{I}_{k+1}\right)+G_{k}\left(z_{k}, u\left(\tilde{I}_{k+1}\right)\right)
 $$
+
+## 拉普拉斯金字塔
+
 高斯金字塔的第k层重建需要用它的第k+ 1 层上采样(即u(Ik+1))加上拉普拉斯金字塔第k层 (即 hk)，其中hk是第k个生成器Gk通过zk和u(Ik+1)生成的。其中Ik+1初始值为0, 最高级的Gk仅 仅使用噪声矢量Z作为输入生成Ik, 因为它没有上一级:
 $$
 \tilde{I}_{K}=G_{K}\left(z_{K}\right)
 $$
-除了最高级以外, 其余的生成器G0、G1.....Gk-1都采用上一级的上采样u(Ik)和噪声zk作为联合输 $\lambda,$ 其中上采样u(Ik)就是“条件变量"。。
+除了最高级以外, 其余的生成器G0、G1.....Gk-1都采用上一级的上采样u(Ik)和噪声zk作为联合输 $\lambda,$ 其中上采样u(Ik)就是“条件变量"。
+
+## 原理
+
+以K=3为例，此时拉普拉斯金字塔为4层结构，包含4个生成器G0、G1、G2、G3，分别生成4个分辨率的图像64x64、32x32、16x16、8x8，分辨率最低的图像来训练原始GAN，输入只有噪声，之后分辨率更高的图像训练CGAN，输入有噪声和同级的高斯金字塔图像上采样后的图像。
+LapGAN通过将一系列CGAN串联起来，不断生成更高分辨率。
+
 
 
 [1]: http://papers.nips.cc/paper/5773-deep-generative-image-models-using-a-laplacian-pyramid-of-adversarial-networks.pdf
 [2]: https://zhuanlan.zhihu.com/p/94153155
+[3]: https://my.oschina.net/u/4579165/blog/4340959
+[4]: https://my.oschina.net/u/4579165/blog/4340959

@@ -89,6 +89,7 @@ traditional GAN gen-erator architecture is in every way inferior to a style-base
 The Mapping Network’s goal is to encode the input vector into an intermediate vector whose different elements control different visual features. This is a non-trivial process since the ability to control visual features with the input vector is limited, as it must follow the probability density of the training data. For example, if images of people with black hair are more common in the dataset, then more input values will be mapped to that feature. As a result, the model isn’t capable of mapping parts of the input (elements in the vector) to features, a phenomenon called features entanglement. However, by using another neural network the model can generate a vector that doesn’t have to follow the training data distribution and can reduce the correlation between features.
 The Mapping Network consists of 8 fully connected layers and its output w is of the same size as the input layer (512×1).
 
+借鉴了一种称为自适应实例标准化 (AdaIN) 的机制来控制潜在空间向量 z。[17]
 
 ## Adaptive Instance Normalization (AdaIN)[11]
 
@@ -182,6 +183,7 @@ class StyleGAN(ProgressiveGAN):
 https://zhuanlan.zhihu.com/p/112664040
 [15]: https://github.com/facebookresearch/pytorch_GAN_zoo/blob/master/models/styleGAN.py
 [16]: https://zhuanlan.zhihu.com/p/94206978
+[17]: https://www.infoq.cn/article/gcgibopiftpbe9deqf3m
 
 TODO:
 
