@@ -99,3 +99,4 @@ https://github.com/hanzhanggit/StackGAN-Pytorch
 [4]: https://www.infoq.cn/article/gcgibopiftpbe9deqf3m
 [5]: https://www.shuzhiduo.com/A/gAJG4R6o5Z/
 [6]: StackGAN - 会飞的闲鱼的文章 - 知乎 https://zhuanlan.zhihu.com/p/78102953
+[7]: https://github.com/hanzhanggit/StackGAN
