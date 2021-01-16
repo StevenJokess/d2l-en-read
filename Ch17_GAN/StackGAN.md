@@ -58,6 +58,19 @@ $$
 (3) 中的两项。
 我们的实验中，设置为 $\lambda=1$ 。其中, $\quad \mu_{0}\left(\varphi_{t}\right), \Sigma_{0}\left(\varphi_{t}\right)$ 是与网络剩余部分一起学习。
 
+### 第1阶段损失函数:
+
+$$
+\begin{aligned}
+\mathcal{L}_{D_{0}}=& \mathbb{E}_{\left(I_{0}, t\right) \sim p_{\text {data }}}\left[\log D_{0}\left(I_{0}, \varphi_{t}\right)\right]+\\
+& \mathbb{E}_{z \sim p_{z}, t \sim p_{\text {data }}}\left[\log \left(1-D_{0}\left(G_{0}\left(z, c_{0}\right), \varphi_{t}\right)\right)\right] \\
+\mathcal{L}_{G_{0}}=& \mathbb{E}_{z \sim p_{z}, t \sim p_{\text {data }}}\left[\log \left(1-D_{0}\left(G_{0}\left(z, c_{0}\right), \varphi_{t}\right)\right)\right]+\\
+& \lambda D_{K L}\left(\mathcal{N}\left(\mu_{0}\left(\varphi_{t}\right), \Sigma_{0}\left(\varphi_{t}\right)\right) \| \mathcal{N}(0, I)\right)
+\end{aligned}
+$$
+
+## Stage II
+
 ### 模型结构
 
 Conditioning Augmentation
@@ -77,6 +90,18 @@ Stage-I 阶段生成的低分辨率图像通常缺之鲜明的目标特征，并
 Stage-II 以高斯隐含变量 $\hat{c}$ 以及 'Stage-I' 的生成器的输出 $s_{0}=G_{0}\left(z, \hat{c}_{0}\right)$ 为输入, 来训练生 $\begin{array}{lll}\text { 成器 } & \text { G 和判别器 } & \text { D } & \text { 其目标函数分别为： }\end{array}$ :
 $\max \quad \mathcal{L}_{D}=\mathbb{E}_{(I, t) \sim p_{\text {data }}}\left[\log \left(D\left(I, \varphi_{t}\right)\right)\right]+\mathbb{E}_{s_{0} \sim p_{G_{0}}, t \sim p_{\text {data }}}\left[\log \left(1-D\left(G\left(s_{0}, \hat{c}\right), \varphi_{t}\right)\right)\right]$
 $\min \quad \mathcal{L}_{G}=\mathbb{E}_{s_{0} \sim p_{G_{0}}, t \sim p_{\text {data }}}\left[\log \left(1-D\left(G\left(s_{0}, \hat{c}\right), \varphi_{t}\right)\right)\right]+\lambda D_{K L}\left(\mathcal{N}\left(\mu\left(\varphi_{t}\right), \Sigma\left(\varphi_{t}\right)\right) \| \mathcal{N}(0, I)\right)$
+
+### 损失函数
+
+$$
+\begin{aligned}
+\mathcal{L}_{D}=& \mathbb{E}_{(I, t) \sim p_{\text {data }}}\left[\log D\left(I, \varphi_{t}\right)\right]+\\
+& \mathbb{E}_{s_{0} \sim p_{G_{0}}, t \sim p_{\text {data }}}\left[\log \left(1-D\left(G\left(s_{0}, c\right), \varphi_{t}\right)\right)\right] \\
+\mathcal{L}_{G}=& \mathbb{E}_{s_{0} \sim p_{G_{0}}, t \sim p_{\text {data }}}\left[\log \left(1-D\left(G\left(s_{0}, c\right), \varphi_{t}\right)\right)\right]+\\
+& \lambda D_{K L}\left(\mathcal{N}\left(\mu\left(\varphi_{t}\right), \Sigma\left(\varphi_{t}\right)\right)\|\mathcal{N}(0, I)\|_{j},
+\end{aligned}
+$$
+
 模型结构
 Conditioning Augmentation
 首先就是通过词向量 $\varphi_{t}$ 来获取 $\hat{c},$ 其过程与 Stage-I 一样。。。。。
@@ -100,3 +125,6 @@ https://github.com/hanzhanggit/StackGAN-Pytorch
 [5]: https://www.shuzhiduo.com/A/gAJG4R6o5Z/
 [6]: StackGAN - 会飞的闲鱼的文章 - 知乎 https://zhuanlan.zhihu.com/p/78102953
 [7]: https://github.com/hanzhanggit/StackGAN
+TODO:
+stack-GAN - 胡今朝的文章 - 知乎
+https://zhuanlan.zhihu.com/p/50746855
