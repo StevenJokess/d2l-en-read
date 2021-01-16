@@ -12,6 +12,7 @@
  * https://www.jianshu.com/p/d5b65e89d4c8
  * https://arxiv.org/abs/1804.02767
 -->
+
 YOLO: Real-Time Object Detection
 You only look once (YOLO) is a state-of-the-art, real-time object detection system. On a Pascal Titan X it processes images at 30 FPS and has a mAP of 57.9% on COCO test-dev.
 
@@ -81,3 +82,5 @@ https://github.com/ayooshkathuria/pytorch-yolo-v3
 https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
 https://github.com/minar09/yolov3-pytorch
 https://github.com/pjreddie/darknet
+300 行代码基于 Pytorch 精确复现 YOLOv3 - Devymex Wang的文章 - 知乎
+https://zhuanlan.zhihu.com/p/343039250
