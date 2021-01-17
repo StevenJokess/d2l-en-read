@@ -69,6 +69,11 @@ The main difference between a GAIL and GANs is that in GANs the generator is tak
 
 ![](img\GANvsIRL.jpg)
 
+I ran GAIL and Behaviorial Cloning on the following MuJoCo environments: Humanoid, HumanoidStandup, and Hopper. With five expert trajectories on Humanoid, GAIL was able to get better than "expert" results. These tests were run with only one seed, I would need to run many more seeds to make a conclusive statement.
+
+https://github.com/openai/baselines/blob/master/baselines/gail/result/gail-result.md
+
+
 [1]: IRL 之小白 - WJP的文章 - 知乎 https://zhuanlan.zhihu.com/p/59649635
 [2]: https://arxiv.org/pdf/1502.05477.pdf
 [3]: https://arxiv.org/abs/1606.03476
@@ -76,3 +81,4 @@ The main difference between a GAIL and GANs is that in GANs the generator is tak
 [5]: https://colab.research.google.com/drive/1WhiULuo9oBo1kKgXqQjNY53ht3J0TlEG?usp=sharing#scrollTo=uzSsqB7Qymsj
 [6]: https://stable-baselines.readthedocs.io/en/master/modules/gail.html
 [7]: https://www.daimajiaoliu.com/daima/479bef0a7100405
+[8]: https://hollygrimm.com/rl_gail
