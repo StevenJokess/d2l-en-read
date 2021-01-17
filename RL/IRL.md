@@ -4,6 +4,11 @@
 
 我们假设Expert的策略就是最好的，根据它的行为策略反推出我们要研究的任务的Reward function。找到Reward function之后，在按照一般的RL问题过程找到最优的actor。这种方法的好处是在某些问题下的Reward function是非常简单的。原则就是 expert 永远是最棒的，是先射箭，再画靶的概念。[8]
 
+假定cost function的集合为$\mathcal{C}$，$\pi_E$为专家策略。带有正则化项$\psi$最大熵逆向强化学习是想找到一个cost function似的专家策略的效果优于其余所有策略（cost越小越优）:
+$$\rm{IRL}_{\psi}(\pi_E) = \arg max_{c\in\mathcal{C}} -\psi(c)+(\min_{\pi \in \Pi}- \it {H}(\pi) + \mathbb E_\pic(s,a)) - \mathbb E_{\pi_E}c(s,a)$$
+其中$\mathbb E_\pic(s,a)=\mathbb E\sum\limits_{t=0}^\infty \gamma^tc(s_t,a_t)$ ，$H(\pi)=\mathbb E_\pi-\log \pi(a|s)$是一个$\gamma$折扣累积熵。IRL过程中包含一个RL过程：
+$$\rm{RL}(c) = \arg min_{\pi \in \Pi} -\it H(\pi)+\mathbb E_\pi c(s,a)$$[9]
+
 数学解释：我们让expert $\hat{\pi}$ 和actor $\pi$ 分别去玩N场游戏, 得到两个大小都为N的状态-行动序列 $\left\{\hat{\tau}_{1}, \hat{\tau}_{2}\right.$
 Reward function $\mathrm{R},$ 它必须满足expert的所有尝试分数之和都要比actor的所有尝试分数之和更高：
 
@@ -284,6 +289,76 @@ $$
 
 IRL是从专家示范中推断出未知收益函数的手段， 一类比较好用的IRL算法是最大熵IRL，相对类似超平面分割的方法来说可以消除歧义，也解决了人类示范可能不是最优这种情况。这类算法可以用表格动态规划来实现，比较简单有效，但是只有在状态行动空间较小，动态已知的情况下才能应用。有一类微分最大熵IRL这边没有涉及，它适合于大而连续的空间，但需要知道系统动态。我们这里讲的深度IRL使用的是基于样本的最大熵IRL，可以用于连续空间，可以不假设有模型存在，较广泛。它的实现可以用GCL算法，该算法与GAN也有很深的渊源，和它紧密相关的还有生成对抗模仿学习算法（但不是IRL，不推测收益函数）。
 
+---
+
+[9]
+
+Defination 1.
+对于一个策略$\pi$，定义其占用率度量（occupancy measure）$\rho_\pi:\mathcal{S}\times\mathcal{A}\to \mathbb R$为
+$$\rho_\pi(s,a) = \pi(a|s)\sum\limits_{t=0}^\infty\gamma^tP(s_t=s|\pi)$$
+占用率度量可以近似看做是使用策略$\pi$时，状态-动作对的分布。$\mathcal D$是有效的占用率度量的集合。
+1 U. Syed, M. Bowling, and R. E. Schapire. Apprenticeship learning using linear programming. In
+Proceedings of the 25th International Conference on Machine Learning, pages 1032–1039, 2008. 证明$\pi \in \Pi$与$\rho\in\mathcal D$是一一对应关系。
+
+Lemma 3.1.
+若$\rho\in\mathcal D$，则$\rho$是策略$\pi_{\rho}=\rho(s,a)/\sum\limits_{a&#x27;}\rho(s,a&#x27;)$的占用率度量，并且$\pi_{\rho}$是唯一的。
+
+根据Definition 1，可以将$\gamma$折累计代价写为
+$$\mathbb E_\pic(s,a)=\sum\limits_{s,a}\rho_\pi(s,a)c(s,a)$$
+
+Lemma 3.2.
+若$H(\pi)=\mathbb E_\pi-\log\pi(a|s)$,$\overline H(\rho)=-\sum\limits_{s,a}\rho(s,a)\log(\rho(s,a)/ \sum_{a&#x27;}\rho(s,a&#x27;))$。可知$\overline H$是强凹的，并且对于任意$\pi \in \Pi, \rho \in \mathcal D$，可得$H(\pi)=\overline H(\rho_\pi)$和$H(\pi_\rho)=\overline H(\rho_)$。
+
+Lemma 3.3.
+若$L(\pi,c)=-H(\pi)+\mathbb E_\pic(s,a)$,$\overline L(\rho,c) = -\overline H(\rho) + \sum_{s,a}\rho(s,a)c(s,a)$。对于所有的代价函数$c$，如下成立：
+1.对于任意$\pi\in\Pi$,$L(\pi,c)=\overline L(\rho_\pi,c)$.
+2.对于任意$\rho\in\mathcal D$,$L(\pi_\rho,c)=\overline L(\rho,c)$
+
+Definition 2
+对于一个方程$f:\mathbb R^{\mathcal R \times \mathcal A}\to \overline \mathbb R$，其凸共轭$f^*:\mathbb R^{\mathcal R \times \mathcal A} \to \overline \mathbb R$定义为$f^*(x) = \sup_{y\in\mathbb R^{\mathcal S \times \mathcal A}}x^Ty-f(y)$.
+
+Proposition 1
+$RL(\widetilde c) $是利用IRL恢复的cost，通过RL学得的policy。可得
+$$RL\circ IRL_\psi(\pi_E) = argmin_{\pi\in\Pi}-H(\pi) + \psi^*(\rho_\pi - \rho_{\pi_{E}})$$
+上述表明，$\psi$正则化逆向强化学习就只隐性的找到policy，该policy的占用率度量(occupancy measure)逼近专家策略的占用率度量，使用凸函数$\psi^*$来衡量占用率度量的差异。
+通过上式可得，最优代价函数（cost function）与学得的policy可以组成上式的一个鞍点，IRL寻找鞍点的一个坐标维度，RL根据IRL的结果寻找鞍点坐标的另一个维度。$(c,\pi)$为一个鞍点。
+可得，不同的正则化函数$\psi$构成不同的模仿学习算法，可以直接求解上式得到$(c,\pi)$。
+
+在本文中将会主要介绍三种不同的正则化函数：恒定正则化函数，示性正则化函数，生成对抗正则化函数（GA）
+
+Corollary 1
+若$\psi$是一个恒定值，$\widetilde c\in IRL_\psi(\pi_E)$并且$\widetilde \pi\in RL(\widetilde c)$，则$\rho_{\widetilde \pi} = \rho_{\pi_E}$.
+
+若没有正则化项，则RL得到的policy将会精确匹配专家policy
+但该算法无法应用于实际系统中，因为实际系统的环境非常大，计算复杂。
+若正则化项为一个恒定值，则只能学习到专家轨迹中采样到的状态动作对，但是在大规模环境中，专家轨迹有限无法探索到所有的状态动作对，因此学得的policy几乎不会涉及到未出现过的状态动作对。
+示性正则化学徒学习
+学徒算法是想要找到一个policy并且比专家policy效果在学得的cost function $\mathcal C$情况下更好，通过解如下方程：
+$$\min_\pi \max_{c\in\mathcal C} \mathbb E_\pic(s,a) - \mathbb E_{\pi_E}c(s,a)$$
+$\mathcal C$是一个有约束的凸集，是由一系列基础方程$f_1,f_2,\dots,f_d$的线性组合而成。 Abbeel 和 Ng使用$\mathcal C_{linear} = { \sum_i w_if_i:|w|_2\le1}$，Syde使用$\mathcal C_{convex}={ \sum_i w_if_i:\sum_iw_i=1,w_i\ge 0 \forall i}$.
+
+对于示性函数$\delta_c:\mathbb R^{\mathcal S \times \mathcal A}\to \overline \mathbb R$，定义如下
+$$\delta_{\mathcal C}(c) =\left{ \begin{array}{lr} 0, &amp; c\in\mathcal C \ +\infty, &amp; otherwise \end{array} \right.$$
+学徒学习的目标函数可以化为
+$$\begin{aligned} &amp;\max_{c\in\mathcal C} \mathbb E_\pic(s,a) - \mathbb E_{\pi_E}c(s,a) \ &amp;=\max_{c\in\mathcal C} -\delta_{\mathcal C}(c)+\sum_{s,a}(\rho_\pi(s,a)-\rho_{\pi_E}(s,a))c(s,a) \ &amp;=\delta_{\mathcal C}^*(\rho_\pi - \rho_{\pi_E}) \end{aligned}$$
+无法精确匹配专家经验的占用率度量。
+
+熵-正则化学徒学习
+$$\min_\pi - H(\pi)+\max_{c\in\mathcal C}\mathbb E_\pic(s,a) - \mathbb E_{\pi_E}c(s,a) = \min_{\pi} -H(\pi)+\delta_{\mathcal C}^*(\rho_\pi-\rho_{\pi_E})$$
+熵-正则化学徒学习等价于在有示性函数$\psi=\delta_{\mathcal C}$的IRL后运行RL。
+
+GA正则化
+$$\psi_{GA}(c) = \left{ \begin{array}{lr} \mathbb E_{\pi_E}g(c(s,a)),\qquad &amp;c&lt;0 \ +\infty, &amp; otherwise \end{array} \right. \ g(x)=\left{ \begin{array}{lr} -x-\log(1-e^x),\qquad &amp;x&lt;0 \ 0, &amp; otherwise \end{array} \right.$$
+
+$\psi_{GA}$是一个针对专家数据求期望的函数，因此可以适用于任意专家数据集。
+不像$\delta_{\mathcal C}$将cost function约束在小的子空间中。$\psi_{GA}$允许任意的cost function只要是负数空间中。
+选择$\psi_{GA}$的目的是因为其具有一个非常优秀的凸共轭函数，如下
+$$\psi_{GA}^*(\rho_\pi-\rho_{\pi_E}) = \max_{D\in(0,1)^{\mathcal S \times \mathcal A}} \mathbb E_{\pi_E}\log(D(s,a)) + \mathbb E_\pi\log(1-D(s,a))$$
+上式等价于一个对数损失函数来区分$\pi$与$\pi_E$。这个最优损失等价于Jensen-Shannon散度
+$$D_{JS}(\rho_\pi,\rho_{\pi_E}) = D_{KL}(\rho_\pi |(\rho_\pi - \rho_{\pi_E})/2)+D_{KL}(\rho_{\pi_E}|(\rho_E+\rho_{\pi_E})/2)$$
+则有如下等价关系
+$$\min_{\pi}\psi_{GA}^*(\rho_\pi - \rho_{\pi_E})-\lambda H(\pi) \Longleftrightarrow \ \min_{\pi}\max_{D}\mathbb E_{\pi_E}\log(D(s,a))+\mathbb E_{\pi}\log(1-D(s,a)-\lambda H(\pi) \Longleftrightarrow \ \min_{\pi}D_{JS}(\rho_\pi,\rho_{\pi_E}) - \lambda H(\pi)$$
+找到一个policy，其占用率度量（occupancy measure）能够最小化与专家经验的Jensen-Shannon散度。
 
 [1]: https://zhuanlan.zhihu.com/p/33663492
 [2]: https://github.com/
@@ -293,9 +368,10 @@ IRL是从专家示范中推断出未知收益函数的手段， 一类比较好�
 [6]: https://blog.csdn.net/weixin_42770354/article/details/109853524
 [7]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter11/chapter11
 [8]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter11/chapter11?id=recap-sentence-generation-amp-chat-bot
-
+[9]: https://www.daimajiaoliu.com/daima/479bef0a7100405
 
 TODO:https://rebornhugo.github.io/reinforcement%20learning/2018/05/20/Inverse-Reinforcement-Learning/#more
+
 
 事实上, 可以令GAN的判别器取决于收益的方式来完成类似的目标。假设一个轨迹在专家（数据）分布下的概率是 $p(x),$ 当前策略下的概率是 $q(x),$ 最优判别器应该为 $D^{*}(x)=\frac{p(x)}{p(x)+q(x)}$ 。 在IRL中，我们假设专家分布下的概率是 $\frac{1}{Z} \exp \left(R_{\psi}\right),$ 从而 $D_{\psi}(x)=\frac{\frac{1}{Z} \exp \left(R_{\psi}\right)}{\frac{1}{Z} \exp \left(R_{\psi}\right)+q(x)}$ 。我们的判
 别器要最小化损失函数 (reward/discriminator optimizaion) $\mathcal{L}_{\text {discriminator }}(\psi)=\mathbf{E}_{x \sim p}\left[-\log D_{\psi}(x)\right]+\mathbf{E}_{x \sim q}\left[-\log \left(1-D_{\psi}(x)\right)\right],$ 简单说就是使得对应分布下的似然最大，这也是IRL的目标函数。

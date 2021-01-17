@@ -15,6 +15,9 @@
 
 在使用Reinforcement Learning来构造agent时，多数情况下这个agent是得不到任何Reward的。这使得agent的训练变得非常困难。
 举例来说，假设我们制作了一个机械手臂，希望让它完成‘用桌上的螺丝刀把螺丝钉栓进去’这个任务，但agent起初是什么都不知道的，它能够完成各种action的原因在于Exploration机制。只有当它随机地将螺丝刀拿起来，再把螺钉栓进去，这个时候它才能得到Reward，但想在随机的情况下完成这一系列的动作就如大海捞针一般困难。
+
+稀疏奖励问题是指agent探索的过程中难以获得正奖励，导致学习缓慢甚至无法进行学习的问题，并且广泛存在于现实中，比如围棋，人们很难去设定中间每步的奖励，并且状态空间巨大，使用全局奖励会有奖励稀疏且滞后的问题。[4]
+
 所以说，当环境当中的reward十分稀疏（sparse）时，这个RL的问题就会十分困难。本节课程介绍的就是三种用于解决Sparse Reward的方法。
 
 ## Reward Shaping
@@ -37,6 +40,8 @@ ICM最原始的具体设计方式如下：有一个network以 $s_{t}$ 和 $a_{t}
 
 ## Curriculum Learning
 
+通过设置不同难度梯度的课程来加速学习，类似人类学习的过程，从简单的问题学习到的策略能够迁移到复杂的问题中。目前也有一些自动课程学习的研究，推荐这个国外的博客 https://lilianweng.github.io/lil-log/2020/01/29/curriculum-for-reinforcement-learning.html#automatic-goal-generation ，对课程学习的算法讲的很详细。[4]
+
 即给机器的学习过程做规划, 从简单到困难。。 准确的来说, 是逐渐提高学习的样本难度，模拟人类的学习过程。 为此，我们需要为机器设计'课程'，即给机器学习的样本做难度上的规划, 一种通用的方法被称作 Reverse Curriculum Generation。它的一般步骤如下:
 
 1. 确定一个目标状态 $s_{g \circ}$
@@ -49,9 +54,14 @@ ICM最原始的具体设计方式如下：有一个network以 $s_{t}$ 和 $a_{t}
 
 什么叫做适中，这个就是你要调的参数，找一些 reward 适中的 case。接下来，再根据这些 reward 适中的 case 去 sample 出更多的 state。假设你一开始，你机械手臂在这边，可以抓的到以后。接下来，就再离远一点，看看能不能够抓得到，又抓的到以后，再离远一点，看看能不能抓得到。这是一个有用的方法，它叫做Reverse Curriculum learning。刚才讲的是 curriculum learning，就是你要为机器规划它学习的顺序。而 reverse curriculum learning 是从 gold state 去反推，就是说你原来的目标是长这个样子，我们从目标去反推，所以这个叫做 reverse。[3]
 
+
+如何提高模型解决大状态空间大动作空间下复杂问题的能力
+
 ## Hierarchical Reinforcement Learning
 
 将所有的agent分层，上层的agent将目标分解为小目标，当目标不能再被分解的时候，最底层的agent就付诸行动，采取action以实现这些小目标。当最底层的agent不能完成这些目标时，上层的agent就会受到一定的惩罚（Penalty），所以上层的agent要避免提出下层agent达不到的目标。另外，当下层的agent达成了一个错误的目标的时候，我们就将上层提出的目标直接修改为下层达成的这个目标（即不浪费下层agent训练过程中的任何成果）[1]
+
+分层强化学习，使用多层次的结构来学习不同层次的策略，提高了解决复杂问题的能力。比较经典的比如 FeUdal networks for hierarchical reinforcement learning、Meta-Learning SharedHierarchies、Learning Multi-Level Hierarchies with Hindsight。[4]
 
 ## 数据
 
@@ -64,3 +74,4 @@ https://www.chainnews.com/articles/832740147057.htm
 [1]: https://blog.csdn.net/weixin_42770354/article/details/109849703
 [2]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter10/chapter10?id=reward-shaping
 [3]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter10/chapter10?id=reward-shaping
+[4]: 强化学习稀疏奖励算法总结 - yr15的文章 - 知乎 https://zhuanlan.zhihu.com/p/133334392

@@ -19,6 +19,7 @@
 当环境状态是完全可观测时，个体可以通过构建马尔科夫决策过程来描述整个强化学习问题。有时候环境状态并不是完全可观测的，此时个体可以结合自身对于环境的历史观测数据来构建一个近似的完全可观测环境的描述
 从这个角度来说，几乎所有的强化学习问题都可以被认为或可以被转化为马尔科夫决策过程
 
+
 ## Agent和Environment的交互
 
 - 学习者和决策者称为agent
@@ -39,6 +40,11 @@ $$
 $$
 \mathbf{P}_{s s}^{a}=P\left[S_{t+1}=s^{\prime} \mid S_{t}=s, A_{t}=a\right], \mathbf{R}_{s}^{a}=E\left[R_{t+1} \mid S_{t}=s, A_{t}=a\right]_{0}
 $$
+
+ 	可数或有限的状态空间	连续或一般的状态空间
+离散时间	在可数且有限状态空间下的马尔可夫链	Harris chain (在一般状态空间下的马尔可夫链)
+连续时间	Continuous-time Markov process	任何具备马尔可夫性质的连续随机过程，如维纳过程
+
 
 ## 什么是有限
 
@@ -73,6 +79,14 @@ $$
 - $\operatorname{Pr} S_{t+1}=s^{\prime}, R_{t+1}=r\left|S_{0}, A_{0}, R_{1}, \ldots, S_{t-1}, A_{t_{1}}, R_{t}, S_{t}, A_{t}=\operatorname{Pr} S_{t+1}=s^{\prime}, R_{t+1}=r\right| S_{t}, A_{t}$
 - 即便state是非马尔科夫的, 我们也希望近似到马尔科夫。
 
+马尔可夫链是满足马尔可夫性质的随机变量序列 $X 1, X 2, X 3, \ldots,$ 即给出当前状态, 将来状态和过去状态是相互独立的。从形式上看，如果两边的条件分布有定义 (即如果
+$$
+\operatorname{Pr}\left(X_{1}=x_{1}, \ldots, X_{n}=x_{n}\right)>0
+$$
+则
+$$
+\operatorname{Pr}\left(X_{n+1}=x \mid X_{1}=x_{1}, X_{2}=x_{2}, \ldots, X_{n}=x_{n}\right)=\operatorname{Pr}\left(X_{n+1}=x \mid X_{n}=x_{n}\right)
+$$
 ## 马尔科夫决策过程(Markov decision process, MDP)
 
 - 满足马尔科夫性质的强化学习任务称为MDP。
@@ -88,6 +102,8 @@ $$
 - P 是集合中基于行为的状态转移概率矩阵: $P_{s s^{\prime}}^{a}=E\left[R_{t+1} \mid S_{t}=s, A_{t}=a\right]$
 - R 是基于状态和行为的奖励函数: $R_{s}^{a}=E\left[R_{t+1} \mid S_{t}=s, A_{t}=a\right]$
 - γ 是一个衰减因子:γ ∈ [0, 1]
+
+
 
 ## 价值函数
 
