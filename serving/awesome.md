@@ -13,3 +13,4 @@
 https://github.com/psmathur/fastai-vision-app
 https://github.com/pytorch/serve
 https://github.com/FrancescoSaverioZuppichini/torchserve-tryout
+https://github.com/layerism/TensorRT-Inference-Server-Tutorial

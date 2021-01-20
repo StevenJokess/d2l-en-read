@@ -105,3 +105,10 @@ $$
 3、对不常见的长宽比物体泛化能力偏弱，这个问题主要是YOLO没有Anchor的不同s尺度框的设计，只能通过数据去驱动。
 4、损失函数的设计问题，对坐标的回归和分类的问题同时用MSE损失明显不合理。
 5、由于YOLOv1是直接预测的BBox位置，相较于预测物体的偏移量，模型会不太好稳定收敛。
+
+## Overview
+Anchor boxes overlap in SSd
+YOLO cuts the input imageuniformly into SX S anchor boxesEach anchor box predicts Bbounding boxesV2 and v3 add more improvements(V4 is mostly a reimplementation)
+
+
+[1]: https://youtu.be/epVPmL-rhA0

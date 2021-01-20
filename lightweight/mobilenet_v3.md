@@ -100,3 +100,4 @@ MobileNetV3定义了两个模型: MobileNetV3-Large和MobileNetV3-Small。V3-Lar
 [3]: https://github.com/pytorch/vision/pull/3182/files
 [4]: http://www.tensorinfinity.com/paper_185.html
 [5]: https://cygao.xyz/2019/07/12/lightweight/
+[6]: https://github.com/xiaolai-sqlai/mobilenetv3/blob/master/mobilenetv3.py

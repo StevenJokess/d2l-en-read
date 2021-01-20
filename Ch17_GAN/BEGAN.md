@@ -27,6 +27,21 @@ BEGAN 编码模块的神经网络一共包含5层结构，输入图像的Height�
 第1层首先使用了1次全连接，然后将1维向量调整为Height、Width、Channel分别为8像素、8像素、n 通道的图像数据，第2～4层均使用步长为2的最近邻上采样和2次卷积核均为3像素×3像素的卷积。每次卷积后，同样采用ELU 激活函数作用于卷积层的输出，最后一层采用1次3像素×3像素的卷积操作，最终得到一张64像素×64像素×3像素的图像数据。
 
 
+Using Jensen's inequality, we can derive a lower bound to $W_{1}\left(\mu_{1}, \mu_{2}\right)$ :
+$$
+\inf \mathbb{E}\left[\left|x_{1}-x_{2}\right|\right] \geqslant \inf \left|\mathbb{E}\left[x_{1}-x_{2}\right]\right|=\left|m_{1}-m_{2}\right|
+$$
+It is important to note that we are aiming to optimize a lower bound of the Wasserstein distance between auto-encoder loss distributions, not between sample distributions.
+
+The BEGAN objective is:
+$$
+\left\{\begin{array}{ll}
+\mathcal{L}_{D}=\mathcal{L}(x)-k_{t} \cdot \mathcal{L}\left(G\left(z_{D}\right)\right) & \text { for } \theta_{D} \\
+\mathcal{L}_{G}=\mathcal{L}\left(G\left(z_{G}\right)\right) & \text { for } \theta_{G} \\
+k_{t+1}=k_{t}+\lambda_{k}\left(\gamma \mathcal{L}(x)-\mathcal{L}\left(G\left(z_{G}\right)\right)\right) & \text { for each training step } t
+\end{array}\right.
+$$
+
 [1]:Radford A， Metz L， Chintala S.Unsupervised representation learning withdeep convolutional generative adversarialnetworks[J]. arXiv preprint， 2015:1511.06434.
 [2]Transposed Convolution， Deconvolution[EB/OL]. 2020-03-01.https://buptldy.github.io/2016/10/29/2016-10-29-deconv/.
 [3]Alec Radford， Luke Metz， SoumithChintala. Unsupervised RepresentationLearning with Deep Convolutional GenerativeAdversarial Networks[C].ICLR （Poster），2016. https://github.com/darr/DCGAN.
@@ -35,3 +50,4 @@ BEGAN 编码模块的神经网络一共包含5层结构，输入图像的Height�
 [6]BEGAN 学习笔记[EB/OL]. 2020-03-01.https://zhuanlan.zhihu.com/p/26394806.
 
 [7]: https://github.com/lanpa/BEGAN-pytorch
+[8]: https://github.com/ski-net/dl_study_with_gluon/tree/master/GAN/BEGAN

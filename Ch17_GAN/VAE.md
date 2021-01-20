@@ -11,7 +11,19 @@
  * @Reference:
 -->
 
+
 # Variational Autoencoders (VAEs)
+
+- VAE的核心是变分推理（VI）。与执行变分推理的现有统计方法相比，DNN只是分辨率非常高的一种方法。
+- 与GAN（通用对抗网络）相比，由于它们具有使用给定信息创建新内容的能力，因此通常都是无监督学习。
+- 如果GAN基于两人游戏概念提出新的Loss函数，则可以将VAE视为在自动编码器概念下重新解释VAE的目标函数，而不是提供新的Loss Function。
+
+- 它的特点是使用DNN的大容量VI定义隐藏变量。
+- 与可以被认为是变分推理的前身（？）的EM算法相比，变分推理不是基于概率模型，而是仅用于近似分布，而VAE是使这一思想最大化的一种方法。
+- VAE的工具分布完全不基于概率模型，样本仅需为方便的概率分布。
+
+- 通过使用DNN，使用SGD优化算法很容易学习。
+- 在使用VI估计分布的情况下，以前使用了需要大量计算的技术，例如MCMC，但是VAE的优势在于能够轻松应用基于反向传播的方法。[18]
 
 Representation 建模
 
@@ -249,3 +261,4 @@ https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter13_unsup
 [15]: https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch07_%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C(GAN)/ch7.md
 [16]: https://blog.csdn.net/weixin_40056577/article/details/104538378
 [17]: https://blog.csdn.net/weixin_40056577
+[18]: https://colab.research.google.com/github/ski-net/dl_study_with_gluon/blob/master/VAE/notebooks/VAE.ipynb#scrollTo=kYQoCqPp79-i
