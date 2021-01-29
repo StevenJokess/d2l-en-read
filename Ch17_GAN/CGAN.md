@@ -152,3 +152,4 @@ https://zhuanlan.zhihu.com/p/25542274
 [11]: https://livebook.manning.com/book/gans-in-action/chapter-8/1
 [12]: https://github.com/Jittor/jittor/blob/master/notebook/ConditionGAN.src.md
 [13]: https://www.shuzhiduo.com/A/gAJG4R6o5Z/
+[14]: https://github.com/sinyeratlantis/deep_learning_gluon/blob/master/12.conv_gan.py

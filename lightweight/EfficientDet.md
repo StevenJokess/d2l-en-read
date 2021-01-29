@@ -10,3 +10,5 @@
  * @TODO::
  * @Reference:https://github.com/zylo117/Yet-Another-EfficientDet-Pytorch
 -->
+全网第一SoTA成绩却朴实无华的pytorch版efficientdet - Zylo117的文章 - 知乎
+https://zhuanlan.zhihu.com/p/129016081

@@ -18,3 +18,5 @@ https://zhuanlan.zhihu.com/p/275989233
 [3]: https://colab.research.google.com/github/pytorch/pytorch.github.io/blob/master/assets/hub/ultralytics_yolov5.ipynb
 [4]: https://github.com/ultralytics/yolov5
 [5]: https://zenodo.org/record/4154370
+一文读懂YOLO V5 与 YOLO V4 - william的文章 - 知乎
+https://zhuanlan.zhihu.com/p/161083602
