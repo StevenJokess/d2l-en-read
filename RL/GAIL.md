@@ -73,6 +73,10 @@ I ran GAIL and Behaviorial Cloning on the following MuJoCo environments: Humanoi
 
 https://github.com/openai/baselines/blob/master/baselines/gail/result/gail-result.md
 
+### 为何GAIL得到的Reward没有一点用处?
+
+
+
 
 [1]: IRL 之小白 - WJP的文章 - 知乎 https://zhuanlan.zhihu.com/p/59649635
 [2]: https://arxiv.org/pdf/1502.05477.pdf

@@ -233,3 +233,5 @@ for inp, tar in test_dataset.take(5):
 [10]: https://zhuyinlin.github.io/build/html/algorithm/GAN.html#sgan-stacked-gan
 TODO: https://www.tensorflow.org/tutorials/generative/pix2pix
 https://github.com/zackchase/mxnet-the-straight-dope/blob/master/chapter14_generative-adversarial-networks/pixel2pixel.ipynb
+
+https://github.com/eriklindernoren/Keras-GAN/blob/master/pix2pix/pix2pix.py

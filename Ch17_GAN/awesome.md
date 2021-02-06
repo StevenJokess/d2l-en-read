@@ -33,7 +33,7 @@ https://github.com/znxlwm/pytorch-generative-model-collections
 https://github.com/bentrevett/pytorch-generative-models
 https://github.com/savan77/The-GAN-World
 https://github.com/hindupuravinash/the-gan-zoo
-
+https://blog.csdn.net/weixin_40056577/category_9741395.html
 ---
 
 生成对抗网络

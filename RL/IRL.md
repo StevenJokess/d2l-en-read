@@ -104,6 +104,9 @@ $\min _{\pi} \max _{c \in C} E_{\pi}[c(s, a)]-E_{\pi_{E}}[c(s, a)]$
 最后你 learn 出来的 reward function 应该就是 expert 和 actor 在这个 reward function 都会得到一样高的分数。最终你的 reward function 没有办法分辨出谁应该会得到比较高的分数。
 
 通常在 train 的时候，你会 iterative 的去做。那今天的状况是这样，最早的 Inverse Reinforcement Learning 对 reward function 有些限制，它是假设 reward function 是 linear 的。如果 reward function 是 linear 的话，你可以 prove 这个algorithm 会 converge。但是如果不是 linear 的，你就没有办法 prove 说它会 converge。你有没有觉得这个东西，看起来还挺熟悉呢？其实你只要把它换个名字，说 actor 就是 generator，然后说 reward function 就是 discriminator，它就是 GAN。所以它会不会收敛这个问题就等于是问说 GAN 会不会收敛。如果你已经实现过，你会知道不一定会收敛。但除非你对 R 下一个非常严格的限制，如果你的 R 是一个 general 的 network 的话，你就会有很大的麻烦。
+
+使用这个IRL学习到的Reward作为RL的Reward要能够解决RL问题，也就是要得到一个比较好的策略。[10]
+
 ## 最大熵逆增强学习 (Max Entropy IRL)
 
 1. 给定 $\psi$, 按照上一篇的方法求出对应的 $\beta\left(\mathbf{s}_{t}, \mathbf{a}_{t}\right)$ 和 $\alpha\left(\mathbf{s}_{t}\right)$ 。
@@ -369,6 +372,7 @@ $$\min_{\pi}\psi_{GA}^*(\rho_\pi - \rho_{\pi_E})-\lambda H(\pi) \Longleftrightar
 [7]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter11/chapter11
 [8]: https://datawhalechina.github.io/leedeeprl-notes/#/chapter11/chapter11?id=recap-sentence-generation-amp-chat-bot
 [9]: https://www.daimajiaoliu.com/daima/479bef0a7100405
+[10]: https://www.way2ml.com/ml/RL_Theory/d_irl.html#algorithms-for-inverse-reinforcement-learning
 
 TODO:https://rebornhugo.github.io/reinforcement%20learning/2018/05/20/Inverse-Reinforcement-Learning/#more
 
