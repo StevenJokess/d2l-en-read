@@ -50,6 +50,8 @@
 [37]: https://antkillerfarm.github.io/drl/2018/12/20/DRL.html
 [38]: https://github.com/ugurkanates/awesome-real-world-rl
 [39]: https://blog.csdn.net/weixin_40056577/category_9689930.html
+
+TODO:https://libertydream.github.io/2020/07/19/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/
 ---
 Atari games: Q-learning: V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, et al. “Playing Atari with Deep Reinforcement Learning”. (2013). Policy gradients: J. Schulman, S. Levine, P. Moritz, M. I. Jordan, and P. Abbeel. “Trust Region Policy Optimization”. (2015). V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. P. Lillicrap, et al. “Asynchronous methods for deep reinforcement learning”. (2016).
 Real-world robots: Guided policy search: S. Levine*, C. Finn*, T. Darrell, P. Abbeel. “End-to-end training of deep visuomotor policies”. (2015). Q-learning: D. Kalashnikov et al. “QT-Opt: Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation”. (2018).

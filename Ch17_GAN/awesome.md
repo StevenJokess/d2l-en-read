@@ -34,6 +34,7 @@ https://github.com/bentrevett/pytorch-generative-models
 https://github.com/savan77/The-GAN-World
 https://github.com/hindupuravinash/the-gan-zoo
 https://blog.csdn.net/weixin_40056577/category_9741395.html
+https://blog.csdn.net/qq_25737169/article/details/78857788
 ---
 
 生成对抗网络
