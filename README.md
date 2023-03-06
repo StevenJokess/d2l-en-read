@@ -36,7 +36,7 @@ bilibili.com/video/BV1W） 随后,作为非社团成员,文案宣传跳绳燃脂
 
 - 更多AI产品经理内容，可见：https://stevenjokess.github.io/2bPM/get_started.html
 - AI时代批判与共产主义意识形态输出，见 https://stevenjokess.github.io/2bPM/AI_critical.html
-- 更多及时内容，进QQ群：171097552
+- 更多及时内容或咨询，进QQ群：171097552
 - 联系我：llgg8679@qq.com or a867907127@gmail.com
 - 付费支持下我的工作：![支付宝收款码](/收.jpg)
 
