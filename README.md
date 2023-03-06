@@ -32,6 +32,8 @@ https://github.com/d2l-ai/d2l-en
 - 体能方面：跳绳比赛成绩:30s单摇:66;30s双摇:60;三摇:11个;·在4*30男子团体单摇比赛,作为非体院唯一绳没断的第四棒,团体一同跳250.取得市和省级铜牌。（B站跳绳视频：
 bilibili.com/video/BV1W）随后,作为非社团成员,文案宣传跳绳燃脂效率高、方便,招新翻四倍。还有初级教练、裁判证;曾会单手俯卧撑、深蹲10个+；
 
+---
+
 - 更多AI产品经理内容，可见：https://stevenjokess.github.io/2bPM/get_started.html
 - AI时代批判与共产主义意识形态输出，见 https://stevenjokess.github.io/2bPM/AI_critical.html
 更多及时内容，进QQ群：171097552
